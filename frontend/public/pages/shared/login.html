@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../../src/stylesheets/shared/login.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Login - Maffy</title>
+</head>
+<body>
+  <!-- <?php include '../shared/navbar.php';?> -->
+  <div class="d-flex justify-content-center mt-5">
+
+    
+
+      <div class="lgn-container">
+        <!-- <div class="text-center"> -->
+          <h1 class="login-txt">Login To Maffy</h1>
+        <!-- </div> -->
+        
+        <!-- form action in html design phase direct to home page -->
+        <!-- after with php, then echo to resprective page -->
+        <form action="./home.html">
+
+          <div class="form__group field">
+            <input type="text" class="form__field" name="username" placeholder="Username" required="required" autofocus>
+            <label for="username" class="form__label">Username</label>
+          </div>
+
+          <input type="text" class="lgnIpt" placeholder="Username/Email" required autofocus>
+          <input type="password" class="lgnIpt" placeholder="Password" required>
+          <input type="submit" class="lgnBtn" value="Login">
+        </form>
+      </div>
+
+
+      <form method="post">
+        
+        <div class="form-group mb-3 px-5 pt-4">
+        </div>
+        <div class="form-group px-5 pt-3">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+        </div>
+        <div class="text-center mt-5">
+          <button class="btn btn-primary w-32 mr-4 discard animate-up-2" type="reset">Clear</button>
+          <button type="submit" name="loginBtn" class="ml-4 w-32 btn btn-primary login-btn save animate-up-2">Log In</button>
+          <p class="link mt-3 text-muted">Don't have an account? Sign Up <a class="highlight animate-up-2" href="signup.php">here</a></p>
+        </div>
+
+      </form>
+
+  </div>
+</body>
+</html>
