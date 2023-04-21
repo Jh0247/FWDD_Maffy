@@ -8,49 +8,169 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <title>Login - Maffy</title>
 </head>
+
 <body>
   <!-- <?php include '../shared/navbar.php';?> -->
-  <div class="d-flex justify-content-center mt-5">
-
-    
-
-      <div class="lgn-container">
-        <!-- <div class="text-center"> -->
-          <h1 class="login-txt">Login To Maffy</h1>
-        <!-- </div> -->
-        
-        <!-- form action in html design phase direct to home page -->
-        <!-- after with php, then echo to resprective page -->
-        <form action="./home.html">
-
-          <div class="form__group field">
-            <input type="text" class="form__field" name="username" placeholder="Username" required="required" autofocus>
-            <label for="username" class="form__label">Username</label>
-          </div>
-
-          <input type="text" class="lgnIpt" placeholder="Username/Email" required autofocus>
-          <input type="password" class="lgnIpt" placeholder="Password" required>
-          <input type="submit" class="lgnBtn" value="Login">
-        </form>
+  <div class="content">
+    <div class="lgn-container">
+      <div class="tab-group w-9/12 sm:w-8/12 lg:w-3/4">
+        <div class="tab w-1/2">
+          <a class="text-sm sm:text-base lg:text-lg" href="#signup">SignUp</a>
+        </div>
+        <div class="tab w-1/2">
+          <a class="text-sm sm:text-base lg:text-lg" href="#login">Log In</a>
+        </div>
       </div>
-
-
-      <form method="post">
+      <div class="tab-content">
+        <!-- Sign up tab content -->
+        <div id="signup" class = "ml-3">  
+          <h1 class="title-txt">Sign up on Maffy</h1>
+          <!-- form action need to change -->
+          <form action="./home.html" method="post">
+            <div class="form_group">
+              <input type="email" class="form_field" name="email" placeholder="Email" required autofocus>
+              <label for="email" class="form_label">Email</label>
+            </div>
+            <div class="form_group">
+              <input type="text" class="form_field" name="username" placeholder="Username" required autofocus>
+              <label for="username" class="form_label">Username</label>
+            </div>
+            <div class="form_group">
+              <input type="password" class="form_field" name="password" placeholder="Password" required>
+              <label for="password" class="form_label">Password</label>
+            </div>
+            <!-- Radio button to choose user type -->
+            <div class="radio-group">
+              <div class="w-1/2">
+                <input type="radio" class="radio-btn" name="type" value="teacher">
+                <a class="text-sm sm:text-base lg:text-lg">Teacher</a>
+              </div>
+              <div class="w-1/2">
+                <input type="radio" class="radio-btn" name="type" value="student">
+                <a class="text-sm sm:text-base lg:text-lg">Student</a>
+              </div>
+            </div>
+            <!-- file upload for teacher -->
+            <div class = "upload-container ml-1 mt-2">
+              <div class = "mb-3">
+                <a class="upload-txt">Please upload your certified education file to sign up as a teacher.</a>
+              </div>
+              <input id="fileUpload" class="upload-button" type="file" name="uploadedFile">
+            </div>
+            <button type="submit" class="submitBtn" value="signup"> Sign Up </button>
+          </form>
+        </div>
         
-        <div class="form-group mb-3 px-5 pt-4">
+        <!-- Login tab content -->
+        <div id="login" class = "ml-3">
+          <h1 class="title-txt">Login To Maffy</h1>
+          <!-- form action need to change -->
+          <form action="./home.html" method="post">
+            <div class="form_group">
+              <input type="text" class="form_field" name="username" placeholder="Username" required autofocus>
+              <label for="username" class="form_label">Username</label>
+            </div>
+    
+            <div class="form_group">
+              <input type="password" class="form_field" name="password" placeholder="Password" required>
+              <label for="username" class="form_label">Password</label>
+            </div>
+            <button type="submit" class="submitBtn" value="Login"> Login </button>
+          </form>
         </div>
-        <div class="form-group px-5 pt-3">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" name="password" placeholder="Password" required="required">
-        </div>
-        <div class="text-center mt-5">
-          <button class="btn btn-primary w-32 mr-4 discard animate-up-2" type="reset">Clear</button>
-          <button type="submit" name="loginBtn" class="ml-4 w-32 btn btn-primary login-btn save animate-up-2">Log In</button>
-          <p class="link mt-3 text-muted">Don't have an account? Sign Up <a class="highlight animate-up-2" href="signup.php">here</a></p>
-        </div>
-
-      </form>
-
+      </div>
+    </div>
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    //==============================================================================
+    // script on handling tab swapping for the login and signup
+    $(document).ready(function() {
+      // Add "active" class to "signup" tab by default
+      $('.tab a[href="#signup"]').addClass('active');
+
+      // Hide all tab contents except "signup"
+      $('.tab-content > div:not("#signup")').hide();
+
+      // When a tab is clicked, show its corresponding content and hide the others
+      $('.tab a').on('click', function(e) {
+        e.preventDefault();
+
+        // Remove "active" class from all tabs
+        $('.tab a').removeClass('active');
+
+        // Add "active" class to clicked tab
+        $(this).addClass('active');
+
+        // Hide all tab contents except the one that matches the clicked tab
+        $('.tab-content > div').hide();
+        $($(this).attr('href')).show();
+      });
+    });
+
+  //==============================================================================
+  // function to add some animation on the login container
+  // get container id
+  const con=document.querySelector('.lgn-container');
+  // when mouse in and out
+  let isIn=true;
+  let isOut=false;
+  var span;
+
+  con.addEventListener('mouseenter',(e)=>{
+    if(isIn){
+      let inX=e.clientX-e.target.offsetLeft;
+      let inY=e.clientY-e.target.offsetTop;
+
+      let el=document.createElement('span');
+      el.style.left=inX+'px';
+      el.style.top=inY+'px';
+      con.appendChild(el);
+
+      $('.lgn-container span').removeClass('out');
+      $('.lgn-container span').addClass('in');
+
+      span=document.querySelector('.lgn-container span');
+      isIn=false;
+      isOut=true;
+    }
+  });
+
+  con.addEventListener('mouseleave',(e)=>{
+    if(isOut){
+      let outX=e.clientX-e.target.offsetLeft;
+      let outY=e.clientY-e.target.offsetTop;
+
+      $('.lgn-container span').removeClass('in');
+      $('.lgn-container span').addClass('out');
+
+      $('.out').css('left',outX+'px');
+      $('.out').css('top',outY+'px');
+
+      isOut=true;
+      setTimeout(() => {
+          con.removeChild(span);
+          isIn=true;
+      },500);
+    }
+  })
+  //==============================================================================
+  // function to hide and show the upload file container for teacher
+  const radioButtons = document.querySelectorAll('input[type="radio"]');
+  const uploadContainer = document.querySelector('.upload-container');
+
+  uploadContainer.style.display = 'none'; // set display to none by default
+
+  radioButtons.forEach((radio) => {
+    radio.addEventListener('click', () => {
+      if (radio.value === 'teacher') {
+        uploadContainer.style.display = 'block';
+      } else {
+        uploadContainer.style.display = 'none';
+      }
+    });
+  });
+</script>
 </body>
 </html>
