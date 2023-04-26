@@ -405,7 +405,10 @@ body{
   color: #fff;
 }
 
-
+.copyright {
+  background-color: rgb(224,238,224);
+  border-top: #000000 1px solid;
+}
 
 @media only screen and (min-width: 450px) and (max-width: 900px) {
   .home-container .search-details h2{
