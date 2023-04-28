@@ -1,0 +1,151 @@
+
+.sidebar {
+  width: 200px;
+  height: 100%;
+  background-color: #ffffff;
+  position: fixed;
+  top: 0;
+  margin: 80px 0px;
+  transition: left 0.3s ease-in-out;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  color: #000000;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.close-sidebar-btn {
+  background-color: transparent;
+  border: none;
+  color: #000000;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  border-bottom: 1px solid #000000;
+}
+
+.sidebar li a {
+  text-decoration: none;
+  color: #000000;
+  font-size: 18px;
+}
+
+.sidebar li a:hover {
+  color: #4f4f4f;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+/* Container styles */
+
+.container {
+  margin: 80px 0px;
+  margin-left: 200px;
+  padding: 20px;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 36px;
+  margin: 0;
+}
+
+.header p {
+  font-size: 18px;
+  margin: 0;
+  color: #666;
+}
+
+.big-container {
+  background-color: #fff;
+  padding: 120px;
+  margin-top: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.comment-section {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.comment-section i {
+  font-size: 24px;
+  margin-right: 10px;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.comment-form {
+  display: none;
+}
+
+.comment-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-form textarea {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+.comment-form button {
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comments {
+  margin-top: 10px;
+}
+
+.comment {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.user-profile img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
