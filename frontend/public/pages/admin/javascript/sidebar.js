@@ -1,4 +1,3 @@
-console.log("sohai");
 const ANIMATION_DURATION = 300;
 
 const SIDEBAR_EL = document.getElementById("sidebar");
