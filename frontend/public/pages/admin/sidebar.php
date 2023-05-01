@@ -75,7 +75,8 @@
             </ul>
             <ul>
               <li class="menu-item">
-                <a href="#">
+                <!-- link to backend logout to destroy session -->
+                <a href="../../../../backend/logout.php">
                   <span class="menu-icon">
                     <i class="fa fa-laptop"></i>
                   </span>

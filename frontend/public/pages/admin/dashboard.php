@@ -1,3 +1,16 @@
+<!--Connection to Database-->
+<?php include("../../../../backend/conn.php")?>
+  <?php include("../../../../backend/session.php");
+  if ($_SESSION['privilege'] == 'teacher'){
+    echo("<script>alert('You do not have the privilege to access this page.')</script>");
+    echo("<script>window.location = '../teacher/homepage.php'</script>");
+  }
+  else if ($_SESSION['privilege'] == 'student'){
+    echo("<script>alert('You do not have the privilege to access this page.')</script>");
+    echo("<script>window.location = '../student/homepage.php'</script>");
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +24,7 @@
 
 <body>
   <div class="w-screen h-screen flex flex-row">
-    <!-- <?php include '../admin/sidebar.php';?> -->
+    <?php include '../admin/sidebar.php';?>
     <div class="w-full overflow-auto">
       <div class="flex flex-col mx-6 sm:mx-9 text-center sm:text-left">
         <h2 class="title my-4">Admin Dashboard</h2>
