@@ -90,8 +90,8 @@
     <div id="overlay" class="overlay"></div>
     <div class="layout">
       <main class="content">
-        <div>
-          <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm">
+        <div id="btn-toggle" class="toggler-cont">
+          <a class="sidebar-toggler break-point-sm">
             <i class="fa-solid fa-bars"></i>
           </a>
         </div>

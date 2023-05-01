@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../../src/stylesheets/admin/view-list.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/775f0ea71b.js" crossorigin="anonymous"></script>
+  <title>Maffy</title>
+</head>
+
+<body>
+  <div class="w-screen h-screen flex flex-row">
+    <!-- <?php include '../admin/sidebar.php';?> -->
+    <div class="w-full overflow-auto">
+      <div class="flex flex-col h-full items-center sm:items-start mx-3 md:mx-9 text-center sm:text-left">
+        <!-- dynamic change name based on type param passed -->
+        <h2 class="title my-4">
+          <!-- <?php 
+            echo $_GET['type'] == 'student' 
+              ? 'Student' 
+              : ($_GET['type'] == 'course' 
+                ? 'Course' 
+                : ($_GET['type'] == 'request-teacher'
+                ? 'Request Teacher'
+                  : ($_GET['type'] == 'teacher'
+                  ? 'Teacher'
+                  : 'Feedback'
+                    )
+                  )
+                ); 
+          ?>   -->
+          Teacher
+        </h2>
+
+        <!-- search bar container -->
+        <div class="search-cont sm:my-2">
+          <input id="search-bar" type="text" class="search__input" placeholder="Search something..">
+          <span class="search__button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </span>
+        </div>
+
+        <!-- search result list -->
+        <div id="search-results" class="result-container max-h-5/6 h-fit w-full my-5 overflow-auto">
+          
+          <!-- for teacher list -->
+          <a href="" class="item-cont flex flex-row justify-around md:justify-between">
+            <div class="flex flex-col md:flex-row text-center md:text-left items-center">  <!-- left content  -->
+              <!-- img cont  -->
+              <div class="md:mr-5">
+                <img src="../../images/intro.png" alt="image">
+              </div>
+              <!-- name and details -->
+              <div class="flex flex-col justify-center">
+                <h2>John Doe</h2>
+                <h3>johndoe@example.com</h3>
+              </div>
+            </div>
+            <!-- arrow -->
+            <div class="flex flex-col justify-center">
+              <span class="arrow-btn">
+                <i class="fa-solid fa-chevron-right"></i>
+              </span>
+            </div>
+          </a>
+
+          <!-- for student list -->
+          <a href="" class="item-cont flex flex-row justify-around md:justify-between">
+            <div class="flex flex-col md:flex-row text-center md:text-left items-center">  <!-- left content  -->
+              <!-- img cont  -->
+              <div class="md:mr-5">
+                <img src="../../images/intro.png" alt="image">
+              </div>
+              <!-- name and details -->
+              <div class="flex flex-col justify-center">
+                <h2>John Doe</h2>
+                <h3>johndoe@example.com</h3>
+              </div>
+            </div>
+            <!-- arrow -->
+            <div class="flex flex-col justify-center">
+              <span class="arrow-btn">
+                <i class="fa-solid fa-chevron-right"></i>
+              </span>
+            </div>
+          </a>
+
+          <!-- for request teacher list -->
+          <div class="item-cont flex flex-col md:flex-row  md:justify-between">
+            <div class="flex flex-col md:flex-row text-center md:text-left items-center">  <!-- left content  -->
+              <!-- img cont  -->
+              <div class="md:mr-5">
+                <img src="../../images/intro.png" alt="image">
+              </div>
+              <!-- name and details -->
+              <div class="flex flex-col justify-center">
+                <h2>John Doe</h2>
+                <h3>johndoe@example.com</h3>
+              </div>
+            </div>
+            <div class="flex flex-row justify-around">
+              <!-- download -->
+              <button id="download-doc" class="flex flex-col justify-center">
+                <span class="download-btn mr-4">
+                  <i class="fa-solid fa-download"></i>
+                </span>
+              </button>
+              <!-- approve -->
+              <button id="check-approval" class="flex flex-col justify-center">
+                <span class="check-btn mr-4">
+                  <i class="fa-regular fa-circle-check"></i>
+                </span>
+              </button>
+              <!-- reject -->
+              <button id="xmark-reject" class="flex flex-col justify-center">
+                <span class="xmark-btn mr-4">
+                  <i class="fa-regular fa-circle-xmark"></i>
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <!-- for course list -->
+          <a href="" class="item-cont flex flex-row justify-around md:justify-between">
+            <div class="flex flex-col md:flex-row text-center md:text-left items-center">  <!-- left content  -->
+              <!-- img cont  -->
+              <div class="md:mr-5">
+                <img src="../../images/intro.png" alt="image">
+              </div>
+              <!-- name and details -->
+              <div class="flex flex-col justify-center">
+                <h2>Title</h2>
+                <h3>Desc</h3>
+              </div>
+            </div>
+            <!-- arrow -->
+            <div class="flex flex-col justify-center">
+              <span class="arrow-btn">
+                <i class="fa-solid fa-chevron-right"></i>
+              </span>
+            </div>
+          </a>
+
+          <!-- for feedback list -->
+          <a href="" class="item-cont flex flex-row justify-around md:justify-between">
+            <div class="flex flex-col md:flex-row text-center md:text-left items-center">  <!-- left content  -->
+              <!-- img cont  -->
+              <div class="md:mr-5">
+                <img src="../../images/intro.png" alt="image">
+              </div>
+              <!-- name and details -->
+              <div class="flex flex-col justify-center">
+                <h2>username</h2>
+                <h3>desc</h3>
+              </div>
+            </div>
+            <!-- arrow -->
+            <div class="flex flex-col justify-center">
+              <span class="arrow-btn">
+                <i class="fa-solid fa-chevron-right"></i>
+              </span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script type="text/javascript" src="../admin/javascript/sidebar.js"></script>
+<script>
+  const searchBar = document.getElementById("search-bar");
+  const searchResults = document.getElementById("search-results");
+
+  searchBar.addEventListener("input", () => {
+    const query = searchBar.value;
+    
+    // Make an AJAX request to fetch search results
+    console.log("query:", query);
+    fetch(`/view-list.php?q=${query}`)
+      .then(response => response.text())
+      .then(data => {
+        // Update the search results section with the fetched data
+        searchResults.innerHTML = data;
+      })
+      .catch(error => {
+        console.error("Error fetching search results:", error);
+      });
+  });
+</script>
+</body>
+</html>
