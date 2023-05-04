@@ -1,6 +1,7 @@
-<!--Connection to Database-->
-<?php include("../../../../backend/conn.php")?>
-  <?php include("../../../../backend/session.php");
+<?php 
+  // connection to database
+  include("../../../../backend/conn.php");
+  include("../../../../backend/session.php");
   if ($_SESSION['privilege'] == 'teacher'){
     echo("<script>alert('You do not have the privilege to access this page.')</script>");
     echo("<script>window.location = '../teacher/homepage.php'</script>");
@@ -9,6 +10,46 @@
     echo("<script>alert('You do not have the privilege to access this page.')</script>");
     echo("<script>window.location = '../student/homepage.php'</script>");
   }
+
+  //sql query to count all teacher account
+  $total_teacher_sql = mysqli_query($con, "SELECT COUNT(user_id) FROM user WHERE privilege_id = 2 AND user_active = 1");
+  $count_teacher = mysqli_fetch_array($total_teacher_sql);
+
+  //sql query to count all student account
+  $total_student_sql = mysqli_query($con, "SELECT COUNT(user_id) FROM user WHERE privilege_id = 3 AND user_active = 1");
+  $count_student = mysqli_fetch_array($total_student_sql);
+
+  //sql query to get total number of course
+  $total_course_sql = mysqli_query($con, "SELECT COUNT(course_id) FROM course");
+  $count_course = mysqli_fetch_array($total_course_sql);
+
+  //sql query to get total number of course
+  $total_feedback_sql = mysqli_query($con, "SELECT COUNT(feedback_id) FROM feedback");
+  $count_feedback = mysqli_fetch_array($total_feedback_sql);
+
+  //sql query to count user that request for teacher account
+  $total_request_teacher_sql = mysqli_query($con, "SELECT COUNT(user_id) FROM user WHERE privilege_id = 2 AND user_active = 0");
+  $count_request_teacher = mysqli_fetch_array($total_request_teacher_sql);
+
+  //sql query to get most performance teaacher
+  $trend_teacher_sql = mysqli_query($con, 
+    "SELECT user.user_id, user.privilege_id, user.username, user.user_image, course.course_status, 
+    COUNT(course_id) as total_course, SUM(course_click) as total_view FROM user
+    INNER JOIN course ON course.user_id = user.user_id    
+    WHERE privilege_id = 2 AND user_active = 1 AND course_status = 1
+    GROUP BY user.user_id
+    ORDER BY total_view DESC
+    LIMIT 2");
+  
+  //sql query to get most performance teaacher
+  $trend_course_sql = mysqli_query($con, 
+    "SELECT * FROM course  WHERE course_status = 1
+    ORDER BY course_click DESC
+    LIMIT 2");
+
+
+  //Close connection of database
+  mysqli_close($con);
 ?>
 
 <!DOCTYPE html>
@@ -31,11 +72,17 @@
 
         <div class="grid-cont">
           <!-- total teacher -->
-          <a href="#" class="item-card">
+          <?php
+            if($count_course[0] > 0) {
+              echo '<a href="view-list.php?type=teacher" class="item-card">';
+            } else {
+              echo '<a class="no-item item-card">';
+            }
+            ?>
             <div class="flex flex-col mx-3 mt-2">
               <div class="flex flex-row h-5/6">
                 <div class="flex flex-col xl:justify-center w-1/6 xl:pl-4">
-                  <h2>4899</h2>
+                  <h2> <?php echo $count_teacher[0]; ?> </h2>
                 </div>
                 <div class="flex flex-row justify-center w-5/6">
                   <img src="../../images/intro.png" alt="image">
@@ -46,11 +93,17 @@
           </a>
 
           <!-- total student -->
-          <a href="#" class="item-card">
+          <?php
+            if($count_course[0] > 0) {
+              echo '<a href="view-list.php?type=student" class="item-card">';
+            } else {
+              echo '<a class="no-item item-card">';
+            }
+            ?>
             <div class="flex flex-col mx-3 mt-2">
               <div class="flex flex-row h-5/6">
                 <div class="flex flex-col xl:justify-center w-1/6 xl:pl-4">
-                  <h2>489</h2>
+                  <h2> <?php echo $count_student[0]; ?> </h2>
                 </div>
                 <div class="flex flex-row justify-center w-5/6">
                   <img src="../../images/intro.png" alt="introduction">
@@ -61,11 +114,17 @@
           </a>
 
           <!-- total course -->
-          <a href="#" class="item-card">
+          <?php
+            if($count_course[0] > 0) {
+              echo '<a href="view-list.php?type=course" class="item-card">';
+            } else {
+              echo '<a class="no-item item-card">';
+            }
+            ?>
             <div class="flex flex-col mx-3 mt-2">
               <div class="flex flex-row h-5/6">
                 <div class="flex flex-col xl:justify-center w-1/6 xl:pl-4">
-                  <h2>4899</h2>
+                  <h2> <?php echo $count_course[0]; ?> </h2>
                 </div>
                 <div class="flex flex-row justify-center w-5/6">
                   <img src="../../images/intro.png" alt="introduction">
@@ -76,11 +135,17 @@
           </a>
 
           <!-- total feedback -->
-          <a href="#" class="item-card">
+          <?php
+            if($count_feedback[0] > 0) {
+              echo '<a href="view-list.php?type=feedback" class="item-card">';
+            } else {
+              echo '<a class="no-item item-card">';
+            }
+            ?>
             <div class="flex flex-col mx-3 mt-2">
               <div class="flex flex-row h-5/6">
                 <div class="flex flex-col xl:justify-center w-1/6 xl:pl-4">
-                  <h2>4899</h2>
+                  <h2> <?php echo $count_feedback[0]; ?> </h2>
                 </div>
                 <div class="flex flex-row justify-center w-5/6">
                   <img src="../../images/intro.png" alt="introduction">
@@ -90,53 +155,61 @@
             </div>
           </a>
 
-          <!-- img, name, total course, total view -->
+          <!-- need hyperlink to teacher account -->
           <!-- Most performance teacher -->
           <div class="item-card two-column-teacher">
             <div class="flex flex-col mx-3 mt-2">
-              <h3 class="h-1/6" style="border-bottom: 1px solid #FF914D ;">Most Performance Teacher</h3>
-              <a href="#" class="user-content my-2">
-                <div class="flex flex-row items-center">
-                  <div class="profile-img">
-                    <img src="../../images/intro.png">
+              <h3 class="h-1/6" style="border-bottom: 1px solid #667e91 ;">Most Performance Teacher</h3>
+              <?php
+              if(mysqli_num_rows($trend_teacher_sql) > 0)
+              {
+                foreach($trend_teacher_sql as $teacher_data) // Run SQL query
+                {
+                  $teacher_avg_score = $teacher_data['total_view']/$teacher_data['total_course'];
+              ?>
+                <a href="#" class="user-content mobile-col my-2">
+                  <div class="flex flex-row items-center">
+                    <div class="profile-img">
+                      <img src="<?=$teacher_data['user_image']?>">
+                    </div>
+                    <div class="flex flex-col">
+                      <div class="user-name ml-3 md:ml-7">
+                        <?php echo $teacher_data['username']; ?>
+                      </div>
+                      <div class="score-view ml-3 md:ml-7">
+                        <span><i class="icon-score mr-1 fa-solid fa-award"></i> </span>
+                        <?php echo $teacher_avg_score; ?>
+                      </div>
+                    </div>
                   </div>
-                  <div class="user-name ml-7">
-                    Teacher name
+                  <div class="count-course mr-2">
+                    <i class="icon-book fa-solid fa-book-bookmark"></i>
+                    <?php echo $teacher_data['total_course']; ?>
                   </div>
-                </div>
-                <div class="count-course">
-                  19 Courses
-                </div>
-                <div class="count-view">
-                  3000 Views
-                </div>
-              </a>
-
-              <a href="#" class="user-content my-2">
-                <div class="flex flex-row items-center">
-                  <div class="profile-img">
-                    <img src="../../images/intro.png">
+                  <div class="count-view mr-2">
+                    <span><i class="icon-eye mr-1 fa-solid fa-eye"></i> </span>
+                    <?php echo $teacher_data['total_view']; ?>
                   </div>
-                  <div class="user-name ml-7">
-                    Teacher name
-                  </div>
-                </div>
-                <div class="count-course">
-                  19 Courses
-                </div>
-                <div class="count-view">
-                  3000 Views
-                </div>
-              </a>
+                </a>
+              <?php
+                }
+              }
+              ?>
             </div>
           </div>
 
           <!-- total requesting teacher -->
-          <a href="#" class="item-card">
+          <?php
+            if($count_request_teacher[0] > 0) {
+              echo '<a href="view-list.php?type=request-teacher" class="item-card">';
+            } else {
+              echo '<a class="no-item item-card">';
+            }
+            ?>
             <div class="flex flex-col mx-3 mt-2">
               <div class="flex flex-row h-5/6">
                 <div class="flex flex-col xl:justify-center w-1/6 xl:pl-4">
-                  <h2>4899</h2>
+                  <h2> <?php echo $count_request_teacher[0]; ?> </h2>
                 </div>
                 <div class="flex flex-row justify-center w-5/6">
                   <img src="../../images/intro.png" alt="introduction">
@@ -145,57 +218,53 @@
               <h3 class="h-1/6">Requesting Account</h3>
             </div>
           </a>
+
+          <!-- need hyperlink to course -->
           <!-- most trend course -->
           <div id="ds-trend-course" class="item-card two-column mb-5 lg:mb-0">
             <div class="flex flex-col mx-3 mt-2">
-              <h3 class="h-1/6" style="border-bottom: 1px solid #FF914D ;">Most Trend Course Assessment</h3>
+              <h3 class="h-1/6" style="border-bottom: 1px solid #667e91 ;">Most Trend Course Assessment</h3>
               <div class="h-5/6 flex flex-col">
-                <a href="#" class="course-content justify-between text-left px-3">
-                  <div class="flex flex-col justify-between">
-                    <span class="course-title">
-                      <small class="text-xs">&ltTITLE&gt</small>
-                      Teach Jojo Eat Chagee
-                    </span>
-                    <span class="name-title">
-                      <small class="text-xs">&ltNAME&gt</small>
-                      Ho Chang Yong
-                    </span>
-                    <span class="course-desc">
-                      <small class="text-xs">&ltDESC&gt</small>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                      incididunt ut labore et dolore magna aliqua.
-                    </span>
-                  </div>
-                  <span class="view-count">
-                    View: 5201
-                  </span>
-                </a> <!-- end -->
+              <?php
+              if(mysqli_num_rows($trend_course_sql) > 0)
+              {
+                foreach($trend_course_sql as $course_data) // Run SQL query
+                {
+                  ?>
+                  <a href="#" class="course-content justify-between text-left px-3">
+                    <div class="flex flex-row my-3 items-center"> 
+                      <i class="icon-book mr-3 fa-solid fa-book-bookmark"></i>
+                      <div class="flex flex-col justify-between">
+                        <span class="course-title">
+                          <?php echo $course_data['course_title']; ?>
+                        </span>
+                        <span class="course-desc">
+                          <?php echo $course_data['course_desc']; ?>
+                        </span>
+                      </div>
+                    </div>
 
-                <a href="#" class="course-content justify-between text-left px-3">
-                  <div class="flex flex-col justify-between">
-                    <span class="course-title">
-                      <small class="text-xs">&ltTITLE&gt</small>
-                      Teach Jojo Eat Chagee
+                    <span class="view-count">
+                      <i class="icon-eye mr-1 fa-solid fa-eye"></i> 
+                      <?php echo $course_data['course_click']; ?>
                     </span>
-                    <span class="name-title">
-                      <small class="text-xs">&ltNAME&gt</small>
-                      Ho Chang Yong
-                    </span>
-                    <span class="course-desc">
-                      <small class="text-xs">&ltDESC&gt</small>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                      incididunt ut labore et dolore magna aliqua.
-                    </span>
-                  </div>
-                  <span class="view-count">
-                    View: 5201
-                  </span>
-                </a> <!-- end -->
+                  </a> <!-- end -->              
+                  <?php
+                }
+              }
+              ?>
               </div>
             </div>
           </div>
+
           <!-- mobile responsive for trend course -->
-          <a href="#" id="mb-trend-course" class="item-card mb-5">
+          <?php
+            if(mysqli_num_rows($trend_course_sql) > 0) {
+              echo '<a href="view-list.php?type=trend-course" id="mb-trend-course" class="item-card mb-5">';
+            } else {
+              echo '<a id="mb-trend-course" class="no-item item-card mb-5">';
+            }
+            ?>
             <div class="flex flex-col mx-3 mt-2">
               <div class="flex flex-row h-5/6 justify-center w-full">
                 <img src="../../images/intro.png" alt="introduction">
@@ -203,6 +272,7 @@
               <h3 class="h-1/6">Most Trend Course</h3>
             </div>
           </a>
+
         </div>
       </div>
     </div>

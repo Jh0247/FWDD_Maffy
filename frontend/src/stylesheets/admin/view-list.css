@@ -1,14 +1,30 @@
 body{
   height:100%;
   width: 100%;
-  background-color: #496970;
+  background-color: #667e91;
+}
+
+.bg-block {
+  background-color: #1d1a19;
+  color: #f33329;
+  opacity: 0.8;
+  border: #080808 1px solid;
+  transition: all ease-in-out .5s;
+}
+
+.bg-block:hover {
+  border: none !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  color: #f33329;
+  opacity: 0.8;
+  transition: all ease-in-out .5s;
 }
 
 .title {
   font-size: 1.8rem;
   font-weight: 600;
   font-family: cursive;
-  color: #e46a3a;
+  color: #ffffff;
 }
 
 .search-cont {
@@ -47,16 +63,17 @@ body{
 }
 
 .item-cont {
-  border-top: #f5c07c 1px solid;
+  border-top: #bebebe 1px solid;
   padding: 5px;
   transition: .1s ease-in-out, .4s color;
 }
 
 .item-cont:hover {
-  border-left: 1px solid #FF914D ;
-  border-right: 1px solid #FF914D ;
+  border-left: 1px solid #bebebe ;
+  border-right: 1px solid #bebebe ;
   border-radius: 5px;
   background-color: rgba(233, 206, 165, 0.4);
+  transition: all ease-in-out .5s;
 }
 
 .result-container{
@@ -64,6 +81,7 @@ body{
   display: flex;
   flex-direction: column;
   border-radius: 25px;
+  transition: all ease-in-out .5s;
 }
 
 .result-container img{
@@ -72,7 +90,7 @@ body{
   border-radius: 999px;
   border: #080808 0.3px solid;
   margin: 5px;
-  object-fit :contain;
+  object-fit :fill;
 }
 
 .result-container h2{
@@ -124,6 +142,113 @@ body{
   color: #00cc00;
 }
 
+.course-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+}
+
+.course-desc {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  font-size: 0.9rem !important;
+  font-weight: 300 !important;
+}
+
+.course-author {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.view-count {
+  font-size: 0.9rem;
+  font-weight: 350;
+}
+
+.count-course {
+  display: flex;
+  flex-direction: row;
+  width: 80px;
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: Montserat;
+  letter-spacing: .3rem;
+}
+
+.count-view {
+  display: flex;
+  flex-direction: row;
+  width: 80px;
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: Montserat;
+  letter-spacing: .3rem;
+}
+
+.score-view {
+  display: flex;
+  flex-direction: row;
+  width: 80px;
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: Montserat;
+  letter-spacing: .3rem;
+}
+
+.icon-book, .icon-score {
+  font-size: 1.3rem;
+}
+
+.icon-eye {
+  font-size: 1rem;
+}
+
+.radio-inputs {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 0.5rem;
+  background-color: #EEE;
+  box-sizing: border-box;
+  box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+  padding: 0.25rem;
+  width: 300px;
+  font-size: 14px;
+}
+
+.radio-inputs .radio {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.radio-inputs .radio input {
+  display: none;
+}
+
+.radio-inputs .radio .radio-lable {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: none;
+  padding: .5rem 0;
+  color: rgba(51, 65, 85, 1);
+  transition: all .15s ease-in-out;
+}
+
+.radio-inputs .radio input:checked + .radio-lable {
+  background-color: #FF914D;
+  font-weight: 600;
+}
+
 @media only screen and (min-width: 468px) and (max-width: 900px) {
   .title {
     font-size: 1.6rem;
@@ -145,6 +270,14 @@ body{
 
   .result-container .download-btn {
     font-size: 1.2rem;
+  }
+
+  .count-course {
+    display: none;
+  }
+  
+  .count-view {
+    display: none;
   }
 }
 
@@ -170,5 +303,13 @@ body{
 
   .result-container .download-btn {
     font-size: 1.2rem;
+  }
+
+  .count-course {
+    display: none;
+  }
+  
+  .count-view {
+    display: none;
   }
 }
