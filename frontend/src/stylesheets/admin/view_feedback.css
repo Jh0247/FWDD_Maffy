@@ -1,0 +1,92 @@
+body {
+  background-color: #6D8A86;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  font-family: cursive;
+  color: #e46a3a;
+}
+
+.backbutton {
+  --bg: #000;
+  --hover-bg: #FF914D;
+  --hover-text: #000;
+  color: #fff;
+  border: 1px solid var(--bg);
+  border-radius: 20px;
+  padding: 0.5em 1em;
+  background: var(--bg);
+  transition: 0.3s;
+  margin-top: 50px;
+  font-weight: bold;
+}
+
+.backbutton:hover {
+  color: var(--hover-text);
+  transform: translate(-0.25rem,-0.25rem);
+  background: var(--hover-bg);
+  box-shadow: 0.25rem 0.25rem var(--bg);
+}
+
+.backbutton:active {
+  transform: translate(0);
+  box-shadow: none;
+}
+
+.card {
+  border-radius: 20px;
+  padding: 1rem;
+  font-family: cursive;
+}
+
+.user-container {
+  padding: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px 20px 0px 0px;
+  background-color: #FF914D;
+  height: fit-content;
+}
+
+.user-container .user,
+.user-container .email {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.feedback {
+  color: #2F4858;
+  padding: 1rem;
+  font-size: 1rem;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  line-height: 3;
+  background: #fff;
+  box-shadow: inset 5px 5px 10px #bababa,
+              inset -5px -5px 10px #fff;
+}
+
+@media only screen and (min-width: 468px) and (max-width: 900px) {
+  .user-container .user,
+  .user-container .email {
+    font-size: 1.3rem;
+  }
+
+  .feedback {
+    font-size: .9rem;
+  }
+}
+
+@media only screen and (max-width: 468px) {
+  .user-container .user,
+  .user-container .email {
+    font-size: 1.2rem;
+  }
+
+  .feedback {
+    font-size: .85rem;
+  }
+}
