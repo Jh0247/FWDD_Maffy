@@ -1,12 +1,12 @@
 body {
-  background-color: #6D8A86;
+  background-color: #667e91;
 }
 
 .title {
   font-size: 1.8rem;
   font-weight: 600;
   font-family: cursive;
-  color: #e46a3a;
+  color: #ffffff;
 }
 
 .backbutton {
@@ -19,7 +19,7 @@ body {
   padding: 0.5em 1em;
   background: var(--bg);
   transition: 0.3s;
-  margin-top: 50px;
+  height: 40px;
   font-weight: bold;
 }
 
@@ -37,7 +37,6 @@ body {
 
 .card {
   border-radius: 20px;
-  padding: 1rem;
   font-family: cursive;
 }
 
@@ -75,6 +74,10 @@ body {
     font-size: 1.3rem;
   }
 
+  .title {
+    font-size: 1.6rem;
+  }
+
   .feedback {
     font-size: .9rem;
   }
@@ -84,6 +87,10 @@ body {
   .user-container .user,
   .user-container .email {
     font-size: 1.2rem;
+  }
+
+  .title {
+    font-size: 1.4rem;
   }
 
   .feedback {
