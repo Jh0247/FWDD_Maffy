@@ -414,9 +414,9 @@
             $sql = mysqli_query($con, "SELECT * FROM feedback INNER JOIN user ON user.user_id = feedback.user_id WHERE user.user_active = 1");
             if(mysqli_num_rows($sql) > 0) {
               foreach($sql as $data) {
+                echo '<a href="view-feedback.php?id=' . $data["feedback_id"] . '" class="item-cont flex flex-row justify-around md:justify-between">';
               ?>
-              <!-- for feedback list -->
-              <a href="" class="item-cont flex flex-row justify-around md:justify-between">
+                <!-- for feedback list -->
                 <div class="flex flex-col md:flex-row text-center md:text-left items-center">  <!-- left content  -->
                   <!-- img cont  -->
                   <div class="md:mr-5">
