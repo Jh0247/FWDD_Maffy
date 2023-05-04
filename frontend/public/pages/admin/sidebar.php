@@ -14,16 +14,16 @@
       <a id="btn-collapse" class="sidebar-collapser"><i class="fa-solid fa-chevron-right"></i></a>
       <div class="sidebar-layout">
         <div class="sidebar-header">
-          <div class="sidebar-logo">
+          <a href="../shared/home.php" class="sidebar-logo">
             <div>M</div>
             <img src="../../images/Maffy.png" alt="logo" class="logo-img">
-          </div>
+          </a>
         </div>
         <div class="sidebar-content h-96">
           <nav class="menu">
             <ul>
               <li class="menu-item">
-                <a>
+                <a style="cursor:default">
                   <span class="menu-icon">
                     <i class="fa-solid fa-user white-color"></i>
                   </span>
@@ -31,7 +31,7 @@
                 </a>
               </li>
               <li class="menu-item">
-                <a href="#">
+                <a href="dashboard.php">
                   <span class="menu-icon">
                     <i class="fa fa-th-large"></i>
                   </span>
@@ -40,7 +40,7 @@
               </li>
               <li class="menu-header" style="padding-top: 20px"><span> Management </span></li>
               <li class="menu-item">
-                <a href="#">
+                <a href="manage-user.php">
                   <span class="menu-icon">
                     <i class="fa-solid fa-user-group"></i>
                   </span>
@@ -48,16 +48,33 @@
                 </a>
               </li>
               <li class="menu-item">
-                <a href="#">
+                <a href="view-list.php?type=performance-teacher">
+                  <span class="menu-icon">
+                    <i class="fa-solid fa-user-group"></i>
+                  </span>
+                  <span class="menu-title">Most Performance Teacher</span>
+                </a>
+              </li>
+              <li class="menu-header" style="padding-top: 20px"><span> Manage Course </span></li>
+              <li class="menu-item">
+                <a href="view-list.php?type=course">
                   <span class="menu-icon">
                     <i class="fa-solid fa-book-bookmark"></i>
                   </span>
-                  <span class="menu-title">Manage Courses</span>
+                  <span class="menu-title">All Courses</span>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="view-list.php?type=trend-course">
+                  <span class="menu-icon">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                  </span>
+                  <span class="menu-title">Trend Courses</span>
                 </a>
               </li>
               <li class="menu-header" style="padding-top: 20px"><span> Support </span></li>
               <li class="menu-item">
-                <a href="#">
+                <a href="view-list.php?type=feedback">
                   <span class="menu-icon">
                     <i class="fa fa-file-text"></i>
                   </span>
@@ -65,7 +82,7 @@
                 </a>
               </li>
               <li class="menu-item">
-                <a href="#">
+                <a href="terms-condition.php">
                   <span class="menu-icon">
                     <i class="fa fa-gears"></i>
                   </span>

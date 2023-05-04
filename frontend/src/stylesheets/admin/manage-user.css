@@ -1,14 +1,14 @@
 body{
   height:100%;
   width: 100%;
-  background-color: #496970;
+  background-color: #667e91;
 }
 
 .title {
   font-size: 1.8rem;
   font-weight: 600;
   font-family: cursive;
-  color: #e46a3a;
+  color: #ffffff;
 }
 
 .item-card {
@@ -19,13 +19,21 @@ body{
   height: 280px;
 }
 
-.item-card img {
+.no-item-card {
+  background-color: #f4eee0;
+  border-radius: 20px;
+  box-shadow: 0 8px 14px 0 rgba(0,0,0,0.2);
+  width: 250px;
+  height: 280px;
+}
+
+.item-card img, .no-item-card img {
   width: 225px;
   height: 225px;
   object-fit: contain;
 }
 
-.item-card h3 {
+.item-card h3, .no-item-card h3 {
   text-align: center;
   font-size: 1rem;
   font-weight: 600;
@@ -36,5 +44,10 @@ body{
   cursor: pointer;
   color: rgb(6, 145, 133);
   transform: translateY(-3px);
+  transition: all ease-in-out .3s;
+}
+
+.no-item-card:hover {
+  opacity: .3;
   transition: all ease-in-out .3s;
 }

@@ -2,6 +2,8 @@
 //Start session
 if(!isset($_SESSION)) {
   session_start();
+  // session_unset();
+  // session_destroy();
 }
 else{
   if ($_SESSION['privilege'] == ""){
@@ -160,6 +162,16 @@ if (isset($_POST['loginBtn'])) {
     $_SESSION['desc']=$desc;
     $_SESSION['email']=$email;
 
+    // Execute query to update user last login
+    date_default_timezone_set('Asia/Kuala_Lumpur');
+    $now = date('Y-m-d H:i:s');
+    $update_login_timestamp = mysqli_query($con, "UPDATE user SET user_last_login = '$now' WHERE user_id = $id");
+    if (!$update_login_timestamp){
+      die('Error validation query: ' . mysqli_error($con));
+    }
+
+    // mysqli_query($con, $update_login_timestamp);
+    
     switch($user_privilege){
       case 'admin':
         echo("<script>window.location = '../admin/dashboard.php'</script>");
