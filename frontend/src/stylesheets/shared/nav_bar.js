@@ -10,35 +10,6 @@ profileIcon.addEventListener("click", () => {
   }
 });
 
-// responsive dropdown list
-// const profileIconRes = document.getElementById("profile-icon");
-// const profileDropdownRes = document.getElementById("profile-dropdown");
-
-// profileIconRes.addEventListener("click", () => {
-//   if (profileDropdownRes.style.display === "block") {
-//     profileDropdownRes.style.display = "none";
-//   } else {
-//     profileDropdownRes.style.display = "block";
-//   }
-// });
-
-// Swaping login register button
-// const loginBtn = document.getElementById("login-btn");
-// const registerBtn = document.getElementById("register-btn");
-// const activeIndicator = document.querySelector(".active-indicator");
-
-// loginBtn.addEventListener("click", function() {
-//   loginBtn.classList.add("active");
-//   registerBtn.classList.remove("active");
-//   activeIndicator.style.transform = "translateX(0)";
-// });
-
-// registerBtn.addEventListener("click", function() {
-//   registerBtn.classList.add("active");
-//   loginBtn.classList.remove("active");
-//   activeIndicator.style.transform = "translateX(100%)";
-// });
-
 // menu responsive
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
@@ -49,6 +20,17 @@ navToggle.addEventListener('click', () => {
   navLinks.classList.toggle('active');
   navToggle.classList.toggle('active');
 
+  if (profileDropdownList_menu.classList.contains('active')) {
+    profileDropdownList_menu.classList.remove('active');
+    profileDropdownList_menu.classList.add('inactive');
+  }
+});
+
+editPasswordBtn.addEventListener('click', () => {
+  navLinks.classList.remove('active');
+  navLinks.classList.add('inactive');
+  navToggle.classList.remove('active');
+  navToggle.classList.add('inactive');
   if (profileDropdownList_menu.classList.contains('active')) {
     profileDropdownList_menu.classList.remove('active');
     profileDropdownList_menu.classList.add('inactive');

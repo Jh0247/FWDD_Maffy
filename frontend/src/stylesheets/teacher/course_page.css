@@ -1,0 +1,309 @@
+header {
+	position: relative;
+	height: 50vh;
+}
+
+.cover-image {
+  top: 80px;
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.cover-image img {
+	object-fit: cover;
+	height: 100%;
+	width: 100%;
+	opacity: 0.7;
+}
+
+.cover-text {
+	position: absolute;
+	top: 0;
+	left: 20px;
+	color: #fff;
+	text-align: right;
+  overflow: auto;
+  white-space: normal;
+}
+
+.cover-text h1 {
+	font-size: 4rem;
+	margin-bottom: 10px;
+}
+
+.cover-text p {
+	font-size: 1.5rem;
+	margin-bottom: 0;
+}
+
+/* Options Section */
+.container {
+  background-color: rgb(255, 255, 255);
+  width: 90%;
+  margin: 0 auto;
+  padding: 0px 20px 0px;
+  border-radius: 10px;
+  position: relative;
+  z-index: 2;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  box-shadow: 3px 3px 7px #bebebe;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.option .fa-plus, .option .fa-edit, .option .fa-trash, .option .fa-filter {
+  font-size: 0.9rem;
+  margin: 0 auto;
+}
+
+.options {
+  display: flex;
+  gap: 40px;
+  margin: 0 auto;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  color: #444;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.option a {
+  text-decoration: none;
+  color: black;
+}
+
+.option:hover {
+  color: #555;
+}
+
+.option i {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* hidden filter container */
+.filter-container {
+  display: none;
+  margin-top: 2rem;
+  background-color: #fff;
+  padding: 20px;
+  border-top: 2px solid #007bff;
+  width: 90%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  z-index: 999;
+  margin-bottom: 50px;
+  border-radius: 10px;
+  box-shadow: 15px 15px 30px #bebebe,
+  -15px -15px 30px #ffffff;
+}
+
+.filter-container h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.filter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filter-column {
+  width: 45%;
+}
+
+.filter-column label {
+  margin-right: 10px;
+}
+
+.filter-radio {
+  margin-bottom: 10px;
+}
+
+.apply-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.apply-btn:hover {
+  background-color: #0056b3;
+}
+
+.published {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* single assessment status */
+.assessment-container {
+  width: 90%;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 7px #bebebe;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.desc {
+  text-align: justify;
+  margin: 0px 0px 40px 0px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.assessment-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: left;
+  gap: 130px;
+  margin-top: 20px;
+}
+
+.assessment-option {
+  display: flex;
+  align-items: center;
+}
+
+.assessment-option input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.view-count {
+  font-size: 16px;
+}
+
+.view-count span {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .assessment-options {
+    gap: 40px;
+  }
+
+  .options {
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 534px) {
+  .assessment-container {
+    width: 80%;
+  }
+
+  .container {
+    width: 80%;
+  }
+
+  .options {
+    vertical-align: middle;
+    padding: 10px 0px 0px 0px;
+  }
+
+  .option .fa-plus, .option .fa-edit, .option .fa-trash, .option .fa-filter {
+    font-size: 0.7rem;
+  }
+
+  .option {
+    font-size: 0.7rem;
+  }
+
+  .publish-container {
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .published {
+    font-size: 0.8rem;
+  }
+
+  .cover-text h1 {
+    font-size: 2rem;
+    display: flex;
+    position: relative;
+    justify-content: flex-start;
+  }
+  
+  .cover-text p {
+    font-size: 1rem;
+  }
+
+  .filter-container h3 {
+    font-size: 18px;
+  }
+
+  .filter-container h4 {
+    font-size: 14px;
+  }
+
+  .filter-column {
+    font-size: 14px;
+  }
+
+  .desc {
+    font-size: 14px;
+  }
+  
+  .header {
+    font-size: 14px;
+  }
+
+  .filter-radio {
+    font-size: 12px;
+  }
+
+  .filter-column .filter-radio {
+    display: flex;
+    position: relative;
+    right: 10px;
+    width: 120%;
+  }
+
+  .filter-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .status-radio {
+    font-size: 12px;
+  }
+
+  .assessment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .apply-btn {
+    display: flex;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}

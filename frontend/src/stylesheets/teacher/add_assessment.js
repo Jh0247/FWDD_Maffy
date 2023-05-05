@@ -1,12 +1,12 @@
 const form = document.querySelector('form');
 const titleInput = document.getElementById('title');
-const descriptionInput = document.getElementById('description');
-const courseInput = document.getElementById('course');
 const contentInput = document.getElementById('content');
 const publishCheckbox = document.getElementById('publish');
+const publishExerciseCheckbox = document.getElementById('publish-exercise');
 const publishDateGroup = document.getElementById('publish-date-group');
-// const publishDateInput = document.getElementById('publish-date');
+const publishExerciseGroup = document.getElementById('exercise-group');
 const submitBtn = document.getElementById('submit-btn');
+const postForm = document.getElementById('post-form');
 
 publishCheckbox.addEventListener('change', () => {
   if (publishCheckbox.checked) {
@@ -16,17 +16,22 @@ publishCheckbox.addEventListener('change', () => {
   }
 });
 
-form.addEventListener('submit', (e) => {
+publishExerciseCheckbox.addEventListener('change', () => {
+  if (publishExerciseCheckbox.checked) {
+    publishExerciseGroup.style.display = 'block';
+  } else {
+    publishExerciseGroup.style.display = 'none';
+  }
+});
+
+postForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
   const title = titleInput.value.trim();
-  const description = descriptionInput.value.trim();
-  const course = courseInput.value.trim();
   const content = contentInput.value.trim();
-  // const publishDate = publishDateInput.value.trim();
 
-  if (title === '' || description === '' || course === '' || content === '') {
-    showError('Please fill in all fields');
+  if (title === '' || content === '') {
+    showError('Please fill in the Title and Content fields');
   } else {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Creating Assessment...';
@@ -41,16 +46,22 @@ function showError(message) {
   const errorDiv = document.createElement('div');
   errorDiv.classList.add('error');
   errorDiv.textContent = message;
-  form.appendChild(errorDiv);
+  postForm.appendChild(errorDiv);
   setTimeout(() => {
     errorDiv.remove();
-  }, 100);
+  }, 1000);
 }
 
 function resetForm() {
-  form.reset();
+  postForm.reset();
   publishCheckbox.checked = false;
   publishDateGroup.style.display = 'none';
+  publishExerciseGroup.style.display = 'none';
   submitBtn.disabled = false;
   submitBtn.textContent = 'Create Assessment';
+}
+
+// back button
+function goBack() {
+  window.history.back();
 }
