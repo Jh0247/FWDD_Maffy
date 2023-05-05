@@ -1,0 +1,178 @@
+*{margin: 0;padding: 0;}
+
+.sidebar{
+  display: block;
+  left: 0;
+  height: 100vh;
+  width: 200px;
+  background-color: #12171e;
+  padding: 0.4rem 0.8rem;
+  transition: all 0.8s ease;
+  position: fixed;
+  z-index: 1;
+}
+
+.sidebar.active ~ .main-content{
+  left: 250px;
+  width: calc(100% - 250px);
+}
+
+
+.sidebar #btn{
+  display: none;
+}
+
+.sidebar.active #btn{
+  left: 90%;
+}
+
+.sidebar .top .logo{
+  color: #fff;
+  display: flex;
+  height: 50px;
+  width: 100%;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.sidebar.active .top{
+  opacity: 1;
+}
+
+.top .logo i{
+  font-size: 2rem;
+  margin-right: 5px;
+
+}
+
+.sidebar ul li{
+  position: relative;
+  list-style-type: none;
+  height: 50px;
+  width: 90%;
+  margin: 0.8rem auto;
+  line-height: s0px;
+}
+
+.sidebar ul li a{
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 0.8rem;
+}
+
+.sidebar ul li a:hover{
+  background-color: #fff;
+  color: #12171e;
+}
+
+.sidebar ul li a i{
+  min-width: 50px;
+  text-align: center;
+  height: 50px;
+  border-radius: 12px;
+  line-height: 50px;
+}
+
+.sidebar .nav-item{
+  opacity: 1;
+}
+
+.sidebar ul li .tooltip{
+  opacity: 1;
+}
+
+.sidebar.active ul li .tooltip{
+  display: none;
+}
+
+@media screen and (max-width: 825px){
+/*Side Bar responsive*/
+.hamburger{
+  position: relative;
+  display: block;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  appearance: none;
+  background: none;
+  outline: none;
+  border: none;
+  margin-right: 20px;
+}
+
+.hamburger .side-bar, .hamburger:after, .hamburger:before{
+  content: '';
+  display: block;
+  width: 100%;
+  height: 5px;
+  background-color: #000000;
+  margin: 6px 0px;
+  transition: 0.4s;
+}
+
+.hamburger.is-active:before{
+  transform: rotate(-45deg) translate(-8px, 6px);
+}
+
+.hamburger.is-active:after{
+  transform: rotate(45deg) translate(-9px,-8px);
+}
+
+.hamburger.is-active .side-bar{
+  opacity: 0;
+}
+
+  .sidebar{
+    box-sizing: border-box;
+    /* width: 80px; */
+    left: -100%;
+    z-index: 1;
+    display: block;
+  }
+
+  .sidebar.active{
+    width: 250px;
+    left: 0;
+  }
+
+  .sidebar .nav-item{
+    opacity: 0;
+  }
+
+  .sidebar.active .nav-item{
+    opacity: 1;
+  }
+
+  .sidebar #btn{
+    display: block;
+    position: absolute;
+    color: white;
+    top: .4rem;
+    left: 50%;
+    font-size: 1.2rem;
+    line-height: 50px;
+    transform: translateX(-50%);
+    cursor: pointer;
+  }
+
+  /* .sidebar ul li .tooltip{
+    position: absolute;
+    left: 125px;
+    top: 50%;
+    transform:  translate(-50%, -50%);
+    box-shadow: 0.8rem 0.8rem rgba(0,0,0,0.2);
+    border-radius: .6rem;
+    padding: .4rem 1.2rem;
+    line-height: 1.8rem;
+    z-index: 20;
+    opacity: 0;
+  }
+
+  .sidebar ul li:hover .tooltip{
+    opacity: 1;
+    z-index: 1;
+  } */
+}

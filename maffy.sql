@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 18, 2023 at 03:16 PM
+-- Generation Time: May 01, 2023 at 02:21 PM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.21
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `assessment` (
   PRIMARY KEY (`assessment_id`),
   UNIQUE KEY `assessment_id` (`assessment_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `chat` (
   `chat_datetime` datetime NOT NULL,
   PRIMARY KEY (`chat_id`),
   KEY `friend_list_id` (`friend_list_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`comment_id`),
   KEY `assessment_id` (`assessment_id`,`user_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -83,15 +83,15 @@ DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
   `course_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
-  `course_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `course_desc` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `course_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `course_desc` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `course_date_posted` date NOT NULL,
   `course_image` longblob NOT NULL,
   `course_click` int NOT NULL,
   `course_status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`course_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `feedback` (
   PRIMARY KEY (`feedback_id`),
   UNIQUE KEY `feedback_id` (`feedback_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `friend_list` (
   UNIQUE KEY `friend_list_id` (`friend_list_id`),
   KEY `first_user_id` (`first_user_id`,`second_user_id`),
   KEY `second_user_id` (`second_user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `note` (
   PRIMARY KEY (`note_id`),
   UNIQUE KEY `note_id` (`note_id`),
   KEY `assessment_id` (`assessment_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `practice` (
   PRIMARY KEY (`practice_id`),
   UNIQUE KEY `practice_id` (`practice_id`),
   KEY `assessment_id` (`assessment_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `privilege` (
   `privilege_id` int NOT NULL AUTO_INCREMENT,
   `user_privilege` varchar(10) NOT NULL,
   PRIMARY KEY (`privilege_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `privilege`
@@ -188,24 +188,6 @@ INSERT INTO `privilege` (`privilege_id`, `user_privilege`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `recent_view`
---
-
-DROP TABLE IF EXISTS `recent_view`;
-CREATE TABLE IF NOT EXISTS `recent_view` (
-  `view_id` int NOT NULL AUTO_INCREMENT,
-  `course_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `view_date` datetime NOT NULL,
-  PRIMARY KEY (`view_id`),
-  UNIQUE KEY `view_id` (`view_id`),
-  KEY `course_id` (`course_id`,`user_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `user`
 --
 
@@ -215,15 +197,23 @@ CREATE TABLE IF NOT EXISTS `user` (
   `privilege_id` int NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `user_image` longblob NOT NULL,
-  `user_email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `user_image` longblob,
+  `user_desc` text,
+  `user_email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `user_last_login` datetime DEFAULT NULL,
   `user_support_doc` longblob,
   `user_active` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username` (`username`),
   KEY `privilege_id` (`privilege_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `privilege_id`, `username`, `password`, `user_image`, `user_desc`, `user_email`, `user_last_login`, `user_support_doc`, `user_active`) VALUES
+(1, 1, 'admin', 'admin', NULL, NULL, NULL, NULL, NULL, 1);
 
 --
 -- Constraints for dumped tables
@@ -278,13 +268,6 @@ ALTER TABLE `note`
 --
 ALTER TABLE `practice`
   ADD CONSTRAINT `practice_ibfk_1` FOREIGN KEY (`assessment_id`) REFERENCES `assessment` (`assessment_id`) ON DELETE CASCADE ON UPDATE RESTRICT;
-
---
--- Constraints for table `recent_view`
---
-ALTER TABLE `recent_view`
-  ADD CONSTRAINT `recent_view_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`) ON DELETE CASCADE ON UPDATE RESTRICT,
-  ADD CONSTRAINT `recent_view_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `user`

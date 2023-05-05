@@ -17,7 +17,7 @@
     </div>
 
     <!-- guest nav bar -->
-    <div class="nav-right">
+    <!-- <div class="nav-right">
       <ul class="nav-links">
         <li><a class="btn active" href="#">About Us</a></li>
         <li><a class="btn" href="#">Course</a></li>
@@ -40,20 +40,19 @@
           <div class="bar">Menu</div>
         </button>
       </div>
-    </div>
+    </div> -->
 
     <!-- teacher nav bar -->
-    <!-- <div class="nav-right">
+    <div class="nav-right">
       <ul class="nav-links">
         <li><a class="btn active" href="#">My Courses</a></li>
-        <li><a class="btn" href="#">Trend Courses</a></li>
-        <li><a class="btn" href="#">Add Assessment</a></li>
+        <li><a class="btn" href="#">Add Course</a></li>
         <div class="profile-res">
           <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
         </div>
         <div class="profile-dropdown_links">
           <li><a href="#">Profile</a></li>
-          <li><a href="#">Setting</a></li>
+          <li><a href="#">Edit Password</a></li>
           <li><a href="#">Logout</a></li>
         </div>
 
@@ -62,7 +61,7 @@
             <img src="../../../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
             <div class="profile-dropdown" id="profile-dropdown">
               <a href="#">Profile</a>
-              <a href="#">Setting</a>
+              <a href="#">Edit Password</a>
               <a href="#">Logout</a>
             </div>
           </div>
@@ -73,7 +72,7 @@
           <div class="bar">Menu</div>
         </button>
       </div>
-    </div>  -->
+    </div> 
 
     <!-- student nav bar -->
     <!-- <div class="nav-right">
@@ -86,7 +85,7 @@
         </div>
         <div class="profile-dropdown_links">
           <li><a href="#">Profile</a></li>
-          <li><a href="#">Setting</a></li>
+          <li><a href="#">Edit Password</a></li>
           <li><a href="#">Logout</a></li>
         </div>
         
@@ -95,7 +94,7 @@
             <img src="../../../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
             <div class="profile-dropdown" id="profile-dropdown">
               <a href="#">Profile</a>
-              <a href="#">Setting</a>
+              <a href="#">Edit Password</a>
               <a href="#">Logout</a>
             </div>
           </div>
@@ -109,6 +108,23 @@
     </div> -->
 
   </nav>
+
+  <!-- pop out edit password container -->
+  <form>
+    <div id="password-popup">
+      <h2>Edit Password</h2>
+      <label for="current-password">Current Password:</label>
+      <input type="password" id="current-password">
+      <label for="new-password">New Password:</label>
+      <input type="password" id="new-password">
+      <label for="confirm-password">Confirm New Password:</label>
+      <input type="password" id="confirm-password">
+      <div class="button-row">
+        <button id="save-password-btn">Save</button>
+        <button id="cancel-password-btn">Cancel</button>
+      </div>
+    </div>
+  </form>
 
   <script src="../../../src/stylesheets/shared/nav_bar.js"></script>
 </body>
