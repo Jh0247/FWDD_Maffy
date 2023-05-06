@@ -17,7 +17,7 @@
 .down-container {
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: #f4eee0;
   width: 100%;
   padding: 40px 0px;
   margin-top: 50px;
@@ -39,8 +39,6 @@
   position: relative;
   cursor: pointer;
   transition: all .1s;
-  box-shadow: 15px 15px 30px #bebebe,
-             -15px -15px 30px #ffffff;
 }
 
 .d-container {
