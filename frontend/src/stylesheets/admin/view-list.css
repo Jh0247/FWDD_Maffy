@@ -62,6 +62,12 @@ body{
   margin: 0 1rem;
 }
 
+.no-item-cont {
+  border-top: #bebebe 1px solid;
+  padding: 5px;
+  text-align: center;
+}
+
 .item-cont {
   border-top: #bebebe 1px solid;
   padding: 5px;
@@ -84,7 +90,7 @@ body{
   transition: all ease-in-out .5s;
 }
 
-.result-container img{
+.result-container .profile-img{
   height: 90px;
   width: 90px;
   border-radius: 999px;
@@ -249,6 +255,47 @@ body{
   font-weight: 600;
 }
 
+/* The Modal (background) */
+.pop-modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  padding-top: 100px; 
+  left: 0;
+  top: 0;
+  width: 100vw; 
+  height: 100vh; 
+  overflow: auto; 
+  background-color: rgb(0, 0, 0); 
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Modal Content */
+.pop-modal .pop-img {
+  margin: auto;
+  display: block;
+  /* min-width: 320px; */
+  max-width: 80%;
+  max-height: 80%;
+}
+
+/* Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 @media only screen and (min-width: 468px) and (max-width: 900px) {
   .title {
     font-size: 1.6rem;
@@ -278,6 +325,11 @@ body{
   
   .count-view {
     display: none;
+  }
+  
+  .close {
+    top: 30px;
+    right: 15px;
   }
 }
 
@@ -311,5 +363,10 @@ body{
   
   .count-view {
     display: none;
+  }
+
+  .close {
+    top: 30px;
+    right: 15px;
   }
 }

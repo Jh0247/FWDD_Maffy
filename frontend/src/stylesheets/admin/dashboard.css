@@ -202,6 +202,72 @@ a:hover {
   transition: all ease-in-out .3s;
 }
 
+/*CHART*/
+.b-skills {
+  text-align: center;
+}
+
+.b-skills:last-child {
+  margin-bottom: -30px;
+}
+
+.b-skills h2 {
+  margin-bottom: 50px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.skill-item {
+  position: relative;
+  max-width: 180px;
+  width: 100%;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 100%;
+  margin-bottom: 27px;
+}
+
+.skill-item .chart,
+.skill-item .chart canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.skill-item .chart:before {
+  content: "";
+  width: 0;
+  height: 100%;
+}
+
+.skill-item .chart:before,
+.skill-item .percent {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.skill-item .percent {
+  position: relative;
+  line-height: 1;
+  font-size: 40px;
+  font-weight: 900;
+  z-index: 2;
+}
+
+.skill-item .percent:after {
+  content: attr(data-after);
+  font-size: 20px;
+}
+
+
 @media only screen and (min-width: 468px) and (max-width: 900px) {
   .title {
     font-size: 1.5rem;
@@ -258,6 +324,10 @@ a:hover {
   .mobile-col {
     flex-direction: column !important;
   }
+
+  .skill-item {
+    max-width: 150px;
+  }
 }
 
 @media only screen and (max-width: 468px) {
@@ -306,5 +376,9 @@ a:hover {
 
   .mobile-col {
     flex-direction: column !important;
+  }
+
+  .skill-item {
+    max-width: 140px;
   }
 }
