@@ -23,7 +23,7 @@
   $total_course_sql = mysqli_query($con, "SELECT COUNT(course_id) FROM course");
   $count_course = mysqli_fetch_array($total_course_sql);
 
-  //sql query to get total number of course
+  //sql query to get total number of feedback
   $total_feedback_sql = mysqli_query($con, "SELECT COUNT(feedback_id) FROM feedback");
   $count_feedback = mysqli_fetch_array($total_feedback_sql);
 
@@ -31,7 +31,7 @@
   $total_request_teacher_sql = mysqli_query($con, "SELECT COUNT(user_id) FROM user WHERE privilege_id = 2 AND user_active = 0");
   $count_request_teacher = mysqli_fetch_array($total_request_teacher_sql);
 
-  //sql query to get most performance teaacher
+  //sql query to get most performance teacher
   $trend_teacher_sql = mysqli_query($con, 
     "SELECT user.user_id, user.privilege_id, user.username, user.user_image, course.course_status, 
     COUNT(course_id) as total_course, SUM(course_click) as total_view FROM user
@@ -47,7 +47,21 @@
     ORDER BY course_click DESC
     LIMIT 2");
 
+  $teacher_percentage = 0;
+  $student_percentage = 0;
 
+  $total_user = mysqli_query($con, 
+    "SELECT COUNT(user_id) as count FROM user 
+      WHERE privilege_id != 1 
+      AND user_active = 1");
+
+  if(mysqli_num_rows($total_user)>0) {
+    $count = mysqli_fetch_assoc($total_user)['count'];
+    if($count != 0) {
+      $teacher_percentage = ($count_teacher[0]/($count_teacher[0] + $count_student[0]))*100;
+      $student_percentage = ($count_student[0]/($count_student[0] + $count_teacher[0]))*100;
+    }
+  }
   //Close connection of database
   mysqli_close($con);
 ?>
@@ -73,43 +87,45 @@
         <div class="grid-cont">
           <!-- total teacher -->
           <?php
-            if($count_course[0] > 0) {
+            if($count_teacher[0] > 0) {
               echo '<a href="view-list.php?type=teacher" class="item-card">';
             } else {
               echo '<a class="no-item item-card">';
             }
             ?>
-            <div class="flex flex-col mx-3 mt-2">
-              <div class="flex flex-row h-5/6">
-                <div class="flex flex-col xl:justify-center w-1/6 xl:pl-4">
-                  <h2> <?php echo $count_teacher[0]; ?> </h2>
-                </div>
-                <div class="flex flex-row justify-center w-5/6">
-                  <img src="../../images/intro.png" alt="image">
+            <div class="flex flex-col lg:flex-row mx-3 mt-2">
+              <h3 class="h-2/6 lg:w-2/6">Total Teacher</h3>
+              <div class="b-skills lg:w-4/6 flex flex-col items-center">
+                <div class="skill-item center-block">
+                  <div class="chart-container">
+                    <div class="chart" data-percent= <?php echo $teacher_percentage ?> data-bar-color="#52565f">
+                      <span class="percent" data-after="%"></span>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <h3 class="h-1/6">Total Teacher</h3>
             </div>
           </a>
 
           <!-- total student -->
           <?php
-            if($count_course[0] > 0) {
+            if($count_student[0] > 0) {
               echo '<a href="view-list.php?type=student" class="item-card">';
             } else {
               echo '<a class="no-item item-card">';
             }
             ?>
-            <div class="flex flex-col mx-3 mt-2">
-              <div class="flex flex-row h-5/6">
-                <div class="flex flex-col xl:justify-center w-1/6 xl:pl-4">
-                  <h2> <?php echo $count_student[0]; ?> </h2>
-                </div>
-                <div class="flex flex-row justify-center w-5/6">
-                  <img src="../../images/intro.png" alt="introduction">
+            <div class="flex flex-col lg:flex-row mx-3 mt-2">
+              <h3 class="h-2/6 lg:w-2/6">Total Student</h3>
+              <div class="b-skills lg:w-4/6 flex flex-col items-center">
+                <div class="skill-item center-block">
+                  <div class="chart-container">
+                    <div class="chart" data-percent= <?php echo $student_percentage ?> data-bar-color="#52565f">
+                      <span class="percent" data-after="%"></span>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <h3 class="h-1/6">Total Student</h3>
             </div>
           </a>
 
@@ -127,7 +143,7 @@
                   <h2> <?php echo $count_course[0]; ?> </h2>
                 </div>
                 <div class="flex flex-row justify-center w-5/6">
-                  <img src="../../images/intro.png" alt="introduction">
+                  <img src="../../images/Courses.png" alt="introduction">
                 </div>
               </div>
               <h3 class="h-1/6">Total Course</h3>
@@ -148,7 +164,7 @@
                   <h2> <?php echo $count_feedback[0]; ?> </h2>
                 </div>
                 <div class="flex flex-row justify-center w-5/6">
-                  <img src="../../images/intro.png" alt="introduction">
+                  <img src="../../images/View_Feedback.png" alt="introduction">
                 </div>
               </div>
               <h3 class="h-1/6">Total Feedback</h3>
@@ -193,6 +209,8 @@
                 </a>
               <?php
                 }
+              } else {
+                echo '<h4 class = "mt-2">No user data available.</h4>';
               }
               ?>
             </div>
@@ -212,7 +230,7 @@
                   <h2> <?php echo $count_request_teacher[0]; ?> </h2>
                 </div>
                 <div class="flex flex-row justify-center w-5/6">
-                  <img src="../../images/intro.png" alt="introduction">
+                  <img src="../../images/Request_Teacher.png" alt="introduction">
                 </div>
               </div>
               <h3 class="h-1/6">Requesting Account</h3>
@@ -251,6 +269,8 @@
                   </a> <!-- end -->              
                   <?php
                 }
+              }else {
+                echo '<h4 class = "mt-2">No course data available.</h4>';
               }
               ?>
               </div>
@@ -277,6 +297,8 @@
       </div>
     </div>
   </div>
+<script src="./javascript/jquery-2.2.4.min.js"></script>
+<script src="./javascript/profile.min.js"></script>
 <script>
   // get id
   const ds_trend = document.getElementById("ds-trend-course");
@@ -295,6 +317,40 @@
 
   window.addEventListener("resize", handleResize);
   handleResize();
+
+  var $window = $(window);
+  function run() {
+    var fName = arguments[0],
+      aArgs = Array.prototype.slice.call(arguments, 1);
+    try {
+      fName.apply(window, aArgs);
+    } catch (err) {}
+  }
+  /* ==================== chart ============================== */
+  function _chart() {
+    $(".b-skills").appear(function () {
+      setTimeout(function () {
+        $(".chart").easyPieChart({
+          easing: "easeOutElastic",
+          delay: 3000,
+          barColor: "#369670",
+          trackColor: "#fff",
+          scaleColor: false,
+          lineWidth: 21,
+          trackWidth: 21,
+          size: 250,
+          lineCap: "round",
+          onStep: function (from, to, percent) {
+            this.el.children[0].innerHTML = Math.round(percent);
+          },
+        });
+      }, 150);
+    });
+  }
+  $(document).ready(function () {
+    run(_chart);
+  });
+
 </script>
 <script type="text/javascript" src="../admin/javascript/sidebar.js"></script>
 
