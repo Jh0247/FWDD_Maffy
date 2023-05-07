@@ -207,17 +207,17 @@ if (isset($_POST['loginBtn'])) {
 </head>
 
 <body>
-    <?php //include '../shared/navbar.php';?>
-    <div class="content">
-        <div class="lgn-container">
-            <div class="tab-group w-9/12 sm:w-8/12 lg:w-3/4">
-                <div class="tab w-1/2">
-                    <a class="text-sm sm:text-base lg:text-lg" href="#signup">SignUp</a>
-                </div>
-                <div class="tab w-1/2">
-                    <a class="text-sm sm:text-base lg:text-lg" href="#login">Log In</a>
-                </div>
-            </div>
+  <?php include '../shared/navbar.php';?>
+  <div class="content">
+    <div class="lgn-container">
+      <div class="tab-group w-9/12 sm:w-8/12 lg:w-3/4">
+        <div class="tab w-1/2">
+          <a class="text-sm sm:text-base lg:text-lg" href="#signup">SignUp</a>
+        </div>
+        <div class="tab w-1/2">
+          <a class="text-sm sm:text-base lg:text-lg" href="#login">Log In</a>
+        </div>
+      </div>
       <div class="tab-content">
         <!-- Sign up tab content -->
         <div id="signup" class = "ml-3">  
@@ -276,8 +276,7 @@ if (isset($_POST['loginBtn'])) {
       </div>
     </div>
   </div>
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script type="text/javascript" src="../shared/javascript/login.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="../shared/javascript/login.js"></script>
 </body>
 </html>
