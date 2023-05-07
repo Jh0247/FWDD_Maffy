@@ -40,29 +40,6 @@ function resetForm() {
   submitBtn.textContent = 'Create Course';
 }
 
-// upload image - first design
-// const uploadBtn = document.querySelector('.image-btn');
-// const fileInput = document.querySelector('input[type="file"]');
-// const previewContainer = document.querySelector('.preview-container');
-// const previewImage = document.getElementById('preview-image');
-
-// uploadBtn.addEventListener('click', () => {
-//   fileInput.click();
-// });
-
-// fileInput.addEventListener('change', () => {
-//   const file = fileInput.files[0];
-//   if (file) {
-//     const reader = new FileReader();
-//     reader.addEventListener('load', () => {
-//       previewImage.setAttribute('src', reader.result);
-//       previewContainer.style.display = 'block';
-//     });
-//     reader.readAsDataURL(file);
-//   }
-// });
-
-
 // upload image - second design
 const fileInput = document.getElementById("file-input");
 const previewImage = document.getElementById("preview-image");
@@ -85,9 +62,3 @@ fileInput.addEventListener("change", function() {
     previewMessage.innerHTML = "No image selected";
   }
 });
-
-// third design
-// function previewImage(event) {
-//   const previewContainer = document.getElementById('preview-container');
-//   previewContainer.style.backgroundImage = `url(${URL.createObjectURL(event.target.files[0])})`;
-// }

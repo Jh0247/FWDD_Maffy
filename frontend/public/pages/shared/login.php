@@ -196,27 +196,28 @@ if (isset($_POST['loginBtn'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../../../src/stylesheets/shared/login.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <title>Login - Maffy</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../src/stylesheets/shared/login.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Login - Maffy</title>
 </head>
 
 <body>
-  <!-- <?php include '../shared/navbar.php';?> -->
-  <div class="content">
-    <div class="lgn-container">
-      <div class="tab-group w-9/12 sm:w-8/12 lg:w-3/4">
-        <div class="tab w-1/2">
-          <a class="text-sm sm:text-base lg:text-lg" href="#signup">SignUp</a>
-        </div>
-        <div class="tab w-1/2">
-          <a class="text-sm sm:text-base lg:text-lg" href="#login">Log In</a>
-        </div>
-      </div>
+    <?php //include '../shared/navbar.php';?>
+    <div class="content">
+        <div class="lgn-container">
+            <div class="tab-group w-9/12 sm:w-8/12 lg:w-3/4">
+                <div class="tab w-1/2">
+                    <a class="text-sm sm:text-base lg:text-lg" href="#signup">SignUp</a>
+                </div>
+                <div class="tab w-1/2">
+                    <a class="text-sm sm:text-base lg:text-lg" href="#login">Log In</a>
+                </div>
+            </div>
       <div class="tab-content">
         <!-- Sign up tab content -->
         <div id="signup" class = "ml-3">  

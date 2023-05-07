@@ -29,8 +29,8 @@ nav {
 .btn {
   display: inline-block;
   padding: 7px 15px;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #38415c;
+  color: #7d84ab;
   cursor: pointer;
 }
 
@@ -39,7 +39,6 @@ nav {
 }
 
 .btn:active {
-  color: #fff;
   transform: translateY(2px);
   box-shadow: none;
   border: none;
@@ -111,7 +110,7 @@ nav {
 }
 
 .nav-links a {
-  color: #000000;
+  color: #7d84ab;
   text-decoration: none;
   font-size: 0.8rem;
 }
@@ -148,7 +147,7 @@ nav {
   z-index: 1;
   top: 60px;
   right: -10px;
-  background-color: #fff;
+  background-color: #f4eee0;
   border: 1px solid #ddd;
   list-style: none;
   display: none;
@@ -211,7 +210,7 @@ button:hover {
   width: 85px;
   height: 40px;
   border-radius: 20px;
-  color: #000000;
+  color: #7d84ab;
 }
 
 #login-btn:hover , #register-btn:hover{
@@ -258,7 +257,7 @@ button:hover {
   position: fixed;
   z-index: 999;
   width: 50%;
-  background-color: #ffffff;
+  background-color: #f4eee0;
   padding: 30px 50px 30px 30px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
@@ -267,11 +266,13 @@ button:hover {
 #password-popup h2 {
   font-size: 20px;
   margin-bottom: 10px;
+  color: #7d84ab;
 }
 
 #password-popup label {
   display: block;
   margin-bottom: 5px;
+  color: #7d84ab;
 }
 
 #password-popup input[type="password"] {
