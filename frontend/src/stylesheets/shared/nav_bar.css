@@ -94,9 +94,10 @@ nav {
   padding: 0px 20px 0px;
 }
 
-.logo-image {
+.logo-image, .logo {
   width: 140px;
   height: 60px;
+  object-fit: contain;
 }
 
 .nav-links {
@@ -177,9 +178,8 @@ nav {
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 170px;
+  width: 100px;
   height: 40px;
-  background-color: #fff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   border-radius: 25px;
   overflow: hidden;
@@ -206,14 +206,14 @@ button:hover {
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-#login-btn, #register-btn {
-  width: 85px;
+#login-btn {
+  width: 100px;
   height: 40px;
   border-radius: 20px;
   color: #7d84ab;
 }
 
-#login-btn:hover , #register-btn:hover{
+#login-btn:hover:hover{
   background-color: #7d84ab;
   color: #fff;
 }
@@ -241,7 +241,6 @@ button:hover {
 
 .nav-toggle:hover {
   background-color: #7d84ab;
-
 }
 
 /* pop out edit password container */
@@ -346,7 +345,6 @@ button:hover {
     padding: 0;
     z-index: 1;
     transition: 0.3s;
-    bottom: 350px;
   }
 
   .nav-links.active, .profile-dropdown_links.active{
@@ -394,5 +392,17 @@ button:hover {
 
   .login-resgister-res {
     display: block;
+  }
+}
+
+@media screen and (max-width: 320px),(max-width: 426px),(max-width: 768px){
+  .logo-image, .logo {
+    width: 100px;
+    height: 50px;
+    object-fit: contain;
+  }
+
+  .bar {
+    font-size: 0.9rem;
   }
 }

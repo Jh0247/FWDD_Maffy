@@ -193,6 +193,8 @@ if (isset($_POST['loginBtn'])) {
   mysqli_close($con);
 }
 
+$current_page_url = $_SERVER['PHP_SELF'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -207,7 +209,7 @@ if (isset($_POST['loginBtn'])) {
 </head>
 
 <body>
-    <?php //include '../shared/navbar.php';?>
+    <?php include '../shared/navbar.php';?>
     <div class="content">
         <div class="lgn-container">
             <div class="tab-group w-9/12 sm:w-8/12 lg:w-3/4">
