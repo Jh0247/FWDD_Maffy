@@ -1,5 +1,4 @@
 <?php 
-#Display categoryid,bookid,bookname,bookimg,bookprice and bookaurthor
 function trendCourses($courseID, $userID, $courseTitle, $courseImg) {
 
     $element = "
