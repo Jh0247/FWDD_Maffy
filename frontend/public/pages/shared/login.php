@@ -193,8 +193,6 @@ if (isset($_POST['loginBtn'])) {
   mysqli_close($con);
 }
 
-$current_page_url = $_SERVER['PHP_SELF'];
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -209,77 +207,81 @@ $current_page_url = $_SERVER['PHP_SELF'];
 </head>
 
 <body>
-  <?php include '../shared/navbar.php';?>
-  <div class="content">
-    <div class="lgn-container">
-      <div class="tab-group w-9/12 sm:w-8/12 lg:w-3/4">
-        <div class="tab w-1/2">
-          <a class="text-sm sm:text-base lg:text-lg" href="#signup">SignUp</a>
-        </div>
-        <div class="tab w-1/2">
-          <a class="text-sm sm:text-base lg:text-lg" href="#login">Log In</a>
-        </div>
-      </div>
-      <div class="tab-content">
-        <!-- Sign up tab content -->
-        <div id="signup" class = "ml-3">  
-          <h1 class="title-txt">Sign up on Maffy</h1>
-          <form method="post" enctype="multipart/form-data">
-            <div class="form_group">
-              <input type="email" class="form_field" name="email" placeholder="Email" required autofocus>
-              <label for="email" class="form_label">Email</label>
+    <?php include '../shared/navbar.php';?>
+    <div class="content">
+        <div class="lgn-container">
+            <div class="tab-group w-9/12 sm:w-8/12 lg:w-3/4">
+                <div class="tab w-1/2">
+                    <a class="text-sm sm:text-base lg:text-lg" href="#signup">SignUp</a>
+                </div>
+                <div class="tab w-1/2">
+                    <a class="text-sm sm:text-base lg:text-lg" href="#login">Log In</a>
+                </div>
+            </div>
+            <div class="tab-content">
+                <!-- Sign up tab content -->
+                <div id="signup" class="ml-3">
+                    <h1 class="title-txt">Sign up on Maffy</h1>
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="form_group">
+                            <input type="email" class="form_field" name="email" placeholder="Email" required autofocus>
+                            <label for="email" class="form_label">Email</label>
 
+                        </div>
+                        <div class="form_group">
+                            <input type="text" class="form_field" name="username" placeholder="Username" required
+                                autofocus>
+                            <label for="username" class="form_label">Username</label>
+                        </div>
+                        <div class="form_group">
+                            <input type="password" class="form_field" name="password" placeholder="Password" required>
+                            <label for="password" class="form_label">Password</label>
+                        </div>
+                        <!-- Radio button to choose user type -->
+                        <div class="radio-group">
+                            <div class="w-1/2">
+                                <input type="radio" class="radio-btn" name="type" value="teacher" required>
+                                <a class="text-sm sm:text-base lg:text-lg">Teacher</a>
+                            </div>
+                            <div class="w-1/2">
+                                <input type="radio" class="radio-btn" name="type" value="student" required>
+                                <a class="text-sm sm:text-base lg:text-lg">Student</a>
+                            </div>
+                        </div>
+                        <!-- file upload for teacher -->
+                        <div class="upload-container ml-1 mt-2">
+                            <div class="mb-3">
+                                <a class="upload-txt">Please upload your certified education file (IMAGE) to sign up as
+                                    a teacher.</a>
+                            </div>
+                            <input id="fileUpload" class="upload-button" type="file" name="uploadedFile">
+                        </div>
+                        <button type="submit" class="submitBtn" value="signup" name="signUpBtn"> Sign Up </button>
+                    </form>
+                </div>
+
+                <!-- Login tab content -->
+                <div id="login" class="ml-3">
+                    <h1 class="title-txt">Login To Maffy</h1>
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="form_group">
+                            <input type="text" class="form_field" name="username" placeholder="Username" required
+                                autofocus>
+                            <label for="username" class="form_label">Username</label>
+                        </div>
+
+                        <div class="form_group">
+                            <input type="password" class="form_field" name="password" placeholder="Password" required>
+                            <label for="username" class="form_label">Password</label>
+                        </div>
+                        <button type="submit" class="submitBtn" value="Login" name="loginBtn"> Login </button>
+                    </form>
+                </div>
             </div>
-            <div class="form_group">
-              <input type="text" class="form_field" name="username" placeholder="Username" required autofocus>
-              <label for="username" class="form_label">Username</label>
-            </div>
-            <div class="form_group">
-              <input type="password" class="form_field" name="password" placeholder="Password" required>
-              <label for="password" class="form_label">Password</label>
-            </div>
-            <!-- Radio button to choose user type -->
-            <div class="radio-group">
-              <div class="w-1/2">
-                <input type="radio" class="radio-btn" name="type" value="teacher" required>
-                <a class="text-sm sm:text-base lg:text-lg">Teacher</a>
-              </div>
-              <div class="w-1/2">
-                <input type="radio" class="radio-btn" name="type" value="student" required>
-                <a class="text-sm sm:text-base lg:text-lg">Student</a>
-              </div>
-            </div>
-            <!-- file upload for teacher -->
-            <div class = "upload-container ml-1 mt-2">
-              <div class = "mb-3">
-                <a class="upload-txt">Please upload your certified education file (IMAGE) to sign up as a teacher.</a>
-              </div>
-              <input id="fileUpload" class="upload-button" type="file" name="uploadedFile">
-            </div>
-            <button type="submit" class="submitBtn" value="signup" name="signUpBtn"> Sign Up </button>
-          </form>
         </div>
-        
-        <!-- Login tab content -->
-        <div id="login" class = "ml-3">
-          <h1 class="title-txt">Login To Maffy</h1>
-          <form method="post" enctype="multipart/form-data">
-            <div class="form_group">
-              <input type="text" class="form_field" name="username" placeholder="Username" required autofocus>
-              <label for="username" class="form_label">Username</label>
-            </div>
-    
-            <div class="form_group">
-              <input type="password" class="form_field" name="password" placeholder="Password" required>
-              <label for="username" class="form_label">Password</label>
-            </div>
-            <button type="submit" class="submitBtn" value="Login" name="loginBtn"> Login </button>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="../shared/javascript/login.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="../shared/javascript/login.js"></script>
 </body>
+
 </html>

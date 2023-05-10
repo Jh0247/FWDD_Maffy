@@ -2,21 +2,10 @@
     // connection to database
     include("../../../../backend/conn.php");
 
-    $current_page_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    $desired_page_url = "http://localhost:8080//Maffy/FWDD_Maffy/frontend/public/pages/shared/login.php";
+    $current_page_url = basename($_SERVER['PHP_SELF']);
+    $desired_page_url = "login.php";
 
     $current_page = basename($_SERVER['PHP_SELF']);
-    
-    // if($current_page == "course_page.php" or $current_page == "user_profile.php")
-    // {
-    //     $homeLink = "../teacher/homepage.php";
-    //     $addCourseLink = "../teacher/add_course.php";
-    // }
-    // elseif($current_page == "../teacher/add_assessment.php" or $current_page == "../teacher/add_course.php")
-    // {
-    //     $homeLink = "homepage.php";
-    //     $addCourseLink = "add_course.php";
-    // }
     
     $user_privilege = 0;
     
