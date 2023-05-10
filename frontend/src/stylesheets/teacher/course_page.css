@@ -8,38 +8,42 @@ header {
 	position: relative;
 	height: 100%;
 	width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+
 }
 
 .cover-image img {
-	object-fit: cover;
 	height: 100%;
 	width: 100%;
-	opacity: 0.7;
+  opacity: 0.2;
+  filter: blur(2px);
 }
 
 .cover-text {
 	position: absolute;
 	top: 0;
 	left: 20px;
-	color: #fff;
-	text-align: right;
+	color: #000000;
+	text-align: justify;
   overflow: auto;
+  max-width: 80%;
+  max-height: auto;
   white-space: normal;
 }
 
 .cover-text h1 {
-	font-size: 4rem;
+	font-size: 2rem;
 	margin-bottom: 10px;
 }
 
 .cover-text p {
-	font-size: 1.5rem;
+	font-size: 1rem;
 	margin-bottom: 0;
 }
 
 /* Options Section */
 .container {
-  background-color: rgb(255, 255, 255);
+  background-color: #f4eee0;
   width: 90%;
   margin: 0 auto;
   padding: 0px 20px 0px;
@@ -48,7 +52,6 @@ header {
   z-index: 2;
   margin-top: 50px;
   margin-bottom: 40px;
-  box-shadow: 3px 3px 7px #bebebe;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -57,6 +60,7 @@ header {
 .option .fa-plus, .option .fa-edit, .option .fa-trash, .option .fa-filter {
   font-size: 0.9rem;
   margin: 0 auto;
+  color: #7d84ab;
 }
 
 .options {
@@ -71,7 +75,7 @@ header {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  color: #444;
+  color: #7d84ab;
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 0.9rem;
@@ -95,7 +99,7 @@ header {
 .filter-container {
   display: none;
   margin-top: 2rem;
-  background-color: #fff;
+  background-color: #f4eee0;
   padding: 20px;
   border-top: 2px solid #007bff;
   width: 90%;
@@ -104,8 +108,6 @@ header {
   z-index: 999;
   margin-bottom: 50px;
   border-radius: 10px;
-  box-shadow: 15px 15px 30px #bebebe,
-  -15px -15px 30px #ffffff;
 }
 
 .filter-container h3 {
@@ -126,10 +128,12 @@ header {
 
 .filter-column label {
   margin-right: 10px;
+  color: #7d84ab;
 }
 
 .filter-radio {
   margin-bottom: 10px;
+  color: #7d84ab;
 }
 
 .apply-btn {
@@ -149,16 +153,16 @@ header {
 .published {
   font-size: 1rem;
   font-weight: bold;
+  color: #000000;
 }
 
 /* single assessment status */
 .assessment-container {
   width: 90%;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: #f4eee0;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 3px 3px 7px #bebebe;
   margin-bottom: 30px;
   cursor: pointer;
 }
@@ -166,12 +170,14 @@ header {
 .desc {
   text-align: justify;
   margin: 0px 0px 40px 0px;
+  color: #7d84ab;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: #7d84ab;
 }
 
 .assessment-options {
@@ -180,6 +186,7 @@ header {
   align-items: left;
   gap: 130px;
   margin-top: 20px;
+  color: #7d84ab;
 }
 
 .assessment-option {
@@ -207,6 +214,7 @@ header {
   .options {
     gap: 20px;
   }
+
 }
 
 @media screen and (max-width: 534px) {

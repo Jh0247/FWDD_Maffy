@@ -1,5 +1,17 @@
 <?php
-ob_clean();
+  // connection to database
+  include("../../../../backend/conn.php");
+  include("../../../../backend/session.php");
+  if ($_SESSION['privilege'] == 'teacher'){
+    echo("<script>alert('You do not have the privilege to access this page.')</script>");
+    echo("<script>window.location = '../teacher/homepage.php'</script>");
+  }
+  else if ($_SESSION['privilege'] == 'student'){
+    echo("<script>alert('You do not have the privilege to access this page.')</script>");
+    echo("<script>window.location = '../student/homepage.php'</script>");
+  }
+  //Close connection of database
+  mysqli_close($con);
 
 $file_path = "../../term_condition/terms_condition.txt";
 $term_contents = file_get_contents($file_path);
@@ -34,7 +46,7 @@ if(isset($_POST['condition'])){
           <textarea name="condition" id="myTextarea" class="condition"><?php
             echo $term_contents;
           ?></textarea>
-          <button name="" id="updateBtn" class="update-button">Submit
+          <button name="" id="updateBtn" class="update-button hidden">Submit
             <div class="icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg>
             </div>
@@ -43,7 +55,14 @@ if(isset($_POST['condition'])){
       </div>
     </div>
   </div>
-<script type="text/javascript" src="./javascript/sidebar.js">
+<script type="text/javascript" src="./javascript/sidebar.js"></script>
+<script>
+  var change = document.getElementById("myTextarea");
+  change.addEventListener("input", showBtn);
+  // show the submit button
+  function showBtn() {
+    document.getElementById('updateBtn').classList.remove("hidden");
+  }
 </script>
 </body>
 </html>

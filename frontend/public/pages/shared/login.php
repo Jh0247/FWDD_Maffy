@@ -12,7 +12,7 @@ else{
 }
 
 if (isset($_SESSION['privilege'])) {
-  echo("<script>alert('You are already logged in!')</script>");
+  echo("<script>alert('You were logged in!')</script>");
   if($_SESSION['privilege'] == "admin"){
     header('Location: ../admin/dashboard.php');
   }
@@ -125,7 +125,7 @@ if (isset($_POST['loginBtn'])) {
 	$password=mysqli_real_escape_string($con,$_POST['password']);
 
   //Try to find is the user is exist or not
-	$sql="SELECT * FROM user WHERE username='$username' and password='$password'";
+	$sql="SELECT * FROM user WHERE username='$username' and password='$password' and user_active = 1";
   //If user exist
 	if ($result=mysqli_query($con,$sql))  {
 	  // Return the number of rows in result set
@@ -196,6 +196,7 @@ if (isset($_POST['loginBtn'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -206,7 +207,7 @@ if (isset($_POST['loginBtn'])) {
 </head>
 
 <body>
-  <!-- <?php include '../shared/navbar.php';?> -->
+  <?php include '../shared/navbar.php';?>
   <div class="content">
     <div class="lgn-container">
       <div class="tab-group w-9/12 sm:w-8/12 lg:w-3/4">
@@ -217,9 +218,10 @@ if (isset($_POST['loginBtn'])) {
           <a class="text-sm sm:text-base lg:text-lg" href="#login">Log In</a>
         </div>
       </div>
+      <!-- tab container -->
       <div class="tab-content">
         <!-- Sign up tab content -->
-        <div id="signup" class = "ml-3">  
+        <div id="signup" class="ml-3">
           <h1 class="title-txt">Sign up on Maffy</h1>
           <form method="post" enctype="multipart/form-data">
             <div class="form_group">
@@ -237,17 +239,17 @@ if (isset($_POST['loginBtn'])) {
             <!-- Radio button to choose user type -->
             <div class="radio-group">
               <div class="w-1/2">
-                <input type="radio" class="radio-btn" name="type" value="teacher">
+                <input type="radio" class="radio-btn" name="type" value="teacher" required>
                 <a class="text-sm sm:text-base lg:text-lg">Teacher</a>
               </div>
               <div class="w-1/2">
-                <input type="radio" class="radio-btn" name="type" value="student">
+                <input type="radio" class="radio-btn" name="type" value="student" required>
                 <a class="text-sm sm:text-base lg:text-lg">Student</a>
               </div>
             </div>
             <!-- file upload for teacher -->
-            <div class = "upload-container ml-1 mt-2">
-              <div class = "mb-3">
+            <div class="upload-container ml-1 mt-2">
+              <div class="mb-3">
                 <a class="upload-txt">Please upload your certified education file (IMAGE) to sign up as a teacher.</a>
               </div>
               <input id="fileUpload" class="upload-button" type="file" name="uploadedFile">
@@ -255,16 +257,15 @@ if (isset($_POST['loginBtn'])) {
             <button type="submit" class="submitBtn" value="signup" name="signUpBtn"> Sign Up </button>
           </form>
         </div>
-        
+
         <!-- Login tab content -->
-        <div id="login" class = "ml-3">
+        <div id="login" class="ml-3">
           <h1 class="title-txt">Login To Maffy</h1>
           <form method="post" enctype="multipart/form-data">
             <div class="form_group">
               <input type="text" class="form_field" name="username" placeholder="Username" required autofocus>
               <label for="username" class="form_label">Username</label>
             </div>
-    
             <div class="form_group">
               <input type="password" class="form_field" name="password" placeholder="Password" required>
               <label for="username" class="form_label">Password</label>
@@ -275,96 +276,7 @@ if (isset($_POST['loginBtn'])) {
       </div>
     </div>
   </div>
-
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    //==============================================================================
-    // script on handling tab swapping for the login and signup
-    $(document).ready(function() {
-      // Add "active" class to "login" tab by default
-      $('.tab a[href="#login"]').addClass('active');
-
-      // Hide all tab contents except "login"
-      $('.tab-content > div:not("#login")').hide();
-
-      // When a tab is clicked, show its corresponding content and hide the others
-      $('.tab a').on('click', function(e) {
-        e.preventDefault();
-
-        // Remove "active" class from all tabs
-        $('.tab a').removeClass('active');
-
-        // Add "active" class to clicked tab
-        $(this).addClass('active');
-
-        // Hide all tab contents except the one that matches the clicked tab
-        $('.tab-content > div').hide();
-        $($(this).attr('href')).show();
-      });
-    });
-
-  //==============================================================================
-  // function to add some animation on the login container
-  // get container id
-  const con=document.querySelector('.lgn-container');
-  // when mouse in and out
-  let isIn=true;
-  let isOut=false;
-  var span;
-
-  con.addEventListener('mouseenter',(e)=>{
-    if(isIn){
-      let inX=e.clientX-e.target.offsetLeft;
-      let inY=e.clientY-e.target.offsetTop;
-
-      let el=document.createElement('span');
-      el.style.left=inX+'px';
-      el.style.top=inY+'px';
-      con.appendChild(el);
-
-      $('.lgn-container span').removeClass('out');
-      $('.lgn-container span').addClass('in');
-
-      span=document.querySelector('.lgn-container span');
-      isIn=false;
-      isOut=true;
-    }
-  });
-
-  con.addEventListener('mouseleave',(e)=>{
-    if(isOut){
-      let outX=e.clientX-e.target.offsetLeft;
-      let outY=e.clientY-e.target.offsetTop;
-
-      $('.lgn-container span').removeClass('in');
-      $('.lgn-container span').addClass('out');
-
-      $('.out').css('left',outX+'px');
-      $('.out').css('top',outY+'px');
-
-      isOut=true;
-      setTimeout(() => {
-          con.removeChild(span);
-          isIn=true;
-      },500);
-    }
-  })
-  //==============================================================================
-  // function to hide and show the upload file container for teacher
-  const radioButtons = document.querySelectorAll('input[type="radio"]');
-  const uploadContainer = document.querySelector('.upload-container');
-
-  uploadContainer.style.display = 'none'; // set display to none by default
-
-  radioButtons.forEach((radio) => {
-    radio.addEventListener('click', () => {
-      if (radio.value === 'teacher') {
-        uploadContainer.style.display = 'block';
-      } else {
-        uploadContainer.style.display = 'none';
-      }
-    });
-  });
-</script>
+  <script type="text/javascript" src="../shared/javascript/login.js"></script>
 </body>
 </html>

@@ -29,8 +29,8 @@ nav {
 .btn {
   display: inline-block;
   padding: 7px 15px;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #38415c;
+  color: #7d84ab;
   cursor: pointer;
 }
 
@@ -39,7 +39,6 @@ nav {
 }
 
 .btn:active {
-  color: #fff;
   transform: translateY(2px);
   box-shadow: none;
   border: none;
@@ -95,9 +94,10 @@ nav {
   padding: 0px 20px 0px;
 }
 
-.logo-image {
+.logo-image, .logo {
   width: 140px;
   height: 60px;
+  object-fit: contain;
 }
 
 .nav-links {
@@ -111,7 +111,7 @@ nav {
 }
 
 .nav-links a {
-  color: #000000;
+  color: #7d84ab;
   text-decoration: none;
   font-size: 0.8rem;
 }
@@ -148,7 +148,7 @@ nav {
   z-index: 1;
   top: 60px;
   right: -10px;
-  background-color: #fff;
+  background-color: #f4eee0;
   border: 1px solid #ddd;
   list-style: none;
   display: none;
@@ -178,9 +178,8 @@ nav {
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 170px;
+  width: 100px;
   height: 40px;
-  background-color: #fff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   border-radius: 25px;
   overflow: hidden;
@@ -207,14 +206,14 @@ button:hover {
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-#login-btn, #register-btn {
-  width: 85px;
+#login-btn {
+  width: 100px;
   height: 40px;
   border-radius: 20px;
-  color: #000000;
+  color: #7d84ab;
 }
 
-#login-btn:hover , #register-btn:hover{
+#login-btn:hover:hover{
   background-color: #7d84ab;
   color: #fff;
 }
@@ -242,7 +241,6 @@ button:hover {
 
 .nav-toggle:hover {
   background-color: #7d84ab;
-
 }
 
 /* pop out edit password container */
@@ -258,7 +256,7 @@ button:hover {
   position: fixed;
   z-index: 999;
   width: 50%;
-  background-color: #ffffff;
+  background-color: #f4eee0;
   padding: 30px 50px 30px 30px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
@@ -267,11 +265,13 @@ button:hover {
 #password-popup h2 {
   font-size: 20px;
   margin-bottom: 10px;
+  color: #7d84ab;
 }
 
 #password-popup label {
   display: block;
   margin-bottom: 5px;
+  color: #7d84ab;
 }
 
 #password-popup input[type="password"] {
@@ -410,7 +410,6 @@ button:hover {
     padding: 0;
     z-index: 1;
     transition: 0.3s;
-    bottom: 350px;
   }
 
   .nav-links.active, .profile-dropdown_links.active{
@@ -458,5 +457,17 @@ button:hover {
 
   .login-resgister-res {
     display: block;
+  }
+}
+
+@media screen and (max-width: 320px),(max-width: 426px),(max-width: 768px){
+  .logo-image, .logo {
+    width: 100px;
+    height: 50px;
+    object-fit: contain;
+  }
+
+  .bar {
+    font-size: 0.9rem;
   }
 }

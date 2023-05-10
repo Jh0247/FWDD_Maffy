@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `assessment` (
   PRIMARY KEY (`assessment_id`),
   UNIQUE KEY `assessment_id` (`assessment_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `chat` (
   `chat_datetime` datetime NOT NULL,
   PRIMARY KEY (`chat_id`),
   KEY `friend_list_id` (`friend_list_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`comment_id`),
   KEY `assessment_id` (`assessment_id`,`user_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -83,15 +83,15 @@ DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
   `course_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
-  `course_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `course_desc` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `course_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `course_desc` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `course_date_posted` date NOT NULL,
   `course_image` longblob NOT NULL,
   `course_click` int NOT NULL,
   `course_status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`course_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `feedback` (
   PRIMARY KEY (`feedback_id`),
   UNIQUE KEY `feedback_id` (`feedback_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `friend_list` (
   UNIQUE KEY `friend_list_id` (`friend_list_id`),
   KEY `first_user_id` (`first_user_id`,`second_user_id`),
   KEY `second_user_id` (`second_user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `note` (
   PRIMARY KEY (`note_id`),
   UNIQUE KEY `note_id` (`note_id`),
   KEY `assessment_id` (`assessment_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `practice` (
   PRIMARY KEY (`practice_id`),
   UNIQUE KEY `practice_id` (`practice_id`),
   KEY `assessment_id` (`assessment_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `privilege` (
   `privilege_id` int NOT NULL AUTO_INCREMENT,
   `user_privilege` varchar(10) NOT NULL,
   PRIMARY KEY (`privilege_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `privilege`
@@ -199,14 +199,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(50) NOT NULL,
   `user_image` longblob,
   `user_desc` text,
-  `user_email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `user_email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `user_last_login` datetime DEFAULT NULL,
   `user_support_doc` longblob,
   `user_active` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username` (`username`),
   KEY `privilege_id` (`privilege_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
