@@ -1,0 +1,560 @@
+    body{
+        background-color: #667e91;
+    }
+
+    .big-container{
+        height: 100%;
+        width: 60%;
+        display: flex;
+        margin: 20px auto;
+        flex-direction: column;
+        border: 1px solid black;
+        padding-top: 10px;
+        border-radius: 20px;
+        backdrop-filter: blur(20px);
+        background-color: white;
+        /* box-shadow: 0 0 1em 1px lightcyan; */
+        /* box-shadow: 10px 10px 0px #666666; */
+        backdrop-filter: blur(20px);
+    }
+
+    .first-container{
+        height: auto;
+        width: 100%;
+        display: flex;
+        margin: auto;
+        flex-direction: row;
+        align-self: center;
+    }
+
+    .subContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 50%;
+        height: 100%;
+        margin: 10px 0 0 10px;
+    }
+
+    .subContainer h1{
+        margin-bottom: 0;
+    }
+
+    .subContainer h4{
+        margin-top: 5px;
+        margin-bottom: 0;
+    }
+
+    .secSubContainer{
+        flex-basis: 50%;
+        margin: 20px 10px 0 0;
+        text-align: end;
+    }
+
+    .secSubContainer p{
+        margin: 15px 0 5px 0;
+        /* color: white; */
+    }
+
+    .secSubContainer a{
+        text-decoration: none;
+        color: blue;
+        cursor: pointer;
+        display: none;
+    }
+
+    .secSubContainer a:hover{
+        color: red;
+    }
+
+    .second-container{
+        align-self: center;
+        width: 90%;
+        height: auto;
+        border: 1px solid black;
+        border-radius: 15px;
+        background-color: rgba(45, 35, 66, 0.15);
+        margin: 10px 0 0 0;
+        padding: 10px;
+    }
+
+    .second-container p{
+        margin-top: 5px;
+        /* color: white; */
+        font-size: 20px;
+    }
+
+    .comment-container{
+        align-self: center;
+        width: 90%;
+        height: auto;
+        margin: 10px 0 0 0;
+        border: 1px dashed black;
+        border-radius: 15px;
+        background-color: #DBDFEA;
+        padding: 5px;
+    }
+
+    .comment-container h2{
+        margin: 0 0 5px 0;
+        /* color: white; */
+    }
+
+    .comment-container i{
+        margin-right: 5px;
+        /* color: white; */
+    }
+
+    .comment{
+        width: 100%;
+        height: auto;
+        margin: 0 0 10px 0;
+        padding: 5px 0 5px 0;
+    }
+
+    .subComment{
+        height: auto;
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .subComment img{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin: 0 0 0 10px;
+    }
+
+    .prev-comment{
+        padding: 5px;
+        height: auto;
+        width: auto;
+        border: 2px solid lightgrey;
+        border-radius: 10px;
+        margin: 0 5px 0 5px;
+    }
+
+    .subComment p{
+        margin: 0 0 0 10px;
+        font-size: 17px;
+        /* color: white; */
+    }
+
+    .comment-box{
+        width: 200px;
+        min-height: 30px;
+        color: black;
+        outline: none;
+        transition: 0.35s;
+        padding: 0px 7px;
+        background-color: #fff;
+        border-radius: 20px;
+        border: 2px solid #212121;
+        box-shadow: 6px 6px 10px rgba(0,0,0,1),
+        1px 1px 10px rgba(255, 255, 255, 0.6);
+        margin: 10px;
+    }
+
+    .comment-box::placeholder{
+        color: #999;
+    }
+
+    .comment-box:focus .comment-box::placeholder{
+        transition: 0.3s;
+        opacity: 0;
+    }
+
+    .comment-box:hover{
+        transform: scale(1.05);
+        box-shadow: 3px 3px 6px rgba(0,0,0,1),
+        1px 1px 10px rgba(255, 255, 255, 0.6),
+        inset 1px 1px 1px rgba(0,0,0,1),
+        inset -1px -1px 5px rgba(255, 255, 255, 0.6);
+    }
+
+    .sendBtn {
+        background-color: white;
+        color: black;
+        border-radius: 10em;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        border: 1px solid black;
+        box-shadow: 0 0 0 0 black;
+    }
+      
+    .sendBtn:hover {
+        transform: translateY(-4px) translateX(-2px);
+        box-shadow: 2px 5px 0 0 black;
+    }
+      
+    .sendBtn:active {
+        transform: translateY(2px) translateX(1px);
+        box-shadow: 0 0 0 0 black;
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .exercise-container{
+        align-self: center;
+        width: 90%;
+        height: auto;
+        margin: 8px 0 8px 0;
+    }
+
+    .check-container input {
+        display: none;
+    }
+  
+    .check-container {
+        display: block;
+        position: relative;
+        cursor: pointer;
+        font-size: 15px;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        display: flex;
+        gap: 15px;
+        margin: 5px 0px;
+    }
+
+    .checkmark {
+        position: relative;
+        top: 0;
+        left: 0;
+        height: 1.3em;
+        width: 1.3em;
+        background-color: #2196F300;
+        border-radius: 0.25em;
+        transition: all 0.25s;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .check-container input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+      
+      /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        transform: rotate(0deg);
+        border: 0.1em solid black;
+        left: 0;
+        top: 0;
+        width: 1.05em;
+        height: 1.05em;
+        border-radius: 0.25em;
+        transition: all 0.25s, border-width 0.1s;
+    }
+      
+      /* Show the checkmark when checked */
+    .check-container input:checked ~ .checkmark:after {
+        left: 0.45em;
+        top: 0.25em;
+        width: 0.25em;
+        height: 0.5em;
+        border-color: #fff0 white white #fff0;
+        border-width: 0 0.15em 0.15em 0;
+        border-radius: 0em;
+        transform: rotate(45deg);
+    }
+
+    .fir-container{
+        height: auto;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid gray;
+        padding: 5px;
+    }
+
+    .sec-container{
+        width: 95%;
+        height: auto;
+        margin: auto;
+        padding: 5px;
+        background-color: #F5E7C6;
+    }
+
+    .sec-container h4{
+        /* color: white; */
+        font-size: 20px;
+    }
+
+    /*share btn*/
+    .bottom-container{
+        align-self: center;
+        width: 90%;
+        margin-bottom: 10px;
+    }
+
+    .bottom-sub-container{
+        width: 100%;
+    }
+
+    .shareBtn {
+        padding: 13px;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: #FF914D;
+        transition: all 1000ms;
+        font-size: 15px;
+        position: relative;
+        overflow: hidden;
+        outline: 2px solid #FF914D;
+        display: none;
+    }
+
+    .shareBtn:hover {
+        color: #ffffff;
+        transform: scale(1.1);
+        outline: 2px solid #70bdca;
+        box-shadow: 4px 5px 17px -4px #FF914D;
+    }
+
+    .shareBtn::before {
+        content: "";
+        position: absolute;
+        left: -50px;
+        top: 0;
+        width: 0;
+        height: 100%;
+        background-color: #FF914D;
+        transform: skewX(45deg);
+        z-index: -1;
+        transition: width 1000ms;
+    }
+
+    .shareBtn:hover::before {
+        width: 250%;
+    }
+
+/* @media screen and (max-width: 768px){ */
+@media only screen and (min-width: 468px) and (max-width: 900px) {
+
+    .big-container{
+        width: 70%;
+        /* margin: auto; */
+        height: 70%;
+    }
+
+    .first-container{
+        width: 90%;
+    }
+
+    .subContainer h1{
+        font-size: 25px;
+    }
+
+    .subContainer h4{
+        font-size: 15px;
+    }
+    .secSubContainer p{
+        font-size: 15px;
+    }
+    
+    .secSubContainer a{
+        font-size: 15px;
+        display: block;
+    }
+
+    .second-container{
+        width: 90%;
+        font-size: 20px;
+    }
+    
+    .second-container p{
+        font-size: 17px;
+    }
+
+    .comment-container{
+        width: 90%;
+    }
+    
+    .comment-container h2{
+        font-size: 20px;
+    }
+
+    .prev-comment{
+        font-size: 17px;
+    }
+
+    .sendBtn{
+        width: 80px    
+    }
+
+    .sendBtn .text{
+        font-size: 14px;
+    }
+
+    .exercise-container{
+        width: 90%;
+    }
+
+    .exercise-container h2{
+        font-size: 20px;
+    }
+
+    .fir-container{
+        height: auto;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid black;
+        padding: 2px;
+    }
+    
+    .sec-container h4{
+        font-size: 18px;
+        margin: 5px 0 5px 0;
+    }
+
+    .bottom-container{
+        align-self: center;
+        width: 80%;
+        margin-bottom: 10px;
+    }
+    
+    .bottom-sub-container{
+        width: 100%;
+    }
+    
+    .shareBtn {
+        padding: 7px;
+        font-size: 14px;
+        display: block;
+    }
+}
+
+/* @media screen and (max-width: 426px) { */
+@media only screen and (max-width: 468px) {
+    .big-container{
+        padding: 0 5px 0 5px;
+        width: 100%;
+        margin: 8px auto;
+    }
+
+    .first-container{
+        flex-direction: column;
+    }
+
+    .subContainer{
+        margin: 3px 0 0 5px;
+    }
+
+    .second-container{
+        width: 95%;
+        padding: 5px;
+    }
+
+    .secSubContainer{
+        margin: 3px 0 0 5px;
+        text-align: start;
+    }
+
+    .secSubContainer p{
+        margin: 0;
+    }
+
+    .secSubContainer a{
+        display: block;
+    }
+
+    .comment{
+        margin-bottom: 0px;
+    }
+
+    .subComment{
+        gap: 4px;
+    }
+
+    .comment-container{
+        width: 95%;
+        margin-bottom: 7px;
+    }
+
+    .comment-box{
+        width: 50%;
+        margin: 0 2%;
+        min-height: 20px;
+    }
+
+    .prev-comment p{
+        font-size: 15px;
+    }
+    
+    .sendBtn{
+        width: 20%;
+        transition: all 0.8s ease;
+        padding: 5px;
+    }
+
+    .sendBtn i{
+        margin: auto;
+    }
+
+    .sendBtn:hover{
+        width: 20%;
+        margin-left: 2%;
+    }
+
+    .comment-container h2{
+        font-size: 17px;
+    }
+
+    .check-container{
+        font-size: 15px;
+        margin-bottom: 5px;
+    }
+
+    .checkmark{
+        width: 0.8em;
+        height: 0.8em;
+    }
+
+    .checkmark:after{
+        width: 0.6em;
+        height: 0.6em;
+    }
+
+    .check-container input:checked ~ .checkmark:after{
+        left: 0.2em;
+        top: 0;
+    }
+
+    .exercise-container{
+        margin: 0 0 5px 0;
+        width: 95%;
+    }
+
+    .exercise-container h2{
+        font-size: 15px;
+        margin-bottom: 2px;
+    }
+    .fir-container{
+        width: 100%;
+    }
+
+    .sec-container{
+        padding: 1px 0 1px 0;
+    }
+
+    .sec-container h4{
+        font-size: 15px;
+        margin: 5px 0px 5px 5px;
+    }
+
+    .shareBtn{
+        padding: 5px;
+        font-size: 10px;
+        display: block;
+    }
+}
