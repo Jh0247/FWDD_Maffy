@@ -28,7 +28,3 @@ function applyFilters() {
   
   // Code to filter based on selected options
 }
-
-
-
-// You can add functionality to the save button to submit the form data

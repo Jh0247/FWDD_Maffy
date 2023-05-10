@@ -193,6 +193,8 @@ if (isset($_POST['loginBtn'])) {
   mysqli_close($con);
 }
 
+$current_page_url = $_SERVER['PHP_SELF'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -226,6 +228,7 @@ if (isset($_POST['loginBtn'])) {
             <div class="form_group">
               <input type="email" class="form_field" name="email" placeholder="Email" required autofocus>
               <label for="email" class="form_label">Email</label>
+
             </div>
             <div class="form_group">
               <input type="text" class="form_field" name="username" placeholder="Username" required autofocus>

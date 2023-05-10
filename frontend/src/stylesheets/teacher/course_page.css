@@ -8,32 +8,36 @@ header {
 	position: relative;
 	height: 100%;
 	width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+
 }
 
 .cover-image img {
-	object-fit: cover;
 	height: 100%;
 	width: 100%;
-	opacity: 0.7;
+  opacity: 0.2;
+  filter: blur(2px);
 }
 
 .cover-text {
 	position: absolute;
 	top: 0;
 	left: 20px;
-	color: #fff;
-	text-align: right;
+	color: #000000;
+	text-align: justify;
   overflow: auto;
+  max-width: 80%;
+  max-height: auto;
   white-space: normal;
 }
 
 .cover-text h1 {
-	font-size: 4rem;
+	font-size: 2rem;
 	margin-bottom: 10px;
 }
 
 .cover-text p {
-	font-size: 1.5rem;
+	font-size: 1rem;
 	margin-bottom: 0;
 }
 
@@ -149,7 +153,7 @@ header {
 .published {
   font-size: 1rem;
   font-weight: bold;
-  color: #7d84ab;
+  color: #000000;
 }
 
 /* single assessment status */
@@ -210,6 +214,7 @@ header {
   .options {
     gap: 20px;
   }
+
 }
 
 @media screen and (max-width: 534px) {
