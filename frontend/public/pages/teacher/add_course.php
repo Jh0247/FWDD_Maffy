@@ -119,7 +119,7 @@
                         //set image content with type and base64
                         $course_image = 'data:image/'.$supDocType.';base64,'.$processedDoc;
                             
-                        $sql = "INSERT INTO assessment (course_id, assessment_title, assessment_content, assessment_date_posted) 
+                        $sql = "INSERT INTO course (user_id, course_title, course_desc, course_date_posted, course_image, course_click, course_status) 
                                 VALUES ('$_SESSION[user_id]', '$course_title', '$course_desc', '$posted_date', '$course_image', '0', '1')";
 
                         $result = mysqli_query($con, $sql);
