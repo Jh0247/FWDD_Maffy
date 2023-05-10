@@ -68,7 +68,7 @@
                             <div class="profile">
                                 <img src="../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
                                 <div class="profile-dropdown" id="profile-dropdown">
-                                    <a href="user_profile.php">Profile</a>
+                                    <a href="'.(($current_page == 'course_page.php' or $current_page == 'user_profile.php' or $current_page == 'view_courses.php') ? 'user_profile.php' : '../shared/user_profile.php').'">Profile</a>
                                     <a href="#" id="edit-password-btn">Edit Password</a>
                                     <a href="../../../../backend/logout.php">Logout</a>
                                 </div>
