@@ -26,6 +26,8 @@
 <body>
   <div class="w-screen h-screen flex flex-row">
     <?php include '../admin/sidebar.php';?>
+    
+    <?php include '../admin/loading.php';?>
     <div class="w-full overflow-auto">
       <div class="flex flex-col h-full items-center sm:items-start mx-3 md:mx-9 text-center sm:text-left">
         <!-- dynamic change name based on type param passed --> 
@@ -115,7 +117,7 @@
                 <div class="flex flex-col md:flex-row text-center md:text-left items-center">  <!-- left content  -->
                   <!-- img cont  -->
                   <div class="md:mr-5">
-                    <img src="<?=$data['user_image']?>" alt="profile pic">
+                    <img src="<?=$data['user_image']?>" alt="profile pic" class="profile-img">
                   </div>
                   <!-- name and details -->
                   <div class="flex flex-col justify-center">
@@ -139,6 +141,12 @@
               </a>
               <?php
               }
+            }  else {
+              ?>
+              <div class="no-item-cont">
+                <span class="text-center">No data available</span>
+              </div>
+              <?php
             }
           }
           else if($_GET['type'] == 'student') {
@@ -185,7 +193,7 @@
                 <div class="flex flex-col md:flex-row text-center md:text-left items-center">  <!-- left content  -->
                   <!-- img cont  -->
                   <div class="md:mr-5">
-                    <img src="<?=$data['user_image']?>" alt="profile pic">
+                    <img src="<?=$data['user_image']?>" alt="profile pic" class="profile-img">
                   </div>
                   <!-- name and details -->
                   <div class="flex flex-col justify-center">
@@ -209,10 +217,16 @@
               </a>
             <?php
               }
+            } else {
+              ?>
+              <div class="no-item-cont">
+                <span class="text-center">No data available</span>
+              </div>
+              <?php
             }
           }
           else if($_GET['type'] == 'request-teacher') {
-            $sql = mysqli_query($con, "SELECT user_id, privilege_id, username, user_image, user_email, user_active FROM user WHERE privilege_id = 2 AND user_active = 0");
+            $sql = mysqli_query($con, "SELECT user_id, privilege_id, username, user_image, user_email, user_support_doc, user_active FROM user WHERE privilege_id = 2 AND user_active = 0");
             if(mysqli_num_rows($sql) > 0) {
               foreach($sql as $data) {
               ?>
@@ -221,7 +235,7 @@
                   <div class="flex flex-col md:flex-row text-center md:text-left items-center">  <!-- left content  -->
                     <!-- img cont  -->
                     <div class="md:mr-5">
-                      <img src="<?=$data['user_image']?>" alt="profile pic">
+                      <img src="<?=$data['user_image']?>" alt="profile pic" class="profile-img">
                     </div>
                     <!-- name and details -->
                     <div class="flex flex-col justify-center">
@@ -231,27 +245,40 @@
                   </div>
                   <div class="flex flex-row justify-around">
                     <!-- download -->
-                    <button id="download-doc" class="flex flex-col justify-center">
+                    <button id="download-doc" class="flex flex-col justify-center" onclick="document.getElementById('modal<?=$data['user_id']?>').style.display='block'">
                       <span class="download-btn mr-4">
-                        <i class="fa-solid fa-download"></i>
+                        <i class="fa-solid fa-file-image"></i>
                       </span>
                     </button>
                     <!-- approve -->
-                    <button id="check-approval" class="flex flex-col justify-center">
+                    <button id="check-approval" name="checkBtn" class="flex flex-col justify-center" onclick="displayCheck('update_active', <?php echo $data['user_id']; ?>);">
                       <span class="check-btn mr-4">
                         <i class="fa-regular fa-circle-check"></i>
                       </span>
                     </button>
                     <!-- reject -->
-                    <button id="xmark-reject" class="flex flex-col justify-center">
+                    <button id="xmark-reject" name="rejectBtn" class="flex flex-col justify-center" onclick="displayXmark('delete', <?php echo $data['user_id']; ?>);">
                       <span class="xmark-btn mr-4">
                         <i class="fa-regular fa-circle-xmark"></i>
                       </span>
                     </button>
                   </div>
                 </div>
+                <form method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="user_id" value="<?php echo $data['user_id']; ?>">
+                </form>
+                <div id="modal<?=$data['user_id']?>" class="pop-modal">
+                  <span class="close" onclick="document.getElementById('modal<?=$data['user_id']?>').style.display='none'">&times;</span>
+                  <img src="<?=$data['user_support_doc']?>" alt="User support doc" class="pop-img">
+                </div>
                 <?php
               }
+            } else {
+              ?>
+              <div class="no-item-cont">
+                <span class="text-center">No data available</span>
+              </div>
+              <?php
             }
           } 
           else if($_GET['type'] == 'performance-teacher') {
@@ -271,7 +298,7 @@
                     <div class="flex flex-col md:flex-row text-center md:text-left items-center">  <!-- left content  -->
                       <!-- img cont  -->
                       <div class="md:mr-5">
-                        <img src="<?=$data['user_image']?>" alt="profile pic">
+                        <img src="<?=$data['user_image']?>" alt="profile pic" class="profile-img">
                       </div>
                       <!-- name and details -->
                       <div class="flex flex-col justify-center">
@@ -302,6 +329,12 @@
                   </a>
                   <?php
                 }
+              } else {
+                ?>
+                <div class="no-item-cont">
+                  <span class="text-center">No data available</span>
+                </div>
+                <?php
               }
           }
           else if($_GET['type'] == 'course') {
@@ -347,7 +380,7 @@
                   <div class="flex flex-col md:flex-row text-center md:text-left items-center">  <!-- left content  -->
                     <!-- img cont  -->
                     <div class="md:mr-5">
-                      <img src="<?=$data['course_image']?>" alt="profile pic">
+                      <img src="<?=$data['course_image']?>" alt="profile pic" class="profile-img">
                     </div>
                     <!-- name and details -->
                     <div class="flex flex-col justify-center">
@@ -371,6 +404,12 @@
                 </a>
                 <?php 
               }
+            } else {
+              ?>
+              <div class="no-item-cont">
+                <span class="text-center">No data available</span>
+              </div>
+              <?php
             }
           }
           else if($_GET['type'] == 'trend-course') {
@@ -383,7 +422,7 @@
                   <div class="flex flex-col md:flex-row text-center md:text-left items-center">  <!-- left content  -->
                     <!-- img cont  -->
                     <div class="md:mr-5">
-                      <img src="<?=$data['course_image']?>" alt="profile pic">
+                      <img src="<?=$data['course_image']?>" alt="profile pic" class="profile-img">
                     </div>
                     <!-- name and details -->
                     <div class="flex flex-col justify-center">
@@ -406,6 +445,12 @@
                 </a>
                 <?php
               }
+            } else {
+              ?>
+              <div class="no-item-cont">
+                <span class="text-center">No data available</span>
+              </div>
+              <?php
             }
           }
           else if($_GET['type'] == 'feedback') {
@@ -418,7 +463,7 @@
                 <div class="flex flex-col md:flex-row text-center md:text-left items-center">  <!-- left content  -->
                   <!-- img cont  -->
                   <div class="md:mr-5">
-                    <img src="<?=$data['user_image']?>" alt="profile pic">
+                    <img src="<?=$data['user_image']?>" alt="profile pic" class="profile-img">
                   </div>
                   <!-- name and details -->
                   <div class="flex flex-col justify-center">
@@ -435,6 +480,12 @@
               </a>
               <?php
               }
+            } else {
+              ?>
+              <div class="no-item-cont">
+                <span class="text-center">No data available</span>
+              </div>
+              <?php
             }
           }
           else {
@@ -450,8 +501,10 @@
     </div>
   </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="../admin/javascript/sidebar.js"></script>
 <script type="text/javascript" src="../admin/javascript/view-list.js"></script>
+<script type="text/javascript" src="../admin/javascript/loading.js"></script>
 </body>
 <?php
   //Close connection of database
