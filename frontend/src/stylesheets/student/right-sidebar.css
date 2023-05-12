@@ -1,7 +1,7 @@
 #right-sidebar {
   float: right;
 	position: relative;
-    top: 0;
+    top: 3%;
     left: 0;
 	background: transparent;
 }
@@ -54,7 +54,7 @@
 }
 
 
-#right-sidebar ul li > div {
+.link{
 	display: inline-block;
 	padding: 25px 0;
 	background: transparent;

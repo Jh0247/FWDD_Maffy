@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="./nav_bar.css">
-    <link rel="stylesheet" href="./siderbar.css">
-    <link rel="stylesheet" href="./search.css">
+    <link rel="stylesheet" href="../../../src/stylesheets/shared/nav_bar.css">
+    <link rel="stylesheet" href="../../../src/stylesheets/student/siderbar.css">
+    <link rel="stylesheet" href="../../../src/stylesheets/student/search.css">
     <script src="https://kit.fontawesome.com/873ab321fe.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search</title>
@@ -18,7 +18,7 @@
         <div class="side-bar"></div>
       </div>
       <div class="logo">
-        <a href="#"><img class="logo-image" src=".\logo.jpg" alt="Website Icon"> </a>
+        <a href="./student_homepage.html"><img class="logo-image" src="../../images/Maffy.png" alt="Website Icon"> </a>
       </div>
       <form action="" id="search-bar">
         <input type="search" required id="search-input">
@@ -29,21 +29,21 @@
     <!-- student nav bar -->
     <div class="nav-right">
       <ul class="nav-links">
-        <li><a class="btn" href="#">My Courses</a></li>
-        <li><a class="btn" href="#">Trend Courses</a></li>
-        <li><a class="btn" href="#">Add Assessment</a></li>
+        <li><a class="btn" href="./student_homepage.html">Home</a></li>
+        <li><a class="btn" href="./View_All_Course.html">Course</a></li>
+        <li><a class="btn" href="./friend_request.html">Friend</a></li>
         <div class="profile-res">
-          <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
+          <li><a class="btn my-profile-btn" href="./profile.html">My Profile</a></li>
         </div>
         <div class="profile-dropdown_links">
-          <li><a href="#">Profile</a></li>
+          <li><a href="./profile.html">Profile</a></li>
           <li><a href="#">Setting</a></li>
           <li><a href="#">Logout</a></li>
         </div>
         
         <li>
           <div class="profile">
-            <img src=".\profile.jpg" alt="Profile Icon" id="profile-icon">
+            <img src="../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
             <div class="profile-dropdown" id="profile-dropdown">
               <a href="#">Profile</a>
               <a href="#">Setting</a>
@@ -135,14 +135,13 @@
       </div>
       <!--End of Filter Hidden-->
 
-      <!--Search Container-->
-      <div class="search-big-container">
+      <!--Course Container-->
+      <div class="course-big-container">
         <div class="assessment-container" id="next-page">
             <div class="header">
                 <div class="left">
                     <h2>COURSE 1</h2>
-                    <img src="./profile.jpg">
-                    <!-- <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget orci tempor, consectetur ante nec, congue mi.</p> -->
+                    <img src="../../images/user_profile.png">
                 </div>
                 <div class="right">
                     <div class="view-count">View: <span id="view-count">0</span></div>
@@ -176,9 +175,8 @@
           window.location.href = "./view_courses.html"; // replace with your desired URL
         });
       </script>
-  <script src="./nav_bar.js"></script>
-  <script src="./hamburger.js"></script>
-  <script src="./sidebar.js"></script>
-  <script src="./filter.js"></script>
+  <script src="./JavaScript/nav_bar.js"></script>
+  <script src="./JavaScript/hamburger.js"></script>
+  <script src="./JavaScript/exercise.js"></script>
 </body>
 </html>

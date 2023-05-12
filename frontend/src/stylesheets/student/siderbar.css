@@ -1,6 +1,7 @@
   .sidebar{
     display: block;
     left: 0;
+    top: 80px;
     height: 100%;
     /* min-height: auto; */
     width: 250px;
@@ -8,7 +9,7 @@
     /* backdrop-filter: blur(20px); */
     /* padding: 0.4rem 0.8rem; */
     transition: all 0.8s ease;
-    /* position: relative; */
+    position: relative;
     z-index: 1;
   }
 
@@ -38,7 +39,7 @@
   }
 
   .sidebar ul li{
-    position: relative;
+    position: sticky;
     list-style-type: none;
     height: 50px;
     width: 90%;
