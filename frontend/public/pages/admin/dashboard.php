@@ -74,6 +74,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../../src/stylesheets/admin/dashboard.css">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/775f0ea71b.js" crossorigin="anonymous"></script>
   <title>Dashboard</title>
 </head>
 
@@ -350,6 +351,11 @@
   $(document).ready(function () {
     run(_chart);
   });
+
+  //always update admin page 
+  setInterval(function() {
+    location.reload();
+  }, 10000);
 
 </script>
 <script type="text/javascript" src="../admin/javascript/sidebar.js"></script>

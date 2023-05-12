@@ -221,6 +221,15 @@ background: linear-gradient(90deg, rgba(20,87,78,1) 0%, rgba(42,116,123,1) 35%, 
   animation: out 0.5s ease-out forwards;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+  transition: background-color 5000s ease-in-out 0s;
+  color: white;
+  -webkit-text-fill-color: #fff;
+}
+
 @media only screen and (max-width: 468px) {
   .lgn-container {
     width: 80vw;
