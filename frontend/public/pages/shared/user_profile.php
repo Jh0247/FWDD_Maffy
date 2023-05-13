@@ -19,8 +19,14 @@
 </head>
 
 <body>
-    <?php include '../shared/navbar.php';?>
     <div class="container">
+        <?php 
+        if($_SESSION['privilege'] == 'teacher' || $_SESSION['privilege'] == 'student'){
+            include '../shared/navbar.php';
+        } else {
+            include '../admin/sidebar.php';
+        }
+        ?>
         <div class="profile-container">
             <div class="user-container">
                 <!-- User profile image -->
@@ -97,12 +103,6 @@
     </div>
 
     <script>
-    const myDiv = document.getElementById("next-page");
-    myDiv.addEventListener("click", () => {
-        window.location.href =
-            "../../../public/pages/teacher/view_course.html"; // replace with your desired URL
-    });
-
     // Pop out edit password container
     const editPasswordBtn = document.getElementById('edit-password-btn');
     const passwordPopup = document.getElementById('password-popup');
