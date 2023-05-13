@@ -13,8 +13,6 @@
         border-radius: 20px;
         backdrop-filter: blur(20px);
         background-color: white;
-        /* box-shadow: 0 0 1em 1px lightcyan; */
-        /* box-shadow: 10px 10px 0px #666666; */
         backdrop-filter: blur(20px);
     }
 
@@ -343,7 +341,6 @@
 
     .big-container{
         width: 70%;
-        /* margin: auto; */
         height: 70%;
     }
 

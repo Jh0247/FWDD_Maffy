@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../src/stylesheets/student/homepage.css">
+    <link rel="stylesheet" href="../../../src/stylesheets/shared/nav_bar.css">
+    <script src="https://kit.fontawesome.com/873ab321fe.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!--Nav Bar Code-->
+    <nav id="navBar">
+      <div class="nav-left">
+        <!-- <div class="hamburger">
+          <div class="side-bar"></div>
+        </div> -->
+        <div class="logo">
+          <a href="./student_homepage.html"><img class="logo-image" src="../../images/Maffy.png" alt="Website Icon"> </a>
+        </div>
+        <form action="" id="search-bar">
+          <input type="search" required id="search-input">
+          <i class="fa fa-search" id="search-icon"></i>
+      </form>
+      </div>
+    
+        <!-- student nav bar -->
+        <div class="nav-right">
+          <ul class="nav-links">
+            <li><a class="btn" href="./student_homepage.html">Home</a></li>
+            <li><a class="btn" href="./View_All_Course.html">Course Assessment</a></li>
+            <li><a class="btn" href="./friend_request.html">Friends</a></li>
+            <div class="profile-res">
+              <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
+            </div>
+            <div class="profile-dropdown_links">
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">Setting</a></li>
+              <li><a href="#">Logout</a></li>
+            </div>
+            
+            <li>
+              <div class="profile">
+                <img src="../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
+                <div class="profile-dropdown" id="profile-dropdown">
+                  <a href="#">Profile</a>
+                  <a href="#">Setting</a>
+                  <a href="#">Logout</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div>
+            <button class="nav-toggle">
+              <div class="bar">Menu</div>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+    <!--img slide-->
+    <div class="first-container">
+        <div class="container">
+            <div class="slides">
+                <div class="slide">
+                    <img src="../../images/img_1.jpg" alt="" />
+                    <h1>Title</h1>
+                    <button class="slider-button"><i class="fa fa-eye" aria-hidden="true"></i>View</button>
+                </div>
+                <div class="slide">
+                    <img src="../../images/img_2.jpg" alt="" />
+                    <h1>Title</h1>
+                    <button class="slider-button"><i class="fa fa-eye" aria-hidden="true"></i>View</button>
+                </div>
+                <div class="slide">
+                    <img src="../../images/img_3.jpg" alt="" />
+                    <h1>Title</h1>
+                    <button class="slider-button"><i class="fa fa-eye" aria-hidden="true"></i>View</button>
+                </div>
+                <div class="slide">
+                  <img src="../../images/img_2.jpg" alt="" />
+                  <h1>Title</h1>
+                  <button class="slider-button"><i class="fa fa-eye" aria-hidden="true"></i>View</button>
+              </div>
+            </div>
+            <div class="slider-controls">
+                <button id="prev-btn">
+                    <i class ="fa fa-chevron-left"></i>
+                </button>
+                <button id="next-btn">
+                    <i class="fa fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>    
+    </div>
+
+    <!--Course Assessment View-->
+    <div class="course-container">
+      <div class="d-container">
+        <div class="image">
+          <img src="../../images/technology.png" alt="Course 1">
+        </div>
+        <div class="content">
+          <h2>Course 1</h2>
+          <button class="button" onclick="location.href='view_courses.html'"><i class="fa fa-eye" aria-hidden="true"></i>View</button>
+        </div>
+      </div>
+
+      <div class="d-container">
+        <div class="image">
+          <img src="../../images/technology.png" alt="Course 1">
+        </div>
+        <div class="content">
+          <h2>Course 1</h2>
+          <button class="button" onclick="location.href='view_courses.html'"><i class="fa fa-eye" aria-hidden="true"></i>View</button>
+        </div>
+      </div>
+
+      <div class="d-container">
+        <div class="image">
+          <img src="../../images/technology.png" alt="Course 1">
+        </div>
+        <div class="content">
+          <h2>Course 1</h2>
+          <button class="button" onclick="location.href='view_courses.html'"><i class="fa fa-eye" aria-hidden="true"></i>View</button>
+        </div>
+      </div>
+
+      <div class="d-container">
+        <div class="image">
+          <img src="../../images/technology.png" alt="Course 1">
+        </div>
+        <div class="content">
+          <h2>Course 1</h2>
+          <button class="button" onclick="location.href='view_courses.html'"><i class="fa fa-eye" aria-hidden="true"></i>View</button>
+        </div>
+      </div>
+
+      <div class="d-container">
+        <div class="image">
+          <img src="../../images/technology.png" alt="Course 1">
+        </div>
+        <div class="content">
+          <h2>Course 1</h2>
+          <button class="button" onclick="location.href='view_courses.html'"><i class="fa fa-eye" aria-hidden="true"></i>View</button>
+        </div>
+      </div>
+
+      <div class="d-container">
+        <div class="image">
+          <img src="../../images/technology.png" alt="Course 1">
+        </div>
+        <div class="content">
+          <h2>Course 1</h2>
+          <button class="button" onclick="location.href='view_courses.html'"><i class="fa fa-eye" aria-hidden="true"></i>View</button>
+        </div>
+      </div>
+    </div>
+</body>
+<script src="./JavaScript/homepage.js"></script>
+<script src="./JavaScript/nav_bar.js"></script>
+</html>
