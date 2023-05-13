@@ -108,9 +108,9 @@
             if(mysqli_num_rows($result) > 0) {
               foreach($result as $data) {
                 if($data['user_active'] == 2) {
-                  echo '<a href="" class="item-cont bg-block flex flex-row justify-around md:justify-between">';
+                  echo '<a href="../shared/user_profile.php?id='. $data["user_id"] .'" class="item-cont bg-block flex flex-row justify-around md:justify-between">';
                 } else {
-                  echo '<a href="" class="item-cont flex flex-row justify-around md:justify-between">';
+                  echo '<a href="../shared/user_profile.php?id='. $data["user_id"] .'" class="item-cont flex flex-row justify-around md:justify-between">';
                 }
                 ?>
                 <!-- for teacher list -->
@@ -184,9 +184,9 @@
             if(mysqli_num_rows($result) > 0){
               foreach($result as $data) {
                 if($data['user_active'] == 2) {
-                  echo '<a href="" class="item-cont bg-block flex flex-row justify-around md:justify-between">';
+                  echo '<a href="../shared/user_profile.php?id='. $data["user_id"] .'" class="item-cont bg-block flex flex-row justify-around md:justify-between">';
                 } else {
-                  echo '<a href="" class="item-cont flex flex-row justify-around md:justify-between">';
+                  echo '<a href="../shared/user_profile.php?id='. $data["user_id"] .'" class="item-cont flex flex-row justify-around md:justify-between">';
                 }
                 ?>
                 <!-- for student list -->
@@ -244,7 +244,7 @@
                     </div>
                   </div>
                   <div class="flex flex-row justify-around">
-                    <!-- download -->
+                    <!-- view -->
                     <button id="download-doc" class="flex flex-col justify-center" onclick="document.getElementById('modal<?=$data['user_id']?>').style.display='block'">
                       <span class="download-btn mr-4">
                         <i class="fa-solid fa-file-image"></i>

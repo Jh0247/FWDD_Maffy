@@ -112,7 +112,7 @@
     background-color: #0056b3;
   }
 
-.course-big-container{
+.search-big-container{
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -128,7 +128,6 @@
     border-radius: 10px;
     box-shadow: 3px 3px 7px #bebebe;
     margin-bottom: 30px;
-    margin-top: 80px;
     cursor: pointer;
   }
   

@@ -1,8 +1,8 @@
 #right-sidebar {
   float: right;
 	position: relative;
-    top: 3%;
-    left: 0;
+  top: 0;
+  left: 0;
 	background: transparent;
 }
 
@@ -53,8 +53,7 @@
 	transform: perspective(400px) rotateY(0deg) scale(1) ;
 }
 
-
-.link{
+#right-sidebar ul li > div {
 	display: inline-block;
 	padding: 25px 0;
 	background: transparent;

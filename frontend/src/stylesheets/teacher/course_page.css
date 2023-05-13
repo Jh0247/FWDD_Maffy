@@ -1,3 +1,30 @@
+body{
+  height:100%;
+  width: 100%;  
+  background-color: #667e91;
+}
+
+/* for the scrollbar on webpage */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: 0 8px 14px 0 rgba(0,0,0,0.2);
+  border-radius: 50px;
+  margin: .5em 0em .5em 0em;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(160, 152, 152);
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(73, 72, 72);
+}
+
 header {
 	position: relative;
 	height: 50vh;
@@ -17,6 +44,7 @@ header {
 	width: 100%;
   opacity: 0.2;
   filter: blur(2px);
+  object-fit: fill;
 }
 
 .cover-text {
@@ -167,6 +195,10 @@ header {
   cursor: pointer;
 }
 
+.view-ass{
+  text-decoration: none;
+}
+
 .desc {
   text-align: justify;
   margin: 0px 0px 40px 0px;
@@ -206,6 +238,23 @@ header {
   font-weight: bold;
 }
 
+.publish-container .post-btn{
+  background-color: #7d84ab;
+  margin: 10px 0px 10px 0px;
+  border-radius: 10px;
+  font-weight: normal;
+  cursor: pointer;
+  padding: 10px;
+  border: none;
+}
+
+.publish-container .post-btn:hover{
+  background-color: #38415c;
+  color: #fff;
+  font-weight: bold;
+  transition: .3s;
+}
+
 @media screen and (max-width: 768px) {
   .assessment-options {
     gap: 40px;
@@ -213,6 +262,10 @@ header {
 
   .options {
     gap: 20px;
+  }
+
+  .publish-container .post-btn{
+    font-size: 12px;
   }
 
 }
