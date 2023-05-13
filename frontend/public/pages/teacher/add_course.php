@@ -12,7 +12,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../src/stylesheets/teacher/add_course.css">
-    <link rel="stylesheet" href="../../../src/stylesheets/shared/nav_bar.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
 
     <title>Add Course</title>

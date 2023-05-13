@@ -38,12 +38,12 @@
                 <!-- teacher nav bar -->
                 <div class="nav-left">
                     <div class="logo">
-                        <a href="homepage.php"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
+                        <a href="../shared/home.php"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
                     </div>
                 </div>
                 <div class="nav-right">
                     <ul class="nav-links">
-                        <li><a class="btn active" href="'.(($current_page == 'course_page.php' or $current_page == 'user_profile.php' or $current_page == 'view_courses.php') ? '../teacher/homepage.php' : 'homepage.php').'">My Courses</a></li>
+                        <li><a class="btn active" href="'.(($current_page == 'course_page.php' or $current_page == 'user_profile.php' or $current_page == 'view_courses.php') ? '../teacher/homepage.php' : 'homepage.php').'">Courses</a></li>
                         <li><a class="btn" href="'.(($current_page == 'course_page.php' or $current_page == 'user_profile.php' or $current_page == 'view_courses.php') ? '../teacher/add_course.php' : 'add_course.php').'">Add Course</a></li>
                         <div class="profile-res">
                             <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
@@ -157,7 +157,7 @@
 
     <!-- pop out edit password container -->
     <form id="form">
-        <div class="pass-popout-container">
+        <div id="pass-popout-container">
             <div id="password-popup">
                 <h2>Edit Password</h2>
                 <label for="current-password">Current Password:</label>
@@ -227,6 +227,10 @@
         passwordPopup.style.display = 'block';
     });
 
+    editPasswordBtn.addEventListener('click', () => {
+        passwordPopup.style.display = 'block';
+    });
+
     cancelPasswordBtn.addEventListener('click', () => {
         passwordPopup.style.display = 'none';
     });
@@ -234,6 +238,7 @@
     savePasswordBtn.addEventListener('click', () => {
         passwordPopup.style.display = 'none';
     });
+
 
     // not refresh the page when submit btn is click in <form>
     $(document).ready(function() {
