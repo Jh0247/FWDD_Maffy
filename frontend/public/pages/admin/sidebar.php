@@ -31,7 +31,7 @@
                 </a>
               </li>
               <li class="menu-item">
-                <a href="dashboard.php">
+                <a href="../admin/dashboard.php">
                   <span class="menu-icon">
                     <i class="fa fa-th-large"></i>
                   </span>
@@ -40,7 +40,7 @@
               </li>
               <li class="menu-header" style="padding-top: 20px"><span> Management </span></li>
               <li class="menu-item">
-                <a href="manage-user.php">
+                <a href="../admin/manage-user.php">
                   <span class="menu-icon">
                     <i class="fa-solid fa-user-group"></i>
                   </span>
@@ -48,7 +48,7 @@
                 </a>
               </li>
               <li class="menu-item">
-                <a href="view-list.php?type=performance-teacher">
+                <a href="../admin/view-list.php?type=performance-teacher">
                   <span class="menu-icon">
                     <i class="fa-solid fa-user-group"></i>
                   </span>
@@ -57,7 +57,7 @@
               </li>
               <li class="menu-header" style="padding-top: 20px"><span> Manage Course </span></li>
               <li class="menu-item">
-                <a href="view-list.php?type=course">
+                <a href="../admin/view-list.php?type=course">
                   <span class="menu-icon">
                     <i class="fa-solid fa-book-bookmark"></i>
                   </span>
@@ -65,7 +65,7 @@
                 </a>
               </li>
               <li class="menu-item">
-                <a href="view-list.php?type=trend-course">
+                <a href="../admin/view-list.php?type=trend-course">
                   <span class="menu-icon">
                     <i class="fa-solid fa-book-bookmark"></i>
                   </span>
@@ -74,7 +74,7 @@
               </li>
               <li class="menu-header" style="padding-top: 20px"><span> Support </span></li>
               <li class="menu-item">
-                <a href="view-list.php?type=feedback">
+                <a href="../admin/view-list.php?type=feedback">
                   <span class="menu-icon">
                     <i class="fa fa-file-text"></i>
                   </span>
@@ -82,7 +82,7 @@
                 </a>
               </li>
               <li class="menu-item">
-                <a href="terms-condition.php">
+                <a href="../admin/terms-condition.php">
                   <span class="menu-icon">
                     <i class="fa fa-gears"></i>
                   </span>
