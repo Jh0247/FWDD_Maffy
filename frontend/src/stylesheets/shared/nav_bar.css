@@ -138,9 +138,12 @@ nav {
 #profile-icon {
   width: 50px;
   height: 50px;
+  min-width: 50px;
+  min-height: 50px;
   border-radius: 50%;
   cursor: pointer;
   margin-right: -10px;
+  box-sizing: content-box;
 }
 
 .profile-dropdown {
@@ -189,10 +192,11 @@ nav {
   display: none;
 }
 
-/* .nav-toggle {
+
+.nav-toggle {
   border: none;
   background-color: transparent;
-  color: #fff;
+  color: #ffffff;
   padding: 12px 18px;
   font-size: 0.8rem;
   cursor: pointer;
@@ -231,35 +235,35 @@ nav {
   display: block;
   color: #7d84ab;
   font-size: 1rem;
-  padding: 30px;
   font-weight: bold;
+  margin-right: 15px;
 }
 
 .bar:hover {
   color: #fff;
 }
 
-.nav-toggle:hover {
-  background-color: #7d84ab;
-}
-
 /* pop out edit password container */
-.pass-popout-container {
+#pass-popout-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 #password-popup {
-  top: 170px;
-  display: none;
+  display: none; 
   position: fixed;
   z-index: 999;
-  width: 50%;
-  background-color: #f4eee0;
+  background-color: rgba(0, 0, 0, 0.8);
   padding: 30px 50px 30px 30px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  padding-top: 100px; 
+  left: 0;
+  top: 0;
+  width: 100vw; 
+  height: 100vh; 
+  overflow: hidden;  
 }
 
 #password-popup h2 {
@@ -393,7 +397,7 @@ nav {
     background-color: #38415c;
     position: fixed;
     flex-direction: column;
-    top: 80px;
+    top: 59px;
     margin: 0;
     padding: 0;
     z-index: 1;
