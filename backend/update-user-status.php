@@ -4,7 +4,7 @@
   $query_type = $_POST['query_type'];
 
   // Connect to the database
-  include("../../../../../backend/conn.php");
+  include("../backend/conn.php");
 
   // Execute the appropriate database query based on the query_type parameter
   if ($query_type == "update_active") {

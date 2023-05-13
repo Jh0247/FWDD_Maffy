@@ -97,6 +97,7 @@ body{
   border: #080808 0.3px solid;
   margin: 5px;
   object-fit :fill;
+  background-color: #000000;
 }
 
 .result-container h2{

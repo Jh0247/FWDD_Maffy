@@ -167,6 +167,10 @@ header {
   cursor: pointer;
 }
 
+.view-ass{
+  text-decoration: none;
+}
+
 .desc {
   text-align: justify;
   margin: 0px 0px 40px 0px;
