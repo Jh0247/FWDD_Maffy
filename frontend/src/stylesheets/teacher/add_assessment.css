@@ -106,11 +106,12 @@ body{
 /* hidden exercise container */
 .exercise-container {
     background-color:rgba(0, 0, 0, 0.1);
-    margin: 0px -14px;
+    margin: -15px -14px 45px -14px;
     padding: 20px 35px 0px 15px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
+    border: 1px solid black;
 }
   
 h2 {
@@ -120,7 +121,7 @@ h2 {
     color: #7d84ab;
 }
 
-#post-form {
+#form {
     display: flex;
     flex-direction: column;
 }
@@ -132,6 +133,7 @@ h2 {
 label {
     margin-bottom: 5px;
     color: #7d84ab;
+    font-size: 20px;
 }
 
 input[type="text"],
@@ -149,8 +151,7 @@ textarea {
 }
 
 .input:hover {
-    box-shadow: 6px 6px 0px #969696,
-                -3px -3px 10px #ffffff;
+    box-shadow: 6px 6px 0px #969696
 }
 
 .input:focus {
@@ -167,8 +168,11 @@ input::placeholder, textarea::placeholder{
     font-size: 10px;
 }
 
+.form-group .check-container {
+  font-size: 16px;
+}
+
 button[type="submit"] {
-    /* background-color: #007bff; */
     color: #7d84ab;
     padding: 10px 20px;
     margin: 0px -20px 0px 0px;
@@ -186,6 +190,55 @@ button[type="submit"] {
     color: rgb(255, 0, 0);
     font-size: 14px;
     margin-top: 10px;
+}
+
+/* select option design */
+/* Custom select container */
+.custom-select {
+  position: relative;
+  display: inline-block;
+  width: 100px; /* Adjust the width as needed */
+  background-color: #333;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 20px;  
+}
+
+/* Hide the default arrow */
+.custom-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: transparent;
+  padding: 4px;
+  border: none;
+  font-size: 12px;
+  color: #fff;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Style the custom arrow */
+.custom-select::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  border-top: 6px solid #fff;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+}
+
+/* Style the options */
+.custom-select select option {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Hover effect for options */
+.custom-select select option:hover {
+  background-color: #555;
 }
 
 /* button style */
@@ -272,20 +325,19 @@ button[type="submit"] {
     padding: 10px 20px;
     border-radius: 20px;
     border: none;
-    color: #38415c;
+    color: #ffffff;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .back-btn i {
     font-size: 20px;
     margin-right: 10px;
-    color: #38415c;
+    color: #ffffff;
   }
-  
 
   
 @media screen and (max-width: 768px) {
@@ -301,10 +353,20 @@ button[type="submit"] {
     button[type="submit"] {
         font-size: 14px;
     }
-}
 
-@media screen and (max-width: 320px), (min-width: 375px) {
-  .form-group .check-container {
-    font-size: 11px;
-  }
+    .form-group .check-container {
+      font-size: 11px;
+    }
+
+    label {
+      font-size: 14px;
+    }
+
+    h2 {
+      font-size: 20px;
+    }
+
+    .back-btn {
+      font-size: 14px;
+    }
 }
