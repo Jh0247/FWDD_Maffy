@@ -25,13 +25,13 @@ function showSuccess() {
 }
 
 function displayCheck(queryType, userId) {
-  console.log(queryType, "This is query type passed");
   console.log(userId, "This is userId passed");
+  console.log(queryType, "This is query type passed");
   showLoadingSuccess();
 
   setTimeout(function() {
     $.ajax({
-      url: "backend/update-user-status.php",
+      url: "../../../../backend/update-user-status.php",
       type: "POST",
       data: {
         user_id: userId,
@@ -64,7 +64,7 @@ function displayXmark(queryType, userId) {
 
   setTimeout(function() {
     $.ajax({
-      url: "backend/update-user-status.php",
+      url: "../../../../backend/update-user-status.php",
       type: "POST",
       data: {
         user_id: userId,

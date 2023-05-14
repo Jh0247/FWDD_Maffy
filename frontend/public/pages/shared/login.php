@@ -38,7 +38,7 @@ if (isset($_POST['signUpBtn'])) {
   $privilege == "teacher" ? $privilege=2 : $privilege=3;
 
   //Provide img as default image
-  $defaultImg = "../../images/default.jpg";
+  $defaultImg = "../../images/user_profile.png";
   $imageFileType = strtolower(pathinfo($defaultImg,PATHINFO_EXTENSION));
   //Encode image into base64
   $processedImg = base64_encode(file_get_contents($defaultImg));
