@@ -24,35 +24,6 @@
 <body>
   <?php include '../shared/navbar.php'; ?>
   <div class="content">
-    <!-- section for home -->
-    <section id="home" class="home-container white-bg h-screen w-screen">
-      <div class="home-content sm:h-5/6 sm:items-center flex-col-reverse sm:flex-row mx-9 sm:mx-12 my-10 sm:my-20">
-        <div class="search-details w-full sm:w-1/2 lg:w-4/12 ml-3 lg:ml-24 mt-8 sm:mt-10 lg:mt-24">
-          <div class="mb-4 sm:mb-12">
-            <h2>What is</h2>
-            <h2>Lorem Ipsum?</h2>
-          </div>
-          <div class="pr-4">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit,
-            </p>
-          </div>
-
-          <div class="search-cont mt-4 sm:mt-10 mb-4 sm:mb-10">
-            <input type="text" class="search__input" placeholder="What to learn..">
-            <button class="search__button">
-              <i class="fa-solid fa-magnifying-glass" style="color: #dee2e8;"></i>
-            </button>
-          </div>
-        </div>
-        <div class="w-full sm:w-1/2 mt-8 sm:mt-28 lg:mt-24 sm:mr-10">
-          <img src="../../images/intro.png" alt="introduction" class="w-64 sm:w-4/5 intro-img">
-        </div>
-      </div>
-    </section>
-
     <!-- section for about us -->
     <section id="about-us" class="flex flex-col h-screen w-screen green-bg">
       <div class="overflow-hidden absolute h-4/6 w-screen">
