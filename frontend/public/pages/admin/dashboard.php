@@ -41,7 +41,7 @@
     ORDER BY total_view DESC
     LIMIT 2");
   
-  //sql query to get most performance teaacher
+  //sql query to get most performance courses
   $trend_course_sql = mysqli_query($con, 
     "SELECT * FROM course  WHERE course_status = 1
     ORDER BY course_click DESC
