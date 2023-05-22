@@ -28,7 +28,8 @@
         $avg_score = 0;
       } else { //do sql to get data from database 
         $profile_sql = mysqli_query($con, 
-          "SELECT user.user_id, user.privilege_id, user.username, user.user_image, user.user_email, user.user_desc, user_active, user_support_doc
+          "SELECT user.user_id, user.privilege_id, user.username, user.user_image, user.user_email,
+          user.user_desc, user_active, user_support_doc,
           COUNT(course_id) as total_course, SUM(course_click) as total_view FROM user
           INNER JOIN course ON course.user_id = user.user_id    
           WHERE user.user_id = $posted_user_id AND course_status = 1");
@@ -69,7 +70,8 @@
         $avg_score = 0;
       } else { //do sql to get data from database 
         $profile_sql = mysqli_query($con, 
-          "SELECT user.user_id, user.privilege_id, user.username, user.user_image, user.user_email, user.user_desc, user_active, user_support_doc
+          "SELECT user.user_id, user.privilege_id, user.username, user.user_image, user.user_email, 
+          user.user_desc, user_active, user_support_doc,
           COUNT(course_id) as total_course, SUM(course_click) as total_view FROM user
           INNER JOIN course ON course.user_id = user.user_id    
           WHERE user.user_id = $posted_user_id AND course_status = 1");
@@ -207,7 +209,7 @@
       <div class="cont-size">
         <div class="my-3">
           <span class="title-details-text">
-            <?php echo ($user_privilege == 2) ? 'Posted Course' : (($user_privilege == 3) ? 'Get in Touch' : ''); ?>
+            <?php echo ($user_privilege == 2) ? 'Posted Course' : ""; ?>
           </span>
         </div>
 
@@ -235,18 +237,6 @@
               <h2 class="course-title">No course data available</h2>
             </div>
             <?php
-          }
-        } 
-        else if ($user_privilege == 3) { //student
-          if(mysqli_num_rows($result) > 0) {
-            foreach($result as $data) {
-            ?>
-            <!-- student friend  -->
-            <div class="friend-cont">
-              
-            </div>
-            <?php
-            }
           }
         }
         ?>

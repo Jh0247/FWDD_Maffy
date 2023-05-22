@@ -3,6 +3,15 @@
   if(!isset($_SESSION)) {
     session_start();
   };
+
+  //sql query to get most performance courses
+  $trend_course_sql = mysqli_query($con, 
+  "SELECT * FROM course  WHERE course_status = 1
+  ORDER BY course_click DESC
+  LIMIT 5");
+    
+  //Close connection of database
+  mysqli_close($con);
 ?>
 
 <!DOCTYPE html>
@@ -27,14 +36,14 @@
     <!-- section for about us -->
     <section id="about-us" class="flex flex-col h-screen w-screen green-bg">
       <div class="overflow-hidden absolute h-4/6 w-screen">
-        <img src="../../images/technology.png" alt="technology" class="techImg">
+        <img src="../../images/website.jpg" alt="technology" class="techImg">
       </div>
-      <div class="flex justify-center items-center w-full relative top-20 sm:top-64 lg:top-80">
+      <div class="flex justify-center items-center w-full relative top-24 sm:top-64 lg:top-80">
         <div class="flex about-us-cont flex-col sm:flex-row w-3/4 sm:w-5/6 lg:4/6">
           <!-- maffy details -->
           <div class="flex flex-col w-full sm:w-1/2">
             <!-- logo -->
-            <div class="flex flex-row sm:flex-col sm:w-full h-40 sm:h-36 md:h-56 lg:h-64 pr-5 py-5 lg:px-16 justify-center">
+            <div class="flex flex-row sm:flex-col sm:w-full h-28 sm:h-36 md:h-56 lg:h-64 pr-5 py-5 lg:px-16 justify-center">
               <img src="../../images/Maffy.png" alt="logo" class="logo-img">
             </div>
             <!-- contact us button -->
@@ -45,15 +54,15 @@
                 </span>
                 <span class="button-text">Contact Us</span>
               </button>
-            </div> <!-- normal-responsive-contact -->
+            </div>
           </div>
           <!-- content details -->
           <div class="sm:w-1/2 p-5">
             <h2 class="mb-4 sm:mb-8">Who we are</h2>
-            <p>
-              Welcome to MAFFY, the premier online destination for anyone who wants to learn how to code.
-              We believe that coding is an essential skill for the 21st century, and we're dedicated to
-              making it accessible to everyone.
+            <p class="about-us-details">
+            Maffy is an innovative online platform for IT education, offering a wide range of courses taught by expert instructors. 
+            With a user-friendly interface and interactive learning experiences, Maffy provides accessible education in 
+            several programming courses.
             </p>
             <div id="mobile-responsive-contact" class="flex flex-row w-full my-5">
               <button class="learn-more contact-btn">
@@ -77,76 +86,26 @@
         <div class="w-screen h-full flex flex-row justify-center items-center">
           <div class="slider-container w-3/4 lg:w-5/6">
 
-            <div class="slider-card mx-3 lg:mx-8">
-              <a href="" class="h-3/5">
-                <img src="../../images/faq.png">
-              </a>
-              <div class="slider-caption h-2/5">
+          <?php
+            if(mysqli_num_rows($trend_course_sql) > 0)
+            {
+              foreach($trend_course_sql as $course_data) // Run SQL query
+              {
+                ?>
+                <div class="slider-card mx-3 lg:mx-8">
+                  <a href="" class="h-3/5">
+                    <img src="<?=$course_data['course_image']?>">
+                  </a>
+                  <div class="slider-caption h-2/5">
 
-                <h2 class="my-3">Course name</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua.
-                </p>
-              </div>
-            </div>
-
-            <div class="slider-card mx-3 lg:mx-8">
-              <a href="" class="h-3/5">
-                <img src="../../images/technology.png">
-              </a>
-              <div class="slider-caption h-2/5">
-
-                <h2 class="my-3">Course name</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua.
-                </p>
-              </div>
-            </div>
-
-            <div class="slider-card mx-3 lg:mx-8">
-              <a href="" class="h-3/5">
-                <img src="../../images/intro.png">
-              </a>
-              <div class="slider-caption h-2/5">
-
-                <h2 class="my-3">Course name</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua.
-                </p>
-              </div>
-            </div>
-
-            <div class="slider-card mx-3 lg:mx-8">
-              <a href="" class="h-3/5">
-                <img src="../../images/our course.png">
-              </a>
-              <div class="slider-caption h-2/5">
-
-                <h2 class="my-3">Course name</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua.
-                </p>
-              </div>
-            </div>
-
-            <div class="slider-card mx-3 lg:mx-8">
-              <a href="" class="h-3/5">
-                <img src="../../images/Maffy.png">
-              </a>
-              <div class="slider-caption h-2/5">
-
-                <h2 class="my-3">Course name</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua.
-                </p>
-              </div>
-            </div>
-
+                    <h2 class="my-3"><?php echo $course_data['course_title']; ?></h2>
+                    <p><?php echo $course_data['course_desc']; ?></p>
+                  </div>
+                </div>          
+                <?php
+              }
+            }
+          ?>
           </div> <!-- slider container -->
         </div>
       </div>
@@ -161,83 +120,57 @@
           <div class="accordion-item">
             <button id="accordion-button-1" aria-expanded="false">
               <h2 class="accordion-title">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                How can I enroll into a course by using the Maffy platform?
               </h2>
               <span class="icon" aria-hidden="true"></span>
             </button>
             <div class="accordion-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et
-                leo duis ut. Ut tortor pretium viverra suspendisse potenti.
+                Maffy is a free learning education website that serve all user to have a better understanding on multiple 
+                programming languages, you do not need to enroll yourself into any course while you can direcrly view all the course
+                available in the website.
               </p>
             </div>
           </div>
-
           <div class="accordion-item">
             <button id="accordion-button-2" aria-expanded="false">
               <h2 class="accordion-title">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                How do I access the course materials?
               </h2>
               <span class="icon" aria-hidden="true"></span>
             </button>
             <div class="accordion-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et
-                leo duis ut. Ut tortor pretium viverra suspendisse potenti.
+                There were several way for you to access Maffy learning course which you can directly find some course in the homepage.
               </p>
             </div>
           </div>
-
           <div class="accordion-item">
             <button id="accordion-button-3" aria-expanded="false">
               <h2 class="accordion-title">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                What should I do if I encounter technical issues?
               </h2>
               <span class="icon" aria-hidden="true"></span>
             </button>
             <div class="accordion-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et
-                leo duis ut. Ut tortor pretium viverra suspendisse potenti.
+                Please contact our website administrator by clicking on the contact us button above. Or you may send an email to "maffy@sample.com"
               </p>
             </div>
           </div>
-
           <div class="accordion-item">
             <button id="accordion-button-4" aria-expanded="false">
               <h2 class="accordion-title">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Can I interact with other students on the platform?
               </h2>
               <span class="icon" aria-hidden="true"></span>
             </button>
             <div class="accordion-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et
-                leo duis ut. Ut tortor pretium viverra suspendisse potenti.
+                Yes. You may send a friend request to your friend and upon they accept the friend request, you may start sending message to your friend.
               </p>
             </div>
           </div>
-
-          <div class="accordion-item">
-            <button id="accordion-button-5" aria-expanded="false">
-              <h2 class="accordion-title">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </h2>
-              <span class="icon" aria-hidden="true"></span>
-            </button>
-            <div class="accordion-content">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et
-                leo duis ut. Ut tortor pretium viverra suspendisse potenti.
-              </p>
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
@@ -303,6 +236,26 @@
     }
 
     items.forEach(item => item.addEventListener('click', toggleAccordion));
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get all the navbar links
+      var navbarLinks = document.querySelectorAll('nav a');
+
+      // Attach click event listeners to each navbar link
+      navbarLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault(); // Prevent the default link behavior
+
+          // Get the target section ID from the href attribute
+          var targetId = link.getAttribute('href');
+
+          // Scroll to the target section
+          document.querySelector(targetId).scrollIntoView({
+            behavior: 'smooth' // Use smooth scrolling
+          });
+        });
+      });
+    });
   </script>
 </body>
 

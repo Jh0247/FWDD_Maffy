@@ -37,77 +37,6 @@ body{
   flex-direction: column;
 }
 
-.home-container{
-  justify-content: center;
-  align-items: center;
-}
-
-.home-container .home-content{
-  display: flex;
-  border-radius: 25px;
-  background: linear-gradient(90deg, rgba(141,172,179,1) 0%, rgba(73,105,112,1) 69%, rgba(47,72,88,1) 100%);
-  justify-content: space-between;
-} 
-
-.home-container .search-details{
-  display: flex;
-  flex-direction: column;
-}
-
-.home-container .search-details h2{
-  font-size: 1.8em;
-  font-weight: 600;
-  font-family: cursive;
-}
-
-.home-container .search-details p{
-  font-size: 1.2rem;
-  line-height: 2;
-}
-
-.home-container .search-details .search-cont {
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-
-.search-cont .search__input {
-  background-color: #ffffff;
-  border: none;
-  color: #080808;
-  padding: 0.7rem 1rem;
-  border-radius: 20px;
-  width: 80%;
-  transition: all ease-in-out .5s;
-  margin-right: -2rem;
-}
-
-.search-cont .search__input:focus {
-  outline: none;
-}
-
-.search-cont .search__button {
-  border: none;
-  background-color: #000000;
-  margin-top: .1em;
-  width: 20%;
-  height: 3rem;
-  border-radius: 20px;
-  margin-top: 3px;
-}
-
-.search-cont .search__button:hover {
-  cursor: pointer;
-}
-
-.home-content .intro-img {
-  -webkit-animation: bounce 5s infinite linear;
-  -o-animation: bounce 5s infinite linear;
-  -ms-animation: bounce 5s infinite linear;
-  -moz-animation: bounce 5s infinite linear;
-  animation: bounce 5s infinite linear;
-}
-
 .techImg {
   width: 100%;
   height: 100%;
@@ -119,8 +48,8 @@ body{
 }
 
 .logo-img {
-  width: 450px;
-  height: 300px;
+  width: 400px;
+  height: 280px;
   object-fit :contain;
 }
 
@@ -216,8 +145,8 @@ body{
 }
 
 .about-us-cont p{
-  font-size: 1.2rem;
-  line-height: 2;
+  text-align: justify;
+  font-size: 1.1rem;
 }
 
 .course-container {
@@ -411,17 +340,6 @@ body{
 }
 
 @media only screen and (min-width: 468px) and (max-width: 900px) {
-  .home-container .search-details h2{
-    font-size: 1.3em;
-    font-weight: 600;
-    font-family: cursive;
-  }
-  
-  .home-container .search-details p{
-    font-size: .85rem;
-    line-height: 2;
-  }
-
   .about-us-cont h2 {
     font-size: 1.6em;
     font-weight: 600;
@@ -430,7 +348,6 @@ body{
   
   .about-us-cont p{
     font-size: 1rem;
-    line-height: 2;
   }
   
   .logo-img {
@@ -477,17 +394,6 @@ body{
 }
 
 @media only screen and (max-width: 468px) {
-  .home-container .search-details h2{
-    font-size: 1.2em;
-    font-weight: 600;
-    font-family: cursive;
-  }
-  
-  .home-container .search-details p{
-    font-size: .8rem;
-    line-height: 2;
-  }
-
   .about-us-cont h2 {
     font-size: 1.2em;
     font-weight: 600;
@@ -496,12 +402,15 @@ body{
   
   .about-us-cont p{
     font-size: .8rem;
-    line-height: 2;
   }
 
   .logo-img {
-    width: 100%;
+    width: 80%;
     height: 120px;
+  }
+  
+  .contact-btn .button-text {
+    font-size: 0.8rem;
   }
 
   .contact-btn {
