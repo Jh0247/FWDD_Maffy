@@ -2,7 +2,7 @@
 //Start session
 if(!isset($_SESSION)) {
   session_start();
-  // session_unset();
+  session_unset();
   // session_destroy();
 }
 else{
@@ -112,6 +112,8 @@ if (isset($_POST['signUpBtn'])) {
     }
   }
 
+  session_unset();
+  session_destroy();
   //Close connection of database
   mysqli_close($con);
 }
