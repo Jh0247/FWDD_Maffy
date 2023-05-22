@@ -3,7 +3,7 @@
     include("../../../../backend/conn.php");
     include("../../../../backend/session.php");
     
-    require_once("../teacher/backend/single_assessment_container.php");
+    require_once("../teacher/component/single_assessment_container.php");
     
     $courseID = $_GET['courseid'];
     
