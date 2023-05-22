@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./nav_bar.css">
-    <link rel="stylesheet" href="./siderbar.css">
-    <link rel="stylesheet" href="./right-sidebar.css">
-    <link rel="stylesheet" href="./view-course-assessment.css">
+    <link rel="stylesheet" href="../../../src/stylesheets/shared/nav_bar.css">
+    <link rel="stylesheet" href="../../../src/stylesheets/student/siderbar.css">
+    <link rel="stylesheet" href="../../../src/stylesheets/student/right-sidebar.css">
+    <link rel="stylesheet" href="../../../src/stylesheets/student/view-assessment.css">
     <script src="https://kit.fontawesome.com/873ab321fe.js" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>View Assessment</title>
 
     <style>
 
@@ -24,7 +24,7 @@
         <div class="side-bar"></div>
       </div>
       <div class="logo">
-        <a href="#"><img class="logo-image" src=".\logo.jpg" alt="Website Icon"> </a>
+        <a href="#"><img class="logo-image" src="../../images/Maffy.png" alt="Website Icon"> </a>
       </div>
       <form action="" id="search-bar">
         <input type="search" required id="search-input">
@@ -49,7 +49,7 @@
         
         <li>
           <div class="profile">
-            <img src=".\profile.jpg" alt="Profile Icon" id="profile-icon">
+            <img src="../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
             <div class="profile-dropdown" id="profile-dropdown">
               <a href="#">Profile</a>
               <a href="#">Setting</a>

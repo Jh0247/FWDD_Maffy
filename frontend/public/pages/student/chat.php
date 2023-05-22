@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/873ab321fe.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Chat</title>
 </head>
 <body>
     <nav id="navBar">
@@ -43,7 +43,7 @@
             
             <li>
               <div class="profile">
-                <img src=".\profile.jpg" alt="Profile Icon" id="profile-icon">
+                <img src="../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
                 <div class="profile-dropdown" id="profile-dropdown">
                   <a href="#">Profile</a>
                   <a href="#">Setting</a>
