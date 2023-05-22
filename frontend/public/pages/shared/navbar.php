@@ -34,8 +34,8 @@
     <nav>
         <?php
             if($user_privilege == '2'){
+                // teacher nav bar
                 echo('
-                <!-- teacher nav bar -->
                 <div class="nav-left">
                     <div class="logo">
                         <a href="../shared/home.php"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
@@ -72,8 +72,8 @@
                 </div>
                 ');
             }elseif($user_privilege == '3') {
+                // student nav bar
                 echo('
-                <!-- student nav bar -->
                 <div class="nav-left">
                     <div class="logo">
                         <a href="#"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
@@ -81,23 +81,23 @@
                 </div>
                 <div class="nav-right">
                     <ul class="nav-links">
-                        <li><a class="btn" href="#">Home</a></li>
-                        <li><a class="btn" href="#">Course Assessment</a></li>
-                        <li><a class="btn" href="#">Friend</a></li>
+                        <li><a class="btn" href="../../pages/student/homepage.php">Home</a></li>
+                        <li><a class="btn" href="../../pages/student/friend_request.php">Friend</a></li>
+                        <li><a class="btn" href="../../pages/student/chat.php">Chat</a></li>
                         <div class="profile-res">
                             <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
-                        </div>
-                        <div class="profile-dropdown_links">
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#" id="edit-password-btn">Edit Password</a></li>
-                            <li><a href="../../../../backend/logout.php">Logout</a></li>
+                            <div class="profile-dropdown_links">
+                                <li><a href="../../pages/shared/user_profile.php">Profile</a></li>
+                                <li><a href="#" id="edit-password-btn">Edit Password</a></li>
+                                <li><a href="../../../../backend/logout.php">Logout</a></li>
+                            </div>
                         </div>
     
                         <li>
                             <div class="profile">
                                 <img src="../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
                                 <div class="profile-dropdown" id="profile-dropdown">
-                                    <a href="#">Profile</a>
+                                    <a href="../../pages/shared/user_profile.php">Profile</a>
                                     <a href="#" id="edit-password-btn">Edit Password</a>
                                     <a href="../../../../backend/logout.php">Logout</a>
                                 </div>
@@ -112,8 +112,8 @@
                 </div>
                 ');
             }else if($user_privilege == '0' and $current_page_url === $desired_page_url){
+                // login nav bar
                 echo('
-                <!-- login nav bar -->
                 <div class="nav-left">
                     <div class="logo">
                         <a href="home.php"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
@@ -121,8 +121,8 @@
                 </div>
                 ');
             }elseif($user_privilege == '0'){
+                // guest nav bar
                 echo('
-                <!-- guest nav bar -->
                 <div class="nav-left">
                     <div class="logo">
                         <a href="home.php"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
@@ -134,7 +134,7 @@
                         <li><a class="btn" href="#course">Course</a></li>
                         <li><a class="btn" href="#faq">FAQS</a></li>
                         <div class="login-resgister-res">
-                            <li><a class="btn" href="login.php">Login</a></li>
+                            <li><a class="btn" href="#" onclick=\'navigateToPage("../../pages/shared/login.php")\'>Login</a></li>
                         </div>
     
                         <li>
@@ -144,7 +144,7 @@
                         </li>
     
                     </ul>
-                    <div id="profile-icon" style="padding: 60px 60px 88px 0px;">
+                    <div>
                         <button class="nav-toggle">
                             <div class="bar">Menu</div>
                         </button>
@@ -175,17 +175,10 @@
     </form>
 
     <script>
-    // profile dropdown list
-    const profileIcon = document.getElementById("profile-icon");
-    const profileDropdown = document.getElementById("profile-dropdown");
-
-    profileIcon.addEventListener("click", () => {
-        if (profileDropdown.style.display === "block") {
-            profileDropdown.style.display = "none";
-        } else {
-            profileDropdown.style.display = "block";
-        }
-    });
+    // login page navigation
+    function navigateToPage(url) {
+        window.location.href = url;
+    }
 
     // menu responsive
     const navToggle = document.querySelector('.nav-toggle');
@@ -210,6 +203,18 @@
     profileToggle.addEventListener('click', () => {
         profileToggle.classList.toggle('active');
         profileDropdownList.classList.toggle('active');
+    });
+
+    // profile dropdown list
+    const profileIcon = document.getElementById("profile-icon");
+    const profileDropdown = document.getElementById("profile-dropdown");
+
+    profileIcon.addEventListener("click", () => {
+        if (profileDropdown.style.display === "block") {
+            profileDropdown.style.display = "none";
+        } else {
+            profileDropdown.style.display = "block";
+        }
     });
 
     // Pop out edit password container

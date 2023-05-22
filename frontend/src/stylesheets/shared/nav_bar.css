@@ -10,7 +10,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   background-color: #38415c;
-  color: #fff;
+  /* color: #fff; */
   padding: 10px 0px 10px 0px;
   height: 60px;
   position: fixed;
@@ -186,12 +186,20 @@ nav {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   border-radius: 25px;
   overflow: hidden;
+  cursor: pointer;
+}
+
+.login-register-toggle:hover {
+  background-color: #667e91;
+}
+
+#login-btn:hover {
+  color: #fff;
 }
 
 .login-resgister-res {
   display: none;
 }
-
 
 .nav-toggle {
   border: none;
@@ -208,18 +216,13 @@ nav {
 .nav-toggle:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-} */
+}
 
 #login-btn {
   width: 100px;
   height: 40px;
   border-radius: 20px;
   color: #7d84ab;
-}
-
-#login-btn:hover:hover{
-  background-color: #7d84ab;
-  color: #fff;
 }
 
 /* Menu */
