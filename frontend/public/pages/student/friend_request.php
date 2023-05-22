@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../../../src/stylesheets/student/friend-request.css">
     <script src="https://kit.fontawesome.com/873ab321fe.js" crossorigin="anonymous"></script> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Friend Request</title>
 </head>
 <body>
         <!--Nav Bar Code-->

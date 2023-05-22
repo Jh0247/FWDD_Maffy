@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="../../../src/stylesheets/shared/nav_bar.css">
     <link rel="stylesheet" href="../../../src/stylesheets/student/siderbar.css">
-    <link rel="stylesheet" href="../../../src/stylesheets/student/profile.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../src/stylesheets/student/edit.css">
     <script src="https://kit.fontawesome.com/873ab321fe.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
 </head>
 <body>
-<!--Nav Bar Code-->
+    <!--Nav Bar Code-->
   <nav id="navBar">
     <div class="nav-left">
       <!-- <div class="hamburger">
@@ -37,14 +37,14 @@
           <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
         </div>
         <div class="profile-dropdown_links">
-          <li><a href="#">Profile</a></li>
+          <li><a href="./profile.html">Profile</a></li>
           <li><a href="#">Setting</a></li>
           <li><a href="#">Logout</a></li>
         </div>
         
         <li>
           <div class="profile">
-            <img src=".\profile.jpg" alt="Profile Icon" id="profile-icon">
+            <img src="../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
             <div class="profile-dropdown" id="profile-dropdown">
               <a href="#">Profile</a>
               <a href="#">Setting</a>
@@ -62,61 +62,33 @@
     </div>
   </nav>
 
-    <!--content box-->
-    <div style="display: flex;flex-direction: row;">
-        <div class="big-container">
+  <div class="first-container">
 
-          <div class="content-container">
-            <div>
-              <img src="./profile.jpg" class="profile_image">
-              <div class="detail-container">
-                <p class="detail">Username: </p>
-                <p class="detail">Useremail: </p>
-              </div>
-            </div>
+    <div class="first-row">
+        <img src="./profile.jpg" class="profile-image" id="image">
+        <div class="file-handle">
+            <p>Please Choose a new profile picture</p>
+            <input type="file" id="real-file" hidden="hidden" accept="image/png,image/png" name="profileImage" onchange="previewImage(event);" />
+            <button type="button" id="custom-button">Choose a image</button>
+            <span id="custom-text">No image chosen yet</span>
+        </div>
+    </div>
 
-            <div class="friend-header">
-              <h1>Friend</h1>
-            </div>
-            
-            <div class="friend-container">
+    <div class="second-row">
+      <p>Username: </p>
+      <input type="text" name="text" class="input" placeholder="Username">
+      <p>Email: </p>
+      <input type="text" name="text" class="input" placeholder="Useremail">
+    </div>
 
-              <div class="friend-card">
-                <img src="./profile.jpg" class="friend-profile">
-                <div>
-                  <p class="user-infor">Username</p>
-                </div>
-                <button class=chatBtn>Chat</button>
-              </div>
+    <div class="thrid-row">
+      <a class="update" href="#">I am a button</a>
+    </div>
 
-              <div class="friend-card">
-                <img src="./profile.jpg" class="friend-profile">
-                <div>
-                  <p class="user-infor">Username</p>
-                </div>
-                <button class=chatBtn>Chat</button>
-              </div>
+  </div>
 
-              <div class="friend-card">
-                <img src="./profile.jpg" class="friend-profile">
-                <div>
-                  <p class="user-infor">Username</p>
-                </div>
-                <button class=chatBtn>Chat</button>
-              </div>
-
-              <div class="friend-card">
-                <img src="./profile.jpg" class="friend-profile">
-                <div>
-                  <p class="user-infor">Username</p>
-                </div>
-                <button class=chatBtn>Chat</button>
-              </div>
-
-            </div>
-          </div>
-      </div>
-
+  <script src="./JavaScript/edit_profile.js"></script>
   <script src="./JavaScript/nav_bar.js"></script>
+
 </body>
 </html>
