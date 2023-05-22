@@ -41,7 +41,7 @@
             text: 'Assessment Successfully Posted!',
             showDenyButton: false,
             showCancelButton: false,
-            confirmButtonText: "<a href=\"../shared/course_page.php?userid=$_SESSION[user_id]&courseid=$courseID\" style=\"text-decoration:none; color:white; \">Continue</a>"
+            confirmButtonText: "<a href=\"#\" onclick=window.location.href=\"../../../public/pages/shared/course_page.php?userid=<?php echo $_SESSION['user_id']; ?>&courseid=<?php echo $courseID; ?>\" style=\"text-decoration:none; color:white; \">Continue</a>"
         })
     }
 
@@ -172,13 +172,15 @@
             date_default_timezone_set('Asia/Kuala_Lumpur');
             $ass_title = $_POST['ass-title'];
             $ass_content = addslashes($_POST['ass-content']);
-            $ass_link = addslashes($_POST['add_link']);
+            $code = addslashes($_POST['code']);
             $exercise_title = $_POST['exercise-title'];
             $exercise_desc = $_POST['exercise-desc']; 
             $exercise_pratice = $_POST['exercise-practice']; 
+            $escaped_input_exericse = mysqli_real_escape_string($con, $exercise_pratice);
             $exercise_ans = $_POST['exercise-answer']; 
             $addLink_title = $_POST['add_link_title'];
-            $addLink = $_POST['add_link'];
+            $ass_link = $_POST['add_link'];
+            $escaped_input_link = mysqli_real_escape_string($con, $ass_link);
             $posted_date = date("Y-m-d H:i:s");
             
 
@@ -187,8 +189,8 @@
             } 
             else {
                 // insert assessment title and content to databese
-                $ass_sql = "INSERT INTO assessment (course_id, assessment_title, assessment_content, assessment_date_posted) 
-                        VALUES ('$courseID', '$ass_title', '$ass_content', '$posted_date')";
+                $ass_sql = "INSERT INTO assessment (course_id, assessment_title, assessment_content, assessment_code, assessment_date_posted) 
+                        VALUES ('$courseID', '$ass_title', '$ass_content', IFNULL('$code', NULL), '$posted_date')";
 
                 $ass_result = mysqli_query($con, $ass_sql);
 
@@ -197,18 +199,18 @@
 
                 // insert exercise data into the database
                 $exercise_sql = "INSERT INTO practice (assessment_id, practice_title, practice_desc, practice_question, practice_answer) 
-                        VALUES ('$last_ass_id', '$exercise_title', '$exercise_desc', '$exercise_pratice', '$exercise_ans')";
+                        VALUES ('$last_ass_id', IFNULL('$exercise_title', NULL), IFNULL('$exercise_desc', NULL), IFNULL('$escaped_input_exericse', NULL), IFNULL('$exercise_ans', NULL))";
 
                 $exercise_result = mysqli_query($con, $exercise_sql);
 
                 // insert note data into the database
                 $note_sql = "INSERT INTO note (assessment_id, note_title, note_content) 
-                VALUES ('$last_ass_id', '$addLink_title', '$addLink_title')";
+                VALUES ('$last_ass_id', IFNULL('$addLink_title', NULL), IFNULL('$escaped_input_link', NULL))";
 
                 $note_result = mysqli_query($con, $note_sql);
 
                 // check if the sql correct or not
-                if($ass_result and $exercise_result and $note_result) {
+                if($ass_result and $note_result and $exercise_result ) {
                     echo "<script>pop_up_success()</script>";
                 } else {
                     echo "<script>alert('Something went wrong')</script>";

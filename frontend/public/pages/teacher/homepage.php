@@ -3,7 +3,7 @@
     include("../../../../backend/conn.php");
     include("../../../../backend/session.php");
     
-    require_once("../teacher/backend/teacher_homepage_course.php");
+    require_once("../teacher/component/teacher_homepage_course.php");
 
     #Extracting course information for trend courses from database
     $trendCourse_info = "SELECT * FROM course ORDER BY course_click DESC LIMIT 3";
