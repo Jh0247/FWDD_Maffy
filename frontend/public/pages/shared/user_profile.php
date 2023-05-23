@@ -226,6 +226,12 @@
                 <a href="../shared/edit_profile.php?id=<?php echo $_SESSION['user_id']; ?>" class="edit-icon"><i class="fas fa-edit"></i></button>
               <?php
                 }
+              } else {
+                ?>
+                <!-- Edit button -->
+                <a href="../shared/edit_profile.php?id=<?php echo $_SESSION['user_id']; ?>" class="edit-btn">Edit Profile</button>
+                <a href="../shared/edit_profile.php?id=<?php echo $_SESSION['user_id']; ?>" class="edit-icon"><i class="fas fa-edit"></i></button>
+                <?php
               }
             } else {
               if ($user_data['user_active'] == 1) {
