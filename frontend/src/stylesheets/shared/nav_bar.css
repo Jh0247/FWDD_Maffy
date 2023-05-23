@@ -321,7 +321,7 @@ nav {
 }
 
 /* search bar */
-#search-bar{
+/* #search-bar{
   position: relative;
   margin-top: 50px;
   left: 23%;
@@ -383,7 +383,7 @@ nav {
 #search-bar:valid .fa{
   background: #07051a;
   color: white;
-}
+} */
 
 /* Show nav-links when nav-toggle is clicked */
 @media screen and (max-width: 768px) {
