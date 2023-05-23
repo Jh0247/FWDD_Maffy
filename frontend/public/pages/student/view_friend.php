@@ -26,7 +26,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../../../src/stylesheets/student/view_friend.css">
+  <link rel="stylesheet" href="../../../src/stylesheets/shared/view_list.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://kit.fontawesome.com/775f0ea71b.js" crossorigin="anonymous"></script>
@@ -106,7 +106,7 @@
       const name = item.querySelector("h2").textContent.trim().toLowerCase();
       const email = item.querySelector("h3").textContent.trim().toLowerCase();
       
-      if (name.includes(query) || email.includes(query) || data.includes(query)) {
+      if (name.includes(query) || email.includes(query)) {
         item.style.display = "flex";
       } else {
         item.style.display = "none";
