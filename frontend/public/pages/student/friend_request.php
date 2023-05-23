@@ -1,3 +1,10 @@
+<?php
+    include("../../../../backend/conn.php");
+    include("../../../../backend/session.php");
+
+    $courses = "SELECT * FROM course";
+    $total_courses = mysqli_query($con,$courses);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +68,7 @@
     </div>
   </nav>
 
-  <div class="content" style="display: flex; flex-direction: row;min-height: 100vh;">
+  <div class="content" style="display: flex; flex-direction: row;min-height: 100vh;margin-top:80px">
     <div>
       <!--Side Bar Code-->
       <div class="sidebar">
@@ -71,24 +78,20 @@
           </div>
         </div>
         <ul>
-          <li>
-            <a href="#">
-              <i class="fa fa-book" aria-hidden="true" class="sidebar-b-i"></i>
-              <span class="nav-item">Course Assessment</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="fa fa-book" aria-hidden="true" class="sidebar-b-i"></i>
-              <span class="nav-item">Course Assessment</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="fa fa-book" aria-hidden="true" class="sidebar-b-i"></i>
-              <span class="nav-item">Course Assessment</span>
-            </a>
-          </li>
+        <?php
+        if(mysqli_num_rows($total_courses)>0){
+          while($row = mysqli_fetch_assoc($total_courses)){
+            echo "
+              <li>
+                <a href='#'>
+                  <i class='fa fa-book' aria-hidden='true' class='sidebar-b-i'></i>
+                  <span class=\"nav-item\">".$row['course_title']."</span>
+                </a>
+              </li>
+            ";
+          }
+        }
+        ?>
         </ul>
       </div>
     </div>

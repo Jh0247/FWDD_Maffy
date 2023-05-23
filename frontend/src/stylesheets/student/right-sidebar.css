@@ -1,8 +1,8 @@
 #right-sidebar {
-  float: right;
+  	float: right;
 	position: relative;
-  top: 0;
-  left: 0;
+  	top: 90px;
+  	left: 0;
 	background: transparent;
 }
 
