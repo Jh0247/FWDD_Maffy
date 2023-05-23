@@ -38,18 +38,18 @@
                 echo('
                 <div class="nav-left">
                     <div class="logo">
-                        <a href="../shared/home.php"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
+                        <a href="../teacher/homepage.php"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
                     </div>
                 </div>
                 <div class="nav-right">
                     <ul class="nav-links">
                         <li><a class="btn active" href="'.(($current_page == 'course_page.php' or $current_page == 'user_profile.php' or $current_page == 'view_courses.php') ? '../teacher/homepage.php' : 'homepage.php').'">Courses</a></li>
-                        <li><a class="btn" href="'.(($current_page == 'course_page.php' or $current_page == 'user_profile.php' or $current_page == 'view_courses.php') ? '../teacher/add_course.php' : 'add_course.php').'">Add Course</a></li>
+                        <li><a class="btn" href="'.(($current_page == 'course_page.php' or $current_page == 'user_profile.php' or $current_page == 'view_courses.php') ? '../teacher/add_course.php?currentfile=' : 'add_course.php?currentfile=').'">Add Course</a></li>
                         <div class="profile-res">
                             <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
                             <div class="profile-dropdown_links">
                                 <li><a href="'.(($current_page == 'course_page.php' or $current_page == 'user_profile.php' or $current_page == 'view_courses.php') ? 'user_profile.php' : '../shared/user_profile.php').'">Profile</a></li>
-                                <li><a href="#" id="edit-password-btn">Edit Password</a></li>
+                                <li><a href="../shared/feedback.php">Feedback</a></li>
                                 <li><a href="../../../../backend/logout.php">Logout</a></li>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                 <img src="../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
                                 <div class="profile-dropdown" id="profile-dropdown">
                                     <a href="'.(($current_page == 'course_page.php' or $current_page == 'user_profile.php' or $current_page == 'view_courses.php') ? 'user_profile.php' : '../shared/user_profile.php').'">Profile</a>
-                                    <a href="#" id="edit-password-btn">Edit Password</a>
+                                    <a href="../shared/feedback.php">Feedback</a>
                                     <a href="../../../../backend/logout.php">Logout</a>
                                 </div>
                             </div>
@@ -76,19 +76,19 @@
                 echo('
                 <div class="nav-left">
                     <div class="logo">
-                        <a href="#"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
+                        <a href="../student/homepage.php"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
                     </div>
                 </div>
                 <div class="nav-right">
                     <ul class="nav-links">
-                        <li><a class="btn" href="../../pages/student/homepage.php">Home</a></li>
-                        <li><a class="btn" href="../../pages/student/friend_request.php">Friend</a></li>
-                        <li><a class="btn" href="../../pages/student/chat.php">Chat</a></li>
+                        <li><a class="btn" href="../student/homepage.php">Courses</a></li>
+                        <li><a class="btn" href="../student/view_friend.php">Friend</a></li>
+                        <li><a class="btn" href="../student/chat.php">Chat</a></li>
                         <div class="profile-res">
                             <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
                             <div class="profile-dropdown_links">
                                 <li><a href="../../pages/shared/user_profile.php">Profile</a></li>
-                                <li><a href="#" id="edit-password-btn">Edit Password</a></li>
+                                <li><a href="../shared/feedback.php">Feedback</a></li>
                                 <li><a href="../../../../backend/logout.php">Logout</a></li>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                                 <img src="../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
                                 <div class="profile-dropdown" id="profile-dropdown">
                                     <a href="../../pages/shared/user_profile.php">Profile</a>
-                                    <a href="#" id="edit-password-btn">Edit Password</a>
+                                    <a href="../shared/feedback.php">Feedback</a>
                                     <a href="../../../../backend/logout.php">Logout</a>
                                 </div>
                             </div>
@@ -155,25 +155,6 @@
         ?>
     </nav>
 
-    <!-- pop out edit password container -->
-    <form id="form">
-        <div id="pass-popout-container">
-            <div id="password-popup">
-                <h2>Edit Password</h2>
-                <label for="current-password">Current Password:</label>
-                <input type="password" id="current-password">
-                <label for="new-password">New Password:</label>
-                <input type="password" id="new-password">
-                <label for="confirm-password">Confirm New Password:</label>
-                <input type="password" id="confirm-password">
-                <div class="button-row">
-                    <button type="submit" id="save-password-btn">Save</button>
-                    <button type="submit" id="cancel-password-btn">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </form>
-
     <script>
     // login page navigation
     function navigateToPage(url) {
@@ -215,55 +196,6 @@
         } else {
             profileDropdown.style.display = "block";
         }
-    });
-
-    // Pop out edit password container
-    const editPasswordBtn = document.getElementById('edit-password-btn');
-    const passwordPopup = document.getElementById('password-popup');
-    const savePasswordBtn = document.getElementById('save-password-btn');
-    const cancelPasswordBtn = document.getElementById('cancel-password-btn');
-
-    editPasswordBtn.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        navLinks.classList.add('inactive');
-        navToggle.classList.remove('active');
-        navToggle.classList.add('inactive');
-
-        passwordPopup.style.display = 'block';
-    });
-
-    editPasswordBtn.addEventListener('click', () => {
-        passwordPopup.style.display = 'block';
-    });
-
-    cancelPasswordBtn.addEventListener('click', () => {
-        passwordPopup.style.display = 'none';
-    });
-
-    savePasswordBtn.addEventListener('click', () => {
-        passwordPopup.style.display = 'none';
-    });
-
-
-    // not refresh the page when submit btn is click in <form>
-    $(document).ready(function() {
-        $('#form').submit(function(event) {
-            event.preventDefault(); // prevent form from refreshing the page
-
-            var formData = $(this).serialize(); // get form data
-
-            $.ajax({
-                type: 'POST',
-                url: $(this).attr('action'),
-                data: formData,
-                success: function(response) {
-                    // handle success response
-                },
-                error: function(xhr, status, error) {
-                    // handle error response
-                }
-            });
-        });
     });
     </script>
 </body>

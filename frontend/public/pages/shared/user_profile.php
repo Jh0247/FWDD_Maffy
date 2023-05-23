@@ -101,10 +101,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../../src/stylesheets/shared/user_profile.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />    
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://kit.fontawesome.com/775f0ea71b.js" crossorigin="anonymous"></script>
   <title>Profile Page</title>
+
+  <script>
+    // a pop-up function that use at php code
+    function request_success() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Friend Request Send!',
+            showDenyButton: false,
+            showCancelButton: false,
+            // confirmButtonText: "<a href=\"#\" onclick=window.location.href=\"../../../public/pages/shared/course_page.php?userid=<?php echo $_SESSION['user_id']; ?>&courseid=<?php echo $courseID; ?>\" style=\"text-decoration:none; color:white; \">Continue</a>"
+        })
+    }
+    </script>
+
 </head>
 
 <body>
@@ -148,17 +164,69 @@
               </span>
             </a>
             <?php
+          } else if ($_SESSION['privilege'] !== 'admin'){
+            // to see student can add or remove friend
+            if (isset($_GET['id'])){
+              $page_user_id = $_GET['id'];
+              if($_SESSION['user_id'] != $page_user_id) {
+                // validate see if friend or not
+                $friend_result = mysqli_query($con, 
+                "SELECT
+                  CASE
+                      WHEN first_user_id = $posted_user_id THEN second_user_id
+                      ELSE first_user_id
+                  END AS second_user_id,
+                  CASE
+                      WHEN first_user_id = $posted_user_id THEN first_user_id
+                      ELSE second_user_id
+                  END AS first_user_id,
+                  friend_status
+                  FROM friend_list
+                  INNER JOIN user ON user.user_id = friend_list.second_user_id
+                  WHERE first_user_id = $posted_user_id OR second_user_id = $posted_user_id");
+
+                  if(mysqli_num_rows($friend_result) > 0) {
+                    foreach($friend_result as $data) {
+                      if($data['second_user_id'] == $page_user_id && $data['friend_status'] == 1){
+                        ?>
+                        <button name="friend-submit" class="flex flex-col text-center">
+                          <span class="download-btn mr-2 sm:mr-4">
+                            <i class="fa-solid fa-user-plus"></i>
+                          </span>
+                        </button>
+                        <?php
+                        break;
+                      } else {
+                        ?>
+                        <button name="friend-submit" class="flex flex-col text-center">
+                          <span class="download-btn mr-2 sm:mr-4">
+                            <i class="fa-solid fa-user-slash"></i>
+                          </span>
+                        </button>
+                        <?php
+                        break;
+                      }
+                    }
+                  }
+                ?>
+                <?php
+              }
+            }
           }
           ?>
-
-          <a href="" class="btn-container">
+          <a class="btn-container">
             <?php 
             if ($_SESSION['privilege'] == 'teacher' || $_SESSION['privilege'] == 'student'){
+              if (isset($_GET['id'])){
+                $page_user_id = $_GET['id'];
+                if($_SESSION['user_id'] == $page_user_id) {
               ?>
                 <!-- Edit button -->
-                <button class="edit-btn">Edit Profile</button>
-                <button class="edit-icon"><i class="fas fa-edit"></i></button>
+                <a href="../shared/edit_profile.php?id=<?php echo $_SESSION['user_id']; ?>" class="edit-btn">Edit Profile</button>
+                <a href="../shared/edit_profile.php?id=<?php echo $_SESSION['user_id']; ?>" class="edit-icon"><i class="fas fa-edit"></i></button>
               <?php
+                }
+              }
             } else {
               if ($user_data['user_active'] == 1) {
                 ?>              

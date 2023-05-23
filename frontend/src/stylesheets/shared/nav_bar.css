@@ -2,7 +2,7 @@ body {
   margin: 0;
 	padding: 0;
   background-color: #667e91;
-  font-family: Montserrat;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 nav {
@@ -223,6 +223,7 @@ nav {
   height: 40px;
   border-radius: 20px;
   color: #7d84ab;
+  background-color: #485475;
 }
 
 /* Menu */

@@ -2,6 +2,18 @@
     // connection to database
     include("../../../../backend/conn.php");
     include("../../../../backend/session.php");
+
+    $currentFile = "../shared/course_page.php";
+
+    if (isset($_GET['courseid'])){
+        $courseID = $_GET['courseid'];
+
+        #Extracting course information for all courses matched user_id from database
+        $course_info = "SELECT * FROM course WHERE user_id = $_SESSION[user_id] AND course_id = $courseID";
+        $course_info_result = mysqli_query($con, $course_info);
+        $course_info_row = mysqli_fetch_assoc($course_info_result);
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +76,8 @@
                     </label>
                     <input id="file-input" type="file" name="uploadedFile" required>
                     <div id="preview-container">
-                        <img id="preview-image">
+                        <img src="<?php echo ($_GET['currentfile'] === $currentFile) ? $course_info_row["course_image"] : "" ?>"
+                            id="preview-image">
                         <div id="preview-message">No image selected</div>
                     </div>
                 </div>
@@ -72,21 +85,37 @@
             </div>
             <div class="form-group">
                 <label for="title">Title:</label>
-                <input class="input" type="text" id="title" name="title" placeholder="e.g. What is html..." required>
+                <input class="input" type="text" id="title" name="title" placeholder="e.g. What is html..."
+                    value="<?php echo ($_GET['currentfile'] === $currentFile) ? $course_info_row["course_title"] : "" ?>"
+                    required>
             </div>
             <div class="form-group">
                 <label for="description">Description:</label>
                 <textarea class="input" id="description" name="description" rows="5" placeholder="e.g. What is html..."
-                    required></textarea>
+                    required><?php echo ($_GET['currentfile'] === $currentFile) ? $course_info_row["course_desc"] : "" ?></textarea>
             </div>
 
-            <button class="button" type="submit" id="submit-btn" name="submitbtn">
-                Create Course
-            </button>
+            <?php 
+            if($_GET['currentfile'] === $currentFile){
+                echo"
+                <button class=\"button\" type=\"submit\" id=\"submit-btn\" name=\"update-btn\">
+                    Update Course
+                </button>
+                ";
+            } else{
+                echo"
+                <button class=\"button\" type=\"submit\" id=\"submit-btn\" name=\"submitbtn\">
+                    Create Course
+                </button>
+                ";
+            }
+            ?>
+
         </form>
     </div>
 
     <?php 
+        // Post oursec
         // if isset is POST 'submit' only execute the code below
         if(isset($_POST['submitbtn'])) {
             
@@ -117,23 +146,95 @@
                         $processedDoc = base64_encode(file_get_contents($userSupDoc));
                         //set image content with type and base64
                         $course_image = 'data:image/'.$supDocType.';base64,'.$processedDoc;
-                            
-                        $sql = "INSERT INTO course (user_id, course_title, course_desc, course_date_posted, course_image, course_click, course_status) 
+                        
+                        if($_GET['currentfile'] === $currentFile){
+                            $post_sql = "INSERT INTO course (user_id, course_title, course_desc, course_date_posted, course_image, course_click, course_status) 
                                 VALUES ('$_SESSION[user_id]', '$course_title', '$course_desc', '$posted_date', '$course_image', '0', '1')";
 
-                        $result = mysqli_query($con, $sql);
+                            $result = mysqli_query($con, $post_sql);
 
-                        if($result) {
-                            echo "<script>pop_up_success()</script>";
+                            if($result) {
+                                echo "<script>pop_up_success()</script>";
+                            } else {
+                                echo "<script>alert('Something went wrong')</script>";
+                            }
                         } else {
-                            echo "<script>alert('Something went wrong')</script>";
+                            $update_sql = "UPDATE course SET course_title='$course_title', course_desc='$course_desc', course_image='$course_image'
+                                WHERE user_id = $_SESSION[user_id] AND course_id = $courseID";
+
+                            $result = mysqli_query($con, $update_sql);
+
+                            if($result) {
+                                echo "<script>pop_up_success()</script>";
+                            } else {
+                                echo "<script>alert('Something went wrong')</script>";
+                            }
                         }
-                        
                     }
                 }
             }
             mysqli_close($con);
+        } else {
+            if(isset($_POST['submitbtn'])) {
+            
+                date_default_timezone_set('Asia/Kuala_Lumpur');
+                // $course_image = file_get_contents($_FILES['uploadedFile']['tmp_name']);
+                $course_title = $_POST['title'];
+                $course_desc = addslashes($_POST['description']);
+                $posted_date = date("Y-m-d H:i:s");
+
+                if(empty($course_title) or empty($course_desc)) {
+                    echo "<script>pop_up_error_emptyTextField()</script>";
+                } else {
+                
+                    $imgfile = $_FILES['uploadedFile']; 
+
+                    $allowedFileType = array('jpg', 'jpeg', 'png');
+                    $validationFile = pathinfo($imgfile['name'], PATHINFO_EXTENSION);
+
+                    if (!in_array($validationFile, $allowedFileType)) {
+                        echo("<script>pop_up_error_imgFile()</script>");
+                    }else{
+                        
+                        $userSupDoc = $_FILES['uploadedFile']['tmp_name'];
+                        if ($_FILES['uploadedFile']['size'] > 0){
+                            //get image type
+                            $supDocType = strtolower(pathinfo($userSupDoc,PATHINFO_EXTENSION));
+                            //encode image into base64
+                            $processedDoc = base64_encode(file_get_contents($userSupDoc));
+                            //set image content with type and base64
+                            $course_image = 'data:image/'.$supDocType.';base64,'.$processedDoc;
+                            
+                            if($_GET['currentfile'] === $currentFile){
+                                $post_sql = "INSERT INTO course (user_id, course_title, course_desc, course_date_posted, course_image, course_click, course_status) 
+                                    VALUES ('$_SESSION[user_id]', '$course_title', '$course_desc', '$posted_date', '$course_image', '0', '1')";
+
+                                $result = mysqli_query($con, $post_sql);
+
+                                if($result) {
+                                    echo "<script>pop_up_success()</script>";
+                                } else {
+                                    echo "<script>alert('Something went wrong')</script>";
+                                }
+                            } else {
+                                $update_sql = "INSERT INTO course (user_id, course_title, course_desc, course_date_posted, course_image, course_click, course_status) 
+                                    VALUES ('$_SESSION[user_id]', '$course_title', '$course_desc', '$posted_date', '$course_image', '0', '1')";
+
+                                $result = mysqli_query($con, $update_sql);
+
+                                if($result) {
+                                    echo "<script>pop_up_success()</script>";
+                                } else {
+                                    echo "<script>alert('Something went wrong')</script>";
+                                }
+                            }
+                        }
+                    }
+                }
+                mysqli_close($con);
+            }
         }
+        
     ?>
 
     <script>
