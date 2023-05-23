@@ -323,6 +323,74 @@ nav {
   background-color: #717171;
 }
 
+<<<<<<< HEAD
+=======
+/* search bar */
+/* #search-bar{
+  position: relative;
+  margin-top: 50px;
+  left: 23%;
+  transform: translate(-40%,-50%);
+  transition: all 1s;
+  width: 50px;
+  height: 50px;
+  background: white;
+  box-sizing: border-box;
+  border-radius: 25px;
+  border: 4px solid white;
+  padding: 5px;
+}
+
+#search-bar input[type=search]{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 42.5px;
+  line-height: 30px;
+  outline: 0;
+  border: 0;
+  display: none;
+  font-size: 1em;
+  border-radius: 20px;
+  padding: 0 20px;
+  border: 1px solid #FF8E3C;
+  background-color: #ddd;
+}
+
+#search-icon{
+  box-sizing: border-box;
+  padding: 10px;
+  width: 42.5px;
+  height: 42.5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+  color: #07051a;
+  text-align: center;
+  font-size: 1.2em;
+  transition: all 1s;
+}
+
+#search-bar:hover,
+#search-bar:valid{
+  width: 200px;
+  cursor: pointer;
+}
+
+#search-bar:hover input,
+#search-bar:valid input{
+  display: block;
+}
+
+#search-bar:hover .fa,
+#search-bar:valid .fa{
+  background: #07051a;
+  color: white;
+} */
+
+>>>>>>> 682e9bc3f22e83b059c038d98d11ccb9195fad6e
 /* Show nav-links when nav-toggle is clicked */
 @media screen and (max-width: 768px) {
   .nav-toggle {
