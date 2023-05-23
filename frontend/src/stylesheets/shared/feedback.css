@@ -70,31 +70,31 @@ body {
   align-items: flex-end;
 }
 
-button {
-  background-color: #eee;
+.submit-btn {
+  background-color: #dddddd23 !important;
   border: none;
-  padding: 1rem;
+  padding: .5rem;
   font-size: 1rem;
   width: 10em;
   border-radius: 1rem;
-  color: #FF8337;
+  color: #ffffff;
   box-shadow: 0 0.4rem #dfd9d9;
   cursor: pointer;
+  transition: all ease-in-out .3s;
 }
 
-button:active {
+.submit-btn:active {
 color: white;
 box-shadow: 0 0.2rem #dfd9d9;
 transform: translateY(0.2rem);
 }
 
-button:hover:not(:disabled) {
-background: #FF8337;
-color: white;
+.submit-btn:hover:not(:disabled) {
+background: #FF8337 !important;
 text-shadow: 0 0.1rem #bcb4b4;
 }
 
-button:disabled {
+.submit-btn:disabled {
 cursor: auto;
 color: grey;
 }

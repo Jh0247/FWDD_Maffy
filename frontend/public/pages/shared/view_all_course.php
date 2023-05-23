@@ -48,13 +48,14 @@
                   </div>
                   <!-- name and details -->
                   <div class="col-cont">
-                    <h2><?php echo $data['course_title']; ?></h2>
-                    <h3><?php echo $data['course_desc']; ?></h3>
+                    <h2 class="name-title"><?php echo $data['course_title']; ?></h2>
+                    <h3 class="desc-title"><?php echo $data['course_desc']; ?></h3>
                   </div>
                 </div>
                 <!-- arrow -->
                 <div class="btn-cont">
                   <span class="chat-btn">
+                    <h2>Access</h2>
                     <i class="fa-solid fa-chevron-right"></i>
                   </span>
                 </div>

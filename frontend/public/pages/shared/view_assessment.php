@@ -1,3 +1,10 @@
+<?php
+    include("../../../../backend/conn.php");
+    include("../../../../backend/session.php");
+
+    $courses = "SELECT * FROM course";
+    $total_courses = mysqli_query($con,$courses);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,59 +24,9 @@
 
 </head>
 <body>
-  <!--Nav Bar Code-->
-  <nav id="navBar">
-    <div class="nav-left">
-      <div class="hamburger">
-        <div class="side-bar"></div>
-      </div>
-      <div class="logo">
-        <a href="#"><img class="logo-image" src="../../images/Maffy.png" alt="Website Icon"> </a>
-      </div>
-      <form action="" id="search-bar">
-        <input type="search" required id="search-input">
-        <i class="fa fa-search" id="search-icon"></i>
-    </form>
-    </div>
-
-    <!-- student nav bar -->
-    <div class="nav-right">
-      <ul class="nav-links">
-        <li><a class="btn" href="#">My Courses</a></li>
-        <li><a class="btn" href="#">Trend Courses</a></li>
-        <li><a class="btn" href="#">Add Assessment</a></li>
-        <div class="profile-res">
-          <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
-        </div>
-        <div class="profile-dropdown_links">
-          <li><a href="#">Profile</a></li>
-          <li><a href="#">Setting</a></li>
-          <li><a href="#">Logout</a></li>
-        </div>
-        
-        <li>
-          <div class="profile">
-            <img src="../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
-            <div class="profile-dropdown" id="profile-dropdown">
-              <a href="#">Profile</a>
-              <a href="#">Setting</a>
-              <a href="#">Logout</a>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <!--Nav Responsive Part-->
-      <div>
-        <button class="nav-toggle">
-          <div class="bar">Menu</div>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-
+<?php include '../shared/navbar.php';?>
   <!--middle-->
-  <div class="sidebar-content" style="display: flex; flex-direction: row;min-height: 100vh;">
+  <div class="sidebar-content" style="display: flex; flex-direction: row;min-height: 100vh;margin-top:80px;">
     <div>
     <!--side bar-->
     <div class="sidebar">
@@ -79,41 +36,32 @@
           </div>
       </div>
       <ul>
-        <li>
-          <a href="#">
-            <i class="fa fa-book" aria-hidden="true" class="sidebar-b-i"></i>
-            <span class="nav-item">Course Assessment</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-book" aria-hidden="true" class="sidebar-b-i"></i>
-            <span class="nav-item">Course Assessment</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-book" aria-hidden="true" class="sidebar-b-i"></i>
-            <span class="nav-item">Course Assessment</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-book" aria-hidden="true" class="sidebar-b-i"></i>
-            <span class="nav-item">Course Assessment</span>
-          </a>
-        </li>
-      </ul>
+        <?php
+        if(mysqli_num_rows($total_courses)>0){
+          while($row = mysqli_fetch_assoc($total_courses)){
+            echo "
+              <li>
+                <a href='./homepage.php'>
+                  <i class='fa fa-book' aria-hidden='true' class='sidebar-b-i'></i>
+                  <span class=\"nav-item\">".$row['course_title']."</span>
+                </a>
+              </li>
+            ";
+          }
+        }
+        ?>
+        </ul>
     </div>
     <!--End Side Bar-->
     </div>
 
 
-    <!-- <div class="right" style="background-color: aqua; height: 300px; width: 300px;"> -->
     <div class="big-container">
       <div class="first-container">
         <div class="subContainer">
-          <h1>Title</h1>
+        <?php
+        ?>
+        <h1>Title</h1>
           <h4>Date</h4>
         </div>
         <div class="secSubContainer">
@@ -123,13 +71,11 @@
       </div>
 
       <div class="second-container">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
       </div>
 
       <div class="comment-container">
@@ -210,7 +156,8 @@
 
   <script src="./nav_bar.js"></script>
   <script src="./hamburger.js"></script>
-  <script src="./exercise.js"></script>
+  <script src="../student/JavaScript/exercise.js"></script>
+
 
   
 </body>

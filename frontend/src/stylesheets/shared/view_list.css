@@ -243,3 +243,38 @@ body{
 .chat-icon {
   font-size: 1.3rem !important;
 }
+
+
+@media only screen and (min-width: 468px) and (max-width: 900px) {
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .search-cont .search__input {
+    font-size: .9rem;
+  }
+
+}
+
+
+@media only screen and (max-width: 468px) {
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .search-cont .search__input {
+    font-size: .9rem;
+  }
+
+  .item-cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .left-details {
+    display: flex;
+    flex-direction: column;
+  }
+}

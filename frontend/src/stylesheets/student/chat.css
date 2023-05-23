@@ -1,3 +1,20 @@
+body {
+    background-color: aliceblue !important;
+}
+
+.home-cont {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-arr {
+    margin-top: 60px;
+    width: 100%;
+    overflow: auto;
+}
+
 .chatSendBtn {
   padding: 10px 20px;
   border: unset;
@@ -13,6 +30,7 @@
   transition: all 250ms;
   overflow: hidden;
   top: 5px;
+  float: right;
  }
  
  .chatSendBtn::before {
@@ -49,60 +67,3 @@
         padding: 5px 10px;
     }
  }
- /* @media only screen and (min-width: 468px) and (max-width: 900px) {
-    .message_container{
-        flex-direction: column;
-    }
-
-    .time_container{
-        justify-content: flex-start;
-        padding-left: 10PX;
-    }
-
-    .profile_img{
-        width: 2.75rem;
-        height: 2.75rem;
-    }
-
-    .message_text,.time_text{
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-        width: 100%;
-    }
-
-    .message_text{
-        padding-left: 5px;
-        padding-top: 5px;
-    }
-
- }
-
- @media only screen and (max-width: 468px) {
-    .message_container{
-        flex-direction: column;
-    }
-
-    .time_container{
-        justify-content: flex-start;
-        padding-left: 10PX;
-    }
-
-    .profile_img{
-        width: 2rem;
-        height: 2rem;
-    }
-    
-    .message_text, .time_text{
-        font-size: 0.70rem;
-        line-height: 1rem;
-    }
-
-    .message_text{
-        padding-left: 5px;
-        padding-top: 5px;
-    }
-
-    .chatSendBtn{
-        padding: 5px 5px;
-    }
- } */

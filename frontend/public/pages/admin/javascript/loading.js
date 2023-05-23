@@ -25,8 +25,6 @@ function showSuccess() {
 }
 
 function displayCheck(queryType, userId) {
-  console.log(userId, "This is userId passed");
-  console.log(queryType, "This is query type passed");
   showLoadingSuccess();
 
   setTimeout(function() {

@@ -1,7 +1,3 @@
-body {
-  /* background-color: ; */
-}
-
 .home-cont {
   width: 100vw;
   height: 100vh;
@@ -17,13 +13,20 @@ body {
 .first-container{
     width: 100%;
     height: 430px;
-    background-color:  #83d0c9;
+    background-color:  #667e91;
     margin-top: 80px;
+}
+
+.first-container h1{
+  margin: 0;
+  font-family: cursive;
+  color: #ffffff;
+  padding-left: 20px;
 }
 
 .container{
     margin: 0 auto;
-    width: 50%;
+    width: 80%;
     height: 400px;
     position: relative;
     overflow: hidden;
@@ -68,8 +71,8 @@ body {
   cursor: pointer;
   outline: none;
   position: relative;
-  left: 70%;
-  bottom: 30px;
+  left: 80%;
+  
 }
 
 .slider-button:hover {
@@ -108,12 +111,26 @@ body {
 }
 
 .course-container{
+    background-color: #f4eee0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     height: auto;
     position: relative;
-    margin: 20px auto;
     flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+.course-container > div h1{
+  font-family: cursive;
+  padding-left: 20px;
+}
+
+.all-course{
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  position: relative;
+  flex-wrap: wrap;
 }
 
 .d-container {
@@ -146,7 +163,7 @@ img {
 }
 
 .content {
-  padding: 10px 0 50px 0;
+  padding: 10px 0 10px 0;
   text-align: center;
 }
 
@@ -155,79 +172,33 @@ img {
 }
 
 .button {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding: 5px;
-  border: 1px solid #4f4f4f;
-  border-radius: 4px;
-  transition: all 0.2s ease-in;
-  position: absolute;
-  overflow: hidden;
-  font-size: 20px;
-  text-align: left;
-  color: black;
-  z-index: 1;
-  width: 90px;
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
   cursor: pointer;
- }
+  outline: none;
+  position: relative;
+}
  
- .button:before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%) scaleY(1) scaleX(1.25);
-  top: 100%;
-  /* width: 140%;
-  height: 180%; */
-  background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 50%;
-  display: block;
-  transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
-  z-index: -1;
- }
- 
- .button:after {
-  content: "";
-  position: absolute;
-  left: 55%;
-  transform: translateX(-50%) scaleY(1) scaleX(1.45);
-  top: 180%;
-  width: 160%;
-  height: 190%;
-  background-color: #39bda7;
-  border-radius: 50%;
-  display: block;
-  transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
-  z-index: -1;
- }
- 
- .button:hover {
-  color: #ffffff;
-  border: 1px solid #39bda7;
- }
+.button:hover {
+  background-color: #23c483;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
 
- .button:hover i{
-  color: #ffffff;
- }
- 
- .button:hover:before {
-  top: -35%;
-  background-color: #39bda7;
-  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
- }
- 
- .button:hover:after {
-  top: -45%;
-  background-color: #39bda7;
-  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
- }
+.button:active {
+  transform: translateY(-1px);
+}
 
- .button i{
-  left: 50%;
-  top: -5px;
- }
 
  .course-assessment-title{
   position: absolute;
@@ -248,6 +219,7 @@ img {
   .first-container{
     margin-top: 80px;
   }
+
     .course-container{
         height: 100%;
         width: 100%;
@@ -292,7 +264,7 @@ img {
     }
 
     .slider-button{
-      left: 60%;
+      left: 50%;
     }
 
     .nav-left input[type=text]{
@@ -309,5 +281,6 @@ img {
 
     .button{
       margin-left: -10px;
+      padding: 0.8rem 1.5rem;
     }
   }

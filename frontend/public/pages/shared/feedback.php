@@ -9,15 +9,23 @@
 
   if (isset($_POST['submitBtn'])) {
     $content = $_POST['feedback'];
-    $sql = "INSERT INTO `feedback` (`user_id`, `feedback_content`) VALUES ($user_id, '$content')";
+    
+    // Validate the feedback content
+    if (empty($content)) {
+      echo("<script>alert('Please provide feedback.')</script>");
+    } else {
+      // Perform additional validation if needed
+        
+      // Insert the feedback into the database
+      $sql = "INSERT INTO `feedback` (`user_id`, `feedback_content`) VALUES ($user_id, '$content')";
 
       $result = mysqli_query($con, $sql);
       if ($result){
-        echo("<script>alert('Your feedback submit successfully!')</script>");
+          echo("<script>alert('Your feedback submitted successfully!')</script>");
+      } else {
+          echo("<script>alert('Please try again later.')</script>");
       }
-      else{
-        echo("<script>alert('Please try again later.')</script>");
-      }
+    }
   }
   mysqli_close($con);
 ?>
@@ -39,14 +47,14 @@
     <?php include '../shared/navbar.php';?>
     <div class="w-full overflow-auto">
       <div class="flex flex-col h-fit mx-6 sm:mx-12 text-left">
-        <p class="term h-1/6 my-4 md:my-16 ml-5">Feedback</p>
+        <p class="term h-1/6 mt-20 md:mt-16 ml-5">Feedback</p>
         <form method="post" enctype="multipart/form-data" class="form-arrangement">
           <div name="user" id="myTextarea" class="user">
           <h2>Username: <?php echo $user_data['username']; ?><h2>
           <h2>Email: <?php echo $user_data['user_email']; ?></h2>
           </div><br>
           <textarea name="feedback" id="myTextarea" class="feedback" placeholder="Write your feedback content here.."></textarea>
-          <button type="submit" class="mt-4" value="submit" name="submitBtn"> Submit </button>
+          <button type="submit" class="mt-4 submit-btn" value="submit" name="submitBtn"> Submit </button>
         </form>
       </div>
     </div>
