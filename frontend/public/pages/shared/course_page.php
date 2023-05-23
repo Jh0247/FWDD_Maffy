@@ -80,12 +80,14 @@
                         <div class=\"option\">
                             <a href=\"../teacher/add_assessment.php?userid=$_SESSION[user_id]&courseid=$courseID\"><i class=\"fas fa-plus\"></i> Add Assessment</a>
                         </div>
-                        <div class=\"option\">
-                            <a href=\"#\"><i class=\"fas fa-edit\"></i> Edit</a>
-                        </div>
-                        <div class=\"option\">
-                            <a href=\"#\"><i class=\"fas fa-trash\"></i> Delete</a>
-                        </div>
+                            <div class=\"option\">
+                                <a href=\"../teacher/add_course.php?userid=$_SESSION[user_id]&courseid=$courseID&currentfile=../shared/course_page.php\"><i class=\"fas fa-edit\"></i> Edit</a>
+                            </div>
+                        <form method=\"POST\" class=\"options\" enctype=\"multipart/form-data\">
+                            <div class=\"option\">
+                                <button type=\"submit\" name=\"deactive-submitbtn\"><i class=\"fas fa-trash\"></i> Deative</button>
+                            </div>
+                        </form>
                         <div class=\"option filter\">
                             <a href=\"#\"><i class=\"fas fa-filter\"></i> Filter</a>
                         </div>
@@ -189,8 +191,14 @@
                 ");
             }
         }
-        
-    
+    ?>
+
+    <?php 
+        // if isset is POST 'submit' only execute the code below
+        if(isset($_POST['deactive-submitbtn'])) {
+            $update_course = "UPDATE course SET course_status = 2 WHERE course_id = $courseID";
+            mysqli_query($con, $update_course);
+        }
     ?>
 
     <script>
