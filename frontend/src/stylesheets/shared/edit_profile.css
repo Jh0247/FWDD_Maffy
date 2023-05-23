@@ -83,3 +83,80 @@ body{
     transform: translateX(0);
    }
    
+
+/* pop out edit password container */
+#pass-popout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #password-popup {
+    display: none; 
+    position: fixed;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 30px 50px 30px 30px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100vw; 
+    height: 100vh; 
+    overflow: hidden;  
+  }
+  
+  #password-popup h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #7d84ab;
+  }
+  
+  #password-popup label {
+    display: block;
+    margin-bottom: 5px;
+    color: #7d84ab;
+  }
+  
+  #password-popup input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .button-row {
+    display: flex;
+    margin: 20px 0px 0px 20px;
+    gap: 10px;
+    position: relative;
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .button-row button {
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #save-password-btn {
+    background-color: rgb(0, 255, 0);
+  }
+  
+  #save-password-btn:hover {
+    background-color: rgb(0, 183, 0);
+  }
+  
+  #cancel-password-btn {
+    background-color: #989898;
+    
+  }
+  
+  #cancel-password-btn:hover {
+    background-color: #717171;
+  }
