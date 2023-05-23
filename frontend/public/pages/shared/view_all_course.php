@@ -3,21 +3,7 @@
   include("../../../../backend/conn.php");
   include("../../../../backend/session.php");
 
-  $user_id = $_SESSION['user_id'];
-  $friend_result = mysqli_query($con, 
-    "SELECT
-    CASE
-        WHEN first_user_id = $user_id THEN second_user_id
-        ELSE first_user_id
-    END AS second_user_id,
-    CASE
-        WHEN first_user_id = $user_id THEN first_user_id
-        ELSE second_user_id
-    END AS first_user_id,
-    friend_status, user.user_image, user.username, user.user_email
-    FROM friend_list
-    INNER JOIN user ON user.user_id = friend_list.second_user_id
-    WHERE first_user_id = $user_id OR second_user_id = $user_id");
+  $course_result = mysqli_query($con, "SELECT * FROM course WHERE course_status = 1");
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +16,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://kit.fontawesome.com/775f0ea71b.js" crossorigin="anonymous"></script>
-  <title>Friend List</title>
+  <title>All course</title>
 </head>
 <body>
   <div class="home-cont">
@@ -38,11 +24,7 @@
     <div class="home-arr">
       <div class="main-cont">
         <div class="row-cont title-cont">
-          <h2 class = "title">Friend</h2>
-          <div class="btn-container">
-            <a href="../student/friend_request.php" class="friend-btn"><h2>Friend Request</h2></a>
-            <a href="../student/friend_request.php" class="friend-icon"><i class="fa-solid fa-users"></i></a>
-          </div>
+          <h2 class = "title">Courses</h2>
         </div>
         <!-- search bar -->
         <div class="search-cont">
@@ -55,35 +37,34 @@
         <div id="search-results" class="result-container">
           <!-- for friend list -->
           <?php
-          if(mysqli_num_rows($friend_result) > 0) {
-            foreach($friend_result as $data) {
+          if(mysqli_num_rows($course_result) > 0) {
+            foreach($course_result as $data) {
               ?>
-              <div class="item-cont">
-                <a href="../shared/user_profile.php?id=<?php echo $data['second_user_id']; ?>" class="left-details">  <!-- left content  -->
+              <a href="../shared/course_page.php?userid=<?php echo $_SESSION['user_id']; ?>&courseid=<?php echo $data['course_id']; ?>" class="item-cont">
+                <div class="left-details">  <!-- left content  -->
                   <!-- img cont  -->
                   <div class="md:mr-5">
-                    <img src="<?=$data['user_image']?>" alt="profile pic" class="profile-img">
+                    <img src="<?=$data['course_image']?>" alt="profile pic" class="profile-img">
                   </div>
                   <!-- name and details -->
                   <div class="col-cont">
-                    <h2><?php echo $data['username']; ?></h2>
-                    <h3><?php echo $data['user_email']; ?></h3>
+                    <h2><?php echo $data['course_title']; ?></h2>
+                    <h3><?php echo $data['course_desc']; ?></h3>
                   </div>
-                </a>
-                <!-- chat -->
-                <div class="btn-cont">
-                  <a href="" class="chat-btn">
-                    <h2>Chat</h2>
-                    <i class="fa-solid fa-comments chat-icon"></i>
-                  </a>
                 </div>
-              </div>
+                <!-- arrow -->
+                <div class="btn-cont">
+                  <span class="chat-btn">
+                    <i class="fa-solid fa-chevron-right"></i>
+                  </span>
+                </div>
+              </a>
             <?php
             }
           } else{
             ?>
             <div class="no-friend-cont">
-              Find a friend and start chatting.
+              Please wait for the teacher to upload some course assessment.
             </div>
             <?php
           }
