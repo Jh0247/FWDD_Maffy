@@ -21,48 +21,47 @@ searchBar.addEventListener("input", () => {
 });
 
 
-// add event listener to all radio buttons
-var radios = document.querySelectorAll('input[name="switch"]');
-for (var i = 0; i < radios.length; i++) {
-  radios[i].addEventListener('click', function() {
-    // get the selected switch value
-    var switchValue = this.value;
-    // update the URL with the selected switch value
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('switch')) {
-      //find the switch params and replace with new value
-      urlParams.set('switch', switchValue);
-      window.location.search = urlParams.toString();
-    } else {
-      //if no switch params then add in
-      window.location.href = window.location.href + '&switch=' + switchValue;
-    }
-  });
-}
+// add on click function to radio buttons
+$('input[name="switch"]').click(function() {
+  // Get the selected switch value
+  var switchValue = $(this).val();
+  
+  // Update the URL with the selected switch value
+  var urlParams = new URLSearchParams(window.location.search);
+  
+  if (urlParams.has('switch')) {
+    // Find the switch parameter and replace with the new value
+    urlParams.set('switch', switchValue);
+    window.location.search = urlParams.toString();
+  } else {
+    // If no switch parameter, then add it to the URL
+    window.location.href = window.location.href + '&switch=' + switchValue;
+  }
+});
 
 // Get the value of the "switch" parameter from the URL
 const urlParams = new URLSearchParams(window.location.search);
 const switchParam = urlParams.get('switch');
 
 // Get the radio buttons and labels
-const activeRadio = document.getElementById('active');
-const activeLabel = document.querySelector('label[for="active"]');
-const banRadio = document.getElementById('ban');
-const banLabel = document.querySelector('label[for="ban"]');
-const allRadio = document.getElementById('all');
-const allLabel = document.querySelector('label[for="all"]');
+const activeRadio = $('#active');
+const activeLabel = $('label[for="active"]');
+const banRadio = $('#ban');
+const banLabel = $('label[for="ban"]');
+const allRadio = $('#all');
+const allLabel = $('label[for="all"]');
 
 // Set the checked attribute based on the value of the "switch" parameter
 switch (switchParam) {
   case 'active':
-    activeRadio.checked = true;
-    activeLabel.classList.add('checked');
+    activeRadio.prop('checked', true);
+    activeLabel.addClass('checked');
     break;
   case 'ban':
-    banRadio.checked = true;
-    banLabel.classList.add('checked');
+    banRadio.prop('checked', true);
+    banLabel.addClass('checked');
     break;
   default:
-    allRadio.checked = true;
-    allLabel.classList.add('checked');
+    allRadio.prop('checked', true);
+    allLabel.addClass('checked');
 }

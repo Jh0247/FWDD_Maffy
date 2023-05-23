@@ -66,8 +66,8 @@
                   </div>
                   <!-- name and details -->
                   <div class="col-cont">
-                    <h2><?php echo $data['username']; ?></h2>
-                    <h3><?php echo $data['user_email']; ?></h3>
+                    <h2 class="name-title"><?php echo $data['username']; ?></h2>
+                    <h3 class="desc-title"><?php echo $data['user_email']; ?></h3>
                   </div>
                 </a>
                 <!-- chat -->
