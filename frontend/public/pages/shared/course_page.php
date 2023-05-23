@@ -41,6 +41,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../src/stylesheets/teacher/course_page.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://fontawesome.com/icons/eye-slash?f=sharp&s=solid" />
     <title>Add Course</title>
 
 </head>
@@ -85,7 +86,10 @@
                             </div>
                         <form method=\"POST\" class=\"options\" enctype=\"multipart/form-data\">
                             <div class=\"option\">
-                                <button type=\"submit\" name=\"deactive-submitbtn\"><i class=\"fas fa-trash\"></i> Deative</button>
+                                <button type=\"submit\" name=\"deactive-submitbtn\"><i class=\"fas fa-eye-slash\"></i> Deative</button>
+                            </div>
+                            <div class=\"option\">
+                                <button type=\"submit\" name=\"delete-submitbtn\"><i class=\"fas fa-trash\"></i> Delete</button>
                             </div>
                         </form>
                         <div class=\"option filter\">

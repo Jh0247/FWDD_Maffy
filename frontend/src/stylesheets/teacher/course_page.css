@@ -85,7 +85,7 @@ header {
   flex-wrap: wrap;
 }
 
-.option .fa-plus, .option .fa-edit, .option .fa-trash, .option .fa-filter {
+.option .fa-plus, .option .fa-edit, .option .fa-trash, .option .fa-eye-slash, .option .fa-filter {
   font-size: 0.9rem;
   margin: 0 auto;
   color: #7d84ab;
