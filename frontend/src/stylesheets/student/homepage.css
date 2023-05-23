@@ -17,6 +17,13 @@
     margin-top: 80px;
 }
 
+.first-container h1{
+  margin: 0;
+  font-family: cursive;
+  color: #ffffff;
+  padding-left: 20px;
+}
+
 .container{
     margin: 0 auto;
     width: 80%;
@@ -64,8 +71,8 @@
   cursor: pointer;
   outline: none;
   position: relative;
-  left: 70%;
-  bottom: 30px;
+  left: 80%;
+  
 }
 
 .slider-button:hover {
@@ -104,13 +111,26 @@
 }
 
 .course-container{
-  background-color: #f4eee0;
+    background-color: #f4eee0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     height: auto;
     position: relative;
-    /* margin: 20px auto; */
     flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+.course-container > div h1{
+  font-family: cursive;
+  padding-left: 20px;
+}
+
+.all-course{
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  position: relative;
+  flex-wrap: wrap;
 }
 
 .d-container {

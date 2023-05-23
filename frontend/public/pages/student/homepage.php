@@ -26,11 +26,13 @@
     <title>Home Page</title>
 </head>
 <body>
-<?php include '../shared/navbar.php';?>
+
   <div class="home-cont">
+    <?php include '../shared/navbar.php';?>
     <div class="home-arr">
       <!--img slide-->
       <div class="first-container">
+        <h1>Trend Courses</h1>
         <div class="container">
           <div class="slides">
               <?php
@@ -39,7 +41,7 @@
                   echo "<div class='slide'>";
                     echo "<img src=".$row['course_image']." alt='' />";
                     echo "<h1>".$row['course_title']."</h1>";
-                    // echo "<button class='slider-button' onclick=location.href='../shared/course_page.php?userid=$_SESSION[user_id]&courseid=$row[course_id]'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
+                    //echo "<button class='slider-button' onclick=location.href='../shared/course_page.php?userid=$_SESSION[user_id]&courseid=$row[course_id]'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
                     echo "<button class='slider-button' onclick=location.href='../shared/view_assessment.php'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
                   echo "</div>";
                 }
@@ -58,23 +60,29 @@
       </div>
       
       <!--Course Assessment View-->
+      
       <div class="course-container">
-        <?php
-          if(mysqli_num_rows($course_result)>0){
-            while($row = mysqli_fetch_assoc($course_result)){
-              echo "<div class='d-container'>";
-              echo  "<div class='image'>";
-              echo    "<img src=".$row['course_image']." alt='' />";
-              echo  "</div>";
-              echo  "<div class='content'>";
-              echo    "<h2>".$row['course_title']."</h2>";
-              // echo    "<button class='button' onclick='location.href='view_courses.html''><i class='fa fa-eye aria-hidden='true'></i>View</button>";
-              echo    "<button class='button' onclick=location.href='../shared/edit_profile.php'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
-              echo  "</div>";
-              echo "</div>";
+        <div>
+          <h1>All Course</h1>
+        </div>
+        <div class="all-course">
+          <?php
+            if(mysqli_num_rows($course_result)>0){
+              while($row = mysqli_fetch_assoc($course_result)){
+                echo "<div class='d-container'>";
+                echo  "<div class='image'>";
+                echo    "<img src=".$row['course_image']." alt='' />";
+                echo  "</div>";
+                echo  "<div class='content'>";
+                echo    "<h2>".$row['course_title']."</h2>";
+                //echo    "<button class='button' onclick=location.href='../shared/course_page.php?userid=$_SESSION[user_id]&courseid=$row[course_id]'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
+                echo    "<button class='button' onclick=location.href='../shared/edit_profile.php'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
+                echo  "</div>";
+                echo "</div>";
+              }
             }
-          }
-        ?>
+          ?>
+        </div>
       </div>
     </div>
   </div>

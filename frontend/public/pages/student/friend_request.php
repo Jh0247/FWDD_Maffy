@@ -18,55 +18,7 @@
     <title>Friend Request</title>
 </head>
 <body>
-        <!--Nav Bar Code-->
-  <nav id="navBar">
-    <div class="nav-left">
-      <div class="hamburger">
-        <div class="side-bar"></div>
-      </div>
-      <div class="logo">
-        <a href="#"><img class="logo-image" src="../../images/Maffy.png" alt="Website Icon"> </a>
-      </div>
-      <form action="" id="search-bar">
-        <input type="search" required id="search-input">
-        <i class="fa fa-search" id="search-icon"></i>
-    </form>
-    </div>
-
-    <!-- student nav bar -->
-    <div class="nav-right">
-      <ul class="nav-links">
-        <li><a class="btn" href="./student_homepage.html">Home</a></li>
-        <li><a class="btn" href="./View_All_Course.html">Course</a></li>
-        <li><a class="btn" href="./friend_request.html">Friend</a></li>
-        <div class="profile-res">
-          <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
-        </div>
-        <div class="profile-dropdown_links">
-          <li><a href="./profile.html">Profile</a></li>
-          <li><a href="#">Setting</a></li>
-          <li><a href="#">Logout</a></li>
-        </div>
-        
-        <li>
-          <div class="profile">
-            <img src="../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
-            <div class="profile-dropdown" id="profile-dropdown">
-              <a href="#">Profile</a>
-              <a href="#">Setting</a>
-              <a href="#">Logout</a>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <!--Nav Responsive Part-->
-      <div>
-        <button class="nav-toggle">
-          <div class="bar">Menu</div>
-        </button>
-      </div>
-    </div>
-  </nav>
+<?php include '../shared/navbar.php';?>
 
   <div class="content" style="display: flex; flex-direction: row;min-height: 100vh;margin-top:80px">
     <div>
