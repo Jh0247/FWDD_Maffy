@@ -81,8 +81,8 @@
                 </div>
                 <div class="nav-right">
                     <ul class="nav-links">
-                        <li><a class="btn" href="../student/homepage.php">Home</a></li>
-                        <li><a class="btn" href="../student/friend_request.php">Friend</a></li>
+                        <li><a class="btn" href="../student/homepage.php">Courses</a></li>
+                        <li><a class="btn" href="../student/view_friend.php">Friend</a></li>
                         <li><a class="btn" href="../student/chat.php">Chat</a></li>
                         <div class="profile-res">
                             <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
