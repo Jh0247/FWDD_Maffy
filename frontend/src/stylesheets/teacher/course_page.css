@@ -109,6 +109,12 @@ header {
   font-size: 0.9rem;
 }
 
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 .option a {
   text-decoration: none;
   color: black;

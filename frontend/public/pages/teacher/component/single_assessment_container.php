@@ -6,7 +6,6 @@ function single_ass($assID, $courseID, $assTitle, $assDesc) {
         <div class=\"assessment-container\" id=\"next-page\">
             <div class=\"header\">
                 <h2>$assTitle</h2>
-                <div class=\"view-count\">View: <span id=\"view-count\">0</span></div>
             </div>
             <p class=\"desc\">$assDesc</p>
             <div class=\"assessment-options\">

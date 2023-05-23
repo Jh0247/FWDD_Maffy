@@ -38,18 +38,18 @@
                 echo('
                 <div class="nav-left">
                     <div class="logo">
-                        <a href="../shared/home.php"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
+                        <a href="../teacher/homepage.php"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
                     </div>
                 </div>
                 <div class="nav-right">
                     <ul class="nav-links">
                         <li><a class="btn active" href="'.(($current_page == 'course_page.php' or $current_page == 'user_profile.php' or $current_page == 'view_courses.php') ? '../teacher/homepage.php' : 'homepage.php').'">Courses</a></li>
-                        <li><a class="btn" href="'.(($current_page == 'course_page.php' or $current_page == 'user_profile.php' or $current_page == 'view_courses.php') ? '../teacher/add_course.php' : 'add_course.php').'">Add Course</a></li>
+                        <li><a class="btn" href="'.(($current_page == 'course_page.php' or $current_page == 'user_profile.php' or $current_page == 'view_courses.php') ? '../teacher/add_course.php?currentfile=' : 'add_course.php?currentfile=').'">Add Course</a></li>
                         <div class="profile-res">
                             <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
                             <div class="profile-dropdown_links">
                                 <li><a href="'.(($current_page == 'course_page.php' or $current_page == 'user_profile.php' or $current_page == 'view_courses.php') ? 'user_profile.php' : '../shared/user_profile.php').'">Profile</a></li>
-                                <li><a href="#" id="edit-password-btn">Edit Password</a></li>
+                                <a class="btn" href="../shared/feedback.php">Feedback</a>
                                 <li><a href="../../../../backend/logout.php">Logout</a></li>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                 <img src="../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
                                 <div class="profile-dropdown" id="profile-dropdown">
                                     <a href="'.(($current_page == 'course_page.php' or $current_page == 'user_profile.php' or $current_page == 'view_courses.php') ? 'user_profile.php' : '../shared/user_profile.php').'">Profile</a>
-                                    <a href="#" id="edit-password-btn">Edit Password</a>
+                                    <a class="btn" href="../shared/feedback.php">Feedback</a>
                                     <a href="../../../../backend/logout.php">Logout</a>
                                 </div>
                             </div>
@@ -76,19 +76,19 @@
                 echo('
                 <div class="nav-left">
                     <div class="logo">
-                        <a href="#"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
+                        <a href="../student/homepage.php"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
                     </div>
                 </div>
                 <div class="nav-right">
                     <ul class="nav-links">
-                        <li><a class="btn" href="../../pages/student/homepage.php">Home</a></li>
-                        <li><a class="btn" href="../../pages/student/friend_request.php">Friend</a></li>
-                        <li><a class="btn" href="../../pages/student/chat.php">Chat</a></li>
+                        <li><a class="btn" href="../student/homepage.php">Home</a></li>
+                        <li><a class="btn" href="../student/friend_request.php">Friend</a></li>
+                        <li><a class="btn" href="../student/chat.php">Chat</a></li>
                         <div class="profile-res">
                             <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
                             <div class="profile-dropdown_links">
                                 <li><a href="../../pages/shared/user_profile.php">Profile</a></li>
-                                <li><a href="#" id="edit-password-btn">Edit Password</a></li>
+                                <li><a class="btn" href="../shared/feedback.php">Feedback</a></li>
                                 <li><a href="../../../../backend/logout.php">Logout</a></li>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                                 <img src="../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
                                 <div class="profile-dropdown" id="profile-dropdown">
                                     <a href="../../pages/shared/user_profile.php">Profile</a>
-                                    <a href="#" id="edit-password-btn">Edit Password</a>
+                                    <li><a class="btn" href="../shared/feedback.php">Feedback</a></li>
                                     <a href="../../../../backend/logout.php">Logout</a>
                                 </div>
                             </div>
