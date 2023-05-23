@@ -160,6 +160,16 @@ body{
   justify-content: space-between;
 }
 
+.no-friend-cont {
+  height: 100px;
+  width: 100%;
+  padding-top: 20px;
+  transition: .1s ease-in-out, .4s color;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .left-details {
   display: flex;
   flex-direction: row;

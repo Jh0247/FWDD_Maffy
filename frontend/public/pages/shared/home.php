@@ -36,7 +36,7 @@
     <!-- section for about us -->
     <section id="about-us" class="flex flex-col h-screen w-screen green-bg">
       <div class="overflow-hidden absolute h-4/6 w-screen">
-        <img src="../../images/website.jpg" alt="technology" class="techImg">
+        <img src="../../images/mainpage.png" alt="technology" class="techImg">
       </div>
       <div class="flex justify-center items-center w-full relative top-24 sm:top-64 lg:top-80">
         <div class="flex about-us-cont flex-col sm:flex-row w-3/4 sm:w-5/6 lg:4/6">

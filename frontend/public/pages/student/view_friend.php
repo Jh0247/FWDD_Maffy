@@ -40,8 +40,8 @@
         <div class="row-cont title-cont">
           <h2 class = "title">Friend</h2>
           <div class="btn-container">
-            <a class="friend-btn"><h2>Friend Request</h2></a>
-            <a class="friend-icon"><i class="fa-solid fa-users"></i></a>
+            <a href="../student/friend_request.php" class="friend-btn"><h2>Friend Request</h2></a>
+            <a href="../student/friend_request.php" class="friend-icon"><i class="fa-solid fa-users"></i></a>
           </div>
         </div>
         <!-- search bar -->
@@ -80,12 +80,39 @@
               </div>
             <?php
             }
+          } else{
+            ?>
+            <div class="no-friend-cont">
+              Find a friend and start chatting.
+            </div>
+            <?php
           }
           ?>
         </div>
       </div>
     </div>
   </div>  
+<script>
+  //get class and id
+  const searchBar = document.getElementById("search-bar");
+  const items = document.querySelectorAll(".item-cont");
 
+  //add event listener
+  searchBar.addEventListener("input", () => {
+    //get search bar value
+    const query = searchBar.value.trim().toLowerCase();
+
+    items.forEach(item => {
+      const name = item.querySelector("h2").textContent.trim().toLowerCase();
+      const email = item.querySelector("h3").textContent.trim().toLowerCase();
+      
+      if (name.includes(query) || email.includes(query) || data.includes(query)) {
+        item.style.display = "flex";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  });
+</script>
 </body>
 </html>
