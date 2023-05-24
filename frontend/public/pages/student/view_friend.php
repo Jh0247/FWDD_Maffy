@@ -21,7 +21,8 @@
       WHEN friend_list.second_user_id != $user_id THEN friend_list.second_user_id
       ELSE friend_list.first_user_id
     END)
-    WHERE (first_user_id = $user_id OR second_user_id = $user_id)");
+    WHERE (first_user_id = $user_id OR second_user_id = $user_id)
+    AND friend_status = 1");
 ?>
 
 <!DOCTYPE html>
