@@ -172,7 +172,6 @@
             </div>
           </a>
 
-          <!-- need hyperlink to teacher account -->
           <!-- Most performance teacher -->
           <div class="item-card two-column-teacher">
             <div class="flex flex-col mx-3 mt-2">
@@ -184,7 +183,7 @@
                 {
                   $teacher_avg_score = $teacher_data['total_view']/$teacher_data['total_course'];
               ?>
-                <a href="#" class="user-content mobile-col my-2">
+                <a href="../shared/user_profile.php?id=<?php echo $teacher_data['user_id']; ?>" class="user-content mobile-col my-2">
                   <div class="flex flex-row items-center">
                     <div class="profile-img">
                       <img src="<?=$teacher_data['user_image']?>">
@@ -238,7 +237,6 @@
             </div>
           </a>
 
-          <!-- need hyperlink to course -->
           <!-- most trend course -->
           <div id="ds-trend-course" class="item-card two-column mb-5 lg:mb-0">
             <div class="flex flex-col mx-3 mt-2">
@@ -250,7 +248,7 @@
                 foreach($trend_course_sql as $course_data) // Run SQL query
                 {
                   ?>
-                  <a href="#" class="course-content justify-between text-left px-3">
+                  <a href="../shared/course_page.php?userid=<?php echo $_SESSION['user_id']; ?>&courseid=<?php echo $course_data['course_id']; ?>" class="course-content justify-between text-left px-3">
                     <div class="flex flex-row my-3 items-center"> 
                       <i class="icon-book mr-3 fa-solid fa-book-bookmark"></i>
                       <div class="flex flex-col justify-between">
