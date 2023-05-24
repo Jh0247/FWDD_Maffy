@@ -30,6 +30,7 @@
 
     // check if the count is greater than or equal to 3 to display "Published", otherwise "Unpublished"
     $status = ($count >= 3) ? "Published" : "Unpublished";
+
 ?>
 
 <!DOCTYPE html>
@@ -42,66 +43,125 @@
     <link rel="stylesheet" href="../../../src/stylesheets/teacher/course_page.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="https://fontawesome.com/icons/eye-slash?f=sharp&s=solid" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Add Course</title>
 
+    <script>
+    // a pop-up function that use at php code
+    function pop_up_success_delete() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Course Successfully Delete!',
+            showDenyButton: false,
+            showCancelButton: false,
+            confirmButtonText: '<a href="../teacher/homepage.php" style="text-decoration:none; color:white; ">Continue</a>'
+        })
+    }
+
+    function pop_up_success_deactive() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Course Successfully Deactivate!',
+            showDenyButton: false,
+            showCancelButton: false,
+            confirmButtonText: '<a href="../teacher/homepage.php" style="text-decoration:none; color:white; ">Continue</a>'
+        })
+    }
+
+    function pop_up_success_active() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Course Successfully Activate!',
+            showDenyButton: false,
+            showCancelButton: false,
+            confirmButtonText: '<a href="../teacher/homepage.php" style="text-decoration:none; color:white; ">Continue</a>'
+        })
+    }
+    </script>
 </head>
 
 <body>
-    <?php 
+    <div class="w-screen h-screen flex flex-row">
+        <?php 
         if($_SESSION['privilege'] == 'teacher' || $_SESSION['privilege'] == 'student'){
             include '../shared/navbar.php';
         } else {
             include '../admin/sidebar.php';
         }
-    ?>
-    <header>
-        <div class="cover-image">
+        ?>
+        <div class="w-full overflow-auto">
+            <header>
+                <div class="cover-image">
 
-            <img src="<?php echo $all_course_info_row["course_image"]; ?>" alt="Cover Image">
-            <div class="cover-text">
-                <h1>
-                    <?php echo $all_course_info_row["course_title"]; ?>
-                </h1>
-                <p>
-                    <?php echo $all_course_info_row["course_desc"];?>
-                </p>
-            </div>
+                    <img src="<?php echo $all_course_info_row["course_image"]; ?>" alt="Cover Image">
+                    <div class="cover-text">
+                        <h1>
+                            <?php echo $all_course_info_row["course_title"]; ?>
+                        </h1>
+                        <p>
+                            <?php echo $all_course_info_row["course_desc"];?>
+                        </p>
+                    </div>
 
-        </div>
-    </header>
+                </div>
+            </header>
 
-    <!-- status container -->
-    <?php 
+            <!-- status container -->
+            <?php 
     
-        if($user_privilege == '2'){
-            if($course_info_row["user_id"] == $_SESSION["user_id"]){
-                echo("
-                <div class=\"container\">
-                    <div class=\"options\">
-                        <div class=\"option\">
-                            <a href=\"../teacher/add_assessment.php?userid=$_SESSION[user_id]&courseid=$courseID\"><i class=\"fas fa-plus\"></i> Add Assessment</a>
-                        </div>
+            if($user_privilege == '2'){
+                if($course_info_row["user_id"] == $_SESSION["user_id"]){
+                    echo("
+                    <div class=\"container\">
+                        <div class=\"options\">
+                            <div class=\"option\">
+                                <a href=\"../teacher/add_assessment.php?userid=$_SESSION[user_id]&courseid=$courseID\"><i class=\"fas fa-plus\"></i> Add Assessment</a>
+                            </div>
                             <div class=\"option\">
                                 <a href=\"../teacher/add_course.php?userid=$_SESSION[user_id]&courseid=$courseID&currentfile=../shared/course_page.php\"><i class=\"fas fa-edit\"></i> Edit</a>
                             </div>
-                        <form method=\"POST\" class=\"options\" enctype=\"multipart/form-data\">
-                            <div class=\"option\">
-                                <button type=\"submit\" name=\"deactive-submitbtn\"><i class=\"fas fa-eye-slash\"></i> Deative</button>
+                            <form method=\"POST\" id=\"myForm\" class=\"options\" enctype=\"multipart/form-data\" action\"\">
+                                <div class=\"option\">
+                                    " . ($course_info_row['user_id'] === $_SESSION['user_id'] && $course_info_row['course_id'] === $courseID && $course_info_row['course_status'] === '1' ? "
+                                        <button type=\"submit\" name=\"deactive-submitbtn\"><i class=\"fas fa-eye-slash\"></i> Deactive</button>
+                                    " : "
+                                        <button type=\"submit\" name=\"active-submitbtn\"><i class=\"fas fa-eye\"></i> Activate</button>
+                                    ") . "
+                                </div>
+                                <div class=\"option\">
+                                    <button type=\"submit\" name=\"delete-submitbtn\"><i class=\"fas fa-trash\"></i> Delete</button>
+                                </div>
+                            </form>
+                            <div class=\"option filter\">
+                                <a href=\"#\"><i class=\"fas fa-filter\"></i> Filter</a>
                             </div>
-                            <div class=\"option\">
-                                <button type=\"submit\" name=\"delete-submitbtn\"><i class=\"fas fa-trash\"></i> Delete</button>
-                            </div>
-                        </form>
-                        <div class=\"option filter\">
-                            <a href=\"#\"><i class=\"fas fa-filter\"></i> Filter</a>
+                        </div>
+                        <div class=\"publish-container\">
+                            <p class=\"published\">$status</p>
                         </div>
                     </div>
-                    <div class=\"publish-container\">
-                        <p class=\"published\">$status</p>
+                    ");
+                }else{
+                    echo("
+                    <div class=\"container\">
+                        <div class=\"options\">
+                            <div class=\"option filter\">
+                                <a href=\"#\"><i class=\"fas fa-filter\"></i> Filter</a>
+                            </div>
+                        </div>
+                        <div class=\"publish-container\">
+                            <p class=\"published\">$status</p>
+                        </div>
                     </div>
-                </div>
-                ");
-            }else{
+                    ");
+                }
+                
+            } elseif ($user_privilege == '3') {
                 echo("
                 <div class=\"container\">
                     <div class=\"options\">
@@ -115,57 +175,40 @@
                 </div> 
                 ");
             }
-            
-        } elseif ($user_privilege == '3') {
-            echo("
-            <div class=\"container\">
-                <div class=\"options\">
-                    <div class=\"option filter\">
-                        <a href=\"#\"><i class=\"fas fa-filter\"></i> Filter</a>
+            ?>
+
+            <!-- hidden filter column -->
+            <div class="filter-container hidden">
+                <h3>Filter Options</h3>
+                <h4>Filter By:</h4>
+                <div class="filter-row">
+                    <div class="filter-column">
+                        <input type="checkbox" id="latest" name="latest">
+                        <label for="latest">Latest</label>
+                        <br><br>
+                        <input type="checkbox" id="oldest" name="oldest">
+                        <label for="oldest">Oldest</label>
+                    </div>
+                    <div class="filter-column">
+                        <div class="filter-radio">
+                            <input type="radio" id="comment" name="filter" value="comment">
+                            <label for="comment">Comment</label>
+                        </div>
+                        <div class="filter-radio">
+                            <input type="radio" id="exercise" name="filter" value="exercise">
+                            <label for="exercise">Exercise</label>
+                        </div>
+                        <div class="filter-radio">
+                            <input type="radio" id="additional-note" name="filter" value="additional-note">
+                            <label for="additional-note">Additional Note</label>
+                        </div>
                     </div>
                 </div>
-                <div class=\"publish-container\">
-                    <p class=\"published\">$status</p>
-                </div>
-            </div> 
-            ");
-        }
-    
-    ?>
-
-
-    <!-- hidden filter column -->
-    <div class="filter-container hidden">
-        <h3>Filter Options</h3>
-        <h4>Filter By:</h4>
-        <div class="filter-row">
-            <div class="filter-column">
-                <input type="checkbox" id="latest" name="latest">
-                <label for="latest">Latest</label>
-                <br><br>
-                <input type="checkbox" id="oldest" name="oldest">
-                <label for="oldest">Oldest</label>
+                <button class="apply-btn">Apply</button>
             </div>
-            <div class="filter-column">
-                <div class="filter-radio">
-                    <input type="radio" id="comment" name="filter" value="comment">
-                    <label for="comment">Comment</label>
-                </div>
-                <div class="filter-radio">
-                    <input type="radio" id="exercise" name="filter" value="exercise">
-                    <label for="exercise">Exercise</label>
-                </div>
-                <div class="filter-radio">
-                    <input type="radio" id="additional-note" name="filter" value="additional-note">
-                    <label for="additional-note">Additional Note</label>
-                </div>
-            </div>
-        </div>
-        <button class="apply-btn">Apply</button>
-    </div>
 
-    <!-- single asssessment status container -->
-    <?php 
+            <!-- single asssessment status container -->
+            <?php 
         if($count >= 1) {
             do{
                 single_ass($ass_info_row["assessment_id"], $ass_info_row["course_id"], $ass_info_row["assessment_title"], $ass_info_row["assessment_content"]);
@@ -195,14 +238,41 @@
                 ");
             }
         }
-    ?>
+        ?>
+        </div>
+    </div>
 
-    <?php 
-        // if isset is POST 'submit' only execute the code below
-        if(isset($_POST['deactive-submitbtn'])) {
-            $update_course = "UPDATE course SET course_status = 2 WHERE course_id = $courseID";
-            mysqli_query($con, $update_course);
+    <?php
+    // delete course
+    if(isset($_POST['delete-submitbtn'])) {
+        $delete_course = "DELETE FROM course WHERE user_id = $_SESSION[user_id] AND course_id = $courseID";
+        $delete_result = mysqli_query($con, $delete_course);
+
+        if($delete_result){
+            echo "<script>pop_up_success_delete()</script>";
+        } 
+    }
+
+    // deactive course
+    if(isset($_POST['deactive-submitbtn'])) {
+        $update_course_deactive = "UPDATE course SET course_status = 2 WHERE course_id = $courseID";
+        $result_deactive = mysqli_query($con, $update_course_deactive);
+
+        if($result_deactive){
+            echo "<script>pop_up_success_deactive()</script>";
         }
+    }
+
+    // active course 
+    if(isset($_POST['active-submitbtn'])) {
+        $update_course_active = "UPDATE course SET course_status = 1 WHERE course_id = $courseID";
+        $result_active = mysqli_query($con, $update_course_active);
+
+        if($result_active){
+            echo "<script>pop_up_success_active()</script>";
+        }
+    }
+
     ?>
 
     <script>
