@@ -90,15 +90,15 @@
                 </label>
             </fieldset>
             <?php
-            $sql = "SELECT user_id, privilege_id, username, user_image, user_email, user_active FROM user WHERE privilege_id = 2  AND user_active != 0";
+            $sql = "SELECT user_id, privilege_id, username, user_image, user_email, user_active, user_last_login FROM user WHERE privilege_id = 2  AND user_active != 0";
             if (isset($_GET['switch'])) {
               $switch = $_GET['switch'];
               switch ($switch) {
                 case 'active':
-                  $sql = "SELECT user_id, privilege_id, username, user_image, user_email, user_active FROM user WHERE privilege_id = 2  AND user_active = 1";
+                  $sql = "SELECT user_id, privilege_id, username, user_image, user_email, user_active, user_last_login FROM user WHERE privilege_id = 2  AND user_active = 1";
                   break;
                 case 'ban':
-                  $sql = "SELECT user_id, privilege_id, username, user_image, user_email, user_active FROM user WHERE privilege_id = 2  AND user_active = 2";
+                  $sql = "SELECT user_id, privilege_id, username, user_image, user_email, user_active, user_last_login FROM user WHERE privilege_id = 2  AND user_active = 2";
                   break;
               }
             }
@@ -125,9 +125,11 @@
                     if($data['user_active'] == 2) {
                       echo '<h2>' . $data["username"] .  ' <i class="fa-solid fa-ban"></i> </h2>';
                       echo '<h3>' . $data["user_email"] . '</h3>';
+                      echo '<small>Last Login: ' . (isset($data["user_last_login"]) ? $data["user_last_login"] : 'Never login') . '</small>';
                     } else {
                       echo '<h2>' . $data["username"] . '</h2>';
                       echo '<h3>' . $data["user_email"] . '</h3>';
+                      echo '<small>Last Login: ' . (isset($data["user_last_login"]) ? $data["user_last_login"] : 'Never login') . '</small>';
                     }
                     ?>
                   </div>
@@ -166,15 +168,15 @@
                 </label>
             </fieldset>
             <?php
-            $sql = "SELECT user_id, privilege_id, username, user_image, user_email, user_active FROM user WHERE privilege_id = 3";
+            $sql = "SELECT user_id, privilege_id, username, user_image, user_email, user_active, user_last_login FROM user WHERE privilege_id = 3";
             if (isset($_GET['switch'])) {
               $switch = $_GET['switch'];
               switch ($switch) {
                 case 'active':
-                  $sql = "SELECT user_id, privilege_id, username, user_image, user_email, user_active FROM user WHERE privilege_id = 3 AND user_active = 1";
+                  $sql = "SELECT user_id, privilege_id, username, user_image, user_email, user_active, user_last_login FROM user WHERE privilege_id = 3 AND user_active = 1";
                   break;
                 case 'ban':
-                  $sql = "SELECT user_id, privilege_id, username, user_image, user_email, user_active FROM user WHERE privilege_id = 3 AND user_active = 2";
+                  $sql = "SELECT user_id, privilege_id, username, user_image, user_email, user_active, user_last_login FROM user WHERE privilege_id = 3 AND user_active = 2";
                   break;
               }
             }
@@ -201,9 +203,11 @@
                     if($data['user_active'] == 2) {
                       echo '<h2>' . $data["username"] .  ' <i class="fa-solid fa-ban"></i> </h2>';
                       echo '<h3>' . $data["user_email"] . '</h3>';
+                      echo '<small>Last Login: ' . (isset($data["user_last_login"]) ? $data["user_last_login"] : 'Never login') . '</small>';
                     } else {
                       echo '<h2>' . $data["username"] . '</h2>';
                       echo '<h3>' . $data["user_email"] . '</h3>';
+                      echo '<small>Last Login: ' . (isset($data["user_last_login"]) ? $data["user_last_login"] : 'Never login') . '</small>';
                     }
                   ?>
                   </div>
@@ -294,7 +298,7 @@
                   $avg_score = $data['total_view']/$data['total_course'];
                   ?>
                   <!-- for performance teacher list -->
-                  <a class="item-cont flex flex-row justify-around md:justify-between">
+                  <a href="../shared/user_profile.php?id=<?php echo $data['user_id']; ?>" class="item-cont flex flex-row justify-around md:justify-between">
                     <div class="flex flex-col md:flex-row text-center md:text-left items-center">  <!-- left content  -->
                       <!-- img cont  -->
                       <div class="md:mr-5">
@@ -371,9 +375,9 @@
             if(mysqli_num_rows($result) > 0) {
               foreach($result as $data) {
                 if($data['course_status'] == 2) {
-                  echo '<a href="" class="item-cont bg-block flex flex-row justify-around md:justify-between">';
+                  echo '<a href="../shared/course_page.php?userid=' . $_SESSION['user_id'] . '&courseid=' . $data['course_id'] . '" class="item-cont bg-block flex flex-row justify-around md:justify-between">';
                 } else {
-                  echo '<a href="" class="item-cont flex flex-row justify-around md:justify-between">';
+                  echo '<a href="../shared/course_page.php?userid=' . $_SESSION['user_id'] . '&courseid=' . $data['course_id'] . '" class="item-cont flex flex-row justify-around md:justify-between">';
                 }
                 ?>
                 <!-- for course list -->
@@ -418,7 +422,7 @@
               foreach($sql as $data) {
                 ?>
                 <!-- for trend course list -->
-                <a href="" class="item-cont flex flex-row justify-around md:justify-between">
+                <a href="../shared/course_page.php?userid=<?php echo $_SESSION['user_id']; ?>&courseid=<?php echo $data['course_id']; ?>" class="item-cont flex flex-row justify-around md:justify-between">
                   <div class="flex flex-col md:flex-row text-center md:text-left items-center">  <!-- left content  -->
                     <!-- img cont  -->
                     <div class="md:mr-5">

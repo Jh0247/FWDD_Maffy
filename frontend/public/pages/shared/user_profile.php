@@ -155,7 +155,7 @@
         <div class="flex flex-col sm:flex-row">
           <!-- if not student the display this modal button to view suppor doc -->
           <?php
-          if ($_SESSION['privilege'] !== 'student'){
+          if ($user_data['privilege_id'] != 3){
             ?>
             <!-- display file button -->
             <a id="download-doc" class="flex flex-col text-center" onclick="document.getElementById('modal').style.display='block'">
@@ -222,15 +222,15 @@
                 if($_SESSION['user_id'] == $page_user_id) {
               ?>
                 <!-- Edit button -->
-                <a href="../shared/edit_profile.php?id=<?php echo $_SESSION['user_id']; ?>" class="edit-btn">Edit Profile</button>
-                <a href="../shared/edit_profile.php?id=<?php echo $_SESSION['user_id']; ?>" class="edit-icon"><i class="fas fa-edit"></i></button>
+                <a href="../shared/edit_profile.php" class="edit-btn">Edit Profile</button>
+                <a href="../shared/edit_profile.php" class="edit-icon"><i class="fas fa-edit"></i></button>
               <?php
                 }
               } else {
                 ?>
                 <!-- Edit button -->
-                <a href="../shared/edit_profile.php?id=<?php echo $_SESSION['user_id']; ?>" class="edit-btn">Edit Profile</button>
-                <a href="../shared/edit_profile.php?id=<?php echo $_SESSION['user_id']; ?>" class="edit-icon"><i class="fas fa-edit"></i></button>
+                <a href="../shared/edit_profile.php" class="edit-btn">Edit Profile</button>
+                <a href="../shared/edit_profile.php" class="edit-icon"><i class="fas fa-edit"></i></button>
                 <?php
               }
             } else {
@@ -279,7 +279,7 @@
         ?>
       </div>
 
-      <!-- course asessment or friend -->
+      <!-- course asessment -->
       <div class="cont-size">
         <div class="my-3">
           <span class="title-details-text">
