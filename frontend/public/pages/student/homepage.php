@@ -41,8 +41,8 @@
                   echo "<div class='slide'>";
                     echo "<img src=".$row['course_image']." alt='' />";
                     echo "<h1>".$row['course_title']."</h1>";
-                    //echo "<button class='slider-button' onclick=location.href='../shared/course_page.php?userid=$_SESSION[user_id]&courseid=$row[course_id]'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
-                    echo "<button class='slider-button' onclick=location.href='../shared/view_assessment.php'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
+                    echo "<button class='slider-button' onclick=location.href='../shared/course_page.php?userid=$_SESSION[user_id]&courseid=$row[course_id]'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
+                    //echo "<button class='slider-button' onclick=location.href='../shared/view_assessment.php'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
                   echo "</div>";
                 }
               }
