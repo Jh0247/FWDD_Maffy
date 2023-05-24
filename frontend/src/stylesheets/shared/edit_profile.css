@@ -135,7 +135,7 @@ body{
 }
 
 .update:hover {
-    background-color: #00cc00;
+    background-color: #FF914D;
     color: #000;
 }
 
@@ -160,19 +160,19 @@ body{
 
 
 .lable {
-line-height: 18px;
-font-size: .85rem;
-color: #394955;
-font-family: Georgia, serif;
-letter-spacing: 1px;
+    line-height: 18px;
+    font-size: .85rem;
+    color: #394955;
+    font-family: Georgia, serif;
+    letter-spacing: 1px;
 }
 
 .forgot-password:hover {
-background: #667E91;
+    background: #667E91; 
 }
 
 .forgot-password:hover .svg-icon {
-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
 }
 
 @keyframes spin {
