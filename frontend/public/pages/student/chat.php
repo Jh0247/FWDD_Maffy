@@ -39,31 +39,37 @@
             </div>
             <ul>
               <li>
-                <a href="#">
                 <i class="fa fa-user" aria-hidden="true"></i>
                   <?php
-                  // get the user friend list
+                    // get the user friend list
                     $user_lists = mysqli_query($con, 
-                    "SELECT
-                      CASE
-                          WHEN first_user_id = 3 THEN second_user_id
-                          ELSE first_user_id
-                      END AS second_user_id,
-                      CASE
-                          WHEN first_user_id = 3 THEN first_user_id
-                          ELSE second_user_id
-                      END AS first_user_id,
-                      friend_status, user.username
-                      FROM friend_list
-                      INNER JOIN user ON user.user_id = friend_list.second_user_id
-                      WHERE first_user_id = 3 OR second_user_id =3
-                      AND friend_status = 1;");
-                    while($user_list = mysqli_fetch_assoc($user_lists))
-                    {
-                      echo "<span class=\"nav-item\"><a href='?friend=" .$user_list['second_user_id']."'>".$user_list["username"]. "</a></span>";
-                    }
+                      "SELECT
+                        CASE
+                            WHEN first_user_id = $_SESSION[user_id]  THEN second_user_id
+                            ELSE first_user_id
+                        END AS second_user_id,
+                        CASE
+                            WHEN first_user_id = $_SESSION[user_id]  THEN first_user_id
+                            ELSE second_user_id
+                        END AS first_user_id,
+                        friend_status, user.username, user.user_image
+                        FROM friend_list
+                        INNER JOIN user ON user.user_id = friend_list.second_user_id
+                        WHERE first_user_id = $_SESSION[user_id] OR second_user_id =$_SESSION[user_id]
+                        AND friend_status = 1;");
+                      if(mysqli_num_rows($user_lists) > 0) {
+                        foreach($user_lists as $data) {
+                          echo '
+                          <li>
+                            <a href="#">
+                              <img src="' . $data['user_image'] . '" alt="profile pic" class="user-profile-img">
+                              <span class="nav-item">' . $data['username'] . '</span>
+                            </a>
+                          </li>
+                        ';
+                        }
+                      }
                   ?>
-                </a>
               </li>
             </ul>
           </div>
@@ -79,17 +85,17 @@
               $username = mysqli_query($con,"SELECT * FROM user WHERE user_id = '".$_GET['friend']."'");
               $uName = mysqli_fetch_assoc($username);
               echo "<input type='text' value = ".$_GET['friend']." id='friend' hidden/>";
-              echo $uName['username'];
+              
             }else{
               $userName = mysqli_query($con,"SELECT * FROM user");
               $uName = mysqli_fetch_assoc($userName);
               $_SESSION["friend"] = $uName["user_id"];
               echo "<input type='text' value = ".$_SESSION['friend']." id='friend' hidden/>";
-              echo $uName['username'];
+              
             }
           ?>
-          <div id="chat-content" class="bg-red-100 flex flex-col w-screen h-auto min-h-[80%] border-solid border border-black rounded-2xl m-0 p-0.5 lg:p-2.5 gap-1 justify-between lg:w-9/12 lg:m-auto lg:bg-gray-500">
-            <div class="flex flex-col self-start overflow-y-auto">
+          <div class="chat-container flex flex-col w-screen h-auto min-h-[80%] border-solid border border-black rounded-2xl m-0 p-0.5 lg:p-2.5 gap-1 justify-between lg:w-9/12 lg:m-auto">
+            <div id="chat-content"  class="flex flex-col self-start overflow-y-auto">
               <?php                  
                 if(mysqli_num_rows($chat_result) == 0){
                   ?>
@@ -111,21 +117,27 @@
                       INNER JOIN user ON user.user_id = chat.sender_id
                       WHERE chat.friend_list_id = ".$friend_id_result['friend_list_id']);
 
+                    // $sender_id = $chat['sender_id']; // Replace with your actual variable or database column
+                    // $receiver_id = $friend_list['second_user_id']; // Replace with your actual variable or database column
+
                     if(mysqli_num_rows($chats) > 0)
                     {
                       foreach($chats as $chat_data) // Run SQL query
                       {
                     ?>
 
-                    <div class="message_container w-full h-auto flex flex-col md:flex-row lg:flex-row justify-between border border-solid rounded-2xl border-black bg-slate-300 p-1 lg:w-4/52">
-                      <div class="flex flex-row">
-                        <img src="<?=$chat_data['user_image']?>" class="profile_img w-11 h-11 pr-1 m-auto justify-start rounded-full lg:w-14 lg:h-14 md:w-14 md:h-14">
-                        <p class="message_text md:text-lg md:pl-1 sm:text-base"><?php echo $chat_data['chat_content']; ?></p>
-                      </div>
-                    </div>
-                    <div class="time_container flex basis-6/12 pl-1 md:justify-end lg:justify-end">
-                      <p class="time_text self-center md:text-lg lg:text-base"><?php echo $chat_data['chat_datetime']; ?></p>
-                    </div>
+                      <div class="message_container w-full h-auto flex flex-col md:flex-row lg:flex-row justify-between p-1 lg:w-4/52">
+                        <div class="flex flex-row gap-1">
+                          <img src="<?=$chat_data['user_image']?>" class="profile_img w-11 h-11 justify-start rounded-full lg:w-14 lg:h-14 md:w-14 md:h-14">  
+                            <div style="display: flex; flex-direction: column;">
+                              <div style="display: flex; flex-direction: row; gap: 0.5rem;">
+                                <p class="UserName self-center"><?=$chat_data['username']?></p>
+                                <p class="time_text"><?=$chat_data['chat_datetime']?></p>
+                              </div>
+                              <p class="message_text"><?=$chat_data['chat_content']?></p>
+                            </div>
+                          </div>
+                        </div>
                     <?php
                       }
                     }
@@ -165,34 +177,7 @@
     </div>
   </div>
 
-  <script>
-    // when click on the send button
-    $(document).ready(function() {
-      $("#send").on("click", function() {
-        // assign value
-        var friend_list = "<?php echo $friend_id_result['friend_list_id']; ?>";
-        var message = $("#message").val();
 
-        console.log("friend_list:", friend_list);
-        console.log("message:", message);
-
-        // pass to insert message
-        $.ajax({
-          url: "../../../../backend/insertMessage.php",
-          method: "POST",
-          data: {
-            sender_id: "<?php echo $_SESSION['user_id']; ?>",
-            friend_list: friend_list,
-            message: message
-          },
-          dataType: "text",
-          success: function(data) {
-            $("#message").val("");
-          }
-        });
-      });
-    });
-  </script>
   <script src="./JavaScript/hamburger.js"></script>
   <script src="./JavaScript/nav_bar.js"></script>
       

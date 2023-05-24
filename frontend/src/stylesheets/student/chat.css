@@ -15,6 +15,28 @@ body {
     overflow: auto;
 }
 
+.chat-container{
+    background-color: #f4eee0;
+}
+
+.profile_img{
+    border-radius: 999px;
+    border: #080808 0.3px solid;
+    margin: 5px;
+    object-fit :fill;
+    background-color: #000000;
+      
+}
+
+.UserName{
+    font-size: 19px;
+}
+
+.time_text{
+    font-size: 12px;
+    align-self: flex-end;
+}
+
 .chatSendBtn {
   padding: 10px 20px;
   border: unset;
@@ -65,5 +87,17 @@ body {
  @media screen and (max-width: 468px) {
     .chatSendBtn{
         padding: 5px 10px;
+    }
+
+    .UserName{
+        font-size: 15px;
+    }
+
+    .time_text{
+        font-size: 10px;
+    }
+
+    .message_text{
+        font-size: 15px;
     }
  }
