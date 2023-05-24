@@ -62,7 +62,6 @@
         <?php
         ?>
         <h1>Title</h1>
-          <h4>Date</h4>
         </div>
         <div class="secSubContainer">
           <p>View</p>

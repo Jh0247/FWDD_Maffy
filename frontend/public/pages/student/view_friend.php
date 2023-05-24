@@ -72,7 +72,7 @@
                 </a>
                 <!-- chat -->
                 <div class="btn-cont">
-                  <a href="" class="chat-btn">
+                  <a href="chat.php?friend=<?php echo $data['second_user_id']; ?>" class="chat-btn">
                     <h2>Chat</h2>
                     <i class="fa-solid fa-comments chat-icon"></i>
                   </a>
