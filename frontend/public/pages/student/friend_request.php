@@ -64,7 +64,11 @@
               END AS first_user_id,
               friend_status, user.username, user.user_image
               FROM friend_list
-              INNER JOIN user ON user.user_id = friend_list.second_user_id
+              INNER JOIN user ON user.user_id =(
+              CASE
+                WHEN friend_list.second_user_id != $_SESSION[user_id] THEN friend_list.second_user_id
+                ELSE friend_list.first_user_id
+              END)
               WHERE (first_user_id = $_SESSION[user_id] OR second_user_id =$_SESSION[user_id])
               AND friend_status = 1;");
             if(mysqli_num_rows($user_lists) > 0) {
