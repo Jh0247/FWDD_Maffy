@@ -2,22 +2,57 @@ body{
     background-color: #667e91;
 }
 
+.details-container {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+}
+
 .first-container{
     display: flex;
     flex-direction: column;
     background-color: #f4eee0;
     border-radius: 15px;
-    margin: 100px auto;
-    width: 90%;
     padding: 10px;
     gap: 1rem;
+    width: 100%;
 }
 
-.first-row{
+.back-btn-cont {
     display: flex;
+    flex-direction: column;
+    padding: 0px 30px;
+    
+}
+.backbutton {
+    --bg: #000;
+    --hover-bg: #FF914D;
+    --hover-text: #000;
+    color: #fff;
+    border: 1px solid var(--bg);
+    border-radius: 20px;
+    padding: 0.5em 1em;
+    background: var(--bg);
+    transition: 0.3s;
+    height: 40px;
+    font-weight: bold;
+    }
+    
+.backbutton:hover {
+    color: var(--hover-text);
+    transform: translate(-0.25rem,-0.25rem);
+    background: var(--hover-bg);
+    box-shadow: 0.25rem 0.25rem var(--bg);
+}
+
+.backbutton:active {
+    transform: translate(0);
+    box-shadow: none;
 }
 
 .profile-image{
+    background-color: black;
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -28,70 +63,77 @@ body{
     padding-left: 10px;
 }
 
-.second-row{
-    display: flex;
-    flex-direction: column;
-}
-
-.second-row p{
+.user-info-title{
     margin: 5px 0 5px 0;
+    width: 110px;
 }
 
 .input {
-    border: 2px solid #8707ff;
+    border: 2px solid #000000;
     border-radius: 10px;
     padding: 5px 10px;
     background: transparent;
     max-width: 190px;
 }
-   
+
 .input:active {
-    box-shadow: 2px 2px 15px #8707ff inset;
+    box-shadow: 2px 2px 15px #000000 inset;
 }
 
 .update {
-    display: inline-block;
-    padding: 0.9rem 1.8rem;
     font-size: 16px;
-    font-weight: 700;
-    color: white;
-    border: 3px solid rgb(252, 70, 100);
-    cursor: pointer;
     position: relative;
-    background-color: transparent;
-    text-decoration: none;
-    overflow: hidden;
-    z-index: 1;
-    font-family: inherit;
-    border-radius: 20px;
-   }
-   
-   .update::before {
-    content: "";
+    margin: auto;
+    padding: 1em 2.5em 1em 2.5em;
+    border: none;
+    background: #fff;
+    transition: all 0.1s linear;
+    box-shadow: 0 0.4em 1em rgba(0, 0, 0, 0.1);
+}
+
+.update:active {
+    transform: scale(0.95);
+}
+
+.update span {
+    color: #464646;
+}
+
+.update .border {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(252, 70, 100);
-    transform: translateX(-100%);
-    transition: all .3s;
-    z-index: -1;
-   }
-   
-   .update:hover::before {
-    transform: translateX(0);
-   }
-   
+    border: 0.15em solid #fff;
+    transition: all 0.3s 0.08s linear;
+    top: 50%;
+    left: 50%;
+    width: 9em;
+    height: 3em;
+    transform: translate(-50%, -50%);
+}
+
+.update:hover .border {
+    display: block;
+    width: 9.9em;
+    height: 3.7em;
+}
+
+.update:hover {
+    background-color: #00cc00;
+    color: #000;
+}
+
+.full-rounded {
+    border-radius: 2em;
+}
+
 
 /* pop out edit password container */
 #pass-popout-container {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  #password-popup {
+}
+
+#password-popup {
     display: none; 
     position: fixed;
     z-index: 999;
@@ -105,58 +147,57 @@ body{
     width: 100vw; 
     height: 100vh; 
     overflow: hidden;  
-  }
-  
-  #password-popup h2 {
+}
+
+#password-popup h2 {
     font-size: 20px;
     margin-bottom: 10px;
     color: #7d84ab;
-  }
-  
-  #password-popup label {
+}
+
+#password-popup label {
     display: block;
     margin-bottom: 5px;
     color: #7d84ab;
-  }
-  
-  #password-popup input[type="password"] {
+}
+
+#password-popup input[type="password"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
-  }
-  
-  .button-row {
+}
+
+.button-row {
     display: flex;
     margin: 20px 0px 0px 20px;
     gap: 10px;
     position: relative;
     width: 100%;
     justify-content: flex-end;
-  }
-  
-  .button-row button {
+}
+
+.button-row button {
     color: #fff;
     padding: 10px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
-  }
-  
-  #save-password-btn {
+}
+
+#save-password-btn {
     background-color: rgb(0, 255, 0);
-  }
-  
-  #save-password-btn:hover {
+}
+
+#save-password-btn:hover {
     background-color: rgb(0, 183, 0);
-  }
-  
-  #cancel-password-btn {
+}
+
+#cancel-password-btn {
     background-color: #989898;
-    
-  }
-  
-  #cancel-password-btn:hover {
+}
+
+#cancel-password-btn:hover {
     background-color: #717171;
-  }
+}
