@@ -102,24 +102,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../../src/stylesheets/shared/user_profile.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />    
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://kit.fontawesome.com/775f0ea71b.js" crossorigin="anonymous"></script>
   <title>Profile Page</title>
-
-  <script>
-    // a pop-up function that use at php code
-    function request_success() {
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: 'Friend Request Send!',
-        showDenyButton: false,
-        showCancelButton: false,
-      })
-    }
-    </script>
-
 </head>
 
 <body>
@@ -141,7 +126,7 @@
         <div class="user-container flex flex-col sm:flex-row">
           <!-- User profile image -->
           <div class="user-image mt-4">
-            <img src="<?=$user_data['user_image']?>" alt="User Profile Image">
+            <img src="<?=$user_data['user_image']?>" alt="User Profile Image" class="profile-image">
           </div>
 
           <!-- User details -->
