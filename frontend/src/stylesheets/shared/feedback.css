@@ -47,6 +47,17 @@ body {
   transition: 0.2s ease-in-out;
 }
 
+.term-container {
+  width: 100%;
+  min-height: 300px;
+  padding: 1em 1.5em;
+  background: #9AB3C7;
+  border-radius: 30px;
+  text-align: left;
+  font-size: 1.2rem;
+  font-family: cursive;
+}
+
 .user {
   width: 100%;
   min-height: 120px;
