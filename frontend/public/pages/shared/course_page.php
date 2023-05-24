@@ -170,7 +170,7 @@
                     ");
                 }
                 
-            } elseif ($user_privilege == '3' && $user_privilege == '1') {
+            } else {
                 echo("
                 <div class=\"container\">
                     <div class=\"options\">
