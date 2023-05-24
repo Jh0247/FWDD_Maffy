@@ -5,6 +5,15 @@
     
     require_once("../teacher/component/single_assessment_container.php");
     
+    $user_privilege = 0;
+    
+    if(isset($_SESSION['user_id'])) {
+        // Retrieve user information from database
+        $query = mysqli_query($con, "SELECT * FROM user WHERE user_id = $_SESSION[user_id]");
+        $user = mysqli_fetch_array($query);
+        $user_privilege = $user['privilege_id'];
+    };
+    
     $courseID = $_GET['courseid'];
     
     #Extracting course information for all courses from database
@@ -125,7 +134,7 @@
                             <div class=\"option\">
                                 <a href=\"../teacher/add_course.php?userid=$_SESSION[user_id]&courseid=$courseID&currentfile=../shared/course_page.php\"><i class=\"fas fa-edit\"></i> Edit</a>
                             </div>
-                            <form method=\"POST\" id=\"myForm\" class=\"options\" enctype=\"multipart/form-data\" action\"\">
+                            <form method=\"POST\" class=\"options\" enctype=\"multipart/form-data\">
                                 <div class=\"option\">
                                     " . ($course_info_row['user_id'] === $_SESSION['user_id'] && $course_info_row['course_id'] === $courseID && $course_info_row['course_status'] === '1' ? "
                                         <button type=\"submit\" name=\"deactive-submitbtn\"><i class=\"fas fa-eye-slash\"></i> Deactive</button>
@@ -161,7 +170,7 @@
                     ");
                 }
                 
-            } elseif ($user_privilege == '3') {
+            } elseif ($user_privilege == '3' && $user_privilege == '1') {
                 echo("
                 <div class=\"container\">
                     <div class=\"options\">
@@ -178,71 +187,98 @@
             ?>
 
             <!-- hidden filter column -->
-            <div class="filter-container hidden">
-                <h3>Filter Options</h3>
-                <h4>Filter By:</h4>
-                <div class="filter-row">
-                    <div class="filter-column">
-                        <input type="checkbox" id="latest" name="latest">
-                        <label for="latest">Latest</label>
-                        <br><br>
-                        <input type="checkbox" id="oldest" name="oldest">
-                        <label for="oldest">Oldest</label>
+            <form method="GET" class=" options" enctype="multipart/form-data">
+                <div class="filter-container hidden">
+                    <h3>Filter Options</h3>
+                    <h4>Filter By:</h4>
+                    <div class="filter-row">
+                        <div class="filter-column">
+                            <input type="checkbox" id="latest" name="latest">
+                            <label for="latest">Latest</label>
+                            <br><br>
+                            <input type="checkbox" id="oldest" name="oldest">
+                            <label for="oldest">Oldest</label>
+                        </div>
+                        <div class="filter-column">
+                            <div class="filter-radio">
+                                <input type="radio" id="comment" name="filter" value="comment">
+                                <label for="comment">Comment</label>
+                            </div>
+                            <div class="filter-radio">
+                                <input type="radio" id="exercise" name="filter" value="exercise">
+                                <label for="exercise">Exercise</label>
+                            </div>
+                            <div class="filter-radio">
+                                <input type="radio" id="additional-note" name="filter" value="additional-note">
+                                <label for="additional-note">Additional Note</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="filter-column">
-                        <div class="filter-radio">
-                            <input type="radio" id="comment" name="filter" value="comment">
-                            <label for="comment">Comment</label>
-                        </div>
-                        <div class="filter-radio">
-                            <input type="radio" id="exercise" name="filter" value="exercise">
-                            <label for="exercise">Exercise</label>
-                        </div>
-                        <div class="filter-radio">
-                            <input type="radio" id="additional-note" name="filter" value="additional-note">
-                            <label for="additional-note">Additional Note</label>
-                        </div>
-                    </div>
+                    <button class="apply-btn">Apply</button>
                 </div>
-                <button class="apply-btn">Apply</button>
-            </div>
+            </form>
+            <?php 
+            
+            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                $filter = [];
+    
+                if (isset($_GET['latest'])) {
+                $filter[] = 'DESC';
+                }
+    
+                if (isset($_GET['oldest'])) {
+                $filter[] = 'ASC';
+                }
+    
+                if (!empty($filter)) {
+                $orderBy = implode(', ', $filter);
+    
+                // Perform the SQL query using the selected filter options
+                $filter_query = "SELECT * FROM assessment ORDER BY assessment_date_posted $orderBy";
+                $filter_result = mysqli_query($con, $filter_query);
+                }
+                }
+            ?>
 
             <!-- single asssessment status container -->
             <?php 
-        if($count >= 1) {
-            do{
-                single_ass($ass_info_row["assessment_id"], $ass_info_row["course_id"], $ass_info_row["assessment_title"], $ass_info_row["assessment_content"]);
-            } while ($ass_info_row = mysqli_fetch_assoc($ass_info_result));
-        }
-        else {
-            if($course_info_row["user_id"] == $_SESSION["user_id"]){
-                echo
-                ("
-                    <div class=\"container\">
-                        <div class=\"options\">
-                            <p>This Course Have No Assessment Posted</p>
-                        </div>
-                        <div class=\"publish-container\">
-                            <button onclick=\"location.href='../teacher/add_assessment.php?userid=$_SESSION[user_id]&courseid=$courseID'\" class=\"published post-btn\" >Post Assessment Now</button>
-                        </div>
-                    </div> 
-                ");
-            }else{
-                echo
-                ("
-                    <div class=\"container\">
-                        <div class=\"options\">
-                            <p>This Course Have No Assessment Posted</p>
-                        </div>
-                    </div> 
-                ");
-            }
-        }
-        ?>
+            // while($row = mysqli_fetch_assoc($filter_result)){
+                if($count >= 1) {
+                    do{
+                        single_ass($ass_info_row["assessment_id"], $ass_info_row["course_id"], $ass_info_row["assessment_title"], $ass_info_row["assessment_content"]);
+                    } while ($ass_info_row = mysqli_fetch_assoc($ass_info_result));
+                }
+                else {
+                    if($course_info_row["user_id"] == $_SESSION["user_id"]){
+                        echo
+                        ("
+                            <div class=\"container\">
+                                <div class=\"options\">
+                                    <p>This Course Have No Assessment Posted</p>
+                                </div>
+                                <div class=\"publish-container\">
+                                    <button onclick=\"location.href='../teacher/add_assessment.php?userid=$_SESSION[user_id]&courseid=$courseID'\" class=\"published post-btn\" >Post Assessment Now</button>
+                                </div>
+                            </div> 
+                        ");
+                    }else{
+                        echo
+                        ("
+                            <div class=\"container\">
+                                <div class=\"options\">
+                                    <p>This Course Have No Assessment Posted</p>
+                                </div>
+                            </div> 
+                        ");
+                    }
+                }
+            // }
+            ?>
         </div>
     </div>
 
     <?php
+      
     // delete course
     if(isset($_POST['delete-submitbtn'])) {
         $delete_course = "DELETE FROM course WHERE user_id = $_SESSION[user_id] AND course_id = $courseID";
