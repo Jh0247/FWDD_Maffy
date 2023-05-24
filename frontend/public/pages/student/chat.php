@@ -177,7 +177,49 @@
       </div><!--end of content box-->
     </div>
   </div>
+  <script>
+// when click on the send button
+$(document).ready(function() {
+  $("#send").on("click", function() {
+    // assign value
+    var friend_list = "<?php echo $friend_id_result['friend_list_id']; ?>";
+    var message = $("#message").val();
 
+    // pass to insert message
+    $.ajax({
+      url: "../../../../backend/insertMessage.php",
+      method: "POST",
+      data: {
+        sender_id: "<?php echo $_SESSION['user_id']; ?>",
+        friend_list: friend_list,
+        message: message
+      },
+      dataType: "text",
+      success: function(data) {
+        $("#message").val("");
+      }
+    });
+  });
+  //refresh the page
+  setInterval(function() {
+    var friend_list = "<?php echo $friend_id_result['friend_list_id']; ?>";
+    var message = $("#message").val();
+
+    $.ajax({
+      url: "../../../../backend/realTimeChat.php",
+      method: "POST",
+      data :{
+        sender_id: "<?php echo $_SESSION['user_id']; ?>",
+        friend_list: friend_list,
+      },
+      dataType:"Text",
+      success:function(data){
+        $("#chat-content").html(data);
+      }
+    })
+  }, 700);
+});
+</script>
   <script src="./JavaScript/hamburger.js"></script>
   <script src="./JavaScript/nav_bar.js"></script>
 </body>
