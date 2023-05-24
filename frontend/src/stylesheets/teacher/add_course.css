@@ -4,27 +4,6 @@ body{
   background-color: #667e91;
 }
 
-/* for the scrollbar on webpage */
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-
-::-webkit-scrollbar-track {
-  box-shadow: 0 8px 14px 0 rgba(0,0,0,0.2);
-  border-radius: 50px;
-  margin: .5em 0em .5em 0em;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: rgb(160, 152, 152);
-  border-radius: 50px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(73, 72, 72);
-}
-
 /* whole container */
 .container {
     margin: 130px 100px 130px 100px;

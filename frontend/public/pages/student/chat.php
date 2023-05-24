@@ -33,68 +33,75 @@
         <!--sidebar-->
         <div class="sidebar">
             <div class="top">
-                <div class="logo">
-                    <h1>All Friends</h1>
-                </div>
+              <div class="logo">
+                <h1>All Friends</h1>
+              </div>
             </div>
             <ul>
-              <li>
-                <i class="fa fa-user" aria-hidden="true"></i>
-                  <?php
-                    // get the user friend list
-                    $user_lists = mysqli_query($con, 
-                      "SELECT
-                        CASE
-                            WHEN first_user_id = $_SESSION[user_id]  THEN second_user_id
-                            ELSE first_user_id
-                        END AS second_user_id,
-                        CASE
-                            WHEN first_user_id = $_SESSION[user_id]  THEN first_user_id
-                            ELSE second_user_id
-                        END AS first_user_id,
-                        friend_status, user.username, user.user_image
-                        FROM friend_list
-                        INNER JOIN user ON user.user_id = friend_list.second_user_id
-                        WHERE first_user_id = $_SESSION[user_id] OR second_user_id =$_SESSION[user_id]
-                        AND friend_status = 1;");
-                      if(mysqli_num_rows($user_lists) > 0) {
-                        foreach($user_lists as $data) {
-                          echo '
-                          <li>
-                            <a href="#">
-                              <img src="' . $data['user_image'] . '" alt="profile pic" class="user-profile-img">
-                              <span class="nav-item">' . $data['username'] . '</span>
-                            </a>
-                          </li>
-                        ';
-                        }
-                      }
-                  ?>
-              </li>
+              <?php
+                // get the user friend list
+                $user_lists = mysqli_query($con, 
+                  "SELECT
+                    CASE
+                        WHEN first_user_id = $_SESSION[user_id]  THEN second_user_id
+                        ELSE first_user_id
+                    END AS second_user_id,
+                    CASE
+                        WHEN first_user_id = $_SESSION[user_id]  THEN first_user_id
+                        ELSE second_user_id
+                    END AS first_user_id,
+                    friend_status, user.username, user.user_image
+                    FROM friend_list
+                    INNER JOIN user ON user.user_id =(
+                    CASE
+                      WHEN friend_list.second_user_id != $_SESSION[user_id] THEN friend_list.second_user_id
+                      ELSE friend_list.first_user_id
+                    END)
+                    WHERE first_user_id = $_SESSION[user_id] OR second_user_id =$_SESSION[user_id]
+                    AND friend_status = 1;");
+                  if(mysqli_num_rows($user_lists) > 0) {
+                    foreach($user_lists as $data) {
+                      echo '
+                      <li>
+                        <a href="?friend=' . $data['second_user_id'] . '">
+                          <img src="' . $data['user_image'] . '" alt="profile pic" class="user-profile-img">
+                          <span class="nav-item">' . $data['username'] . '</span>
+                        </a>
+                      </li>
+                    ';
+                    }
+                  }
+              ?>
             </ul>
           </div>
           <!--End of sidebar-->
         </div>
-
         <input type="text" id="fromUser" value=<?php echo $user["user_id"]; ?> hidden />
-
-        <div class="first-container flex flex-col justify-center content-center bg-slate-500 w-screen h-screen min-h-[90%] pt-2.5 pb-2.5">
+        <div class="first-container flex-col justify-center content-center bg-slate-500 w-screen h-screen min-h-[90%] pt-2.5 pb-2.5">
           <!--Big container-->
           <?php
             if(isset($_GET['friend'])){
               $username = mysqli_query($con,"SELECT * FROM user WHERE user_id = '".$_GET['friend']."'");
               $uName = mysqli_fetch_assoc($username);
               echo "<input type='text' value = ".$_GET['friend']." id='friend' hidden/>";
-              
+              ?>
+              <div class="p-0.5 lg:p-2.5">
+                <h2 class ="lg:ml-16 user-title"><?php echo $uName["username"]; ?></h2>
+              </div>
+              <?php
             }else{
               $userName = mysqli_query($con,"SELECT * FROM user");
               $uName = mysqli_fetch_assoc($userName);
               $_SESSION["friend"] = $uName["user_id"];
               echo "<input type='text' value = ".$_SESSION['friend']." id='friend' hidden/>";
-              
+              ?>
+              <div class="p-0.5 lg:p-2.5">
+                <h2 class ="lg:ml-16 user-title">No user</h2>
+              </div>
+              <?php
             }
           ?>
-          <div class="chat-container flex flex-col w-screen h-auto min-h-[80%] border-solid border border-black rounded-2xl m-0 p-0.5 lg:p-2.5 gap-1 justify-between lg:w-9/12 lg:m-auto">
+          <div class="chat-container flex flex-col w-screen h-auto min-h-[80%] border-solid border border-black rounded-2xl m-0 p-0.5 lg:p-2.5 gap-1 justify-between lg:w-11/12 lg:m-auto">
             <div id="chat-content"  class="flex flex-col self-start overflow-y-auto">
               <?php                  
                 if(mysqli_num_rows($chat_result) == 0){
@@ -117,15 +124,11 @@
                       INNER JOIN user ON user.user_id = chat.sender_id
                       WHERE chat.friend_list_id = ".$friend_id_result['friend_list_id']);
 
-                    // $sender_id = $chat['sender_id']; // Replace with your actual variable or database column
-                    // $receiver_id = $friend_list['second_user_id']; // Replace with your actual variable or database column
-
                     if(mysqli_num_rows($chats) > 0)
                     {
                       foreach($chats as $chat_data) // Run SQL query
                       {
                     ?>
-
                       <div class="message_container w-full h-auto flex flex-col md:flex-row lg:flex-row justify-between p-1 lg:w-4/52">
                         <div class="flex flex-row gap-1">
                           <img src="<?=$chat_data['user_image']?>" class="profile_img w-11 h-11 justify-start rounded-full lg:w-14 lg:h-14 md:w-14 md:h-14">  
@@ -169,17 +172,13 @@
                   ?>
                 <!--end of message type box-->
               </div>
-
           </div>
         </div>
-
       </div><!--end of content box-->
     </div>
   </div>
 
-
   <script src="./JavaScript/hamburger.js"></script>
   <script src="./JavaScript/nav_bar.js"></script>
-      
 </body>
 </html>
