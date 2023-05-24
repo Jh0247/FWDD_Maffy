@@ -26,7 +26,7 @@
     $course_info_result = mysqli_query($con, $course_info);
     $course_info_row = mysqli_fetch_assoc($course_info_result);
 
-    #Extracting course information for all courses from database
+    #Extracting assessment information for all courses from database
     $ass_info = "SELECT * FROM assessment WHERE course_id = $courseID";
     $ass_info_result = mysqli_query($con, $ass_info);
     $ass_info_row = mysqli_fetch_assoc($ass_info_result);
@@ -217,35 +217,38 @@
                     <button class="apply-btn">Apply</button>
                 </div>
             </form>
-            <?php 
-            
-            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-                $filter = [];
-    
-                if (isset($_GET['latest'])) {
-                $filter[] = 'DESC';
-                }
-    
-                if (isset($_GET['oldest'])) {
-                $filter[] = 'ASC';
-                }
-    
-                if (!empty($filter)) {
-                $orderBy = implode(', ', $filter);
-    
-                // Perform the SQL query using the selected filter options
-                $filter_query = "SELECT * FROM assessment ORDER BY assessment_date_posted $orderBy";
-                $filter_result = mysqli_query($con, $filter_query);
-                }
-                }
-            ?>
 
             <!-- single asssessment status container -->
             <?php 
-            // while($row = mysqli_fetch_assoc($filter_result)){
                 if($count >= 1) {
+                    
                     do{
+                        // if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                        //     $filter = [];
+                
+                        //     if (isset($_GET['latest'])) {
+                        //     $filter[] = 'DESC';
+                        //     }
+                
+                        //     if (isset($_GET['oldest'])) {
+                        //     $filter[] = 'ASC';
+                        //     }
+                
+                        //     if (!empty($filter)) {
+                        //     $orderBy = implode(', ', $filter);
+                
+                        //     // Perform the SQL query using the selected filter options
+                        //     $filter_query = "SELECT * FROM assessment ORDER BY assessment_date_posted $orderBy";
+                        //     $filter_result = mysqli_query($con, $filter_query);
+                        //     $filter_result_row = mysqli_fetch_assoc($filter_result);
+            
+                        //     }
+                        //     single_ass($filter_result_row["assessment_id"], $filter_result_row["course_id"], $filter_result_row["assessment_title"], $filter_result_row["assessment_content"]);
+
+                        // } else{
+                        
                         single_ass($ass_info_row["assessment_id"], $ass_info_row["course_id"], $ass_info_row["assessment_title"], $ass_info_row["assessment_content"]);
+                        
                     } while ($ass_info_row = mysqli_fetch_assoc($ass_info_result));
                 }
                 else {
@@ -272,7 +275,6 @@
                         ");
                     }
                 }
-            // }
             ?>
         </div>
     </div>

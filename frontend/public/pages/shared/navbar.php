@@ -44,6 +44,7 @@
                     <ul class="nav-links">
                         <li><a class="btn active" href="../shared/view_all_course.php">Courses</a></li>
                         <li><a class="btn" href="../teacher/add_course.php?currentfile=">Add Course</a></li>
+                        <li><a class="btn" href="../shared/term-condition.php">Term & Condition</a></li>
                         <div class="profile-res">
                             <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
                             <div class="profile-dropdown_links">
@@ -83,6 +84,7 @@
                         <li><a class="btn" href="../shared/view_all_course.php">Courses</a></li>
                         <li><a class="btn" href="../student/view_friend.php">Friend</a></li>
                         <li><a class="btn" href="../student/chat.php">Chat</a></li>
+                        <li><a class="btn" href="../shared/term-condition.php">Term & Condition</a></li>
                         <div class="profile-res">
                             <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
                             <div class="profile-dropdown_links">

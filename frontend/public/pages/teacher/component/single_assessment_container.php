@@ -2,7 +2,7 @@
 function single_ass($assID, $courseID, $assTitle, $assDesc) {
 
     $element = "
-    <a class=\"view-ass\" href=\"#\">
+    <a class=\"view-ass\" href=\"../shared/view_assessment.php?ass_id=$assID&courseid=$courseID\">
         <div class=\"assessment-container\" id=\"next-page\">
             <div class=\"header\">
                 <h2>$assTitle</h2>
