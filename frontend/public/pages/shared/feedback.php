@@ -14,8 +14,6 @@
     if (empty($content)) {
       echo("<script>alert('Please provide feedback.')</script>");
     } else {
-      // Perform additional validation if needed
-        
       // Insert the feedback into the database
       $sql = "INSERT INTO `feedback` (`user_id`, `feedback_content`) VALUES ($user_id, '$content')";
 

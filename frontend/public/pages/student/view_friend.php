@@ -16,8 +16,12 @@
     END AS first_user_id,
     friend_status, user.user_image, user.username, user.user_email
     FROM friend_list
-    INNER JOIN user ON user.user_id = friend_list.second_user_id
-    WHERE first_user_id = $user_id OR second_user_id = $user_id");
+    INNER JOIN user ON user.user_id =(
+    CASE
+      WHEN friend_list.second_user_id != $user_id THEN friend_list.second_user_id
+      ELSE friend_list.first_user_id
+    END)
+    WHERE (first_user_id = $user_id OR second_user_id = $user_id)");
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +76,7 @@
                 </a>
                 <!-- chat -->
                 <div class="btn-cont">
-                  <a href="chat.php?friend=<?php echo $data['second_user_id']; ?>" class="chat-btn">
+                  <a href="../student/chat.php?friend=<?php echo $data['second_user_id']; ?>" class="chat-btn">
                     <h2>Chat</h2>
                     <i class="fa-solid fa-comments chat-icon"></i>
                   </a>
