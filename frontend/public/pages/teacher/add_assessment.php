@@ -92,16 +92,16 @@
                 <label for="title">Programming Code:</label>
                 <div class="custom-select">
                     <select id="language-select" onchange="setMode(this.value)">
-                        <option value="htmlmixed">HTML</option>
-                        <option value="css">CSS</option>
-                        <option value="javascript">JavaScript</option>
-                        <option value="php">PHP</option>
-                        <option value="text/x-java">Java</option>
-                        <option value="python">Python</option>
-                        <option value="jsx">React</option>
-                        <option value="xml">AJAX</option>
-                        <option value="javascript">jQuery</option>
-                        <option value="sql">SQL</option>
+                        <option value="htmlmixed">html</option>
+                        <option value="css">css</option>
+                        <option value="javascript">javascript</option>
+                        <option value="php">php</option>
+                        <option value="text/x-java">java</option>
+                        <option value="python">python</option>
+                        <option value="jsx">react</option>
+                        <option value="xml">ajax</option>
+                        <option value="javascript">jquery</option>
+                        <option value="sql">sql</option>
                     </select>
                 </div>
                 <textarea class="input" id="code-editor" name="code" rows="10" cols="80" class="code-editor"></textarea>

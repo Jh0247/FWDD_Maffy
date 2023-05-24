@@ -140,7 +140,7 @@ button {
   width: 90%;
   margin: 0 auto;
   box-sizing: border-box;
-  z-index: 999;
+  z-index: 1;
   margin-bottom: 50px;
   border-radius: 10px;
 }
