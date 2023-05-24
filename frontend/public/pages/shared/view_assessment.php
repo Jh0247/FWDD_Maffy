@@ -2,8 +2,19 @@
     include("../../../../backend/conn.php");
     include("../../../../backend/session.php");
 
+    $assessment_id = $_GET['ass_id'];
+    $course_id = $_GET['courseid'];
+
+    #select assessment
+    $assessment = mysqli_query($con, "SELECT * FROM assessment WHERE assessment_id ='$assessment_id'");
+
     $courses = "SELECT * FROM course";
     $total_courses = mysqli_query($con,$courses);
+
+    #select the comment data
+    $comment = "SELECT * FROM comment WHERE assessment_id = '$assessment_id'";
+    $comment_result = mysqli_query($con,$comment);
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,47 +70,21 @@
     <div class="big-container">
       <div class="first-container">
         <div class="subContainer">
+          <?php
+          if(mysqli_num_rows($assessment) > 0){
+            while($row = mysqli_fetch_assoc($assessment)){
+          ?>
+            <h1><?=$row['assessment_title']?></h1>
+            <h4><?=$row['assessment_date_posted']?></h4>              
+          </div>
+        </div>
+        <div class="second-container">
+          <p><?=$row['assessment_content']?></p>
+        </div>
         <?php
+          }
+        }
         ?>
-        <h1>Title</h1>
-        </div>
-        <div class="secSubContainer">
-          <p>View</p>
-          <a href="#">Additional Note</a>
-        </div>
-      </div>
-
-      <div class="second-container">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
-
-      <div class="comment-container">
-        <h2><i class="fa fa-comment-o" aria-hidden="true"></i>Comment</h2>
-        <div class="comment">
-          <div class="subComment">
-            <img src="./profile.jpg">
-            <div class="prev-comment">
-              <p>Comment somethingComment somethingComment somethingComment somethingComment somethingComment something</p>
-            </div>
-          </div>
-        </div>
-        <!--For user to type the comment-->
-        <form action="">
-          <div class="comment">
-            <div class="subComment">
-              <img src="./profile.jpg">
-              <input type="text" class="comment-box" placeholder="Comment">
-              <button class="sendBtn">
-                <span class="text">Post</span>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
 
       <form novalidate>
         <div class="exercise-container">
@@ -121,6 +106,64 @@
           </div>
         </div>
       </form>
+
+      <div class="comment-container">
+        <div>
+          <i class="fa fa-comment-o comment" aria-hidden="true"></i>
+          <h2>Comment</h2>
+        </div>
+        <?php                  
+          if(mysqli_num_rows($comment_result) == 0){
+        ?>
+          <p>This assessment don't have comment</P>
+        <?php
+          }else{
+              // php to get the friend list id
+              $comment = mysqli_query($con,
+              "SELECT comment.comment_word,comment.comment_date_posted,user.user_image, user.username FROM comment
+              INNER JOIN user ON user.user_id = comment.user_id
+              INNER JOIN assessment ON assessment.assessment_id = comment.assessment_id
+              WHERE comment.assessment_id = assessment.assessment_id");
+
+              if(mysqli_num_rows($comment) > 0)
+              {
+                foreach($comment as $comment_data) // Run SQL query
+                    {
+          ?>
+                      <div class="comment">
+                        <div class="subComment">
+                          <!-- <img src="./profile.jpg"> -->
+                          <img src="<?=$comment_data['user_image']?>">
+                          <div class="prev-comment">
+                            <p><?=$comment_data['comment_word']?></p>
+                            <!-- <p>Comment somethingComment somethingComment somethingComment somethingComment somethingComment something</p> -->
+                          </div>
+                        </div>
+                      </div>
+          <?php
+                    }
+                  }
+              }
+          ?>
+        <!--For user to type the comment-->
+        <form action="">
+          <div class="comment">
+            <div class="subComment">
+              <!-- <img src="./profile.jpg"> -->
+              <?php
+              #Get user id
+              $user = mysqli_query($con,"SELECT * FROM user where user_id = '" . $_SESSION['user_id'] . "'");
+              $users = mysqli_fetch_assoc($user);
+              ?>
+              <img src="<?=$users['user_image']?>">
+              <input type="text" class="comment-box" placeholder="Comment" id="comment-text">
+              <button class="sendBtn" id="post">
+                <span class="text">Post</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
 
       <!--share button-->
       <div class="bottom-container">
