@@ -110,14 +110,13 @@
   <script>
     // a pop-up function that use at php code
     function request_success() {
-        Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: 'Friend Request Send!',
-            showDenyButton: false,
-            showCancelButton: false,
-            // confirmButtonText: "<a href=\"#\" onclick=window.location.href=\"../../../public/pages/shared/course_page.php?userid=<?php echo $_SESSION['user_id']; ?>&courseid=<?php echo $courseID; ?>\" style=\"text-decoration:none; color:white; \">Continue</a>"
-        })
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Friend Request Send!',
+        showDenyButton: false,
+        showCancelButton: false,
+      })
     }
     </script>
 
@@ -168,45 +167,57 @@
             // to see student can add or remove friend
             if (isset($_GET['id'])){
               $page_user_id = $_GET['id'];
+              $self_id = $_SESSION['user_id'];
               if($_SESSION['user_id'] != $page_user_id) {
                 // validate see if friend or not
                 $friend_result = mysqli_query($con, 
                 "SELECT
                   CASE
-                      WHEN first_user_id = $posted_user_id THEN second_user_id
-                      ELSE first_user_id
+                    WHEN first_user_id = $self_id THEN second_user_id
+                    ELSE first_user_id
                   END AS second_user_id,
                   CASE
-                      WHEN first_user_id = $posted_user_id THEN first_user_id
-                      ELSE second_user_id
+                    WHEN first_user_id = $self_id THEN first_user_id
+                    ELSE second_user_id
                   END AS first_user_id,
-                  friend_status
+                  friend_status, friend_list_id
                   FROM friend_list
-                  INNER JOIN user ON user.user_id = friend_list.second_user_id
-                  WHERE first_user_id = $posted_user_id OR second_user_id = $posted_user_id");
+                  INNER JOIN user ON user.user_id =(
+                  CASE
+                    WHEN friend_list.second_user_id != $self_id THEN friend_list.second_user_id
+                    ELSE friend_list.first_user_id
+                  END)
+                  WHERE (first_user_id = $self_id OR second_user_id = $self_id)
+                  AND (first_user_id = $page_user_id OR second_user_id = $page_user_id)");
 
-                  if(mysqli_num_rows($friend_result) > 0) {
-                    foreach($friend_result as $data) {
-                      if($data['second_user_id'] == $page_user_id && $data['friend_status'] == 1){
-                        ?>
-                        <button name="friend-submit" class="flex flex-col text-center">
-                          <span class="download-btn mr-2 sm:mr-4">
-                            <i class="fa-solid fa-user-plus"></i>
-                          </span>
-                        </button>
-                        <?php
-                        break;
-                      } else {
-                        ?>
-                        <button name="friend-submit" class="flex flex-col text-center">
-                          <span class="download-btn mr-2 sm:mr-4">
-                            <i class="fa-solid fa-user-slash"></i>
-                          </span>
-                        </button>
-                        <?php
-                        break;
-                      }
-                    }
+                $get_friend_result = mysqli_fetch_array($friend_result);
+
+                  if(isset($get_friend_result) && $get_friend_result['friend_status'] == 1) {
+                    ?>
+                    <button onclick="deleteAction(<?php echo $get_friend_result['friend_list_id']; ?>)" class="flex flex-col text-center">
+                      <span class="download-btn mr-2 sm:mr-4">
+                        <i class="fa-solid fa-user-slash"></i>
+                      </span>
+                    </button>
+                    <?php
+                  } else if (isset($get_friend_result) && $get_friend_result['friend_status'] == 0){
+                    ?>
+                    <span class="flex flex-col text-center">
+                      <span class="mr-2 sm:mr-4">
+                        <i class="fa-solid fa-spinner"></i>
+                        PENDING
+                      </span>
+                    </span>
+                    <?php
+                  }
+                  else {
+                    ?>
+                    <button onclick="requestAction(<?php echo $page_user_id; ?>)" class="flex flex-col text-center">
+                      <span class="download-btn mr-2 sm:mr-4">
+                        <i class="fa-solid fa-user-plus"></i>
+                      </span>
+                    </button>
+                    <?php
                   }
                 ?>
                 <?php
@@ -336,5 +347,61 @@
   <?php
     mysqli_close($con);
   ?>
+  <script>
+
+  function requestAction(target) {
+    // Create an AJAX request
+    var xhr = new XMLHttpRequest();
+    
+    // Define the request parameters
+    var url = '../../../../backend/update-friend-request.php';
+    var from_id = <?php echo $_SESSION['user_id']; ?>;
+    var params = 'type=request&to_id=' + encodeURIComponent(target) + '&from_id=' + encodeURIComponent(from_id);
+
+    // Configure the request
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    
+    // Define the callback function for when the request completes
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        // Request successful
+        location.reload();
+      } else {
+        // Request failed
+        location.reload();
+        console.log('Error: Request failed');
+      }
+    };
+
+    xhr.send(params);
+  }
+
+    function deleteAction(target) {
+      // Create an AJAX request
+      var xhr = new XMLHttpRequest();
+      
+      // Define the request parameters
+      var url = '../../../../backend/update-friend-request.php';
+      var params = 'type=reject&list_id=' + encodeURIComponent(target);
+
+      // Configure the request
+      xhr.open('POST', url, true);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      
+      // Define the callback function for when the request completes
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          location.reload();
+        } else {
+          // Request failed
+          location.reload();
+          console.log('Error: Reject request failed');
+        }
+      };
+
+      xhr.send(params);
+    }
+  </script>
 </body>
 </html>

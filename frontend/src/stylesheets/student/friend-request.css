@@ -2,109 +2,118 @@ body{
     background-color: #667e91;
   }
 
+.title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  font-family: cursive;
+  color: #ffffff;
+}
+
 .friend-container{
-    display: flex;
-    flex-direction: column;
-    border-radius: 20px;
-    padding: 15px;
-    width: 80%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 15px 30px 0px 30px;
+  width: 100%;
 }
 
 .friend-content {
   width: 100%;
-  background-color: #ffffff;
+  background-color: #f4eee0;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  /* box-shadow: 3px 3px 7px #bebebe; */
+  margin-bottom: 10px;
 }
 
 .left {
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
 }
 
 .left h1{
-    margin: auto;
-    font-size:25px;
+  margin: auto;
+  font-size: 1.4rem;
 }
 
-.left img{
+.left .user-img{
   height: 70px;
   width: 70px;
-  margin-top: 5px;
+  margin: 10px;
+  border-radius: 999px;
+  background-color: #000;
 }
 
 .decision{
-    display: flex;
-    align-self: flex-end;
-    gap: 1rem;
-    padding: 10px;
+  display: flex;
+  align-self: flex-end;
+  gap: 1rem;
+  padding: 10px;
 }
 
 .accept {
-    display: inline-block;
-    color: #fff;
-    background-color:#4aa13f;
-    border: 2px solid #000;
-    border-radius: 10px;
-    box-shadow: 5px 5px 0px #000;
-    transition: all 0.3s ease;
-    margin-top: 5px;
-  }
-  
-  .accept:hover {
-    background-color: #fff;
-    color: #4aa13f;
-    border: 2px solid #4aa13f;
-    box-shadow: 5px 5px 0px #4aa13f;
-  }
-  
-  .accept:active, .reject:active {
-    background-color: #fcf414;
-    box-shadow: none;
-    transform: translateY(4px);
-  }
+  display: inline-block;
+  color: #fff;
+  background-color:#4aa13f;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.3s ease;
+  margin-top: 5px;
+}
 
-  .reject {
-    display: inline-block;
-    color: #fff;
-    background-color: #ff5252;
-    border: 2px solid #000;
-    border-radius: 10px;
-    box-shadow: 5px 5px 0px #000;
-    transition: all 0.3s ease;
-    margin-top: 5px;
-  }
-  
-  .reject:hover {
-    background-color: #fff;
-    color: #ff5252;
-    border: 2px solid #ff5252;
-    box-shadow: 5px 5px 0px #ff5252;
-  }
+.accept:hover {
+  background-color: #fff;
+  color: #4aa13f;
+  border: 2px solid #4aa13f;
+  box-shadow: 5px 5px 0px #4aa13f;
+}
+
+.accept:active, .reject:active {
+  background-color: #fcf414;
+  box-shadow: none;
+  transform: translateY(4px);
+}
+
+.reject {
+  display: inline-block;
+  color: #fff;
+  background-color: #ff5252;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.3s ease;
+  margin-top: 5px;
+}
+
+.reject:hover {
+  background-color: #fff;
+  color: #ff5252;
+  border: 2px solid #ff5252;
+  box-shadow: 5px 5px 0px #ff5252;
+}
 
 @media only screen and (max-width: 468px) {
-    .friend-content{
-        flex-direction: column;
-    }
+  .friend-content{
+    flex-direction: column;
+  }
 
-    .left{
-        flex-direction: column;
-    }
+  .left{
+    flex-direction: column;
+  }
 
-    .left img{
-        align-self: center;
-    }
+  .left img{
+    align-self: center;
+  }
 
-    .decision{
-        justify-content: center;
-    }
+  .decision{
+    justify-content: center;
+  }
 
-    .accept, .reject{
-        font-size: 10px;
-        padding: 10px 10px;
-    }
+  .accept, .reject{
+    font-size: 10px;
+    padding: 10px 10px;
+  }
 }

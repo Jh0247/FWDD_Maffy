@@ -3,9 +3,11 @@
     left: 0;
     height: 100%;
     width: 250px;
-    background-color: #12171e;
+    color: #7d84ab;
+    background-color: rgb(83, 92, 117);
     transition: all 0.8s ease;
     z-index: 1;
+    overflow-x: hidden !important;
   }
 
   .sidebar.active ~ .main-content{
@@ -31,6 +33,12 @@
 
   .logo h1{
     font-size: 20px;
+  }
+
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
   }
 
   .sidebar ul li{
@@ -73,6 +81,14 @@
 
   .sidebar.active ul li .tooltip{
     display: none;
+  }
+
+  .sidebar .user-profile-img{
+    background-color: #000000;
+    width: 50px;
+    height: 50px;
+    border-radius: 999px;
+    margin-right: 10px;
   }
 
 @media screen and (max-width: 825px){
