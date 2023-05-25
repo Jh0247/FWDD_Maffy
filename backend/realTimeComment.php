@@ -7,7 +7,7 @@
     $output = "";
 
     $comments = mysqli_query($con, 
-      "SELECT comment.comment_word, comment.assessment_id, comment.comment_date_posted, user.user_image, user.username
+      "SELECT comment.comment_word, comment.user_id ,comment.assessment_id, comment.comment_date_posted, user.user_image, user.username
       FROM comment
       INNER JOIN user ON user.user_id = comment.user_id
       INNER JOIN assessment ON assessment.assessment_id = comment.assessment_id
@@ -19,7 +19,7 @@
         $output .= '
         <div class="comment">
         <div class="subComment">
-          <img src="'.$comment['user_image'].'">
+          <a href="../shared/user_profile.php?id=' . $comment['user_id'] . '"><img src="'.$comment['user_image'].'"></a>
           <div class="prev-comment">
             <p>'.$comment['comment_word'].'</p>
             <!-- <p>Comment somethingComment somethingComment somethingComment somethingComment somethingComment something</p> -->
@@ -30,17 +30,17 @@
       }
       else
       {
-        $output .= "
-        <div class=\"comment\">
-        <div class=\"subComment\">
-          <img src=\"".$comment['user_image']."\">
-          <div class=\"prev-comment\">
-            <p>\"".$comment['comment_word']."\"</p>
+        $output .= '
+        <div class="comment">
+        <div class="subComment">
+          <a href="../shared/user_profile.php?id=' . $comment['user_id'] . '"><img src="'.$comment['user_image'].'"></a>
+          <div class="prev-comment">
+            <p>'.$comment['comment_word'].'</p>
             <!-- <p>Comment somethingComment somethingComment somethingComment somethingComment somethingComment something</p> -->
           </div>
         </div>
       </div>
-        ";
+        ';
       }
     }
     echo $output;
