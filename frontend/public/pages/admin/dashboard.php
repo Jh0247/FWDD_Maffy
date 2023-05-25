@@ -2,14 +2,6 @@
   // connection to database
   include("../../../../backend/conn.php");
   include("../../../../backend/session.php");
-  if ($_SESSION['privilege'] == 'teacher'){
-    echo("<script>alert('You do not have the privilege to access this page.')</script>");
-    echo("<script>window.location = '../teacher/homepage.php'</script>");
-  }
-  else if ($_SESSION['privilege'] == 'student'){
-    echo("<script>alert('You do not have the privilege to access this page.')</script>");
-    echo("<script>window.location = '../student/homepage.php'</script>");
-  }
 
   //sql query to count all teacher account
   $total_teacher_sql = mysqli_query($con, "SELECT COUNT(user_id) FROM user WHERE privilege_id = 2 AND user_active = 1");
@@ -73,18 +65,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../../src/stylesheets/admin/dashboard.css">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com"></script>  
   <script src="https://kit.fontawesome.com/775f0ea71b.js" crossorigin="anonymous"></script>
   <title>Dashboard</title>
 </head>
-
 <body>
-  <div class="w-screen h-screen flex flex-row">
+
+  <div id="all"class="w-screen h-screen flex flex-row">
     <?php include '../admin/sidebar.php';?>
     <div class="w-full overflow-auto">
       <div class="flex flex-col mx-6 sm:mx-9 text-center sm:text-left">
         <h2 class="title my-4">Admin Dashboard</h2>
-
         <div class="grid-cont">
           <!-- total teacher -->
           <?php
@@ -296,6 +287,7 @@
       </div>
     </div>
   </div>
+<?php include("../../../../backend/admin-block-privilege.php"); ?>
 <script src="./javascript/jquery-2.2.4.min.js"></script>
 <script src="./javascript/profile.min.js"></script>
 <script>
@@ -354,6 +346,8 @@
   setInterval(function() {
     location.reload();
   }, 10000);
+
+
 
 </script>
 <script type="text/javascript" src="../admin/javascript/sidebar.js"></script>

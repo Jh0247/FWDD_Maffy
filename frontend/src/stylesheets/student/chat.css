@@ -1,5 +1,6 @@
 body {
   background-color: #667e91 !important;
+  overflow: hidden !important;
 }
 
 .user-title {
@@ -11,7 +12,7 @@ body {
 
 .home-cont {
   width: 100vw;
-  height: 100vh;
+  height: fit-content;
   display: flex;
   flex-direction: column;
 }
