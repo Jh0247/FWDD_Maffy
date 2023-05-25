@@ -115,13 +115,14 @@
   <link rel="stylesheet" href="../../../src/stylesheets/shared/nav_bar.css">
   <link rel="stylesheet" href="../../../src/stylesheets/shared/edit_profile.css">  
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
   <script src="https://kit.fontawesome.com/873ab321fe.js" crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Profile</title>
 </head>
 
 <body>
-<div class="w-screen h-screen flex flex-row">
+<div id="all" class="w-screen h-screen flex flex-row">
   <?php include '../shared/navbar.php';?>
   <div class="w-full overflow-auto">
     <div class="details-container">
@@ -187,7 +188,30 @@
       </div>
     </div>
   </form>
+  <script>
+  function pop_block() {
+    Swal.fire({
+      icon: 'warning',
+      title: 'ALERT',
+      text: 'Please use desktop to access this page!',
+      showDenyButton: false,
+      showCancelButton: false,
+      confirmButtonText: 'Continue'
+        }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        to_profile();
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+  }
 
+  function to_profile() {
+    window.location = '../shared/user_profile.php'
+  }
+
+  </script>
   <!-- edit password -->
   <script>
   // Pop out edit password container
@@ -220,6 +244,16 @@
   function chooseImage() {
     document.getElementById('real-file').click();
   }
+
+  window.onload = function() {
+    // Check the width of the browser window
+    var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+    if (windowWidth < 760) {
+      document.getElementById('all').style.display = 'none';
+      pop_block();
+    }
+  };
   </script>
   <script src="../student/JavaScript/edit_profile.js"></script>
   <script src="./JavaScript/nav_bar.js"></script>

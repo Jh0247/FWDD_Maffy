@@ -2,14 +2,7 @@
   // connection to database
   include("../../../../backend/conn.php");
   include("../../../../backend/session.php");
-  if ($_SESSION['privilege'] == 'teacher'){
-    echo("<script>alert('You do not have the privilege to access this page.')</script>");
-    echo("<script>window.location = '../teacher/homepage.php'</script>");
-  }
-  else if ($_SESSION['privilege'] == 'student'){
-    echo("<script>alert('You do not have the privilege to access this page.')</script>");
-    echo("<script>window.location = '../student/homepage.php'</script>");
-  }
+
   //Close connection of database
   mysqli_close($con);
 
@@ -37,7 +30,7 @@ if(isset($_POST['condition'])){
   <script src="https://kit.fontawesome.com/775f0ea71b.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="w-screen h-screen flex flex-row">
+  <div id="all" class="w-screen h-screen flex flex-row">
     <?php include '../admin/sidebar.php';?>
     <div class="w-full overflow-auto">
       <div class="flex flex-col h-fit mx-6 sm:mx-9 text-left">
@@ -55,6 +48,7 @@ if(isset($_POST['condition'])){
       </div>
     </div>
   </div>
+<?php include("../../../../backend/admin-block-privilege.php"); ?>
 <script type="text/javascript" src="./javascript/sidebar.js"></script>
 <script>
   var change = document.getElementById("myTextarea");
