@@ -43,6 +43,14 @@ body{
   transform: translatex(-3px);
 }
 
+.profile-image{
+  background-color: black;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
 .details-container {
   width: 95%;
   margin: 0 auto;

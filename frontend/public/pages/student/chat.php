@@ -163,8 +163,8 @@
 
                     $friend_id_result = mysqli_fetch_array($get_friend_id_sql);
                 ?>
-                  <input type="text" id="message" class="outline-none p-2 bg-transparent border-none w-7/12" placeholder="Type Your Message Here....." id="chat_message">
-                  <span class="chatSendBtn" id="send">Send</span>
+                  <input type="text" id="message" class="outline-none p-2 bg-transparent border-none w-7/12" placeholder="Type Your Message Here....." id="chat_message" onkeypress="handleKeyDown(event)">
+                  <button class="chatSendBtn" id="send">Send</button>
                   <?php
                   } else {
                     ?>
@@ -173,61 +173,68 @@
                   }
                   ?>
                 <!--end of message type box-->
-              </div>
+            </div>
           </div>
         </div>
       </div><!--end of content box-->
     </div>
   </div>
   <script>
-// when click on the send button
-$(document).ready(function() {
-  $("#send").on("click", function() {
-    // assign value
-    var friend_list = "<?php echo $friend_id_result['friend_list_id']; ?>";
-    var message = $("#message").val();
-
-    // pass to insert message
-    $.ajax({
-      url: "../../../../backend/insertMessage.php",
-      method: "POST",
-      data: {
-        sender_id: "<?php echo $_SESSION['user_id']; ?>",
-        friend_list: friend_list,
-        message: message
-      },
-      dataType: "text",
-      success: function(data) {
-        $("#message").val("");
-      }
-    });
-  });
+  function handleKeyDown(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      document.getElementById("send").click();
+    }
+  }
+    
   function scrollToBottom() {
-  var chatContainer = document.getElementById("chatContainer");
-  chatContainer.scrollTop = chatContainer.scrollHeight;
-}
-  //refresh the page
-  setInterval(function() {
-    var friend_list = "<?php echo $friend_id_result['friend_list_id']; ?>";
-    var message = $("#message").val();
+    var chatContainer = document.getElementById("chatContainer");
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  }
 
-    $.ajax({
-      url: "../../../../backend/realTimeChat.php",
-      method: "POST",
-      data :{
-        sender_id: "<?php echo $_SESSION['user_id']; ?>",
-        friend_list: friend_list,
-      },
-      dataType:"Text",
-      success:function(data){
-        $("#chat-content").html(data);
-        scrollToBottom();
-      }
-    })
-  }, 700);
-});
+  // when click on the send button
+  $(document).ready(function() {
+    $("#send").on("click", function() {
+      // assign value
+      var friend_list = "<?php echo $friend_id_result['friend_list_id']; ?>";
+      var message = $("#message").val();
 
+      // pass to insert message
+      $.ajax({
+        url: "../../../../backend/insertMessage.php",
+        method: "POST",
+        data: {
+          sender_id: "<?php echo $_SESSION['user_id']; ?>",
+          friend_list: friend_list,
+          message: message
+        },
+        dataType: "text",
+        success: function(data) {
+          $("#message").val("");
+        }
+      });
+    });
 
+    //refresh the page
+    setInterval(function() {
+      var friend_list = "<?php echo $friend_id_result['friend_list_id']; ?>";
+      var message = $("#message").val();
+
+      $.ajax({
+        url: "../../../../backend/realTimeChat.php",
+        method: "POST",
+        data :{
+          sender_id: "<?php echo $_SESSION['user_id']; ?>",
+          friend_list: friend_list,
+        },
+        dataType:"Text",
+        success:function(data){
+          $("#chat-content").html(data);
+           scrollToBottom();
+        }
+      })
+    }, 700);
+  });
 </script>
   <script src="./JavaScript/hamburger.js"></script>
   <script src="./JavaScript/nav_bar.js"></script>

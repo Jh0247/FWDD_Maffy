@@ -63,7 +63,14 @@ if (isset($_GET['courseid'])) {
 <body>
     <?php include '../shared/navbar.php'; ?>
     <div class="container">
-        <h2>ADD COURSE</h2>
+        <?php
+        if (($_GET['currentfile'] === $currentFile)) {
+            echo "<h2>EDIT COURSE</h2>";
+        } else {
+            echo "<h2>ADD COURSE</h2>";
+        }
+
+        ?>
 
         <form novalidate method="POST" id="post-form" enctype="multipart/form-data">
             <div class="form-group">
