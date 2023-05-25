@@ -2,8 +2,6 @@
     include("../backend/conn.php");
     include("../backend/session.php");
 
-    echo("<script>alert('You were logged in!')</script>");
-
     $sender = $_POST["sender_id"];
     $friend_list = $_POST["friend_list"];
     $message = $_POST["message"];

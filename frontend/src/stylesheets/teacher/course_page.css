@@ -15,10 +15,24 @@ header {
 	height: 100%;
 	width: 100%;
   background-color: rgba(255, 255, 255, 0.5);
+}
 
+.cover-admin{
+  position: relative;
+	height: 100%;
+	width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .cover-image img {
+	height: 100%;
+	width: 100%;
+  opacity: 0.2;
+  filter: blur(2px);
+  object-fit: fill;
+}
+
+.cover-admin img {
 	height: 100%;
 	width: 100%;
   opacity: 0.2;
@@ -30,12 +44,23 @@ header {
 	position: absolute;
 	top: 0;
 	left: 20px;
+  right: 20px;
 	color: #000000;
 	text-align: justify;
   overflow: auto;
-  max-width: 80%;
   max-height: auto;
   white-space: normal;
+}
+
+.cover-header-text{
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  max-width: 100%;
+}
+
+.cover-p-text{
+  max-width: 80%;
 }
 
 .cover-text h1 {
@@ -119,7 +144,7 @@ button {
   width: 90%;
   margin: 0 auto;
   box-sizing: border-box;
-  z-index: 999;
+  z-index: 1;
   margin-bottom: 50px;
   border-radius: 10px;
 }
@@ -227,11 +252,11 @@ button {
 
 .publish-container .post-btn{
   background-color: #7d84ab;
-  margin: 5px 0;
+  margin: 10px 0;
   border-radius: 10px;
   font-weight: normal;
   cursor: pointer;
-  padding: 10px;
+  padding: 6px;
   border: none;
 }
 
@@ -256,6 +281,14 @@ button {
   }
 
 }
+
+@media screen and (max-width: 426px) {
+
+  .container {
+    height:100px;
+  }
+}
+
 
 @media screen and (max-width: 534px) {
   .assessment-container {
