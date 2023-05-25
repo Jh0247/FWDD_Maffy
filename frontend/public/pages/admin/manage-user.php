@@ -2,14 +2,7 @@
   // connection to database
   include("../../../../backend/conn.php");
   include("../../../../backend/session.php");
-  if ($_SESSION['privilege'] == 'teacher'){
-    echo("<script>alert('You do not have the privilege to access this page.')</script>");
-    echo("<script>window.location = '../teacher/homepage.php'</script>");
-  }
-  else if ($_SESSION['privilege'] == 'student'){
-    echo("<script>alert('You do not have the privilege to access this page.')</script>");
-    echo("<script>window.location = '../student/homepage.php'</script>");
-  }
+
   //sql query to count all teacher account
   $total_teacher_sql = mysqli_query($con, "SELECT COUNT(user_id) FROM user WHERE privilege_id = 2 AND user_active = 1");
   $count_teacher = mysqli_fetch_array($total_teacher_sql);
@@ -38,7 +31,7 @@
 </head>
 
 <body>
-  <div class="w-screen h-screen flex flex-row">
+  <div id="all" class="w-screen h-screen flex flex-row">
     <?php include '../admin/sidebar.php';?>
     <div class="w-full overflow-auto">
       <div class="flex flex-col items-center sm:items-start mx-0 sm:mx-9 text-center sm:text-left">
@@ -93,6 +86,7 @@
       </div>
     </div>
   </div>
+<?php include("../../../../backend/admin-block-privilege.php"); ?>
 <script type="text/javascript" src="../admin/javascript/sidebar.js"></script>
 </body>
 </html>

@@ -2,14 +2,6 @@
   // connection to database
   include("../../../../backend/conn.php");
   include("../../../../backend/session.php");
-  if ($_SESSION['privilege'] == 'teacher'){
-    echo("<script>alert('You do not have the privilege to access this page.')</script>");
-    echo("<script>window.location = '../teacher/homepage.php'</script>");
-  }
-  else if ($_SESSION['privilege'] == 'student'){
-    echo("<script>alert('You do not have the privilege to access this page.')</script>");
-    echo("<script>window.location = '../student/homepage.php'</script>");
-  }
   
   //sql query to get the specific feeback details
   $feedback_id = $_GET['id'];
@@ -19,6 +11,9 @@
     INNER JOIN user on feedback.user_id = user.user_id 
     WHERE feedback_id = $feedback_id");
   $result = mysqli_fetch_array($feedback_sql);
+
+  //Close connection of database
+  mysqli_close($con);
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +28,7 @@
   <script src="https://kit.fontawesome.com/775f0ea71b.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="w-screen h-screen flex flex-row">
+  <div id="all" class="w-screen h-screen flex flex-row">
     <?php include '../admin/sidebar.php';?>
     <div class="w-full overflow-auto">
       <div class="flex flex-col h-fit mx-6 sm:mx-9 text-left">
@@ -55,6 +50,7 @@
       </div>
     </div>
   </div>
+<?php include("../../../../backend/admin-block-privilege.php"); ?>
 <script type="text/javascript" src="./javascript/sidebar.js"></script>
 </body>
 </html>

@@ -2,14 +2,6 @@
   // connection to database
   include("../../../../backend/conn.php");
   include("../../../../backend/session.php");
-  if ($_SESSION['privilege'] == 'teacher'){
-    echo("<script>alert('You do not have the privilege to access this page.')</script>");
-    echo("<script>window.location = '../teacher/homepage.php'</script>");
-  }
-  else if ($_SESSION['privilege'] == 'student'){
-    echo("<script>alert('You do not have the privilege to access this page.')</script>");
-    echo("<script>window.location = '../student/homepage.php'</script>");
-  }
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +16,7 @@
   <title>Maffy</title>
 </head>
 <body>
-  <div class="w-screen h-screen flex flex-row">
+  <div id="all" class="w-screen h-screen flex flex-row">
     <?php include '../admin/sidebar.php';?>
     
     <?php include '../admin/loading.php';?>
@@ -505,6 +497,7 @@
     </div>
   </div>
 
+<?php include("../../../../backend/admin-block-privilege.php"); ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="../admin/javascript/sidebar.js"></script>
 <script type="text/javascript" src="../admin/javascript/view-list.js"></script>

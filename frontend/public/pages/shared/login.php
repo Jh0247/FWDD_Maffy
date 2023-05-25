@@ -11,19 +11,6 @@ else{
   }
 }
 
-if (isset($_SESSION['privilege'])) {
-  echo("<script>alert('You were logged in!')</script>");
-  if($_SESSION['privilege'] == "admin"){
-    header('Location: ../admin/dashboard.php');
-  }
-  else if($_SESSION['privilege'] == "teacher"){
-    header('Location: ../teacher/homepage.php');
-  }
-  else if ($_SESSION['privilege'] == "student"){
-    header('Location: ../student/homepage.php');
-  }
-}
-
 if (isset($_POST['signUpBtn'])) {
   //Connection to database
   include("../../../../backend/conn.php");
@@ -280,7 +267,8 @@ if (isset($_POST['loginBtn'])) {
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
+    <script type="text/javascript" src="../shared/javascript/pop-message-user.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="../shared/javascript/login.js"></script>
 </body>
