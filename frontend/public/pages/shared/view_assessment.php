@@ -26,8 +26,8 @@
     <link rel="stylesheet" href="../../../src/stylesheets/student/siderbar.css">
     <link rel="stylesheet" href="../../../src/stylesheets/student/right-sidebar.css">
     <link rel="stylesheet" href="../../../src/stylesheets/student/view-assessment.css">
-    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-    <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://kit.fontawesome.com/873ab321fe.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/codemirror.css">
@@ -95,54 +95,52 @@
         <div class="second-container">
           <p><?=$row['assessment_content']?></p>
         </div>
-        <?php
-          }
-        }
-        ?>
 
-        <!-- add code session -->
+
+        <!-- add code session --> 
         <div class="code-part">
-            <div class="form-group" id="add-code-div">
-                <label for="title">Programming Code:</label>
-                <div class="custom-select">
-                    <select id="language-select" onchange="setMode(this.value)">
-                    <!-- dont need select, just get from db see what language then pass to js to identify the code background -->
-                        <option value="htmlmixed">html</option>
-                        <option value="css">css</option>
-                        <option value="javascript">javascript</option>
-                        <option value="php">php</option>
-                        <option value="text/x-java">java</option>
-                        <option value="python">python</option>
-                        <option value="jsx">react</option>
-                        <option value="xml">ajax</option>
-                        <option value="javascript">jquery</option>
-                        <option value="sql">sql</option>
-                    </select>
-                </div>
-                <textarea class="input texttt" id="code-editor" name="code" rows="10" cols="80" class="code-editor"></textarea>
-              </div>
-        </div>
-
-      <form novalidate>
-        <div class="exercise-container">
-          <div class="form-group">
-            <label for="publish-exercise" class="check-container">
-              <input type="checkbox" id="publish-exercise" name="publish-exercise">
-              <div class="checkmark"></div>
-              Exercise
-            </label>
-          </div>
-      
-          <div class="exercise-container" id="exercise-group" style="display: none;">
-            <h2>Exercises</h2>
-            <div class="fir-container">
-              <div class="sec-container">
-                <h4>How to comment HTML tags?</h4>
-              </div>
+          <div class="form-group" id="add-code-div">
+            <!-- <label for="title">Programming Code:</label> -->
+            <!-- <span id="language-select" value="css"><?=$row['assessment_language']?></span> -->
+            <div style="display: flex; flex-direction: column;">
+              <h3 style="margin: 0; padding: 0 0 0 10px;text-transform: uppercase;background-color: #DDE6ED;"><?=$row['assessment_language']?></h3>
+              <textarea id="code-editor" name="code" rows="10" cols="80" class="code-editor"><?= htmlspecialchars($row['assessment_code']) ?></textarea>
             </div>
           </div>
         </div>
-      </form>
+      <?php
+            }
+          }
+            ?>
+<form novalidate>
+  <div class="exercise-container">
+    <div class="exercise-container" id="exercise-group">
+      <h2>Exercises</h2>
+      <?php
+      $practice = mysqli_query($con, "SELECT * FROM practice WHERE assessment_id = '$assessment_id'");
+      if (mysqli_num_rows($practice) > 0) {
+        while ($row = mysqli_fetch_assoc($practice)) {
+      ?>
+          <h3 style="margin: 0; padding:0;"><?= $row['practice_title']; ?></h3>
+          <div class="fir-container">
+            <div class="sec-container">
+              <h4><?= htmlspecialchars($row['practice_question']); ?></h4>
+              <input type="text" id="answer" class="answer">
+              <?php
+              // Assuming your stored answer is in a column called 'practice_answer' in the database
+              $storedAnswer = $row['practice_answer'];
+              ?>
+              <button type="button" class="check-btn" onclick="checkAnswer('<?= $storedAnswer; ?>')">Check Answer</button>
+              <div><p id="result"></p></div>
+            </div>
+          </div>
+      <?php
+        }
+      }
+      ?>
+    </div>
+  </div>
+</form>
 
       <div class="comment-container">
         <div>
@@ -159,7 +157,7 @@
           }else{
               // php to get the friend list id
               $comment = mysqli_query($con,
-              "SELECT comment.comment_word, comment.assessment_id, comment.comment_date_posted, user.user_image, user.username
+              "SELECT comment.comment_word, comment.user_id, comment.assessment_id, comment.comment_date_posted, user.user_image, user.username
               FROM comment
               INNER JOIN user ON user.user_id = comment.user_id
               INNER JOIN assessment ON assessment.assessment_id = comment.assessment_id
@@ -176,7 +174,7 @@
                       <div class="comment">
                         <div class="subComment">
                           <!-- <img src="./profile.jpg"> -->
-                          <img src="<?=$comment_data['user_image']?>">
+                          <a href="../shared/user_profile?id=<?php echo $comment_data['user_id'];?>"><img src="<?=$comment_data['user_image']?>"></a>
                           <div class="prev-comment">
                             <p><?=$comment_data['comment_word']?></p>
                           </div>
@@ -240,7 +238,7 @@
     </div>
   </div>
 
-  <!-- <script>
+  <script>
     // when click on the send button
     $(document).ready(function() {
       $("#post").on("click", function() {
@@ -280,10 +278,9 @@
       }, 700);
     });
 
-  </script> -->
+  </script>
   <script src="./nav_bar.js"></script>
   <script src="./hamburger.js"></script>
-  <script src="../student/JavaScript/exercise.js"></script>
 
   <script>
     const form = document.querySelector('form');
@@ -299,8 +296,8 @@
     const postForm = document.getElementById('form');
 
 
-    // Initialize CodeMirror editor
-    var codeEditor = CodeMirror(document.getElementById("code-editor"), {
+// Initialize CodeMirror editor
+var codeEditor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
   mode: "htmlmixed",
   theme: "monokai",
   lineNumbers: true,
@@ -310,13 +307,28 @@
   smartIndent: true,
   lineWrapping: true
 });
- 
 
+// Set the code in the editor
+var code = codeEditor.getValue();
+codeEditor.setValue(code);
 
-    // Set the mode dynamically based on user selection
-    function setMode(mode) {
-        codeEditor.setOption("mode", mode);
-    }
+document.addEventListener("DOMContentLoaded", function() {
+  var languageSelect = document.getElementById("language-select");
+  var selectedMode = languageSelect.getAttribute("value");
+  codeEditor.setOption("mode", selectedMode);
+});
+  </script>
+  <script>
+function checkAnswer(storedAnswer) {
+  var userAnswer = $("#answer").val();
+
+  if (userAnswer === storedAnswer) {
+    $("#result").text("Correct!");
+  } else {
+    $("#result").text("Incorrect!");
+  }
+}
+
   </script>
   
 </body>
