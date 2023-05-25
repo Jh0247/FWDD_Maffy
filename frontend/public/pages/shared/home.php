@@ -48,12 +48,12 @@
             </div>
             <!-- contact us button -->
             <div id="normal-responsive-contact" class="flex flex-row sm:w-10/12 mb-5 justify-center lg:pl-6">
-              <button class="learn-more contact-btn mx-5">
+              <a href="mailto:hello@maffy.com" class="learn-more contact-btn mx-5">
                 <span class="circle" aria-hidden="true">
                   <span class="icon arrow"></span>
                 </span>
                 <span class="button-text">Contact Us</span>
-              </button>
+              </a>
             </div>
           </div>
           <!-- content details -->
@@ -92,16 +92,16 @@
               foreach($trend_course_sql as $course_data) // Run SQL query
               {
                 ?>
-                <div class="slider-card mx-3 lg:mx-8">
-                  <a href="" class="h-3/5">
+                <a href="../shared/login.php"  class="slider-card mx-3 lg:mx-8">
+                  <div class="h-3/5">
                     <img src="<?=$course_data['course_image']?>">
-                  </a>
+                  </div>
                   <div class="slider-caption h-2/5">
 
                     <h2 class="my-3"><?php echo $course_data['course_title']; ?></h2>
                     <p><?php echo $course_data['course_desc']; ?></p>
                   </div>
-                </div>          
+                </a>          
                 <?php
               }
             }
