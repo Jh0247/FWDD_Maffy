@@ -310,7 +310,7 @@
   smartIndent: true,
   lineWrapping: true
 });
-
+ 
 
 
     // Set the mode dynamically based on user selection
