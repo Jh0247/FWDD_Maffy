@@ -16,10 +16,4 @@
     $sql = "INSERT INTO chat (`friend_list_id`, `sender_id`, `chat_content`, `chat_datetime`) VALUES ($friend_list, '$sender', '$message', '$now')";
 
     $result = mysqli_query($con, $sql);
-    if ($result){
-      echo("<script>alert('SEND')</script>");
-    }
-    else{
-      echo("Error description: " . mysqli_error($con));
-    }
 ?>

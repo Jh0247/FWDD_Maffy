@@ -34,6 +34,17 @@ body {
   background-color: #000000;
 }
 
+.chat_user_detail{
+  display: flex;
+  flex-direction: column;
+}
+
+.chat_user{
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
 .UserName{
   font-size: 19px;
 }

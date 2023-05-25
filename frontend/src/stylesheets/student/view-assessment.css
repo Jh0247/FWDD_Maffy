@@ -112,6 +112,11 @@
         font-size: 20px;
     }
 
+    #comment-content{
+        display: flex;
+        flex-direction: column;
+    }
+
     .comment{
         /* width: 100%; */
         height: auto;
