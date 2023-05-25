@@ -194,6 +194,7 @@
 
   // when click on the send button
   $(document).ready(function() {
+    scrollToBottom();
     $("#send").on("click", function() {
       // assign value
       var friend_list = "<?php echo $friend_id_result['friend_list_id']; ?>";
@@ -211,6 +212,7 @@
         dataType: "text",
         success: function(data) {
           $("#message").val("");
+          scrollToBottom();
         }
       });
     });
@@ -230,7 +232,7 @@
         dataType:"Text",
         success:function(data){
           $("#chat-content").html(data);
-           scrollToBottom();
+          scrollToBottom();
         }
       })
     }, 700);
