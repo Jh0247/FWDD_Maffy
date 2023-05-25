@@ -57,6 +57,8 @@ if (isset($_GET['courseid'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/775f0ea71b.js" crossorigin="anonymous"></script>
+
 
     <title>Add Course</title>
 
@@ -210,38 +212,65 @@ if (isset($_GET['courseid'])) {
                             ");
                             }
                         ?>
-                        <?php
-                            if ($count >= 1) {
-                                do {
-                                    single_ass($ass_info_row["assessment_id"], $ass_info_row["course_id"], $ass_info_row["assessment_title"], $ass_info_row["assessment_content"]);
-                                } while ($ass_info_row = mysqli_fetch_assoc($ass_info_result));
-                            } else {
-                                if ($course_info_row["user_id"] == $_SESSION["user_id"]) {
-                                    echo ("
-                                        <div class=\"container\">
-                                            <div class=\"options\">
-                                                <p>This Course Have No Assessment Posted</p>
-                                            </div>
-                                            <div class=\"publish-container\">
-                                                <button onclick=\"location.href='../teacher/add_assessment.php?userid=$_SESSION[user_id]&courseid=$courseID'\" class=\"published post-btn\" >Post Assessment Now</button>
-                                            </div>
-                                        </div> 
-                                    ");
-                                } else {
-                                    echo ("
-                                        <div class=\"container\">
-                                            <div class=\"options\">
-                                                <p>This Course Have No Assessment Posted</p>
-                                            </div>
-                                        </div> 
-                                    ");
-                                }
-                            }
-                        ?>
-                    </div>
-                </div>
 
-                <?php
+                        <!-- search bar container -->
+                        <div class="search-cont">
+                            <input id="search-bar" type="text" class="search__input" placeholder="Search assessment..">
+                            <span class="search__button">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </span>
+                        </div>
+                        <!-- search result list -->
+                        <div id="search-results" class="result-container">
+                            <?php
+                            if ($count >= 1) {
+                                
+                                if(mysqli_num_rows($ass_info_result)>0) {
+                                    foreach($ass_info_result as $data) {
+
+                                    echo "
+                                    <a class=\"view-ass\" href=\"../shared/view_assessment.php?ass_id=$data[assessment_id]&courseid=$courseID\">
+                                        <div class=\"left-details\">
+                                            <div class=\"assessment-container\" id=\"next-page\">
+                                                <div class=\"header\">
+                                                    <h2 style=\"font-weight: bold; font-size: 24px\">".$data['assessment_title']."</h2>
+                                                </div>
+                                                <h3 class=\"desc\">".$data['assessment_content']."</h3>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    ";
+                                    }
+                                }
+                            } else {
+                            if ($course_info_row["user_id"] == $_SESSION["user_id"]) {
+                            echo ("
+                            <div class=\"container\">
+                                <div class=\"options\">
+                                    <p>This Course Have No Assessment Posted</p>
+                                </div>
+                                <div class=\"publish-container\">
+                                    <button
+                                        onclick=\"location.href='../teacher/add_assessment.php?userid=$_SESSION[user_id]&courseid=$courseID'
+                                        \" class=\"published post-btn\">Post Assessment Now</button>
+                                </div>
+                            </div>
+                            ");
+                            } else {
+                            echo ("
+                            <div class=\"container\">
+                                <div class=\"options\">
+                                    <p>This Course Have No Assessment Posted</p>
+                                </div>
+                            </div>
+                            ");
+                            }
+                            }
+                            ?>
+                        </div>
+                    </div>
+
+                    <?php
                     // delete course
                     if (isset($_POST['delete-submitbtn'])) {
                         $delete_course = "DELETE FROM course WHERE user_id = $_SESSION[user_id] AND course_id = $courseID";
@@ -274,46 +303,30 @@ if (isset($_GET['courseid'])) {
 
                     ?>
 
-                <script>
-                const filterOption = document.querySelector('.filter');
-                const filterContainer = document.querySelector('#filter-container');
+                    <script>
+                    //get class and id
+                    const searchBar = document.getElementById("search-bar");
+                    const items = document.querySelectorAll(".view-ass");
 
-                // Event listener for Filter option click
-                const toggle_dropdown = () => {
-                    console.log(0);
-                    if (filterContainer.style.display === "block !important") {
+                    //add event listener
+                    searchBar.addEventListener("input", () => {
+                        //get search bar value
+                        const query = searchBar.value.trim().toLowerCase();
 
-                        filterContainer.style.display = "none";
-                    } else {
-                        filterContainer.style.display = "block";
-                    }
-                };
+                        items.forEach(item => {
+                            const name = item.querySelector("h2").textContent.trim().toLowerCase();
+                            const email = item.querySelector("h3").textContent.trim().toLowerCase();
 
-                const applyButton = document.querySelector('.apply-btn');
-                applyButton.addEventListener('click', applyFilters);
-
-                function applyFilters() {
-                    const lastestCheckbox = document.querySelector('#lastest-checkbox');
-                    const oldestCheckbox = document.querySelector('#oldest-checkbox');
-                    const commentRadio = document.querySelector('#comment-radio');
-                    const exerciseRadio = document.querySelector('#exercise-radio');
-                    const noteRadio = document.querySelector('#note-radio');
-
-                    const lastestChecked = lastestCheckbox.checked;
-                    const oldestChecked = oldestCheckbox.checked;
-                    const commentChecked = commentRadio.checked;
-                    const exerciseChecked = exerciseRadio.checked;
-                    const noteChecked = noteRadio.checked;
-
-                    // Code to filter based on selected options
-                }
-                // Add an onchange event listener to the filter checkboxes
-                document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
-                    checkbox.addEventListener('change', applyFilters);
-                });
-                </script>
-                <script src="../../../src/stylesheets/shared/nav_bar.js"></script>
-                <script type="text/javascript" src="../admin/javascript/sidebar.js"></script>
+                            if (name.includes(query) || email.includes(query)) {
+                                item.style.display = "flex";
+                            } else {
+                                item.style.display = "none";
+                            }
+                        });
+                    });
+                    </script>
+                    <script src="../../../src/stylesheets/shared/nav_bar.js"></script>
+                    <script type="text/javascript" src="../admin/javascript/sidebar.js"></script>
 </body>
 
 </html>

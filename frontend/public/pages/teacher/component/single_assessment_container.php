@@ -7,7 +7,7 @@ function single_ass($assID, $courseID, $assTitle, $assDesc) {
             <div class=\"header\">
                 <h2>$assTitle</h2>
             </div>
-            <p class=\"desc\">$assDesc</p>
+            <h3 class=\"desc\">$assDesc</h3>
             <div class=\"assessment-options\">
                 <div class=\"status-radio\">
                     <input type=\"radio\" id=\"comment\" value=\"comment\">
