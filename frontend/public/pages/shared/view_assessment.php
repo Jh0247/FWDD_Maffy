@@ -26,14 +26,26 @@
     <link rel="stylesheet" href="../../../src/stylesheets/student/siderbar.css">
     <link rel="stylesheet" href="../../../src/stylesheets/student/right-sidebar.css">
     <link rel="stylesheet" href="../../../src/stylesheets/student/view-assessment.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+    <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
     <script src="https://kit.fontawesome.com/873ab321fe.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/codemirror.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/theme/monokai.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/codemirror.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/mode/css/css.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/mode/javascript/javascript.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/mode/php/php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/mode/jsx/jsx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/mode/sql/sql.min.js"></script>
+
+
     <title>View Assessment</title>
-
-    <style>
-
-    </style>
 
 </head>
 <body>
@@ -88,6 +100,29 @@
         }
         ?>
 
+        <!-- add code session -->
+        <div class="code-part">
+            <div class="form-group" id="add-code-div">
+                <label for="title">Programming Code:</label>
+                <div class="custom-select">
+                    <select id="language-select" onchange="setMode(this.value)">
+                    <!-- dont need select, just get from db see what language then pass to js to identify the code background -->
+                        <option value="htmlmixed">html</option>
+                        <option value="css">css</option>
+                        <option value="javascript">javascript</option>
+                        <option value="php">php</option>
+                        <option value="text/x-java">java</option>
+                        <option value="python">python</option>
+                        <option value="jsx">react</option>
+                        <option value="xml">ajax</option>
+                        <option value="javascript">jquery</option>
+                        <option value="sql">sql</option>
+                    </select>
+                </div>
+                <textarea class="input texttt" id="code-editor" name="code" rows="10" cols="80" class="code-editor"></textarea>
+              </div>
+        </div>
+
       <form novalidate>
         <div class="exercise-container">
           <div class="form-group">
@@ -124,10 +159,12 @@
           }else{
               // php to get the friend list id
               $comment = mysqli_query($con,
-              "SELECT comment.comment_word,comment.assessment_id,comment.comment_date_posted,user.user_image, user.username FROM comment
+              "SELECT comment.comment_word, comment.assessment_id, comment.comment_date_posted, user.user_image, user.username
+              FROM comment
               INNER JOIN user ON user.user_id = comment.user_id
               INNER JOIN assessment ON assessment.assessment_id = comment.assessment_id
-              WHERE comment.assessment_id =".$assessment_id);
+              WHERE comment.assessment_id = " . $assessment_id . "
+              ORDER BY comment.comment_id ASC");
 
               if(mysqli_num_rows($comment) > 0)
               {
@@ -203,7 +240,7 @@
     </div>
   </div>
 
-  <script>
+  <!-- <script>
     // when click on the send button
     $(document).ready(function() {
       $("#post").on("click", function() {
@@ -242,12 +279,45 @@
         })
       }, 700);
     });
-  </script>
+
+  </script> -->
   <script src="./nav_bar.js"></script>
   <script src="./hamburger.js"></script>
   <script src="../student/JavaScript/exercise.js"></script>
 
+  <script>
+    const form = document.querySelector('form');
+    const titleInput = document.getElementById('title');
+    const contentInput = document.getElementById('content');
+    const publishLinkCheckbox = document.getElementById('publish-link');
+    const publishExerciseCheckbox = document.getElementById('publish-exercise');
+    const publishCodeCheckbox = document.getElementById('publish-code');
+    const addLinkDiv = document.getElementById('add-link-div');
+    const addCodeDiv = document.getElementById('add-code-div');
+    const publishExerciseGroup = document.getElementById('exercise-group');
+    const submitBtn = document.getElementById('submit-btn');
+    const postForm = document.getElementById('form');
 
+
+    // Initialize CodeMirror editor
+    var codeEditor = CodeMirror(document.getElementById("code-editor"), {
+  mode: "htmlmixed",
+  theme: "monokai",
+  lineNumbers: true,
+  autofocus: true,
+  indentUnit: 2,
+  tabSize: 2,
+  smartIndent: true,
+  lineWrapping: true
+});
+ 
+
+
+    // Set the mode dynamically based on user selection
+    function setMode(mode) {
+        codeEditor.setOption("mode", mode);
+    }
+  </script>
   
 </body>
 </html>
