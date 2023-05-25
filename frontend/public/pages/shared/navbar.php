@@ -134,6 +134,7 @@
                         <li><a class="btn active" href="#about-us">About Us</a></li>
                         <li><a class="btn" href="#course">Course</a></li>
                         <li><a class="btn" href="#faq">FAQS</a></li>
+                        <li><a class="btn" href="#" onclick=\'navigateToPageT_C("../shared/term-condition.php")\'>Terms & Conditions</a></li>
                         <div class="login-resgister-res">
                             <li><a class="btn" href="#" onclick=\'navigateToPage("../../pages/shared/login.php")\'>Login</a></li>
                         </div>
@@ -159,6 +160,10 @@
     <script>
     // login page navigation
     function navigateToPage(url) {
+        window.location.href = url;
+    }
+
+    function navigateToPageT_C(url) {
         window.location.href = url;
     }
 

@@ -1,46 +1,46 @@
 <?php
-    // connection to database
-    include("../../../../backend/conn.php");
-    include("../../../../backend/session.php");
-    
-    require_once("../teacher/component/single_assessment_container.php");
-    
-    $user_privilege = 0;
-    
-    if(isset($_SESSION['user_id'])) {
-        // Retrieve user information from database
-        $query = mysqli_query($con, "SELECT * FROM user WHERE user_id = $_SESSION[user_id]");
-        $user = mysqli_fetch_array($query);
-        $user_privilege = $user['privilege_id'];
-    };
-    if (isset($_GET['courseid'])) {
+// connection to database
+include("../../../../backend/conn.php");
+include("../../../../backend/session.php");
 
-        $courseID = $_GET['courseid'];
-        
-        #Extracting course information for all courses from database
-        $all_course_info = "SELECT * FROM course WHERE course_id = $courseID";
-        $all_course_info_result = mysqli_query($con, $all_course_info);
-        $all_course_info_row = mysqli_fetch_assoc($all_course_info_result);
-        
-        #Extracting course information for all courses matched user_id from database
-        $course_info = "SELECT * FROM course WHERE user_id = $_SESSION[user_id] AND course_id = $courseID";
-        $course_info_result = mysqli_query($con, $course_info);
-        $course_info_row = mysqli_fetch_assoc($course_info_result);
+require_once("../teacher/component/single_assessment_container.php");
 
-        #Extracting assessment information for all courses from database
-        $ass_info = "SELECT * FROM assessment WHERE course_id = $courseID";
-        $ass_info_result = mysqli_query($con, $ass_info);
-        $ass_info_row = mysqli_fetch_assoc($ass_info_result);
+$user_privilege = 0;
 
-        #Counting the assessment number
-        $count_ass = "SELECT COUNT(*) AS count FROM assessment WHERE course_id = $courseID";
-        $count_ass_result = mysqli_query($con, $count_ass);
-        $count_ass_row = mysqli_fetch_assoc($count_ass_result);
-        $count = $count_ass_row['count'];
+if (isset($_SESSION['user_id'])) {
+    // Retrieve user information from database
+    $query = mysqli_query($con, "SELECT * FROM user WHERE user_id = $_SESSION[user_id]");
+    $user = mysqli_fetch_array($query);
+    $user_privilege = $user['privilege_id'];
+};
+if (isset($_GET['courseid'])) {
 
-        // check if the count is greater than or equal to 3 to display "Published", otherwise "Unpublished"
-        $status = ($count >= 3) ? "Published" : "Unpublished";
-    }
+    $courseID = $_GET['courseid'];
+
+    #Extracting course information for all courses from database
+    $all_course_info = "SELECT * FROM course WHERE course_id = $courseID";
+    $all_course_info_result = mysqli_query($con, $all_course_info);
+    $all_course_info_row = mysqli_fetch_assoc($all_course_info_result);
+
+    #Extracting course information for all courses matched user_id from database
+    $course_info = "SELECT * FROM course WHERE user_id = $_SESSION[user_id] AND course_id = $courseID";
+    $course_info_result = mysqli_query($con, $course_info);
+    $course_info_row = mysqli_fetch_assoc($course_info_result);
+
+    #Extracting assessment information for all courses from database
+    $ass_info = "SELECT * FROM assessment WHERE course_id = $courseID";
+    $ass_info_result = mysqli_query($con, $ass_info);
+    $ass_info_row = mysqli_fetch_assoc($ass_info_result);
+
+    #Counting the assessment number
+    $count_ass = "SELECT COUNT(*) AS count FROM assessment WHERE course_id = $courseID";
+    $count_ass_result = mysqli_query($con, $count_ass);
+    $count_ass_row = mysqli_fetch_assoc($count_ass_result);
+    $count = $count_ass_row['count'];
+
+    // check if the count is greater than or equal to 3 to display "Published", otherwise "Unpublished"
+    $status = ($count >= 3) ? "Published" : "Unpublished";
+}
 
 ?>
 
@@ -99,23 +99,23 @@
 
 <body>
     <div class="w-screen h-screen flex flex-row">
-        <?php 
-        if($_SESSION['privilege'] == 'teacher' || $_SESSION['privilege'] == 'student'){
+        <?php
+        if ($_SESSION['privilege'] == 'teacher' || $_SESSION['privilege'] == 'student') {
 
-        include '../shared/navbar.php';
+            include '../shared/navbar.php';
         ?>
         <div class="w-full overflow-auto">
             <header>
                 <div class="cover-image">
                     <?php
-                    } else { 
+                } else {
                     include '../admin/sidebar.php';
                     ?>
                     <div class="w-full overflow-auto">
                         <header>
                             <div class="cover-admin">
                                 <?php
-                                }
+                            }
                                 ?>
                                 <img src="<?php echo $all_course_info_row["course_image"]; ?>" alt="Cover Image">
                                 <div class="cover-text">
@@ -127,7 +127,7 @@
                                         </span>
                                     </h1>
                                     <p class="cover-p-text">
-                                        <?php echo $all_course_info_row["course_desc"];?>
+                                        <?php echo $all_course_info_row["course_desc"]; ?>
                                     </p>
                                 </div>
 
@@ -135,10 +135,10 @@
                         </header>
 
                         <!-- status container -->
-                        <?php 
-                        if($user_privilege == '2'){
-                            if($course_info_row["user_id"] == $_SESSION["user_id"]){
-                                echo("
+                        <?php
+                            if ($user_privilege == '2') {
+                                if ($course_info_row["user_id"] == $_SESSION["user_id"]) {
+                                    echo ("
                                 <div class=\"container\">
                                     <div class=\"options\">
                                         <div class=\"option\">
@@ -159,240 +159,137 @@
                                                 <button type=\"submit\" name=\"delete-submitbtn\"><i class=\"fas fa-trash\"></i> Delete</button>
                                             </div>
                                         </form>
-                                        <div class=\"option filter\">
-                                            <a href=\"#\"><i class=\"fas fa-filter\"></i> Filter</a>
-                                        </div>
+                                        
                                     </div>
                                     <div class=\"publish-container\">
-                                        ".($course_info_row["course_status"] === '1'?"
+                                        " . ($course_info_row["course_status"] === '1' ? "
                                             <p class=\"published\">Published</p>
-                                        ":"
-                                            ".($status = ($count >= 3)?"
+                                        " : "
+                                            " . ($status = ($count >= 3) ? "
                                                 <form method=\"POST\" enctype=\"multipart/form-data\">
                                                     <div class=\"publish-container\">
                                                         <button class=\"published post-btn\" name=\"active-submitbtn\" >Publish Now!</button>
                                                     </div>
                                                 </form>
-                                            ":"
+                                            " : "
                                                 <p class=\"published\">$status</p>
-                                            ")."
-                                        ")."
+                                            ") . "
+                                        ") . "
                                     </div>
                                 </div>
                                 ");
-                            }else{
-                                echo("
+                                } else {
+                                    echo ("
                                 <div class=\"container\">
-                                    <div class=\"options\">
-                                        <div class=\"option filter\">
-                                            <a href=\"#\"><i class=\"fas fa-filter\"></i> Filter</a>
-                                        </div>
-                                    </div>
                                     <div class=\"publish-container\">
-                                        
-                                        <P class=\"published\">$status</p>
-                                        
+                                    " . ($course_info_row["course_status"] === '1' && $status === ($count >= 3) ? "
+                                        <P class=\"published\">Published</p>
+                                    " : "
+                                        <P class=\"published\">Unpublished</p>
+                                    ") . "
                                     </div>
                                 </div>
                                 ");
-                            }
-                            
-                        } else {
-                            echo("
+                                }
+                            } else {
+                                echo ("
                             <div class=\"container\">
-                                <div class=\"options\">
-                                    <div class=\"option filter\">
-                                        <a href=\"#\"><i class=\"fas fa-filter\"></i> Filter</a>
-                                    </div>
-                                </div>
                                 <div class=\"publish-container\">
-                                    
+                                " . ($status = ($count >= 3) ? "
+                                    <P class=\"published\">$status</p>
+                                " : "
+                                    " . ($course_info_row["course_status"] === '1' && $status === ($count >= 3) ? "
+                                        <P class=\"published\">Published</p>
+                                    " : "
                                         <P class=\"published\">$status</p>
+                                    ") . "
+                                ") . "
                                     
                                 </div>
                             </div> 
                             ");
-                        }
+                            }
                         ?>
-
-                        <!-- hidden filter column -->
-                        <form method="GET" class="options" enctype="multipart/form-data">
-                            <div class="filter-container hidden">
-                                <h3>Filter Options</h3>
-                                <h4>Filter By:</h4>
-                                <div class="filter-row">
-                                    <div class="filter-column">
-                                        <input type="checkbox" id="latest" name="latest">
-                                        <label for="latest">Latest</label>
-                                        <br><br>
-                                        <input type="checkbox" id="oldest" name="oldest">
-                                        <label for="oldest">Oldest</label>
-                                    </div>
-                                    <div class="filter-column">
-                                        <div class="filter-radio">
-                                            <input type="radio" id="comment" name="filter" value="comment">
-                                            <label for="comment">Comment</label>
-                                        </div>
-                                        <div class="filter-radio">
-                                            <input type="radio" id="exercise" name="filter" value="exercise">
-                                            <label for="exercise">Exercise</label>
-                                        </div>
-                                        <div class="filter-radio">
-                                            <input type="radio" id="additional-note" name="filter"
-                                                value="additional-note">
-                                            <label for="additional-note">Additional Note</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button onclick="applyFilterUrl()" class="apply-btn">Apply</button>
-                            </div>
-                        </form>
-
                         <?php
-                            // Check if the form is submitted
-                            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-                                // Initialize an empty array to store the filter options
-                                $filter = [];
-
-                                // Check if the 'latest' checkbox is selected
-                                if (isset($_GET['latest'])) {
-                                // Add the filter option to the array
-                                $filter[] = 'DESC';
-                                }
-
-                                // Check if the 'oldest' checkbox is selected
-                                if (isset($_GET['oldest'])) {
-                                // Add the filter option to the array
-                                $filter[] = 'ASC';
-                                }
-
-                                // Check if any filter options are selected
-                                if (!empty($filter)) {
-                                    
-                                    // Prepare the SQL query using the selected filter options
-                                    $orderBy = implode(', ', $filter);
-
-                                    $ass_info = "SELECT * FROM assessment WHERE course_id = $courseID ORDER BY assessment_date_posted $orderBy";
-                                    $ass_info_result = mysqli_query($con, $ass_info);
-                                    $ass_info_row = mysqli_fetch_assoc($ass_info_result);
-                                    
-                                    if($count >= 1) {
-                                        do{
-                                            single_ass($ass_info_row["assessment_id"], $ass_info_row["course_id"], $ass_info_row["assessment_title"], $ass_info_row["assessment_content"]);
-                                            
-                                        } while ($ass_info_row = mysqli_fetch_assoc($ass_info_result));
-                                    }
-                                    else {
-                                        if($course_info_row["user_id"] == $_SESSION["user_id"]){
-                                            echo
-                                            ("
-                                                <div class=\"container\">
-                                                    <div class=\"options\">
-                                                        <p>This Course Have No Assessment Posted</p>
-                                                    </div>
-                                                    <div class=\"publish-container\">
-                                                        <button onclick=\"location.href='../teacher/add_assessment.php?userid=$_SESSION[user_id]&courseid=$courseID'\" class=\"published post-btn\" >Post Assessment Now</button>
-                                                    </div>
-                                                </div> 
-                                            ");
-                                        }else{
-                                            echo
-                                            ("
-                                                <div class=\"container\">
-                                                    <div class=\"options\">
-                                                        <p>This Course Have No Assessment Posted</p>
-                                                    </div>
-                                                </div> 
-                                            ");
-                                        }
-                                    }
-
+                            if ($count >= 1) {
+                                do {
+                                    single_ass($ass_info_row["assessment_id"], $ass_info_row["course_id"], $ass_info_row["assessment_title"], $ass_info_row["assessment_content"]);
+                                } while ($ass_info_row = mysqli_fetch_assoc($ass_info_result));
+                            } else {
+                                if ($course_info_row["user_id"] == $_SESSION["user_id"]) {
+                                    echo ("
+                                        <div class=\"container\">
+                                            <div class=\"options\">
+                                                <p>This Course Have No Assessment Posted</p>
+                                            </div>
+                                            <div class=\"publish-container\">
+                                                <button onclick=\"location.href='../teacher/add_assessment.php?userid=$_SESSION[user_id]&courseid=$courseID'\" class=\"published post-btn\" >Post Assessment Now</button>
+                                            </div>
+                                        </div> 
+                                    ");
                                 } else {
-                                    if($count >= 1) {
-                                        do{
-                                            single_ass($ass_info_row["assessment_id"], $ass_info_row["course_id"], $ass_info_row["assessment_title"], $ass_info_row["assessment_content"]);
-                                            
-                                        } while ($ass_info_row = mysqli_fetch_assoc($ass_info_result));
-                                    }
-                                    else {
-                                        if($course_info_row["user_id"] == $_SESSION["user_id"]){
-                                            echo
-                                            ("
-                                                <div class=\"container\">
-                                                    <div class=\"options\">
-                                                        <p>This Course Have No Assessment Posted</p>
-                                                    </div>
-                                                    <div class=\"publish-container\">
-                                                        <button onclick=\"location.href='../teacher/add_assessment.php?userid=$_SESSION[user_id]&courseid=$courseID'\" class=\"published post-btn\" >Post Assessment Now</button>
-                                                    </div>
-                                                </div> 
-                                            ");
-                                        }else{
-                                            echo
-                                            ("
-                                                <div class=\"container\">
-                                                    <div class=\"options\">
-                                                        <p>This Course Have No Assessment Posted</p>
-                                                    </div>
-                                                </div> 
-                                            ");
-                                        }
-                                    }
+                                    echo ("
+                                        <div class=\"container\">
+                                            <div class=\"options\">
+                                                <p>This Course Have No Assessment Posted</p>
+                                            </div>
+                                        </div> 
+                                    ");
                                 }
                             }
-
-                            ?>
+                        ?>
                     </div>
                 </div>
 
                 <?php
-      
-                // delete course
-                if(isset($_POST['delete-submitbtn'])) {
-                    $delete_course = "DELETE FROM course WHERE user_id = $_SESSION[user_id] AND course_id = $courseID";
-                    $delete_result = mysqli_query($con, $delete_course);
+                    // delete course
+                    if (isset($_POST['delete-submitbtn'])) {
+                        $delete_course = "DELETE FROM course WHERE user_id = $_SESSION[user_id] AND course_id = $courseID";
+                        $delete_result = mysqli_query($con, $delete_course);
 
-                    if($delete_result){
-                        echo "<script>pop_up_success_delete()</script>";
-                    } 
-                }
-
-                // deactive course
-                if(isset($_POST['deactive-submitbtn'])) {
-                    $update_course_deactive = "UPDATE course SET course_status = 2 WHERE course_id = $courseID";
-                    $result_deactive = mysqli_query($con, $update_course_deactive);
-
-                    if($result_deactive){
-                        echo "<script>pop_up_success_deactive()</script>";
+                        if ($delete_result) {
+                            echo "<script>pop_up_success_delete()</script>";
+                        }
                     }
-                }
 
-                // active course 
-                if(isset($_POST['active-submitbtn'])) {
-                    $update_course_active = "UPDATE course SET course_status = 1 WHERE course_id = $courseID";
-                    $result_active = mysqli_query($con, $update_course_active);
+                    // deactive course
+                    if (isset($_POST['deactive-submitbtn'])) {
+                        $update_course_deactive = "UPDATE course SET course_status = 2 WHERE course_id = $courseID";
+                        $result_deactive = mysqli_query($con, $update_course_deactive);
 
-                    if($result_active){
-                        echo "<script>pop_up_success_active()</script>";
+                        if ($result_deactive) {
+                            echo "<script>pop_up_success_deactive()</script>";
+                        }
                     }
-                }
 
-                ?>
+                    // active course 
+                    if (isset($_POST['active-submitbtn'])) {
+                        $update_course_active = "UPDATE course SET course_status = 1 WHERE course_id = $courseID";
+                        $result_active = mysqli_query($con, $update_course_active);
+
+                        if ($result_active) {
+                            echo "<script>pop_up_success_active()</script>";
+                        }
+                    }
+
+                    ?>
 
                 <script>
                 const filterOption = document.querySelector('.filter');
-                const filterContainer = document.querySelector('.filter-container');
+                const filterContainer = document.querySelector('#filter-container');
 
                 // Event listener for Filter option click
-                filterOption.addEventListener('click', () => {
-                    if (filterContainer.style.display === "block") {
+                const toggle_dropdown = () => {
+                    console.log(0);
+                    if (filterContainer.style.display === "block !important") {
+
                         filterContainer.style.display = "none";
                     } else {
                         filterContainer.style.display = "block";
                     }
-                });
+                };
 
-                const applyButton = document.querySelector('.apply-button');
+                const applyButton = document.querySelector('.apply-btn');
                 applyButton.addEventListener('click', applyFilters);
 
                 function applyFilters() {
@@ -412,23 +309,8 @@
                 }
                 // Add an onchange event listener to the filter checkboxes
                 document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
-                    checkbox.addEventListener('change', applyFilter);
+                    checkbox.addEventListener('change', applyFilters);
                 });
-
-                // Function to apply the filter
-                function applyFilterUrl() {
-                    var latestCheckbox = document.getElementById('latest');
-                    var oldestCheckbox = document.getElementById('oldest');
-                    var userId = 6; // Replace with the actual user ID
-                    var courseId = 1; // Replace with the actual course ID
-
-                    var url = window.location.href.split('#')[0]; // Get the current URL without the hash part
-                    url += "?latest=" + (latestCheckbox.checked ? "on" : "off");
-                    url += "&userid=" + userId;
-                    url += "&courseid=" + courseId;
-
-                    window.location.href = url;
-                }
                 </script>
                 <script src="../../../src/stylesheets/shared/nav_bar.js"></script>
                 <script type="text/javascript" src="../admin/javascript/sidebar.js"></script>
