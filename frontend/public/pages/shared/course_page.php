@@ -2,11 +2,6 @@
 // connection to database
 include("../../../../backend/conn.php");
 include("../../../../backend/session.php");
-
-require_once("../teacher/component/single_assessment_container.php");
-
-
-
 ?>
 
 <!DOCTYPE html>
