@@ -5,42 +5,7 @@ include("../../../../backend/session.php");
 
 require_once("../teacher/component/single_assessment_container.php");
 
-$user_privilege = 0;
 
-if (isset($_SESSION['user_id'])) {
-    // Retrieve user information from database
-    $query = mysqli_query($con, "SELECT * FROM user WHERE user_id = $_SESSION[user_id]");
-    $user = mysqli_fetch_array($query);
-    $user_privilege = $user['privilege_id'];
-};
-if (isset($_GET['courseid'])) {
-
-    $courseID = $_GET['courseid'];
-
-    #Extracting course information for all courses from database
-    $all_course_info = "SELECT * FROM course WHERE course_id = $courseID";
-    $all_course_info_result = mysqli_query($con, $all_course_info);
-    $all_course_info_row = mysqli_fetch_assoc($all_course_info_result);
-
-    #Extracting course information for all courses matched user_id from database
-    $course_info = "SELECT * FROM course WHERE user_id = $_SESSION[user_id] AND course_id = $courseID";
-    $course_info_result = mysqli_query($con, $course_info);
-    $course_info_row = mysqli_fetch_assoc($course_info_result);
-
-    #Extracting assessment information for all courses from database
-    $ass_info = "SELECT * FROM assessment WHERE course_id = $courseID";
-    $ass_info_result = mysqli_query($con, $ass_info);
-    $ass_info_row = mysqli_fetch_assoc($ass_info_result);
-
-    #Counting the assessment number
-    $count_ass = "SELECT COUNT(*) AS count FROM assessment WHERE course_id = $courseID";
-    $count_ass_result = mysqli_query($con, $count_ass);
-    $count_ass_row = mysqli_fetch_assoc($count_ass_result);
-    $count = $count_ass_row['count'];
-
-    // check if the count is greater than or equal to 3 to display "Published", otherwise "Unpublished"
-    $status = ($count >= 3) ? "Published" : "Unpublished";
-}
 
 ?>
 
@@ -102,10 +67,46 @@ if (isset($_GET['courseid'])) {
 </head>
 
 <body>
-    <div class="w-screen h-screen flex flex-row">
+    <div id="all" class="w-screen h-screen flex flex-row">
         <?php
-        if ($_SESSION['privilege'] == 'teacher' || $_SESSION['privilege'] == 'student') {
+        $user_privilege = 0;
 
+        if (isset($_SESSION['user_id'])) {
+            // Retrieve user information from database
+            $query = mysqli_query($con, "SELECT * FROM user WHERE user_id = $_SESSION[user_id]");
+            $user = mysqli_fetch_array($query);
+            $user_privilege = $user['privilege_id'];
+            if (isset($_GET['courseid'])) {
+        
+                $courseID = $_GET['courseid'];
+            
+                #Extracting course information for all courses from database
+                $all_course_info = "SELECT * FROM course WHERE course_id = $courseID";
+                $all_course_info_result = mysqli_query($con, $all_course_info);
+                $all_course_info_row = mysqli_fetch_assoc($all_course_info_result);
+            
+                #Extracting course information for all courses matched user_id from database
+                $course_info = "SELECT * FROM course WHERE user_id = $_SESSION[user_id] AND course_id = $courseID";
+                $course_info_result = mysqli_query($con, $course_info);
+                $course_info_row = mysqli_fetch_assoc($course_info_result);
+            
+                #Extracting assessment information for all courses from database
+                $ass_info = "SELECT * FROM assessment WHERE course_id = $courseID";
+                $ass_info_result = mysqli_query($con, $ass_info);
+                $ass_info_row = mysqli_fetch_assoc($ass_info_result);
+            
+                #Counting the assessment number
+                $count_ass = "SELECT COUNT(*) AS count FROM assessment WHERE course_id = $courseID";
+                $count_ass_result = mysqli_query($con, $count_ass);
+                $count_ass_row = mysqli_fetch_assoc($count_ass_result);
+                $count = $count_ass_row['count'];
+            
+                // check if the count is greater than or equal to 3 to display "Published", otherwise "Unpublished"
+                $status = ($count >= 3) ? "Published" : "Unpublished";
+            }
+        };
+        if (isset($_SESSION['user_id'])) {
+        if ($_SESSION['privilege'] == 'teacher' || $_SESSION['privilege'] == 'student') {
             include '../shared/navbar.php';
         ?>
         <div class="w-full overflow-auto">
@@ -120,6 +121,7 @@ if (isset($_GET['courseid'])) {
                             <div class="cover-admin">
                                 <?php
                             }
+                        
                                 ?>
                                 <img src="<?php echo $all_course_info_row["course_image"]; ?>" alt="Cover Image">
                                 <div class="cover-text">
@@ -273,6 +275,9 @@ if (isset($_GET['courseid'])) {
                             ?>
                         </div>
                     </div>
+                    <?php 
+                    }
+                    ?>
 
                     <?php
                     // delete course
@@ -353,7 +358,7 @@ if (isset($_GET['courseid'])) {
                     // Button click event listener
                     $('#generate-button').on('click', function() {
                         var text =
-                            "http://localhost:8080/Maffy/FWDD_Maffy/frontend/public/pages/shared/course_page.php?userid=<?php echo ($_SESSION["user_id"]); ?>&courseid=<?php echo ($courseID); ?>";
+                            "http://localhost:8080/Maffy/FWDD_Maffy/frontend/public/pages/shared/course_page.php?courseid=<?php echo ($courseID); ?>";
                         var width = 500;
                         var height = 500;
 
