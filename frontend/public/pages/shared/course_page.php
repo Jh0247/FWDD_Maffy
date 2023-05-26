@@ -17,6 +17,7 @@ include("../../../../backend/session.php");
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://kit.fontawesome.com/775f0ea71b.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
@@ -141,77 +142,77 @@ include("../../../../backend/session.php");
                         <?php
                             if ($user_privilege == '2') {
                                 if ($course_info_row["user_id"] == $_SESSION["user_id"]) {
-                                    echo ("
-                                <div class=\"container\">
-                                    <div class=\"options\">
-                                        <div class=\"option\">
-                                            <a href=\"../teacher/add_assessment.php?userid=$_SESSION[user_id]&courseid=$courseID\"><i class=\"fas fa-plus\"></i> Add Assessment</a>
-                                        </div>
-                                        <div class=\"option\">
-                                            <a href=\"../teacher/add_course.php?userid=$_SESSION[user_id]&courseid=$courseID&currentfile=../shared/course_page.php\"><i class=\"fas fa-edit\"></i> Edit</a>
-                                        </div>
-                                        <form method=\"POST\" class=\"options\" enctype=\"multipart/form-data\">
-                                            <div class=\"option\">
-                                                " . ($course_info_row['user_id'] === $_SESSION['user_id'] && $course_info_row['course_id'] === $courseID && $course_info_row['course_status'] === '1' ? "
-                                                    <button type=\"submit\" name=\"deactive-submitbtn\"><i class=\"fas fa-eye-slash\"></i> Deactive</button>
-                                                " : "
-                                                    <button type=\"submit\" name=\"active-submitbtn\"><i class=\"fas fa-eye\"></i> Activate</button>
-                                                ") . "
-                                            </div>
-                                            <div class=\"option\">
-                                                <button type=\"submit\" name=\"delete-submitbtn\"><i class=\"fas fa-trash\"></i> Delete</button>
-                                            </div>
-                                        </form>
-                                        
-                                    </div>
-                                    <div class=\"publish-container\">
-                                        " . ($course_info_row["course_status"] === '1' ? "
-                                            <p class=\"published\">Published</p>
-                                        " : "
-                                            " . ($status = ($count >= 3) ? "
-                                                <form method=\"POST\" enctype=\"multipart/form-data\">
-                                                    <div class=\"publish-container\">
-                                                        <button class=\"published post-btn\" name=\"active-submitbtn\" >Publish Now!</button>
-                                                    </div>
-                                                </form>
-                                            " : "
-                                                <p class=\"published\">$status</p>
-                                            ") . "
-                                        ") . "
-                                    </div>
+                        ?>
+                        <div class="container">
+                            <div class="options">
+                                <div class="option">
+                                    <a
+                                        href="../teacher/add_assessment.php?userid=<?php echo $_SESSION["user_id"]; ?>&courseid=<?php echo $courseID; ?>"><i
+                                            class="fas fa-plus"></i> Add Assessment</a>
                                 </div>
-                                ");
-                                } else {
-                                    echo ("
-                                <div class=\"container\">
-                                    <div class=\"publish-container\">
-                                    " . ($course_info_row["course_status"] === '1' && $status === ($count >= 3) ? "
-                                        <P class=\"published\">Published</p>
-                                    " : "
-                                        <P class=\"published\">Unpublished</p>
-                                    ") . "
-                                    </div>
+                                <div class="option">
+                                    <a
+                                        href="../teacher/add_course.php?userid=<?php echo $_SESSION["user_id"]; ?>&courseid=<?php echo $courseID; ?>&currentfile=../shared/course_page.php"><i
+                                            class="fas fa-edit"></i> Edit</a>
                                 </div>
-                                ");
-                                }
-                            } else {
-                                echo ("
-                            <div class=\"container\">
-                                <div class=\"publish-container\">
-                                " . ($status = ($count >= 3) ? "
-                                    <P class=\"published\">$status</p>
-                                " : "
-                                    " . ($course_info_row["course_status"] === '1' && $status === ($count >= 3) ? "
-                                        <P class=\"published\">Published</p>
-                                    " : "
-                                        <P class=\"published\">$status</p>
-                                    ") . "
-                                ") . "
-                                    
+                                <div class="option">
+                                    <?php if ($course_info_row['user_id'] === $_SESSION['user_id'] && $course_info_row['course_id'] === $courseID && $course_info_row['course_status'] === '1') { ?>
+                                    <button type=" submit" id="deactive-btn" name="deactive_submitbtn"><i
+                                            class="fas fa-eye-slash"></i> Deactivate</button>
+                                    <?php } else { ?>
+                                    <button type="submit" id="active-btn" name="active_submitbtn"><i
+                                            class="fas fa-eye"></i> Activate</button>
+                                    <?php } ?>
                                 </div>
-                            </div> 
-                            ");
-                            }
+                                <div class="option">
+                                    <button type="submit" id="delete-btn" name="delete_submitbtn"><i
+                                            class="fas fa-trash"></i> Delete</button>
+                                </div>
+                            </div>
+                            <div class="publish-container">
+                                <?php if ($course_info_row["course_status"] === '1'): ?>
+                                <p class="published">Published</p>
+                                <?php else: ?>
+                                <?php if ($count >= 3): ?>
+                                <div class="publish-container">
+                                    <button class="published post-btn" id="publish-btn" name="publish_submitbtn">Publish
+                                        Now!</button>
+                                </div>
+                                <?php else: ?>
+                                <p class="published"><?php echo $status; ?></p>
+                                <?php endif; ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <?php
+                        } else {
+                        ?>
+                        <div class="container">
+                            <div class="publish-container">
+                                <?php if ($course_info_row["course_status"] === '1' && $status === ($count >= 3)): ?>
+                                <p class="published">Published</p>
+                                <?php else: ?>
+                                <p class="published">Unpublished</p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <?php
+                        }
+                        } else {
+                        ?>
+                        <div class="container">
+                            <div class="publish-container">
+                                <?php if ($count >= 3): ?>
+                                <p class="published"><?php echo $status; ?></p>
+                                <?php elseif ($course_info_row["course_status"] === '1'): ?>
+                                <p class="published">Published</p>
+                                <?php else: ?>
+                                <p class="published"><?php echo $status; ?></p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <?php
+                        }
                         ?>
 
                         <!-- search bar container -->
@@ -225,46 +226,47 @@ include("../../../../backend/session.php");
                         <div id="search-results" class="result-container">
                             <?php
                             if ($count >= 1) {
-                                
-                                if(mysqli_num_rows($ass_info_result)>0) {
-                                    foreach($ass_info_result as $data) {
-
-                                    echo "
-                                    <a class=\"view-ass\" href=\"../shared/view_assessment.php?ass_id=$data[assessment_id]&courseid=$courseID\">
-                                        <div class=\"left-details\">
-                                            <div class=\"assessment-container\" id=\"next-page\">
-                                                <div class=\"header\">
-                                                    <h2 style=\"font-weight: bold; font-size: 24px\">".$data['assessment_title']."</h2>
-                                                </div>
-                                                <h3 class=\"desc\">".$data['assessment_content']."</h3>
-                                            </div>
+                            
+                            if(mysqli_num_rows($ass_info_result)>0) {
+                            foreach($ass_info_result as $data) {
+                            ?>
+                            <a class="view-ass"
+                                href="../shared/view_assessment.php?ass_id=<?php echo $data["assessment_id"]; ?>&courseid=<?php echo $courseID; ?>">
+                                <div class="left-details">
+                                    <div class="assessment-container" id="next-page">
+                                        <div class="header">
+                                            <h2 style="font-weight: bold; font-size: 24px">
+                                                <?php echo $data['assessment_title']; ?></h2>
                                         </div>
-                                    </a>
-                                    ";
-                                    }
-                                }
+                                        <h3 class=" desc"><?php echo $data['assessment_content']; ?></h3>
+                                    </div>
+                                </div>
+                            </a>
+                            <?php                          
+                            }
+                            }
                             } else {
                             if ($course_info_row["user_id"] == $_SESSION["user_id"]) {
-                            echo ("
-                            <div class=\"container\">
-                                <div class=\"options\">
+                            ?>
+                            <div class="container">
+                                <div class="options">
                                     <p>This Course Have No Assessment Posted</p>
                                 </div>
-                                <div class=\"publish-container\">
+                                <div class="publish-container">
                                     <button
-                                        onclick=\"location.href='../teacher/add_assessment.php?userid=$_SESSION[user_id]&courseid=$courseID'
-                                        \" class=\"published post-btn\">Post Assessment Now</button>
+                                        onclick="location.href='../teacher/add_assessment.php?userid=<?php echo $_SESSION['user_id']; ?>&courseid=<?php echo $courseID; ?>'"
+                                        class="published post-btn">Post Assesment Now</button>
                                 </div>
                             </div>
-                            ");
+                            <?php
                             } else {
-                            echo ("
-                            <div class=\"container\">
-                                <div class=\"options\">
+                            ?>
+                            <div class=" container">
+                                <div class="options">
                                     <p>This Course Have No Assessment Posted</p>
                                 </div>
                             </div>
-                            ");
+                            <?php
                             }
                             }
                             ?>
@@ -274,41 +276,128 @@ include("../../../../backend/session.php");
                     }
                     ?>
 
-                    <?php
-                    // delete course
-                    if (isset($_POST['delete-submitbtn'])) {
-                        $delete_course = "DELETE FROM course WHERE user_id = $_SESSION[user_id] AND course_id = $courseID";
-                        $delete_result = mysqli_query($con, $delete_course);
-
-                        if ($delete_result) {
-                            echo "<script>pop_up_success_delete()</script>";
-                        }
-                    }
-
-                    // deactive course
-                    if (isset($_POST['deactive-submitbtn'])) {
-                        $update_course_deactive = "UPDATE course SET course_status = 2 WHERE course_id = $courseID";
-                        $result_deactive = mysqli_query($con, $update_course_deactive);
-
-                        if ($result_deactive) {
-                            echo "<script>pop_up_success_deactive()</script>";
-                        }
-                    }
-
-                    // active course 
-                    if (isset($_POST['active-submitbtn'])) {
-                        $update_course_active = "UPDATE course SET course_status = 1 WHERE course_id = $courseID";
-                        $result_active = mysqli_query($con, $update_course_active);
-
-                        if ($result_active) {
-                            echo "<script>pop_up_success_active()</script>";
-                        }
-                    }
-
-                    ?>
                     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4"></script>
 
                     <script>
+                    // delete the course function
+                    $(document).ready(function() {
+                        $("#delete-btn").on("click", function(e) {
+                            e.preventDefault();
+                            var courseid =
+                                "<?php echo $course_info_row['course_id']; ?>";
+                            // Send AJAX request
+                            $.ajax({
+                                url: "../../../../backend/course_page_backend.php",
+                                type: "POST",
+                                data: {
+                                    delete_submitbtn: true,
+                                    userid: "<?php echo $_SESSION['user_id']; ?>",
+                                    courseid: courseid
+                                },
+                                success: function(response) {
+                                    // Request was successful, handle the response here
+                                    // Display success message or perform any other actions
+                                    pop_up_success_delete();
+                                },
+                                error: function(xhr, status, error) {
+                                    // Request encountered an error, handle it here
+                                    console.log(xhr
+                                        .responseText
+                                    ); // Display the error message
+                                }
+                            });
+                        });
+                    });
+
+                    // activate the course function
+                    $(document).ready(function() {
+                        $("#active-btn").on("click", function(e) {
+                            e.preventDefault();
+                            var course_id =
+                                "<?php echo $course_info_row['course_id']; ?>";
+                            // Send AJAX request
+                            $.ajax({
+                                url: "../../../../backend/course_page_backend.php",
+                                type: "POST",
+                                data: {
+                                    active_submitbtn: true,
+                                    course_id: course_id
+                                },
+                                success: function(response) {
+                                    // Request was successful, handle the response here
+                                    // Display success message or perform any other actions
+                                    pop_up_success_active();
+                                },
+                                error: function(xhr, status, error) {
+                                    // Request encountered an error, handle it here
+                                    console.log(xhr
+                                        .responseText
+                                    ); // Display the error message
+                                }
+                            });
+                        });
+                    });
+
+                    // publish the course function
+                    $(document).ready(function() {
+                        $("#publish-btn").on("click", function(e) {
+                            e.preventDefault();
+                            var course_id =
+                                "<?php echo $course_info_row['course_id']; ?>";
+                            // Send AJAX request
+                            $.ajax({
+                                url: "../../../../backend/course_page_backend.php",
+                                type: "POST",
+                                data: {
+                                    publish_submitbtn: true,
+                                    course_id: course_id
+                                },
+                                success: function(response) {
+                                    // Request was successful, handle the response here
+                                    // Display success message or perform any other actions
+                                    pop_up_success_active();
+                                },
+                                error: function(xhr, status, error) {
+                                    // Request encountered an error, handle it here
+                                    console.log(xhr
+                                        .responseText
+                                    ); // Display the error message
+                                }
+                            });
+                        });
+                    });
+
+                    // deactivate the course function
+                    $(document).ready(function() {
+                        $("#deactive-btn").on("click", function(e) {
+                            e.preventDefault();
+                            var courseid =
+                                "<?php echo $course_info_row['course_id']; ?>";
+                            // Send AJAX request
+                            $.ajax({
+                                url: "../../../../backend/course_page_backend.php",
+                                method: "POST",
+                                data: {
+                                    deactive_submitbtn: true,
+                                    courseid: courseid
+                                },
+                                dataType: "text",
+                                success: function(response) {
+                                    // Request was successful, handle the response here
+                                    // Display success message or perform any other actions
+                                    pop_up_success_deactive();
+                                },
+                                error: function(xhr, status, error) {
+                                    // Request encountered an error, handle it here
+                                    console.log(xhr
+                                        .responseText
+                                    ); // Display the error message
+                                }
+                            });
+                        });
+                    });
+
+
                     //get class and id
                     const searchBar = document.getElementById("search-bar");
                     const items = document.querySelectorAll(".view-ass");
@@ -319,8 +408,10 @@ include("../../../../backend/session.php");
                         const query = searchBar.value.trim().toLowerCase();
 
                         items.forEach(item => {
-                            const name = item.querySelector("h2").textContent.trim().toLowerCase();
-                            const email = item.querySelector("h3").textContent.trim().toLowerCase();
+                            const name = item.querySelector("h2").textContent.trim()
+                                .toLowerCase();
+                            const email = item.querySelector("h3").textContent.trim()
+                                .toLowerCase();
 
                             if (name.includes(query) || email.includes(query)) {
                                 item.style.display = "flex";
@@ -332,7 +423,8 @@ include("../../../../backend/session.php");
 
                     // Generate QR Code function
                     function generateQRCode(text, width, height) {
-                        var qrCodeUrl = "https://chart.googleapis.com/chart?cht=qr&chs=" + width + "x" + height +
+                        var qrCodeUrl = "https://chart.googleapis.com/chart?cht=qr&chs=" + width + "x" +
+                            height +
                             "&chl=" + encodeURIComponent(text);
                         var qrCodeImage = '<img src="' + qrCodeUrl + '" alt="QR Code">';
 
