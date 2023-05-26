@@ -32,128 +32,136 @@
 <body>
     <nav>
         <?php
-            if($user_privilege == '2'){
-                // teacher nav bar
-                echo('
-                <div class="nav-left">
-                    <div class="logo">
-                        <a href="../teacher/homepage.php"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
+        if($user_privilege == '2'){
+            // teacher nav bar
+        ?>
+        <div class="nav-left">
+            <div class="logo">
+                <a href="../teacher/homepage.php"><img class="logo-image" src="../../../public/images/Maffy.png"
+                        alt="Website Icon"></a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a class="btn active" href="../shared/view_all_course.php">Courses</a></li>
+                <li><a class="btn" href="../teacher/add_course.php?currentfile=">Add Course</a></li>
+                <li><a class="btn" href="../shared/term-condition.php">Term & Condition</a></li>
+                <div class="profile-res">
+                    <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
+                    <div class="profile-dropdown_links">
+                        <li><a href="../shared/user_profile.php">Profile</a></li>
+                        <li><a href="../shared/feedback.php">Feedback</a></li>
+                        <li><a href="../../../../backend/logout.php">Logout</a></li>
                     </div>
                 </div>
-                <div class="nav-right">
-                    <ul class="nav-links">
-                        <li><a class="btn active" href="../shared/view_all_course.php">Courses</a></li>
-                        <li><a class="btn" href="../teacher/add_course.php?currentfile=">Add Course</a></li>
-                        <li><a class="btn" href="../shared/term-condition.php">Term & Condition</a></li>
-                        <div class="profile-res">
-                            <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
-                            <div class="profile-dropdown_links">
-                                <li><a href="../shared/user_profile.php">Profile</a></li>
-                                <li><a href="../shared/feedback.php">Feedback</a></li>
-                                <li><a href="../../../../backend/logout.php">Logout</a></li>
-                            </div>
+                <li>
+                    <div class="profile">
+                        <img src="../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
+                        <div class="profile-dropdown" id="profile-dropdown">
+                            <a href="../shared/user_profile.php">Profile</a>
+                            <a href="../shared/feedback.php">Feedback</a>
+                            <a href="../../../../backend/logout.php">Logout</a>
                         </div>
-                        <li>
-                            <div class="profile">
-                                <img src="../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
-                                <div class="profile-dropdown" id="profile-dropdown">
-                                    <a href="../shared/user_profile.php">Profile</a>
-                                    <a href="../shared/feedback.php">Feedback</a>
-                                    <a href="../../../../backend/logout.php">Logout</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <div>
-                        <button class="nav-toggle" style="position:relative; width:100%; justify-content:flex-end;">
-                            <div class="bar">Menu</div>
-                        </button>
+                    </div>
+                </li>
+            </ul>
+            <div>
+                <button class="nav-toggle" style="position:relative; width:100%; justify-content:flex-end;">
+                    <div class="bar">Menu</div>
+                </button>
+            </div>
+        </div>
+        <?php     
+        }elseif($user_privilege == '3') {
+        ?>
+        <!-- student nav bar -->
+
+        <div class="nav-left">
+            <div class="logo">
+                <a href="../student/homepage.php"><img class="logo-image" src="../../../public/images/Maffy.png"
+                        alt="Website Icon"></a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a class="btn" href="../shared/view_all_course.php">Courses</a></li>
+                <li><a class="btn" href="../student/view_friend.php">Friend</a></li>
+                <li><a class="btn" href="../student/chat.php">Chat</a></li>
+                <li><a class="btn" href="../shared/term-condition.php">Term & Condition</a></li>
+                <div class="profile-res">
+                    <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
+                    <div class="profile-dropdown_links">
+                        <li><a href="../../pages/shared/user_profile.php">Profile</a></li>
+                        <li><a href="../shared/feedback.php">Feedback</a></li>
+                        <li><a href="../../../../backend/logout.php">Logout</a></li>
                     </div>
                 </div>
-                ');
-            }elseif($user_privilege == '3') {
-                // student nav bar
-                echo('
-                <div class="nav-left">
-                    <div class="logo">
-                        <a href="../student/homepage.php"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
-                    </div>
-                </div>
-                <div class="nav-right">
-                    <ul class="nav-links">
-                        <li><a class="btn" href="../shared/view_all_course.php">Courses</a></li>
-                        <li><a class="btn" href="../student/view_friend.php">Friend</a></li>
-                        <li><a class="btn" href="../student/chat.php">Chat</a></li>
-                        <li><a class="btn" href="../shared/term-condition.php">Term & Condition</a></li>
-                        <div class="profile-res">
-                            <li><a class="btn my-profile-btn" href="#">My Profile</a></li>
-                            <div class="profile-dropdown_links">
-                                <li><a href="../../pages/shared/user_profile.php">Profile</a></li>
-                                <li><a href="../shared/feedback.php">Feedback</a></li>
-                                <li><a href="../../../../backend/logout.php">Logout</a></li>
-                            </div>
+
+                <li>
+                    <div class="profile">
+                        <img src="../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
+                        <div class="profile-dropdown" id="profile-dropdown">
+                            <a href="../../pages/shared/user_profile.php">Profile</a>
+                            <a href="../shared/feedback.php">Feedback</a>
+                            <a href="../../../../backend/logout.php">Logout</a>
                         </div>
-    
-                        <li>
-                            <div class="profile">
-                                <img src="../../images/user_profile.png" alt="Profile Icon" id="profile-icon">
-                                <div class="profile-dropdown" id="profile-dropdown">
-                                    <a href="../../pages/shared/user_profile.php">Profile</a>
-                                    <a href="../shared/feedback.php">Feedback</a>
-                                    <a href="../../../../backend/logout.php">Logout</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <div>
-                        <button class="nav-toggle">
-                            <div class="bar">Menu</div>
-                        </button>
                     </div>
+                </li>
+            </ul>
+            <div>
+                <button class="nav-toggle">
+                    <div class="bar">Menu</div>
+                </button>
+            </div>
+        </div>
+        <?php
+        }else if($user_privilege == '0' and $current_page_url === $desired_page_url){
+        // login nav bar
+        ?>
+        <div class="nav-left">
+            <div class="logo">
+                <a href="home.php"><img class="logo-image" src="../../../public/images/Maffy.png"
+                        alt="Website Icon"></a>
+            </div>
+        </div>
+        <?php
+        }elseif($user_privilege == '0'){
+        // guest nav bar
+        ?>
+        <div class="nav-left">
+            <div class="logo">
+                <a href="home.php"><img class="logo-image" src="../../../public/images/Maffy.png"
+                        alt="Website Icon"></a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a class="btn active" href="#about-us">About Us</a></li>
+                <li><a class="btn" href="#course">Course</a></li>
+                <li><a class="btn" href="#faq">FAQS</a></li>
+                <li><a class="btn" href="#" onclick='navigateToPageT_C("../shared/term-condition.php")'>Terms &
+                        Conditions</a></li>
+                <div class="login-resgister-res">
+                    <li><a class="btn" href="#" onclick='navigateToPage("../../pages/shared/login.php")'>Login</a>
+                    </li>
                 </div>
-                ');
-            }else if($user_privilege == '0' and $current_page_url === $desired_page_url){
-                // login nav bar
-                echo('
-                <div class="nav-left">
-                    <div class="logo">
-                        <a href="home.php"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
+
+                <li>
+                    <div class="login-register-toggle">
+                        <button id="login-btn" onclick="location.href='login.php'">Login</button>
                     </div>
-                </div>
-                ');
-            }elseif($user_privilege == '0'){
-                // guest nav bar
-                echo('
-                <div class="nav-left">
-                    <div class="logo">
-                        <a href="home.php"><img class="logo-image" src="../../../public/images/Maffy.png" alt="Website Icon"></a>
-                    </div>
-                </div>
-                <div class="nav-right">
-                    <ul class="nav-links">
-                        <li><a class="btn active" href="#about-us">About Us</a></li>
-                        <li><a class="btn" href="#course">Course</a></li>
-                        <li><a class="btn" href="#faq">FAQS</a></li>
-                        <li><a class="btn" href="#" onclick=\'navigateToPageT_C("../shared/term-condition.php")\'>Terms & Conditions</a></li>
-                        <div class="login-resgister-res">
-                            <li><a class="btn" href="#" onclick=\'navigateToPage("../../pages/shared/login.php")\'>Login</a></li>
-                        </div>
-    
-                        <li>
-                            <div class="login-register-toggle">
-                                <button id="login-btn" onclick="location.href=\'login.php\'">Login</button>
-                            </div>
-                        </li>
-    
-                    </ul>
-                    <div>
-                        <button class="nav-toggle">
-                            <div class="bar">Menu</div>
-                        </button>
-                    </div>
-                </div>
-                ');
-            };
+                </li>
+
+            </ul>
+            <div>
+                <button class="nav-toggle">
+                    <div class="bar">Menu</div>
+                </button>
+            </div>
+        </div>
+
+        <?php
+        };
         ?>
     </nav>
 
