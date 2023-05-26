@@ -14,7 +14,7 @@ body{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background-color: white;
+    background-color: #f4eee0;
     border-radius: 25px;
     transition: .4s ease-in-out;
     box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
@@ -29,6 +29,24 @@ body{
   margin-bottom: -20px;
 }
 
+.img-upload{
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: #02b7ab;
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.img-upload:hover{
+  background-color: #028a81;
+}
+
 .upload-section label {
   display: flex;
   flex-direction: column;
@@ -41,7 +59,7 @@ body{
   margin-top: 10px;
   font-size: 18px;
   font-weight: bold;
-  color: #7d84ab;
+  color: #ffffff;
 }
 
 .upload-section input[type="file"] {
