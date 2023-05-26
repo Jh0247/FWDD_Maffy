@@ -353,7 +353,7 @@ if (isset($_GET['courseid'])) {
                     // Button click event listener
                     $('#generate-button').on('click', function() {
                         var text =
-                            "https://www.w3schools.com/";
+                            "http://localhost:8080/Maffy/FWDD_Maffy/frontend/public/pages/shared/course_page.php?userid=<?php echo ($_SESSION["user_id"]); ?>&courseid=<?php echo ($courseID); ?>";
                         var width = 500;
                         var height = 500;
 
