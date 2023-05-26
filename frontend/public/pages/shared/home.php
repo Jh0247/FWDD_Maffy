@@ -184,6 +184,7 @@
   <!-- ==================================       Script       ================================================= -->
   <!-- ======================================================================================================= -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <script type="text/javascript" src="../../jquery-plugin/carousel/slick/slick.min.js"></script>
   <script>
     // this is the function for the slider with using jQuery plugin and some params
