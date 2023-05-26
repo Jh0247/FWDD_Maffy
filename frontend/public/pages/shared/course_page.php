@@ -58,6 +58,8 @@ if (isset($_GET['courseid'])) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/775f0ea71b.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
 
     <title>Add Course</title>
@@ -123,10 +125,14 @@ if (isset($_GET['courseid'])) {
                                 <div class="cover-text">
                                     <h1 class="cover-header-text" style="max-width: 100%;">
                                         <?php echo $all_course_info_row["course_title"]; ?>
-                                        <span>
-                                            <button><i class=" fas fa-qrcode"></i>
-                                            </button>
-                                        </span>
+                                        <a id="download-doc" class="flex flex-col text-center"
+                                            onclick="document.getElementById('modal').style.display='block'">
+
+                                            <span id="qrcode">
+                                                <button id="generate-button"><i class=" fas fa-qrcode"></i>
+                                                </button>
+                                            </span>
+                                        </a>
                                     </h1>
                                     <p class="cover-p-text">
                                         <?php echo $all_course_info_row["course_desc"]; ?>
@@ -302,6 +308,7 @@ if (isset($_GET['courseid'])) {
                     }
 
                     ?>
+                    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4"></script>
 
                     <script>
                     //get class and id
@@ -323,6 +330,36 @@ if (isset($_GET['courseid'])) {
                                 item.style.display = "none";
                             }
                         });
+                    });
+
+                    // Generate QR Code function
+                    function generateQRCode(text, width, height) {
+                        var qrCodeUrl = "https://chart.googleapis.com/chart?cht=qr&chs=" + width + "x" + height +
+                            "&chl=" + encodeURIComponent(text);
+                        var qrCodeImage = '<img src="' + qrCodeUrl + '" alt="QR Code">';
+
+                        // Create a pop-up container
+                        var popupContainer = $('<div class="popup-container"></div>');
+                        popupContainer.append(qrCodeImage);
+
+                        // Create a close button
+                        var closeButton = $('<span class="close-button">&times;</span>');
+                        closeButton.on('click', function() {
+                            popupContainer.remove();
+                        });
+                        popupContainer.append(closeButton);
+
+                        $('body').append(popupContainer);
+                    }
+
+                    // Button click event listener
+                    $('#generate-button').on('click', function() {
+                        var text =
+                            "https://www.w3schools.com/";
+                        var width = 500;
+                        var height = 500;
+
+                        generateQRCode(text, width, height);
                     });
                     </script>
                     <script src="../../../src/stylesheets/shared/nav_bar.js"></script>
