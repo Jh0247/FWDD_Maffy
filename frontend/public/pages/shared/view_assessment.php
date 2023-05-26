@@ -14,6 +14,10 @@
     #select the comment data
     $comment = "SELECT * FROM comment WHERE assessment_id = '$assessment_id'";
     $comment_result = mysqli_query($con,$comment);
+
+    #Get the note content from database
+    $note = mysqli_query($con,"SELECT note_content FROM note WHERE assessment_id = '".$assessment_id."'");
+    $note_url = mysqli_fetch_assoc($note);
     
 ?>
 <!DOCTYPE html>
@@ -43,6 +47,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/mode/xml/xml.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/mode/javascript/javascript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/mode/sql/sql.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
 
     <title>View Assessment</title>
@@ -97,14 +103,14 @@
         </div>
 
 
-        <!-- add code session --> 
+        <!-- code session --> 
         <div class="code-part">
           <div class="form-group" id="add-code-div">
-            <!-- <label for="title">Programming Code:</label> -->
-            <!-- <span id="language-select" value="css"><?=$row['assessment_language']?></span> -->
             <div style="display: flex; flex-direction: column;">
-              <h3 style="margin: 0; padding: 0 0 0 10px;text-transform: uppercase;background-color: #DDE6ED;"><?=$row['assessment_language']?></h3>
-              <textarea id="code-editor" name="code" rows="10" cols="80" class="code-editor"><?= htmlspecialchars($row['assessment_code']) ?></textarea>
+              <h3 class="language-title"><?=$row['assessment_language']?></h3>
+              <textarea id="code-editor" name="code" rows="10" cols="80" class="code-editor">
+                <?= htmlspecialchars($row['assessment_code']) ?>
+              </textarea>
             </div>
           </div>
         </div>
@@ -112,26 +118,26 @@
             }
           }
             ?>
-<form novalidate>
+
   <div class="exercise-container">
-    <div class="exercise-container" id="exercise-group">
-      <h2>Exercises</h2>
+    <div id="exercise-group">
       <?php
       $practice = mysqli_query($con, "SELECT * FROM practice WHERE assessment_id = '$assessment_id'");
       if (mysqli_num_rows($practice) > 0) {
         while ($row = mysqli_fetch_assoc($practice)) {
       ?>
-          <h3 style="margin: 0; padding:0;"><?= $row['practice_title']; ?></h3>
+          <h3 class="practice-title"><?= $row['practice_title']; ?></h3>
           <div class="fir-container">
-            <div class="sec-container">
+            <div class="answer-type">
               <h4><?= htmlspecialchars($row['practice_question']); ?></h4>
-              <input type="text" id="answer" class="answer">
-              <?php
-              // Assuming your stored answer is in a column called 'practice_answer' in the database
-              $storedAnswer = $row['practice_answer'];
-              ?>
-              <button type="button" class="check-btn" onclick="checkAnswer('<?= $storedAnswer; ?>')">Check Answer</button>
-              <div><p id="result"></p></div>
+              <div class="answer-part">
+                <input type="text" id="answer" class="answer">
+                <?php $storedAnswer = $row['practice_answer'];?>
+                <div><p id="result"></p></div>
+                <button type="button" class="check-btn" onclick="checkAnswer('<?= $storedAnswer; ?>')">
+                Check Answer
+              </button>
+              </div>
             </div>
           </div>
       <?php
@@ -140,8 +146,8 @@
       ?>
     </div>
   </div>
-</form>
 
+ 
       <div class="comment-container">
         <div>
           <i class="fa fa-comment-o comment" aria-hidden="true"></i>
@@ -210,7 +216,7 @@
       <!--share button-->
       <div class="bottom-container">
         <div class="bottom-sub-container">
-          <button class="shareBtn">Share</button>
+          <button class="shareBtn" id="btn-share">Share</button>
         </div>
       </div>
     </div>
@@ -220,12 +226,12 @@
     <nav id="right-sidebar">
       <ul>
         <li>
-          <div class="Share-icone">
-            <a href="https://sci-hub.ru/10.1007/978-3-662-45317-9_6"></a><i class="fa fa-share-alt fa-2x" aria-hidden="true"></i></a>
-          </div>
+            <div class="Share-icone" id="share">
+            <i class="fa fa-share-alt fa-2x" aria-hidden="true"></i>
+            </div>
         </li>
         <li>
-          <div class="mail-icon">
+          <div class="mail-icon" id="note">
             <i class="fa fa-book fa-2x" aria-hidden="true" class="sidebar-b-i"></i>
               <div class="mail-top"></div>
             </div>
@@ -279,57 +285,86 @@
     });
 
   </script>
-  <script src="./nav_bar.js"></script>
-  <script src="./hamburger.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // Generate QR Code function
+    function generateQRCode(text, width, height) {
+      var qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?data=" + encodeURIComponent(text) + "&size=" + width + "x" + height;
+      var qrCodeImage = '<img src="' + qrCodeUrl + '" alt="QR Code">';
+
+      // Create a pop-up container
+      var popupContainer = $('<div class="popup-container"></div>');
+      popupContainer.append(qrCodeImage);
+
+      // Create a close button
+      var closeButton = $('<span class="close-button">&times;</span>');
+      closeButton.on('click', function() {
+        popupContainer.remove();
+      });
+      popupContainer.append(closeButton);
+
+      $('body').append(popupContainer);
+    }
+
+    // Button click event listener
+    $('#share').on('click', function() {
+      var text = "http://localhost:8080/Maffy/FWDD_Maffy/frontend/public/pages/shared/view_assessment.php?courseid=<?php echo $course_id; ?>";
+      var width = 500;
+      var height = 500;
+
+      generateQRCode(text, width, height);
+    });
+
+    $('#note').on('click', function() {
+      var text = "<?php echo $note_url['note_content'];?>";
+      var width = 500;
+      var height = 500;
+
+      generateQRCode(text, width, height);
+    });
+
+    $('#btn-share').on('click', function() {
+      var text = "http://localhost:8080/Maffy/FWDD_Maffy/frontend/public/pages/shared/view_assessment.php?courseid=<?php echo $course_id; ?>";
+      var width = 500;
+      var height = 500;
+
+      generateQRCode(text, width, height);
+    });
+  </script>
 
   <script>
-    const form = document.querySelector('form');
-    const titleInput = document.getElementById('title');
-    const contentInput = document.getElementById('content');
-    const publishLinkCheckbox = document.getElementById('publish-link');
-    const publishExerciseCheckbox = document.getElementById('publish-exercise');
-    const publishCodeCheckbox = document.getElementById('publish-code');
-    const addLinkDiv = document.getElementById('add-link-div');
-    const addCodeDiv = document.getElementById('add-code-div');
-    const publishExerciseGroup = document.getElementById('exercise-group');
-    const submitBtn = document.getElementById('submit-btn');
-    const postForm = document.getElementById('form');
+    $(document).ready(function() {
+      // Initialize CodeMirror editor
+      var codeEditor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+        mode: "htmlmixed",
+        theme: "monokai",
+        lineNumbers: true,
+        autofocus: true,
+        indentUnit: 2,
+        tabSize: 2,
+        smartIndent: true,
+        lineWrapping: true
+      });
 
+      // Set the code in the editor
+      var code = codeEditor.getValue();
+        codeEditor.setValue(code);
 
-// Initialize CodeMirror editor
-var codeEditor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
-  mode: "htmlmixed",
-  theme: "monokai",
-  lineNumbers: true,
-  autofocus: true,
-  indentUnit: 2,
-  tabSize: 2,
-  smartIndent: true,
-  lineWrapping: true
-});
+      // Change mode based on selected language
+      var selectedMode = "htmlmixed";
+      codeEditor.setOption("mode", selectedMode);
+    });
 
-// Set the code in the editor
-var code = codeEditor.getValue();
-codeEditor.setValue(code);
+    function checkAnswer(storedAnswer) {
+      var userAnswer = $("#answer").val();
 
-document.addEventListener("DOMContentLoaded", function() {
-  var languageSelect = document.getElementById("language-select");
-  var selectedMode = languageSelect.getAttribute("value");
-  codeEditor.setOption("mode", selectedMode);
-});
+      if (userAnswer === storedAnswer) {
+        $("#result").text("Correct!");
+      } else {
+        $("#result").text("Incorrect!");
+      }
+    };
   </script>
-  <script>
-function checkAnswer(storedAnswer) {
-  var userAnswer = $("#answer").val();
 
-  if (userAnswer === storedAnswer) {
-    $("#result").text("Correct!");
-  } else {
-    $("#result").text("Incorrect!");
-  }
-}
-
-  </script>
-  
 </body>
 </html>

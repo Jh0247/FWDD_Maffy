@@ -75,8 +75,7 @@
                 echo  "</div>";
                 echo  "<div class='content'>";
                 echo    "<h2>".$row['course_title']."</h2>";
-                //echo    "<button class='button' onclick=location.href='../shared/course_page.php?userid=$_SESSION[user_id]&courseid=$row[course_id]'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
-                echo    "<button class='button' onclick=location.href='../shared/edit_profile.php'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
+                echo    "<button class='button' onclick=location.href='../shared/course_page.php?userid=$_SESSION[user_id]&courseid=$row[course_id]'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
                 echo  "</div>";
                 echo "</div>";
               }
@@ -87,6 +86,4 @@
     </div>
   </div>
 </body>
-<script src="./JavaScript/homepage.js"></script>
-<script src="./JavaScript/nav_bar.js"></script>
 </html>
