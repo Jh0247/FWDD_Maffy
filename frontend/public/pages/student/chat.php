@@ -240,7 +240,5 @@
     }, 700);
   });
 </script>
-  <script src="./JavaScript/hamburger.js"></script>
-  <script src="./JavaScript/nav_bar.js"></script>
 </body>
 </html>
