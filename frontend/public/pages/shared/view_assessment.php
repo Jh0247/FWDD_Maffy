@@ -95,7 +95,8 @@
             while($row = mysqli_fetch_assoc($assessment)){
           ?>
             <h1><?=$row['assessment_title']?></h1>
-            <h4><?=$row['assessment_date_posted']?></h4>              
+            <h4><?=$row['assessment_date_posted']?></h4>
+            <a id="res-note">Extra Note</a>            
           </div>
         </div>
         <div class="second-container">
@@ -308,7 +309,7 @@
 
     // Button click event listener
     $('#share').on('click', function() {
-      var text = "http://localhost:8080/Maffy/FWDD_Maffy/frontend/public/pages/shared/view_assessment.php?courseid=<?php echo $course_id; ?>";
+      var text = "http://localhost:8080/Maffy/FWDD_Maffy/frontend/public/pages/shared/view_assessment.php?ass_id=<?php echo $assessment_id;?>&courseid=<?php echo $course_id; ?>";
       var width = 500;
       var height = 500;
 
@@ -316,6 +317,14 @@
     });
 
     $('#note').on('click', function() {
+      var text = "<?php echo $note_url['note_content'];?>";
+      var width = 500;
+      var height = 500;
+
+      generateQRCode(text, width, height);
+    });
+
+    $('#res-note').on('click', function() {
       var text = "<?php echo $note_url['note_content'];?>";
       var width = 500;
       var height = 500;

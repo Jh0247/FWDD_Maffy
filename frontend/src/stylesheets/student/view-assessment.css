@@ -47,25 +47,15 @@
         font-family: "Times New Roman", Times, serif;
     }
 
-    .secSubContainer{
-        flex-basis: 50%;
-        /* margin: 20px 10px 0 0; */
-        text-align: end;
-    }
-
-    .secSubContainer p{
-        margin: 15px 0 5px 0;
-        font-family: "Times New Roman", Times, serif;
-    }
-
-    .secSubContainer a{
+    #res-note{
         text-decoration: none;
-        color: blue;
+        color: black;
         cursor: pointer;
         display: none;
+        margin-top: 5px;
     }
 
-    .secSubContainer a:hover{
+    #res-note:hover{
         color: red;
     }
 
@@ -494,6 +484,10 @@
     .first-container{
         width: 90%;
     }
+    
+    .subContainer{
+        width: 90%;
+    }
 
     .subContainer h1{
         font-size: 25px;
@@ -506,7 +500,7 @@
         font-size: 15px;
     }
     
-    .secSubContainer a{
+    #res-note {
         font-size: 15px;
         display: block;
     }
@@ -575,6 +569,7 @@
         padding: 7px;
         font-size: 14px;
         display: block;
+        margin-top: 10px;
     }
 }
 
@@ -592,6 +587,7 @@
 
     .subContainer{
         margin: 3px 0 0 5px;
+        width: 90%;
     }
 
     .second-container{
@@ -599,16 +595,11 @@
         padding: 5px;
     }
 
-    .secSubContainer{
-        margin: 3px 0 0 5px;
-        text-align: start;
+    .subContainer h1{
+        font-size: 20px;
     }
 
-    .secSubContainer p{
-        margin: 0;
-    }
-
-    .secSubContainer a{
+    #res-note {
         display: block;
     }
 
