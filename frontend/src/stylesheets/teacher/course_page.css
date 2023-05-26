@@ -104,6 +104,8 @@ header {
   margin: 0 auto;
   align-items: center;
   margin-left: 10px;
+  padding: 7px;
+  height: fit-content;
 }
 
 .option {

@@ -62,7 +62,7 @@ if (isset($_GET['courseid'])) {
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
 
-    <title>Add Course</title>
+    <title>Single Course Page</title>
 
     <script>
     // a pop-up function that use at php code
