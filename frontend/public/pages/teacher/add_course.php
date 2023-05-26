@@ -79,7 +79,7 @@ if (isset($_GET['courseid'])) {
                 <!-- second design -->
                 <div class="upload-section">
                     <label for="file-input">
-                        <p>Select an Image to Upload</p>
+                        <p class="img-upload">Select an Image to Upload</p>
                     </label>
                     <input id="file-input" type="file" name="uploadedFile"
                         value='<?php echo ($_GET['currentfile'] === $currentFile) ? $course_info_row["course_image"] : "" ?>'
