@@ -58,6 +58,7 @@ header {
   justify-content: space-between;
   position: relative;
   max-width: 100%;
+  align-items: center;
 }
 
 .cover-p-text{
@@ -269,8 +270,8 @@ button {
 
 .close-button {
   position: absolute;
-  top: 9%;
-  right: 35px;
+  top: 8%;
+  right: 30px;
   color: #f1f1f1;
   font-size: 40px;
   font-weight: bold;

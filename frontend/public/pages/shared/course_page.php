@@ -125,9 +125,7 @@ if (isset($_GET['courseid'])) {
                                 <div class="cover-text">
                                     <h1 class="cover-header-text" style="max-width: 100%;">
                                         <?php echo $all_course_info_row["course_title"]; ?>
-                                        <a id="download-doc" class="flex flex-col text-center"
-                                            onclick="document.getElementById('modal').style.display='block'">
-
+                                        <a id="download-doc" class="flex flex-col text-center">
                                             <span id="qrcode">
                                                 <button id="generate-button"><i class=" fas fa-qrcode"></i>
                                                 </button>
