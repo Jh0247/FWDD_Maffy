@@ -91,7 +91,7 @@
             <div class="form-group" id="add-code-div" style="display: none;">
                 <label for="title">Programming Code:</label>
                 <div class="custom-select">
-                    <select id="language-select" onchange="setMode(this.value)">
+                    <select id="language-select" name="language_select" onchange="setMode(this.value)">
                         <option value="htmlmixed">html</option>
                         <option value="css">css</option>
                         <option value="javascript">javascript</option>
@@ -179,6 +179,7 @@
             $escaped_input_exericse = mysqli_real_escape_string($con, $exercise_pratice);
             $exercise_ans = $_POST['exercise-answer']; 
             $addLink_title = $_POST['add_link_title'];
+            $selectedOption = $_POST['language_select'];
             $ass_link = $_POST['add_link'];
             $escaped_input_link = mysqli_real_escape_string($con, $ass_link);
             $posted_date = date("Y-m-d H:i:s");
@@ -189,8 +190,8 @@
             } 
             else {
                 // insert assessment title and content to databese
-                $ass_sql = "INSERT INTO assessment (course_id, assessment_title, assessment_content, assessment_code, assessment_date_posted) 
-                        VALUES ('$courseID', '$ass_title', '$ass_content', IFNULL('$code', NULL), '$posted_date')";
+                $ass_sql = "INSERT INTO assessment (course_id, assessment_title, assessment_content, assessment_code, assessment_language, assessment_date_posted) 
+                        VALUES ('$courseID', '$ass_title', '$ass_content', IFNULL('$code', NULL), IFNULL('$selectedOption', NULL), '$posted_date')";
 
                 $ass_result = mysqli_query($con, $ass_sql);
 
@@ -287,7 +288,6 @@
     var codeEditor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
         mode: "htmlmixed",
         theme: "monokai",
-        lineNumbers: true,
         autofocus: true,
         indentUnit: 2,
         tabSize: 2,
