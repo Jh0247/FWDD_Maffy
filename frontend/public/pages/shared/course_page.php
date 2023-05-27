@@ -155,31 +155,37 @@ include("../../../../backend/session.php");
                                         href="../teacher/add_course.php?userid=<?php echo $_SESSION["user_id"]; ?>&courseid=<?php echo $courseID; ?>&currentfile=../shared/course_page.php"><i
                                             class="fas fa-edit"></i> Edit</a>
                                 </div>
-                                <div class="option">
-                                    <?php if ($course_info_row['user_id'] === $_SESSION['user_id'] && $course_info_row['course_id'] === $courseID && $course_info_row['course_status'] === '1') { ?>
-                                    <button type=" submit" id="deactive-btn" name="deactive_submitbtn"><i
-                                            class="fas fa-eye-slash"></i> Deactivate</button>
-                                    <?php } else { ?>
-                                    <button type="submit" id="active-btn" name="active_submitbtn"><i
-                                            class="fas fa-eye"></i> Activate</button>
-                                    <?php } ?>
-                                </div>
-                                <div class="option">
-                                    <button type="submit" id="delete-btn" name="delete_submitbtn"><i
-                                            class="fas fa-trash"></i> Delete</button>
-                                </div>
+                                <form method="POST" class="options">
+                                    <div class="option">
+                                        <?php if ($course_info_row['user_id'] === $_SESSION['user_id'] && $course_info_row['course_id'] === $courseID && $course_info_row['course_status'] === '1') { ?>
+
+                                        <button type=" submit" id="deactive-btn" name="deactive_submitbtn"><i
+                                                class="fas fa-eye-slash"></i> Deactivate</button>
+                                        <?php } else { ?>
+                                        <button type="submit" id="active-btn" name="active_submitbtn"><i
+                                                class="fas fa-eye"></i> Activate</button>
+                                        <?php } ?>
+
+                                    </div>
+                                    <div class="option">
+                                        <button type="submit" id="delete-btn" name="delete_submitbtn"><i
+                                                class="fas fa-trash"></i> Delete</button>
+                                    </div>
+                                </form>
                             </div>
                             <div class="publish-container">
                                 <?php if ($course_info_row["course_status"] === '1'): ?>
                                 <p class="published">Published</p>
                                 <?php else: ?>
                                 <?php if ($count >= 3): ?>
-                                <div class="publish-container">
-                                    <button class="published post-btn" id="publish-btn" name="publish_submitbtn">Publish
-                                        Now!</button>
-                                </div>
-                                <?php else: ?>
-                                <p class="published"><?php echo $status; ?></p>
+                                <form method="POST">
+                                    <div class="publish-container">
+                                        <button class="published post-btn" id="publish-btn"
+                                            name="publish_submitbtn">Publish
+                                            Now!</button>
+                                    </div>
+                                </form>
+                                <?php else: ?> <p class="published"><?php echo $status; ?></p>
                                 <?php endif; ?>
                                 <?php endif; ?>
                             </div>
