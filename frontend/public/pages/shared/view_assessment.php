@@ -8,7 +8,7 @@
     #select assessment
     $assessment = mysqli_query($con, "SELECT * FROM assessment WHERE assessment_id ='$assessment_id'");
 
-    $all_courses = "SELECT * FROM course";
+    $all_courses = "SELECT * FROM course WHERE course_status = 1";
     $total_all_courses = mysqli_query($con,$all_courses);
 
     #select the comment data
