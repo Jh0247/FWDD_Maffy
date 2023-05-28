@@ -3,12 +3,12 @@
     include("../../../../backend/session.php");
 
     #select the top 3 course
-    $top_course = "SELECT * FROM course ORDER BY course_click DESC LIMIT 3";
+    $top_course = "SELECT * FROM course WHERE course_status = 1 ORDER BY course_click DESC LIMIT 3";
     $top_result = mysqli_query($con,$top_course);
     //$top_course_row = mysqli_fetch_assoc($top_result);
 
     #select all the course from the database
-    $all_course = "SELECT * FROM course";
+    $all_course = "SELECT * FROM course WHERE course_status = 1";
     $course_result = mysqli_query($con,$all_course);
     // $course_row = mysqli_fetch_assoc($course_result);;
 
@@ -41,8 +41,7 @@
                   echo "<div class='slide'>";
                     echo "<img src=".$row['course_image']." alt='' />";
                     echo "<h1>".$row['course_title']."</h1>";
-                    echo "<button class='slider-button' onclick=location.href='../shared/course_page.php?userid=$_SESSION[user_id]&courseid=$row[course_id]'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
-                    //echo "<button class='slider-button' onclick=location.href='../shared/view_assessment.php'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
+                    echo "<button class='slider-button' onclick=location.href='../shared/course_page.php?courseid=$row[course_id]'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
                   echo "</div>";
                 }
               }
@@ -75,7 +74,7 @@
                 echo  "</div>";
                 echo  "<div class='content'>";
                 echo    "<h2>".$row['course_title']."</h2>";
-                echo    "<button class='button' onclick=location.href='../shared/course_page.php?userid=$_SESSION[user_id]&courseid=$row[course_id]'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
+                echo    "<button class='button' onclick=location.href='../shared/course_page.php?courseid=$row[course_id]'><i class='fa fa-eye aria-hidden='true'></i>View</button>";
                 echo  "</div>";
                 echo "</div>";
               }

@@ -1,6 +1,9 @@
 <?php
-    // connection to database
-    include("../../../../backend/session.php");
+    if (!isset($_GET['type'])){
+        // connection to database
+        include("../../../../backend/session.php");
+    }
+;
 ?>
 <!DOCTYPE html>
 <html lang="en">

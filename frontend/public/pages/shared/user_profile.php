@@ -288,9 +288,9 @@
           if(mysqli_num_rows($result) > 0) {
             foreach($result as $data) {
               if($data['course_status'] == 1) {
-                echo '<a href="" class="assessment-container mt-3">';
+                echo '<a href="../shared/course_page.php?courseid=' . $data['course_id'] . '" class="assessment-container mt-3">';
               } else {
-                echo '<a href="" class="assessment-container deactive mt-3">';
+                echo '<a href="../shared/course_page.php?courseid=' . $data['course_id'] . '" class="assessment-container deactive mt-3">';
               }
               ?>
                 <div class="header flex flex-col sm:flex-row">

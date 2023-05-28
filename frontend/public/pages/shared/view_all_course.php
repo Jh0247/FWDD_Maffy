@@ -40,7 +40,7 @@
           if(mysqli_num_rows($course_result) > 0) {
             foreach($course_result as $data) {
               ?>
-              <a href="../shared/course_page.php?userid=<?php echo $_SESSION['user_id']; ?>&courseid=<?php echo $data['course_id']; ?>" class="item-cont">
+              <a href="../shared/course_page.php?courseid=<?php echo $data['course_id']; ?>" class="item-cont">
                 <div class="left-details">  <!-- left content  -->
                   <!-- img cont  -->
                   <div class="md:mr-5">

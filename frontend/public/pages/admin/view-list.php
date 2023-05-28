@@ -367,9 +367,9 @@
             if(mysqli_num_rows($result) > 0) {
               foreach($result as $data) {
                 if($data['course_status'] == 2) {
-                  echo '<a href="../shared/course_page.php?userid=' . $_SESSION['user_id'] . '&courseid=' . $data['course_id'] . '" class="item-cont bg-block flex flex-row justify-around md:justify-between">';
+                  echo '<a href="../shared/course_page.php?courseid=' . $data['course_id'] . '" class="item-cont bg-block flex flex-row justify-around md:justify-between">';
                 } else {
-                  echo '<a href="../shared/course_page.php?userid=' . $_SESSION['user_id'] . '&courseid=' . $data['course_id'] . '" class="item-cont flex flex-row justify-around md:justify-between">';
+                  echo '<a href="../shared/course_page.php?courseid=' . $data['course_id'] . '" class="item-cont flex flex-row justify-around md:justify-between">';
                 }
                 ?>
                 <!-- for course list -->
@@ -414,7 +414,7 @@
               foreach($sql as $data) {
                 ?>
                 <!-- for trend course list -->
-                <a href="../shared/course_page.php?userid=<?php echo $_SESSION['user_id']; ?>&courseid=<?php echo $data['course_id']; ?>" class="item-cont flex flex-row justify-around md:justify-between">
+                <a href="../shared/course_page.php?courseid=<?php echo $data['course_id']; ?>" class="item-cont flex flex-row justify-around md:justify-between">
                   <div class="flex flex-col md:flex-row text-center md:text-left items-center">  <!-- left content  -->
                     <!-- img cont  -->
                     <div class="md:mr-5">

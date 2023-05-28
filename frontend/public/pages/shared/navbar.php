@@ -161,7 +161,7 @@
                 <li><a class="btn active" href="#about-us">About Us</a></li>
                 <li><a class="btn" href="#course">Course</a></li>
                 <li><a class="btn" href="#faq">FAQS</a></li>
-                <li><a class="btn" href="#" onclick='navigateToPageT_C("../shared/term-condition.php")'>Terms &
+                <li><a class="btn" href="#" onclick='navigateToPageT_C("../shared/term-condition.php?type=none")'>Terms &
                         Conditions</a></li>
                 <div class="login-resgister-res">
                     <li><a class="btn" href="#" onclick='navigateToPage("../../pages/shared/login.php")'>Login</a>
