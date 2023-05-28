@@ -71,7 +71,7 @@
   cursor: pointer;
   outline: none;
   position: relative;
-  left: 80%;
+  left: 90%;
   
 }
 
@@ -131,6 +131,7 @@
   height: auto;
   position: relative;
   flex-wrap: wrap;
+  background-color: #f4eee0;
 }
 
 .d-container {
@@ -225,6 +226,8 @@ img {
         width: 100%;
         position: relative;
         margin: 20px 0;
+        flex-direction: row;
+        margin-top: 50px;
     }
 
     .d-container{
@@ -250,7 +253,7 @@ img {
     }
 
     .slider-button{
-      left: 50%;
+      left: 75%;
     }
   }
   
@@ -264,7 +267,8 @@ img {
     }
 
     .slider-button{
-      left: 50%;
+      left: 60%;
+      top: 5%;
     }
 
     .nav-left input[type=text]{
