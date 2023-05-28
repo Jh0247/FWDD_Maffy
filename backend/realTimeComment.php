@@ -14,34 +14,56 @@
       WHERE comment.assessment_id = " . $assessment_id . "
       ORDER BY comment.comment_id ASC");
 
-    while($comment = mysqli_fetch_assoc($comments)){
-      if ($comment["assessment_id"] == $assessment_id) {
-        $output .= '
-        <div class="comment">
-        <div class="subComment">
-          <a href="../shared/user_profile.php?id=' . $comment['user_id'] . '"><img src="'.$comment['user_image'].'"></a>
-          <div class="prev-comment">
-            <p>'.$comment['comment_word'].'</p>
-            <!-- <p>Comment somethingComment somethingComment somethingComment somethingComment somethingComment something</p> -->
-          </div>
-        </div>
-      </div>
-        ';
+      if(mysqli_num_rows($comments) == 0){
+        echo "<p>This assessment don't have comment yet</p>";
+      }else{
+        while($comment = mysqli_fetch_assoc($comments)){
+          if ($comment["assessment_id"] == $assessment_id) {
+            $output .= '
+            <div class="comment">
+                <div class="subComment">
+                    <img src="' . $comment['user_image'] . '">
+                    <div style="display: flex; flex-direction: column;">
+                        <div style="display: flex; flex-direction: row; gap: 0.2rem;">
+                            <a href="../shared/user_profile?id=' . $comment['user_id'] . '" class="username">
+                                <p>' . $comment['username'] . '</p>
+                            </a>
+                            <p class="date">' . $comment['comment_date_posted'] . '</p>
+                        </div>
+                        <div class="prev-comment">
+                            <p class="comment-data">' . $comment['comment_word'] . '</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ';
+            
+            
+          }
+          else
+          {
+            $output .= '
+            <div class="comment">
+                <div class="subComment">
+                    <img src="' . $comment['user_image'] . '">
+                    <div style="display: flex; flex-direction: column;">
+                        <div style="display: flex; flex-direction: row; gap: 0.2rem;">
+                            <a href="../shared/user_profile?id=' . $comment['user_id'] . '" class="username">
+                                <p>' . $comment['username'] . '</p>
+                            </a>
+                            <p class="date">' . $comment['comment_date_posted'] . '</p>
+                        </div>
+                        <div class="prev-comment">
+                            <p class="comment-data">' . $comment['comment_word'] . '</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ';
+          }
+        }
       }
-      else
-      {
-        $output .= '
-        <div class="comment">
-        <div class="subComment">
-          <a href="../shared/user_profile.php?id=' . $comment['user_id'] . '"><img src="'.$comment['user_image'].'"></a>
-          <div class="prev-comment">
-            <p>'.$comment['comment_word'].'</p>
-            <!-- <p>Comment somethingComment somethingComment somethingComment somethingComment somethingComment something</p> -->
-          </div>
-        </div>
-      </div>
-        ';
-      }
-    }
+
+
     echo $output;
 ?>

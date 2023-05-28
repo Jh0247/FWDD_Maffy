@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="../../../src/stylesheets/shared/nav_bar.css">
     <link rel="stylesheet" href="../../../src/stylesheets/student/siderbar.css">
     <link rel="stylesheet" href="../../../src/stylesheets/student/right-sidebar.css">
-    <link rel="stylesheet" href="../../../src/stylesheets/student/view-assessment.css">
+    <link rel="stylesheet" href="../../../src/stylesheets/shared/view-assessment.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://kit.fontawesome.com/873ab321fe.js" crossorigin="anonymous"></script>
@@ -57,11 +57,13 @@
 </head>
 
 <body>
-    <?php include '../shared/navbar.php';?>
-    <!--middle-->
     <div class="sidebar-content" style="display: flex; flex-direction: row;min-height: 100vh;margin-top:80px;">
         <div>
-            <!--side bar-->
+        <?php
+        if ($_SESSION['privilege'] == 'teacher' || $_SESSION['privilege'] == 'student') {
+            include '../shared/navbar.php';
+        ?>            
+        <!--side bar-->
             <div class="sidebar">
                 <div class="top">
                     <div class="logo">
@@ -71,179 +73,191 @@
                 <ul>
                     <?php
                         if(mysqli_num_rows($total_all_courses)>0){
-                        while($row = mysqli_fetch_assoc($total_all_courses)){
-                            echo "
-                            <li>
-                                <a href='../shared/course_page.php?user_id=$_SESSION[user_id]&courseid=$row[course_id]'>
-                                <i class='fa fa-book' aria-hidden='true' class='sidebar-b-i'></i>
-                                <span class=\"nav-item\">".$row['course_title']."</span>
-                                </a>
-                            </li>
-                            ";
+                            while($row = mysqli_fetch_assoc($total_all_courses)){
+                                echo "
+                                <li>
+                                    <a href='../shared/course_page.php?user_id=$_SESSION[user_id]&courseid=$row[course_id]'>
+                                    <i class='fa fa-book' aria-hidden='true' class='sidebar-b-i'></i>
+                                    <span class=\"nav-item\">".$row['course_title']."</span>
+                                    </a>
+                                </li>
+                                ";
+                            }
                         }
-                        }
-                        ?>
+                    ?>
                 </ul>
             </div>
             <!--End Side Bar-->
+        <?php
+        }
+        ?>
         </div>
 
 
-        <div class="big-container">
-            <div class="first-container">
-                <div class="subContainer">
-                    <?php
-          if(mysqli_num_rows($assessment) > 0){
-            while($row = mysqli_fetch_assoc($assessment)){
-          ?>
-                    <h1><?=$row['assessment_title']?></h1>
-                    <h4><?=$row['assessment_date_posted']?></h4>
-                    <a id="res-note">Extra Note</a>
-                </div>
-            </div>
-            <div class="second-container">
-                <p><?=$row['assessment_content']?></p>
-            </div>
-
-
-            <!-- code session -->
-            <div class="code-part">
-                <div class="form-group" id="add-code-div">
-                    <div style="display: flex; flex-direction: column;">
-                        <h3 class="language-title"><?=$row['assessment_language']?></h3>
-                        <textarea id="code-editor" name="code" rows="10" cols="80" class="code-editor">
-                <?= htmlspecialchars($row['assessment_code']) ?>
-              </textarea>
-                    </div>
-                </div>
-            </div>
-            <?php
-            }
-          }
-            ?>
-
-            <div class="exercise-container">
-                <div id="exercise-group">
-                    <?php
-      $practice = mysqli_query($con, "SELECT * FROM practice WHERE assessment_id = '$assessment_id'");
-      if (mysqli_num_rows($practice) > 0) {
-        while ($row = mysqli_fetch_assoc($practice)) {
-      ?>
-                    <h3 class="practice-title"><?= $row['practice_title']; ?></h3>
-                    <div class="fir-container">
-                        <div class="answer-type">
-                            <h4><?= htmlspecialchars($row['practice_question']); ?></h4>
-                            <div class="answer-part">
-                                <input type="text" id="answer" class="answer">
-                                <?php $storedAnswer = $row['practice_answer'];?>
-                                <div>
-                                    <p id="result"></p>
-                                </div>
-                                <button type="button" class="check-btn" onclick="checkAnswer('<?= $storedAnswer; ?>')">
-                                    Check Answer
-                                </button>
-                            </div>
+        <!-- <button onclick="history.back()" class="backbutton"><</button> -->
+        <?php
+            if(mysqli_num_rows($assessment) > 0){
+                while($row = mysqli_fetch_assoc($assessment)){
+        ?>        
+                <div class="big-container">
+                    <div class="first-container">
+                        <div class="subContainer">
+                            <h1><?=$row['assessment_title']?></h1>
+                            <h4><?=$row['assessment_date_posted']?></h4>
+                            <a id="res-note">Extra Note</a>
                         </div>
                     </div>
-                    <?php
-        }
-      }
-      ?>
+                <div class="second-container">
+                    <p><?=$row['assessment_content']?></p>
                 </div>
-            </div>
 
 
-            <div class="comment-container">
-                <div>
-                    <i class="fa fa-comment-o comment" aria-hidden="true"></i>
-                    <h2>Comment</h2>
-                </div>
-                <div id="comment-content">
-                    <?php                  
-          if(mysqli_num_rows($comment_result) == 0){
-        ?>
-                    <p>This assessment don't have comment</P>
-                    <?php
-
-          }else{
-              // php to get the friend list id
-              $comment = mysqli_query($con,
-              "SELECT comment.comment_word, comment.user_id, comment.assessment_id, comment.comment_date_posted, user.user_image, user.username
-              FROM comment
-              INNER JOIN user ON user.user_id = comment.user_id
-              INNER JOIN assessment ON assessment.assessment_id = comment.assessment_id
-              WHERE comment.assessment_id = " . $assessment_id . "
-              ORDER BY comment.comment_id ASC");
-
-              if(mysqli_num_rows($comment) > 0)
-              {
-                while($row = mysqli_fetch_assoc($comment)) {
-                  if($row["assessment_id"] == $assessment_id){
-                foreach($comment as $comment_data) // Run SQL query
-                    {
-          ?>
-                    <div class="comment">
-                        <div class="subComment">
-                            <!-- <img src="./profile.jpg"> -->
-                            <a href="../shared/user_profile?id=<?php echo $comment_data['user_id'];?>"><img
-                                    src="<?=$comment_data['user_image']?>"></a>
-                            <div class="prev-comment">
-                                <p><?=$comment_data['comment_word']?></p>
-                            </div>
+                <!-- code session -->
+                <div class="code-part">
+                    <div class="form-group" id="add-code-div">
+                        <div style="display: flex; flex-direction: column;">
+                            <h3 class="language-title"><?=$row['assessment_language']?></h3>
+                            <textarea id="code-editor" name="code" rows="10" cols="80" class="code-editor">
+                                <?= htmlspecialchars($row['assessment_code']) ?>
+                            </textarea>
                         </div>
                     </div>
-                    <?php
-                    }
-                  }
-                  }
+                </div>
+        <?php
                 }
-              }
-          ?>
-                </div>
+            }
+        ?>
 
-                <!--For user to type the comment-->
-                <div class="comment">
-                    <div class="subComment">
-                        <!-- <img src="./profile.jpg"> -->
-                        <?php
-              #Get user id
-              $user = mysqli_query($con,"SELECT * FROM user where user_id = '" . $_SESSION['user_id'] . "'");
-              $users = mysqli_fetch_assoc($user);
-              ?>
+        <div class="exercise-container">
+            <div id="exercise-group">
+                <?php
+                    $practice = mysqli_query($con, "SELECT * FROM practice WHERE assessment_id = '$assessment_id'");
+                    if (mysqli_num_rows($practice) > 0) {
+                        while ($row = mysqli_fetch_assoc($practice)){
+                            if($row['practice_title'] == ''){
+                ?>
+                                <h2>There is no practice for this assessment</h2>
+                <?php
+                            }else{
+                ?>
+                <?php
+                ?>
+                                <h3 class="practice-title"><?= $row['practice_title']; ?></h3>
+                                <div class="fir-container">
+                                    <div class="answer-type">
+                                        <h4><?= htmlspecialchars($row['practice_question']); ?></h4>
+                                        <div class="answer-part">
+                                            <input type="text" id="answer" class="answer">
+                                            <?php $storedAnswer = $row['practice_answer'];?>
+                                            <div>
+                                                <p id="result"></p>
+                                            </div>
+                                            <button type="button" class="check-btn" onclick="checkAnswer('<?= $storedAnswer; ?>')">
+                                                Check Answer
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                <?php
+                            }
+                        }
+                    }
+                ?>
+            </div>
+        </div>
+
+
+        <div class="comment-container">
+            <div>
+                <i class="fa fa-comment-o comment" aria-hidden="true"></i>
+                <h2>Comment</h2>
+            </div>
+            <div id="comment-content">
+                <?php                  
+                    if(mysqli_num_rows($comment_result) == 0){
+                ?>
+                    <p>This assessment don't have comment yet</P>
+                <?php
+                    }else{
+                        // php to get the friend list id
+                        $comment = mysqli_query($con,
+                        "SELECT comment.comment_word, comment.user_id, comment.assessment_id, comment.comment_date_posted, user.user_image, user.username
+                        FROM comment
+                        INNER JOIN user ON user.user_id = comment.user_id
+                        INNER JOIN assessment ON assessment.assessment_id = comment.assessment_id
+                        WHERE comment.assessment_id = " . $assessment_id . "
+                        ORDER BY comment.comment_id ASC");
+
+                        if(mysqli_num_rows($comment) > 0){
+                            while($row = mysqli_fetch_assoc($comment)){
+                                if($row["assessment_id"] == $assessment_id){
+                                    foreach($comment as $comment_data){ // Run SQL query
+                ?>
+                                        <div class="comment">
+                                            <div class="subComment">
+                                                <img src="<?=$comment_data['user_image']?>">
+                                                <div style="display: flex; flex-direction: column;">
+                                                    <div style="display: flex; flex-direction: row; gap: 0.2rem;">
+                                                        <a href="../shared/user_profile?id=<?php echo $comment_data['user_id'];?>" class="username">
+                                                            <p><?= $comment_data['username']?></p>
+                                                        </a>
+                                                        <p class="date"><?= $comment_data['comment_date_posted']?></p>
+                                                    </div>
+                                                    <div class="prev-comment">
+                                                        <p class="comment-data"><?=$comment_data['comment_word']?></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                <?php
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ?>
+            </div>
+
+            <!--For user to type the comment-->
+            <div class="comment">
+                <div class="subComment">
+                    <!-- <img src="./profile.jpg"> -->
+                    <?php
+                        #Get user id
+                        $user = mysqli_query($con,"SELECT * FROM user where user_id = '" . $_SESSION['user_id'] . "'");
+                        $users = mysqli_fetch_assoc($user);
+                    ?>
                         <img src="<?=$users['user_image']?>">
                         <input type="text" class="comment-box" placeholder="Comment" id="comment-text">
-                        <button class="sendBtn" id="post">
-                            Post
-                        </button>
+                        <button class="sendBtn" id="post">Post</button>
+                </div>
+            </div>
+        </div>
+
+        <!--share button-->
+        <div class="bottom-container">
+            <div class="bottom-sub-container">
+                <button class="shareBtn" id="btn-share">Share</button>
+            </div>
+        </div>
+        <!--end of right sidebar-->
+    </div>
+
+    <div style="display: flex;flex-direction: row;justify-content: flex-end;">
+        <!--Rightside sidebar-->
+        <nav id="right-sidebar">
+            <ul>
+                <li>
+                    <div class="Share-icone" id="share">
+                        <i class="fa fa-share-alt fa-2x" aria-hidden="true"></i>
                     </div>
-                </div>
-            </div>
-
-            <!--share button-->
-            <div class="bottom-container">
-                <div class="bottom-sub-container">
-                    <button class="shareBtn" id="btn-share">Share</button>
-                </div>
-            </div>
-        </div>
-
-        <div style="display: flex;flex-direction: row;justify-content: flex-end;">
-            <!--Rightside sidebar-->
-            <nav id="right-sidebar">
-                <ul>
-                    <li>
-                        <div class="Share-icone" id="share">
-                            <i class="fa fa-share-alt fa-2x" aria-hidden="true"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="mail-icon" id="note">
-                            <i class="fa fa-book fa-2x" aria-hidden="true" class="sidebar-b-i"></i>
-                            <div class="mail-top"></div>
-                        </div>
-        </div>
-        </li>
-        </ul>
+                </li>
+                <li>
+                    <div class="mail-icon" id="note">
+                        <i class="fa fa-book fa-2x" aria-hidden="true" class="sidebar-b-i"></i>
+                    </div>
+                </li>
+            </ul>
         </nav>
     </div>
 

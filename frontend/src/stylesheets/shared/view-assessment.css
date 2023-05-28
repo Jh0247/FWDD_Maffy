@@ -72,7 +72,7 @@
 
     .second-container p{
         margin-top: 5px;
-        font-size: 15px;
+        font-size: 18px;
         color: #27374D;
     }
 
@@ -225,6 +225,7 @@
         width: 100%;
         display: flex;
         align-items: center;
+        gap: 0.2rem;
     }
 
     .subComment img{
@@ -237,6 +238,26 @@
         background-color: #000000;      
     }
 
+    .username{
+        text-decoration: none;
+        color: #000000;
+        font-size: 18px;
+    }
+
+    .username p{
+        margin: 0 5px 0 0;
+    }
+
+    .username:hover {
+        color: blue;
+    }
+
+    .date{
+        font-size: 12px;
+        margin: 0 5px 0 0;
+        align-self: flex-end;
+    }
+
     .prev-comment{
         padding: 5px;
         height: auto;
@@ -246,10 +267,9 @@
         margin: 0 5px 0 5px;
     }
 
-    .subComment p{
+    .comment-data{
         margin: 0 0 0 10px;
         font-size: 17px;
-        /* color: white; */
     }
 
     .comment-box{
@@ -317,6 +337,7 @@
         align-self: center;
         width: 90%;
         height: auto;
+        margin-bottom: 30px;
     }
 
     .practice-title{
