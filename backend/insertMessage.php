@@ -11,7 +11,9 @@
     date_default_timezone_set('Asia/Kuala_Lumpur');
     $now = date('Y-m-d H:i:s');
 
-    $sql = "INSERT INTO chat (`friend_list_id`, `sender_id`, `chat_content`, `chat_datetime`) VALUES ($friend_list, '$sender', '$message', '$now')";
+    $sql = "INSERT INTO chat 
+    (`friend_list_id`, `sender_id`, `chat_content`, `chat_datetime`) VALUES 
+    ($friend_list, '$sender', '$message', '$now')";
 
     $result = mysqli_query($con, $sql);
 ?>

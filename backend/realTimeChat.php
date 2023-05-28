@@ -5,10 +5,7 @@
     $sender = $_POST["sender_id"];
     $friend_list = $_POST["friend_list"];
     $output = "";
-
-    // $chats = mysqli_query($con,"SELECT * FROM chat where (sender_id = '".$sender."' AND friend_list_id = '".$friend_list."') 
-    //                             OR (sender_id = '".$friend_list."' AND friend_list_id = '".$sender."')");
-
+    
     $chats = mysqli_query($con, 
       "SELECT chat.chat_content, chat.chat_datetime, chat.sender_id, user.user_image, user.username,user.user_id, chat.sender_id FROM chat 
       INNER JOIN friend_list ON friend_list.friend_list_id = chat.friend_list_id
