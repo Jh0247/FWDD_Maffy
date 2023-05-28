@@ -25,6 +25,7 @@ if (isset($_GET['courseid'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../src/stylesheets/teacher/add_course.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
     <title>Add Course</title>
 
@@ -62,14 +63,30 @@ if (isset($_GET['courseid'])) {
 
 <body>
     <?php include '../shared/navbar.php'; ?>
+    <?php
+    if (($_GET['currentfile'] === $currentFile)) {
+    ?>
+    <!-- go back to previous page js function -->
+    <div class="back-btn-container">
+        <a href="#" onclick="goBack()" class="back-btn" id="back-btn">
+            <i class="fas fa-chevron-left"></i> Back
+        </a>
+    </div>
+    <?php
+    }
+    ?>
+
     <div class="container">
         <?php
         if (($_GET['currentfile'] === $currentFile)) {
-            echo "<h2>EDIT COURSE</h2>";
+        ?>
+        <h2>EDIT COURSE</h2>
+        <?php
         } else {
-            echo "<h2>ADD COURSE</h2>";
+        ?>
+        <h2>ADD COURSE</h2>
+        <?php
         }
-
         ?>
 
         <form novalidate method="POST" id="post-form" enctype="multipart/form-data">
@@ -89,9 +106,12 @@ if (isset($_GET['courseid'])) {
                             id="preview-image">
                         <?php
                         if (($_GET['currentfile'] === $currentFile)) {
-                            echo "";
+                        ?>
+                        <?php
                         } else {
-                            echo "<div id=\"preview-message\">No image selected</div>";
+                        ?>
+                        <div id="preview-message">No image selected</div>
+                        <?php
                         }
 
                         ?>
@@ -113,17 +133,17 @@ if (isset($_GET['courseid'])) {
 
             <?php
             if ($_GET['currentfile'] === $currentFile) {
-                echo "
-                <button class=\"button\" type=\"submit\" id=\"submit-btn\" name=\"update-btn\">
-                    Update Course
-                </button>
-                ";
+                ?>
+            <button class="button" type="submit" id="submit-btn" name="update-btn">
+                Update Course
+            </button>
+            <?php
             } else {
-                echo "
-                <button class=\"button\" type=\"submit\" id=\"submit-btn\" name=\"submitbtn\">
-                    Create Course
-                </button>
-                ";
+            ?>
+            <button class="button" type="submit" id="submit-btn" name="submitbtn">
+                Create Course
+            </button>
+            <?php 
             }
             ?>
 
@@ -258,6 +278,11 @@ if (isset($_GET['courseid'])) {
             previewMessage.innerHTML = "No image selected";
         }
     });
+
+    // back button function
+    function goBack() {
+        window.history.back();
+    }
     </script>
 
     <script src="../../../src/stylesheets/shared/nav_bar.js"></script>

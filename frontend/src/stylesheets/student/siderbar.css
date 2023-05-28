@@ -92,7 +92,9 @@
   }
 
 @media screen and (max-width: 825px){
-
+  .sidebar{
+    display: none;
+  }
   /*Side Bar responsive*/
   .hamburger{
     position: relative;
@@ -135,9 +137,9 @@
     z-index: 1;
     display: block;
     position: absolute;
-    height: auto;
+    height: 100vh;
     left: -100%;
-    background-color: rgba(0,0,0,0.33);
+    background-color: #38415c;
   }
 
   .sidebar.active{

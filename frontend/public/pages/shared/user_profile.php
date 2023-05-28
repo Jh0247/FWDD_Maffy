@@ -335,58 +335,44 @@
   <script>
 
   function requestAction(target) {
-    // Create an AJAX request
-    var xhr = new XMLHttpRequest();
-    
-    // Define the request parameters
     var url = '../../../../backend/update-friend-request.php';
     var from_id = <?php echo $_SESSION['user_id']; ?>;
     var params = 'type=request&to_id=' + encodeURIComponent(target) + '&from_id=' + encodeURIComponent(from_id);
-
-    // Configure the request
-    xhr.open('POST', url, true);
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     
-    // Define the callback function for when the request completes
-    xhr.onload = function() {
-      if (xhr.status === 200) {
-        // Request successful
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: params,
+      dataType: 'html',
+      success: function(response) {
         location.reload();
-      } else {
-        // Request failed
+      },
+      error: function(xhr, status, error) {
         location.reload();
         console.log('Error: Request failed');
       }
-    };
-
-    xhr.send(params);
+    });
   }
 
-    function deleteAction(target) {
-      // Create an AJAX request
-      var xhr = new XMLHttpRequest();
-      
-      // Define the request parameters
-      var url = '../../../../backend/update-friend-request.php';
-      var params = 'type=reject&list_id=' + encodeURIComponent(target);
+  function deleteAction(target) {
+    var url = '../../../../backend/update-friend-request.php';
+    var params = 'type=reject&list_id=' + encodeURIComponent(target);
+    
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: params,
+      dataType: 'html',
+      success: function(response) {
+        location.reload();
+      },
+      error: function(xhr, status, error) {
+        location.reload();
+        console.log('Error: Reject request failed');
+      }
+    });
+  }
 
-      // Configure the request
-      xhr.open('POST', url, true);
-      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      
-      // Define the callback function for when the request completes
-      xhr.onload = function() {
-        if (xhr.status === 200) {
-          location.reload();
-        } else {
-          // Request failed
-          location.reload();
-          console.log('Error: Reject request failed');
-        }
-      };
-
-      xhr.send(params);
-    }
   </script>
 </body>
 </html>
