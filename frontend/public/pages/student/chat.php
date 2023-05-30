@@ -57,7 +57,7 @@
                       WHEN friend_list.second_user_id != $_SESSION[user_id] THEN friend_list.second_user_id
                       ELSE friend_list.first_user_id
                     END)
-                    WHERE first_user_id = $_SESSION[user_id] OR second_user_id =$_SESSION[user_id]
+                    WHERE (first_user_id = $_SESSION[user_id] OR second_user_id =$_SESSION[user_id])
                     AND friend_status = 1;");
                   if(mysqli_num_rows($user_lists) > 0) {
                     foreach($user_lists as $data) {
