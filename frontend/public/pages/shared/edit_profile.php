@@ -54,12 +54,13 @@
       $result = mysqli_query($con, $sql);
       }
       if ($result){
-        header("Location: ../shared/user_profile.php");
+        echo("<script>window.location = '../shared/user_profile.php'</script>");
       }
       else{
         echo("Error description: " . mysqli_error($con));
       }
     }
+    echo("<script>window.location = '../shared/user_profile.php'</script>");
   }
 
   //if edit password
